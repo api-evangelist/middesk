@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/signal.json",
+  "title": "Signal",
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "tin": {
+      "type": "string",
+      "nullable": true
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true
+    },
+    "model_slug": {
+      "type": "string"
+    },
+    "score": {
+      "type": "number",
+      "nullable": true,
+      "format": "double"
+    },
+    "business_id": {
+      "type": "string",
+      "nullable": true,
+      "format": "uuid"
+    },
+    "batch_id": {
+      "type": "string",
+      "nullable": true,
+      "format": "uuid"
+    },
+    "requester": {
+      "$ref": "#/components/schemas/type_:SignalRequester"
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:SignalReasonsItem"
+      }
+    },
+    "addresses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "object",
+    "id",
+    "name",
+    "created_at"
+  ]
+}

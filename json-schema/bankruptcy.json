@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/bankruptcy.json",
+  "title": "Bankruptcy",
+  "type": "object",
+  "properties": {
+    "object": {
+      "$ref": "#/components/schemas/type_:BankruptcyObject"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "business_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "case_number": {
+      "type": "string"
+    },
+    "case_updates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:BankruptcyCaseUpdatesItem"
+      }
+    },
+    "chapter": {
+      "type": "number",
+      "format": "double"
+    },
+    "court": {
+      "type": "string"
+    },
+    "filing_date": {
+      "type": "string",
+      "nullable": true,
+      "format": "date"
+    },
+    "debtors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:BankruptcyDebtorsItem"
+      }
+    }
+  },
+  "required": [
+    "object",
+    "id",
+    "business_id",
+    "case_number",
+    "case_updates",
+    "chapter",
+    "court",
+    "filing_date",
+    "debtors"
+  ]
+}

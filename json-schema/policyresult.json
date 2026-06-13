@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/policyresult.json",
+  "title": "PolicyResult",
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "description": "Policy result ID"
+    },
+    "result": {
+      "type": "string",
+      "description": "Policy result outcome"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "Creation timestamp"
+    },
+    "matched": {
+      "type": "string",
+      "nullable": true,
+      "description": "Match status"
+    },
+    "executed": {
+      "type": "boolean",
+      "description": "Execution status"
+    },
+    "name": {
+      "type": "string",
+      "nullable": true,
+      "description": "Policy name"
+    },
+    "details": {
+      "type": "object",
+      "additionalProperties": {
+        "description": "Any type"
+      },
+      "description": "Additional details"
+    },
+    "owner_id": {
+      "type": "string",
+      "description": "Owner ID"
+    },
+    "owner_type": {
+      "type": "string",
+      "description": "Owner type"
+    },
+    "business_id": {
+      "type": "string",
+      "description": "Business ID"
+    },
+    "type_of": {
+      "type": "string",
+      "description": "Type of policy result"
+    },
+    "policy_action_results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:PolicyActionResult"
+      }
+    }
+  }
+}

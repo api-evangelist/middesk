@@ -1,0 +1,31 @@
+{
+  "name": "list-businesses",
+  "summary": "List all businesses with pagination",
+  "request": {
+    "method": "GET",
+    "url": "https://api.middesk.com/v1/businesses?page=1&per_page=25",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "object": "list",
+      "data": [
+        {
+          "id": "bus_abc123",
+          "name": "Acme Corporation",
+          "status": "approved"
+        },
+        {
+          "id": "bus_def456",
+          "name": "Beta LLC",
+          "status": "pending"
+        }
+      ],
+      "has_more": true,
+      "total_count": 150
+    }
+  }
+}

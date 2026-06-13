@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/certification.json",
+  "title": "Certification",
+  "type": "object",
+  "properties": {
+    "object": {
+      "$ref": "#/components/schemas/type_:CertificationObject"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "business_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "entrance_date": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time"
+    },
+    "exit_date": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time"
+    },
+    "certification_id": {
+      "type": "string",
+      "nullable": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string"
+    },
+    "certification_type": {
+      "$ref": "#/components/schemas/type_:CertificationCertificationType"
+    },
+    "external_sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:CertificationExternalSourcesItem"
+      }
+    }
+  },
+  "required": [
+    "object",
+    "name",
+    "key",
+    "certification_type",
+    "external_sources"
+  ]
+}

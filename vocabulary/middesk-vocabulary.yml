@@ -1,0 +1,103 @@
+vocabulary:
+  - term: business
+    definition: A legal entity submitted to Middesk for identity verification and KYB compliance screening.
+    domain: KYB
+  - term: order
+    definition: A verification task submitted against a business for a specific product such as identity, watchlist, or liens.
+    domain: KYB
+  - term: business_batch
+    definition: A collection of businesses submitted together via CSV for bulk KYB processing.
+    domain: KYB
+  - term: signal
+    definition: A real-time risk score and assessment returned for a business based on submitted attributes.
+    domain: Risk
+  - term: monitor
+    definition: An ongoing subscription that tracks changes to a business's registration or compliance status and generates alerts.
+    domain: Monitoring
+  - term: lien
+    definition: A UCC or state lien filing associated with a business, used to record secured interests against assets.
+    domain: Liens
+  - term: registration
+    definition: A Secretary of State or equivalent jurisdiction record confirming the legal formation and standing of a business.
+    domain: Compliance
+  - term: tin
+    definition: Taxpayer Identification Number (EIN or SSN) submitted to validate a business's tax identity.
+    domain: Tax
+  - term: watchlist
+    definition: A screening check against OFAC, sanctions lists, adverse media, and other risk databases.
+    domain: Compliance
+  - term: bankruptcy
+    definition: A record of bankruptcy proceedings associated with a business or its principals.
+    domain: Compliance
+  - term: certification
+    definition: A business credential such as minority-owned, woman-owned, or other certification status.
+    domain: Compliance
+  - term: policy_result
+    definition: The outcome of applying a configured compliance policy to a business, determining automated pass/fail decisions.
+    domain: Policy
+  - term: review
+    definition: A human or automated review workflow assessing a business's verification results and tasks.
+    domain: KYB
+  - term: action
+    definition: A logged decision or event recorded against a business object for audit trail purposes.
+    domain: Audit
+  - term: website
+    definition: Intelligence gathered from a business's web presence including domain, pages, indicators, and risk ratings.
+    domain: Intelligence
+  - term: person
+    definition: An individual associated with a business as an officer, owner, or UBO, potentially subject to KYC checks.
+    domain: KYB
+  - term: address
+    definition: A physical location associated with a business, verified for deliverability and risk indicators.
+    domain: KYB
+  - term: connection
+    definition: A linked relationship between businesses, addresses, or people discovered during verification.
+    domain: Intelligence
+  - term: document
+    definition: An official filing or certificate retrieved from government sources for a business.
+    domain: Compliance
+  - term: adverse_media
+    definition: Negative news coverage or media records linked to a business or its principals.
+    domain: Risk
+  - term: litigation
+    definition: Court records or civil/criminal legal proceedings associated with a business entity.
+    domain: Compliance
+  - term: fmcsa_registration
+    definition: Federal Motor Carrier Safety Administration registration data for transportation businesses.
+    domain: Compliance
+  - term: politically_exposed_person
+    definition: An individual flagged as a politically exposed person (PEP) during KYC screening of business principals.
+    domain: Risk
+  - term: industry_classification
+    definition: NAICS or SIC codes assigned to a business based on its described activities or website content.
+    domain: Intelligence
+  - term: webhook
+    definition: An HTTP endpoint registered to receive real-time event notifications when business or order statuses change.
+    domain: Integration
+  - term: agent
+    definition: An automated workflow agent that executes multi-step compliance tasks via threads and runs.
+    domain: Automation
+  - term: thread
+    definition: A conversational or workflow context maintained by an agent for multi-step task execution.
+    domain: Automation
+  - term: run
+    definition: A single execution instance of an agent thread, tracking status, steps, and output.
+    domain: Automation
+  - term: registration_request
+    definition: A partner-initiated request for business registration or formation services.
+    domain: Partner
+  - term: prefill_business
+    definition: Pre-populated business data returned from Middesk's identity autocomplete service.
+    domain: Onboarding
+  - term: sandbox
+    definition: A test environment at api-sandbox.middesk.com for development and integration testing without real data.
+    domain: Integration
+  - term: kyb
+    definition: Know Your Business — the regulatory compliance process of verifying a business entity's identity and legitimacy.
+    domain: Compliance
+  - term: ubo
+    definition: Ultimate Beneficial Owner — the natural person(s) who ultimately own or control a business entity.
+    domain: Compliance
+  - term: ein
+    definition: Employer Identification Number — a federal tax ID assigned by the IRS to business entities in the US.
+    domain: Tax

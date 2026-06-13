@@ -1,0 +1,30 @@
+{
+  "name": "create-order",
+  "summary": "Create a verification order for a business",
+  "request": {
+    "method": "POST",
+    "url": "https://api.middesk.com/v1/businesses/{business_id}/orders",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "product": "watchlist",
+      "subproducts": [
+        "ofac",
+        "adverse_media"
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "ord_xyz789",
+      "object": "order",
+      "product": "watchlist",
+      "status": "pending",
+      "business_id": "bus_abc123",
+      "created_at": "2026-06-13T00:00:00Z"
+    }
+  }
+}

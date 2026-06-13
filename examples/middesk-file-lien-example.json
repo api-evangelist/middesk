@@ -1,0 +1,50 @@
+{
+  "name": "file-lien",
+  "summary": "File a UCC lien for a business",
+  "request": {
+    "method": "POST",
+    "url": "https://api.middesk.com/v1/businesses/{business_id}/liens",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "state": "CA",
+      "debtors": [
+        {
+          "name": "Acme Corporation",
+          "address": {
+            "address_line1": "123 Main St",
+            "city": "San Francisco",
+            "state": "CA",
+            "postal_code": "94105"
+          }
+        }
+      ],
+      "secured_parties": [
+        {
+          "role": "secured_party",
+          "name": "First National Bank",
+          "address": {
+            "address_line1": "456 Bank Ave",
+            "city": "New York",
+            "state": "NY",
+            "postal_code": "10001"
+          }
+        }
+      ],
+      "collateral": "All assets"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "lien_jkl345",
+      "object": "lien",
+      "status": "pending",
+      "state": "CA",
+      "type": "ucc",
+      "created_at": "2026-06-13T00:00:00Z"
+    }
+  }
+}

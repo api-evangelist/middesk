@@ -1,0 +1,210 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "middesk": "https://docs.middesk.com/vocab#",
+    "Business": "middesk:Business",
+    "Order": "middesk:Order",
+    "BusinessBatch": "middesk:BusinessBatch",
+    "Signal": "middesk:Signal",
+    "Monitor": "middesk:Monitor",
+    "Lien": "middesk:Lien",
+    "Registration": "middesk:Registration",
+    "Watchlist": "middesk:Watchlist",
+    "Bankruptcy": "middesk:Bankruptcy",
+    "Certification": "middesk:Certification",
+    "PolicyResult": "middesk:PolicyResult",
+    "Review": "middesk:Review",
+    "Action": "middesk:Action",
+    "Website": "middesk:Website",
+    "Person": "middesk:Person",
+    "Address": "middesk:Address",
+    "Connection": "middesk:Connection",
+    "Document": "middesk:Document",
+    "Webhook": "middesk:Webhook",
+    "Agent": "middesk:Agent",
+    "Thread": "middesk:Thread",
+    "Run": "middesk:Run",
+    "IndustryClassification": "middesk:IndustryClassification",
+    "id": "@id",
+    "type": "@type",
+    "object": "middesk:object",
+    "status": "middesk:status",
+    "created_at": {
+      "@id": "middesk:createdAt",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "middesk:updatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "email": "schema:email",
+    "tin": "middesk:tin",
+    "ein": "middesk:ein",
+    "addresses": {
+      "@id": "middesk:addresses",
+      "@container": "@set"
+    },
+    "people": {
+      "@id": "middesk:people",
+      "@container": "@set"
+    },
+    "orders": {
+      "@id": "middesk:orders",
+      "@container": "@set"
+    },
+    "registrations": {
+      "@id": "middesk:registrations",
+      "@container": "@set"
+    },
+    "watchlists": {
+      "@id": "middesk:watchlists",
+      "@container": "@set"
+    },
+    "liens": {
+      "@id": "middesk:liens",
+      "@container": "@set"
+    },
+    "documents": {
+      "@id": "middesk:documents",
+      "@container": "@set"
+    },
+    "certifications": {
+      "@id": "middesk:certifications",
+      "@container": "@set"
+    },
+    "bankruptcies": {
+      "@id": "middesk:bankruptcies",
+      "@container": "@set"
+    },
+    "product": "middesk:product",
+    "subproducts": {
+      "@id": "middesk:subproducts",
+      "@container": "@set"
+    },
+    "business_id": "middesk:businessId",
+    "review": "middesk:review",
+    "policy_results": {
+      "@id": "middesk:policyResults",
+      "@container": "@set"
+    },
+    "website": "middesk:website",
+    "industry_classification": "middesk:industryClassification",
+    "formation": "middesk:formation",
+    "phone_numbers": {
+      "@id": "middesk:phoneNumbers",
+      "@container": "@set"
+    },
+    "email_addresses": {
+      "@id": "middesk:emailAddresses",
+      "@container": "@set"
+    },
+    "state": {
+      "@id": "schema:addressRegion"
+    },
+    "city": {
+      "@id": "schema:addressLocality"
+    },
+    "postal_code": {
+      "@id": "schema:postalCode"
+    },
+    "address_line1": {
+      "@id": "schema:streetAddress"
+    },
+    "address_line2": "middesk:addressLine2",
+    "dob": {
+      "@id": "schema:birthDate",
+      "@type": "xsd:date"
+    },
+    "titles": {
+      "@id": "middesk:titles",
+      "@container": "@set"
+    },
+    "reasons": {
+      "@id": "middesk:reasons",
+      "@container": "@set"
+    },
+    "requester": "middesk:requester",
+    "score": "middesk:score",
+    "file_number": "middesk:fileNumber",
+    "entity_type": "middesk:entityType",
+    "jurisdiction": "middesk:jurisdiction",
+    "collateral": "middesk:collateral",
+    "debtors": {
+      "@id": "middesk:debtors",
+      "@container": "@set"
+    },
+    "secured_parties": {
+      "@id": "middesk:securedParties",
+      "@container": "@set"
+    },
+    "lien_type": "middesk:lienType",
+    "filing_date": {
+      "@id": "middesk:filingDate",
+      "@type": "xsd:date"
+    },
+    "expiration_date": {
+      "@id": "middesk:expirationDate",
+      "@type": "xsd:date"
+    },
+    "data": {
+      "@id": "middesk:data",
+      "@container": "@set"
+    },
+    "has_more": "middesk:hasMore",
+    "total_count": "middesk:totalCount",
+    "event_types": {
+      "@id": "middesk:eventTypes",
+      "@container": "@set"
+    },
+    "enabled_events": {
+      "@id": "middesk:enabledEvents",
+      "@container": "@set"
+    },
+    "tasks": {
+      "@id": "middesk:tasks",
+      "@container": "@set"
+    },
+    "steps": {
+      "@id": "middesk:steps",
+      "@container": "@set"
+    },
+    "output": "middesk:output",
+    "rating": "middesk:rating",
+    "indicators": {
+      "@id": "middesk:indicators",
+      "@container": "@set"
+    },
+    "domain": "middesk:domain",
+    "pages": {
+      "@id": "middesk:pages",
+      "@container": "@set"
+    },
+    "results": {
+      "@id": "middesk:results",
+      "@container": "@set"
+    },
+    "agencies": {
+      "@id": "middesk:agencies",
+      "@container": "@set"
+    },
+    "sources": {
+      "@id": "middesk:sources",
+      "@container": "@set"
+    },
+    "connections": {
+      "@id": "middesk:connections",
+      "@container": "@set"
+    },
+    "tags": {
+      "@id": "middesk:tags",
+      "@container": "@set"
+    },
+    "naics_code": "middesk:naicsCode",
+    "sic_code": "middesk:sicCode"
+  }
+}

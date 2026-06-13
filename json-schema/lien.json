@@ -1,0 +1,169 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/lien.json",
+  "title": "Lien",
+  "type": "object",
+  "properties": {
+    "object": {
+      "$ref": "#/components/schemas/type_:LienObject"
+    },
+    "type": {
+      "$ref": "#/components/schemas/type_:LienType",
+      "description": "Type of lien"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "business_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "debtors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:LienDebtorsItem"
+      }
+    },
+    "secured_parties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:LienSecuredPartiesItem"
+      }
+    },
+    "file_number": {
+      "type": "string",
+      "nullable": true,
+      "description": "Filing number for the lien"
+    },
+    "state": {
+      "$ref": "#/components/schemas/type_:LienState",
+      "description": "State where the lien was filed"
+    },
+    "status": {
+      "$ref": "#/components/schemas/type_:LienStatus",
+      "description": "Current status of the lien"
+    },
+    "filing_date": {
+      "type": "string",
+      "nullable": true,
+      "format": "date",
+      "description": "Date the lien was filed"
+    },
+    "updated_date": {
+      "type": "string",
+      "nullable": true,
+      "format": "date",
+      "description": "Date the lien was last updated"
+    },
+    "lapse_date": {
+      "type": "string",
+      "nullable": true,
+      "format": "date",
+      "description": "Date the lien lapses/expires"
+    },
+    "collateral": {
+      "type": "string",
+      "nullable": true,
+      "description": "Description of collateral securing the lien"
+    },
+    "collateral_type": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:LienCollateralType"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Type of collateral"
+    },
+    "negative_pledge": {
+      "type": "boolean",
+      "description": "Whether this is a negative pledge"
+    },
+    "confirmation_number": {
+      "type": "string",
+      "nullable": true
+    },
+    "loan_principal_amount_cents": {
+      "type": "integer",
+      "nullable": true,
+      "description": "Loan principal amount in cents"
+    },
+    "source": {
+      "type": "string",
+      "nullable": true,
+      "format": "uri",
+      "description": "Source URL for the lien data"
+    },
+    "packet_number": {
+      "type": "string",
+      "nullable": true
+    },
+    "lien_termination": {
+      "type": "object",
+      "nullable": true,
+      "additionalProperties": {
+        "description": "Any type"
+      },
+      "description": "Lien termination details if terminated"
+    },
+    "liability_cents": {
+      "type": "integer",
+      "nullable": true,
+      "description": "Liability amount in cents"
+    },
+    "alternative_designation": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:LienAlternativeDesignation"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status_category": {
+      "$ref": "#/components/schemas/type_:LienStatusCategory",
+      "description": "Categorized status of the lien"
+    },
+    "owner_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Polymorphic owner ID (typically business_id)"
+    },
+    "owner_type": {
+      "type": "string",
+      "description": "Polymorphic owner type (typically Business)"
+    },
+    "filed_by_account": {
+      "type": "boolean",
+      "nullable": true,
+      "description": "Whether the lien was filed by the account"
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Document"
+      },
+      "description": "Associated lien documents"
+    }
+  },
+  "required": [
+    "object",
+    "type",
+    "id",
+    "business_id",
+    "debtors",
+    "secured_parties",
+    "file_number",
+    "state",
+    "status",
+    "filing_date",
+    "status_category",
+    "owner_id",
+    "owner_type",
+    "documents"
+  ]
+}

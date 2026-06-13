@@ -1,0 +1,308 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/business.json",
+  "title": "Business",
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true
+    },
+    "unique_external_id": {
+      "type": "string",
+      "nullable": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/components/schemas/type_:BusinessStatus",
+      "description": "Current status of the business verification"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requester": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:Requester"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "assignee_id": {
+      "type": "string",
+      "nullable": true,
+      "format": "uuid"
+    },
+    "supported_document_types": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:BusinessSupportedDocumentTypesItem"
+      }
+    },
+    "review": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:Review"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tin": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:Tin"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "business_batch_id": {
+      "type": "string",
+      "nullable": true,
+      "format": "uuid"
+    },
+    "formation": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:Formation"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "website": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:Website"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "watchlist": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:Watchlist"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bankruptcies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Bankruptcy"
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Certification"
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Document"
+      }
+    },
+    "liens": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Lien"
+      }
+    },
+    "names": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Name"
+      }
+    },
+    "addresses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Address"
+      }
+    },
+    "people": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Person"
+      }
+    },
+    "phone_numbers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:PhoneNumber"
+      }
+    },
+    "email_addresses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:EmailAddress"
+      }
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Profile"
+      }
+    },
+    "registrations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Registration"
+      }
+    },
+    "orders": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Order"
+      }
+    },
+    "industry_classification": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:IndustryClassification"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "monitor": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:Monitor"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tax_exempt_organization": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:TaxExemptOrganization"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "fmcsa_registrations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:FmcsaRegistration"
+      }
+    },
+    "loans": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/type_:Loan"
+      }
+    },
+    "litigations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Litigation"
+      }
+    },
+    "policy_results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:PolicyResult"
+      }
+    },
+    "politically_exposed_person_screening": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:PoliticallyExposedPersonScreening"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "adverse_media_screening": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:AdverseMediaScreening"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "signal": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:Signal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "submitted": {
+      "$ref": "#/components/schemas/type_:SubmittedAttribute"
+    },
+    "subscription": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:Subscription"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "subscription_availability": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:BusinessSubscriptionAvailability"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "object",
+    "id",
+    "name",
+    "status",
+    "created_at",
+    "updated_at"
+  ]
+}

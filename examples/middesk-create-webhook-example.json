@@ -1,0 +1,32 @@
+{
+  "name": "create-webhook",
+  "summary": "Register a webhook endpoint",
+  "request": {
+    "method": "POST",
+    "url": "https://api.middesk.com/v1/webhooks",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "url": "https://yourapp.com/webhooks/middesk",
+      "enabled_events": [
+        "business.updated",
+        "order.completed"
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "wh_mno678",
+      "object": "webhook",
+      "url": "https://yourapp.com/webhooks/middesk",
+      "enabled_events": [
+        "business.updated",
+        "order.completed"
+      ],
+      "created_at": "2026-06-13T00:00:00Z"
+    }
+  }
+}

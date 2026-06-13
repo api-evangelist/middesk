@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/website.json",
+  "title": "Website",
+  "type": "object",
+  "properties": {
+    "object": {
+      "$ref": "#/components/schemas/type_:WebsiteObject"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "url": {
+      "type": "string",
+      "nullable": true,
+      "format": "uri",
+      "description": "The URL that was passed or found for the Business"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "$ref": "#/components/schemas/type_:WebsiteStatus"
+    },
+    "http_status_code": {
+      "type": "integer",
+      "nullable": true,
+      "description": "HTTP response status code"
+    },
+    "title": {
+      "type": "string",
+      "nullable": true,
+      "description": "Website page title"
+    },
+    "description": {
+      "type": "string",
+      "nullable": true,
+      "description": "Website meta description"
+    },
+    "domain": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:WebsiteDomain"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Domain registration and redirect information"
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:WebsitePagesItem"
+      },
+      "description": "Website pages with screenshots"
+    },
+    "parked": {
+      "type": "boolean",
+      "nullable": true,
+      "description": "Whether the domain is parked"
+    },
+    "submitted": {
+      "type": "boolean",
+      "description": "Whether the website was submitted by user"
+    },
+    "error": {
+      "type": "string",
+      "nullable": true,
+      "description": "Error message if website analysis failed"
+    },
+    "category": {
+      "type": "string",
+      "nullable": true,
+      "description": "Website category classification"
+    },
+    "platform": {
+      "type": "string",
+      "nullable": true,
+      "description": "Website platform (e.g., instagram.com, facebook.com)"
+    },
+    "posts_summary": {
+      "type": "string",
+      "nullable": true,
+      "description": "Summary of posts found on the website or linked social media profiles"
+    },
+    "reviews_summary": {
+      "type": "string",
+      "nullable": true,
+      "description": "Summary of reviews found on the website or linked third-party profiles"
+    },
+    "business_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "business_name_match": {
+      "type": "boolean",
+      "description": "Whether website content matches business name"
+    },
+    "names": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Name"
+      },
+      "description": "Names found on website"
+    },
+    "phone_numbers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:WebsitePhoneNumber"
+      },
+      "description": "Phone numbers found on website"
+    },
+    "people": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": {
+          "description": "Any type"
+        }
+      },
+      "description": "People found on website"
+    },
+    "addresses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:WebsiteAddressesItem"
+      },
+      "description": "Addresses found on website"
+    },
+    "email_addresses": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/type_:WebsiteEmailAddressesItem"
+      },
+      "description": "Email addresses found on website"
+    },
+    "rating": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:WebsiteRating"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "object",
+    "id",
+    "url",
+    "created_at",
+    "updated_at",
+    "status",
+    "parked",
+    "submitted",
+    "business_id",
+    "business_name_match",
+    "phone_numbers",
+    "addresses"
+  ]
+}

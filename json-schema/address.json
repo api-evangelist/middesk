@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/address.json",
+  "title": "Address",
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "address_line1": {
+      "type": "string",
+      "nullable": true
+    },
+    "address_line2": {
+      "type": "string",
+      "nullable": true
+    },
+    "city": {
+      "type": "string",
+      "nullable": true
+    },
+    "state": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:AddressState"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "postal_code": {
+      "type": "string",
+      "nullable": true
+    },
+    "full_address": {
+      "type": "string"
+    },
+    "submitted": {
+      "type": "boolean"
+    },
+    "latitude": {
+      "type": "number",
+      "nullable": true,
+      "format": "double"
+    },
+    "longitude": {
+      "type": "number",
+      "nullable": true,
+      "format": "double"
+    },
+    "property_type": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:AddressPropertyType"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "deliverable": {
+      "type": "boolean"
+    },
+    "deliverability_analysis": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:AddressDeliverabilityAnalysis"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "street_view_available": {
+      "type": "boolean",
+      "nullable": true
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "registered_agent_name": {
+      "type": "string",
+      "nullable": true
+    },
+    "cmra": {
+      "type": "boolean"
+    },
+    "business_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "location_count": {
+      "type": "integer",
+      "nullable": true
+    },
+    "is_registered_agent": {
+      "type": "boolean",
+      "nullable": true
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Source"
+      }
+    },
+    "rating": {
+      "$ref": "#/components/schemas/type_:AddressRating"
+    }
+  },
+  "required": [
+    "object",
+    "id",
+    "full_address",
+    "submitted",
+    "created_at",
+    "updated_at",
+    "business_id",
+    "sources",
+    "rating"
+  ]
+}

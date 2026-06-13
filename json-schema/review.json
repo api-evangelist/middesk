@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/review.json",
+  "title": "Review",
+  "type": "object",
+  "properties": {
+    "object": {
+      "$ref": "#/components/schemas/type_:ReviewObject"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:ReviewTask"
+      }
+    },
+    "assignee": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/type_:User"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "object",
+    "id",
+    "created_at",
+    "updated_at",
+    "tasks"
+  ]
+}

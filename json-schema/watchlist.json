@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/watchlist.json",
+  "title": "Watchlist",
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "hit_count": {
+      "type": "integer"
+    },
+    "agencies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:WatchlistAgency"
+      }
+    },
+    "lists": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:WatchlistSource"
+      }
+    },
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": {
+          "description": "Any type"
+        }
+      }
+    }
+  },
+  "required": [
+    "object",
+    "id",
+    "hit_count",
+    "agencies",
+    "lists",
+    "people"
+  ]
+}

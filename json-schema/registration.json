@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/registration.json",
+  "title": "Registration",
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "business_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "sub_status": {
+      "type": "string",
+      "nullable": true
+    },
+    "status_details": {
+      "type": "string",
+      "nullable": true
+    },
+    "jurisdiction": {
+      "type": "string"
+    },
+    "entity_type": {
+      "type": "string"
+    },
+    "file_number": {
+      "type": "string"
+    },
+    "addresses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "officers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": {
+          "description": "Any type"
+        }
+      }
+    },
+    "registered_agent": {
+      "type": "object",
+      "additionalProperties": {
+        "description": "Any type"
+      }
+    },
+    "registration_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "state": {
+      "$ref": "#/components/schemas/type_:RegistrationState"
+    },
+    "source": {
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "required": [
+    "object",
+    "id",
+    "business_id",
+    "name",
+    "status",
+    "jurisdiction",
+    "entity_type",
+    "file_number",
+    "state"
+  ]
+}

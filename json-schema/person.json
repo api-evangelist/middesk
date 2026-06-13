@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/person.json",
+  "title": "Person",
+  "type": "object",
+  "properties": {
+    "object": {
+      "$ref": "#/components/schemas/type_:PersonObject"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "submitted": {
+      "type": "boolean"
+    },
+    "business_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "titles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:PersonTitlesItem"
+      }
+    },
+    "people_bankruptcies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": {
+          "description": "Any type"
+        }
+      }
+    },
+    "litigations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Litigation"
+      }
+    },
+    "liens": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Lien"
+      }
+    },
+    "criminal_records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:CriminalHistoryRecord"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:Source"
+      }
+    }
+  }
+}

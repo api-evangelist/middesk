@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/action.json",
+  "title": "Action",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "type": {
+      "$ref": "#/components/schemas/type_:ActionType",
+      "description": "The action type that was performed"
+    },
+    "object_type": {
+      "$ref": "#/components/schemas/type_:ActionObjectType",
+      "description": "The type of object the action was performed on"
+    },
+    "object_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of the object the action was performed on"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "note": {
+      "type": "string",
+      "nullable": true,
+      "description": "Optional text note describing the reason for the action"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "description": "Any type"
+      },
+      "description": "Additional metadata associated with the action"
+    },
+    "effects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:ActionEffect"
+      },
+      "description": "List of effects describing what changed"
+    },
+    "actors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:ActionActor"
+      },
+      "description": "List of actors describing who initiated the action"
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "object_type",
+    "object_id",
+    "created_at",
+    "effects",
+    "actors"
+  ]
+}

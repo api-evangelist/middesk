@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/middesk/main/json-schema/order.json",
+  "title": "Order",
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "status": {
+      "$ref": "#/components/schemas/type_:OrderStatus"
+    },
+    "business_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "subproducts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/type_:OrderSubproductsItem"
+      }
+    },
+    "completed_at": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time"
+    },
+    "monitoring": {
+      "type": "boolean"
+    },
+    "product": {
+      "$ref": "#/components/schemas/type_:OrderProduct"
+    },
+    "requester": {
+      "$ref": "#/components/schemas/type_:OrderRequester"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "object",
+    "id",
+    "status",
+    "business_id",
+    "product",
+    "created_at",
+    "updated_at"
+  ]
+}

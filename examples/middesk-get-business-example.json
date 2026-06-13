@@ -1,0 +1,31 @@
+{
+  "name": "get-business",
+  "summary": "Retrieve a business record",
+  "request": {
+    "method": "GET",
+    "url": "https://api.middesk.com/v1/businesses/{id}",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "bus_abc123",
+      "object": "business",
+      "name": "Acme Corporation",
+      "status": "approved",
+      "review": {
+        "status": "approved"
+      },
+      "registrations": [
+        {
+          "state": "CA",
+          "status": "active",
+          "entity_type": "corporation",
+          "file_number": "C1234567"
+        }
+      ]
+    }
+  }
+}
