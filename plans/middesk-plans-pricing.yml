@@ -1,0 +1,47 @@
+name: Middesk Plans and Pricing
+description: Middesk offers custom, volume-based pricing for business verification and compliance products. Pricing is tailored to KYB verification volumes, data services required, and monitoring needs. All plans require contacting sales for a custom quote.
+url: https://www.middesk.com/pricing/business-onboarding
+pricing_model: custom
+pricing_contact: https://www.middesk.com/pricing/business-onboarding
+plans:
+  - name: Business Onboarding
+    description: Core KYB verification package covering business registration checks, EIN/TIN validation, sanctions screening, and owner/officer verification. Suitable for fintechs and lenders onboarding business customers.
+    pricing_model: per-verification
+    estimated_cost: "$2–$5 per verification (volume-dependent)"
+    features:
+      - Secretary of State registration verification
+      - EIN/TIN validation
+      - Owner and officer verification
+      - Sanctions screening (OFAC and global)
+      - Adverse media search
+      - Politically exposed persons (PEP) screening
+      - Business address verification
+      - Industry classification
+      - Web presence analysis
+  - name: Business Monitoring
+    description: Ongoing monitoring add-on that continuously tracks registered business entities for status changes, new liens, sanctions updates, and other risk signals.
+    pricing_model: per-entity-per-month
+    estimated_cost: Contact sales for volume-based monitoring pricing
+    features:
+      - Continuous Secretary of State status monitoring
+      - Lien and legal record updates
+      - Sanctions list re-screening
+      - Adverse media monitoring
+      - Webhook-based change notifications
+      - Bulk disable monitoring
+  - name: Entity Management (Payroll/Compliance)
+    description: Registration request management for payroll tax and business entity formation, including jurisdiction search and document management.
+    pricing_model: custom
+    estimated_cost: Contact sales
+    features:
+      - Payroll tax registration requests
+      - Jurisdiction search and support
+      - Document management and download
+      - Mail management for registered agents
+      - Guest dashboard access
+notes:
+  - Middesk does not publish a public pricing page with fixed rates; all quotes are custom based on monthly verification volume, data products, and contract length.
+  - Annual and monthly minimums may apply.
+  - Volume discounts increase for higher verification volumes (1,000–5,000+ per month) and multi-year agreements.
+  - Professional services fees may apply for complex integrations or custom data mapping.
+  - A free sandbox environment is available for development and testing.

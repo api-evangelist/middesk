@@ -1,0 +1,71 @@
+aid: middesk
+name: Middesk
+description: Middesk is a business identity and verification platform providing a REST API for KYB (Know Your Business) compliance, EIN/TIN validation, business registration verification, UBO research, sanctions screening, and ongoing business monitoring. Used by fintechs, lenders, and banks to automate onboarding and compliance workflows.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/middesk/refs/heads/main/apis.yml
+created: 2026-06-13
+modified: 2026-06-13
+specificationVersion: "0.19"
+tags:
+  - Business Verification
+  - KYB
+  - Know Your Business
+  - Identity Verification
+  - Compliance
+  - EIN Validation
+  - TIN Verification
+  - Sanctions Screening
+  - Business Monitoring
+  - Fintech
+  - RegTech
+apis:
+  - name: Middesk Business Verification API
+    description: REST API for verifying business identities, including Secretary of State registrations, EIN/TIN validation, UBO and officer research, sanctions and adverse media screening, and real-time business monitoring. Supports both sandbox and production environments.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.middesk.com/reference/introduction
+    baseURL: https://api.middesk.com/v1/
+    tags:
+      - Business Verification
+      - KYB
+      - Identity Verification
+      - Compliance
+    properties:
+      - type: Documentation
+        url: https://docs.middesk.com/docs
+      - type: OpenAPI
+        url: https://docs.middesk.com/openapi.json
+      - type: PostmanCollection
+        url: https://github.com/middesk/middesk-postman
+      - type: Sandbox
+        url: https://api-sandbox.middesk.com/v1/
+    contact:
+      - FN: Middesk Support
+        url: https://docs.middesk.com
+        email: support@middesk.com
+common:
+  - type: Website
+    url: https://www.middesk.com
+  - type: Documentation
+    url: https://docs.middesk.com
+  - type: GitHubOrg
+    url: https://github.com/middesk
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/middesk
+  - type: Blog
+    url: https://www.middesk.com/blog
+  - type: Pricing
+    url: https://www.middesk.com/pricing/business-onboarding
+  - type: StatusPage
+    url: https://status.middesk.com
+  - type: X
+    url: https://x.com/middeskhq
+  - type: Plans
+    url: plans/middesk-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/middesk-rate-limits.yml
+  - type: FinOps
+    url: finops/middesk-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,40 @@
+name: Middesk FinOps
+description: Financial operations guidance for managing Middesk API costs, including cost drivers, optimization strategies, and budgeting considerations for business verification and compliance workloads.
+url: https://www.middesk.com/pricing/business-onboarding
+cost_model: per-verification with optional per-entity-per-month monitoring add-on
+billing_contact: https://www.middesk.com/pricing/business-onboarding
+cost_drivers:
+  - name: Business Verification Requests
+    description: Each KYB verification order is the primary cost unit. Per-request pricing ranges from approximately $2–$5 depending on volume tiers, products ordered, and contract terms.
+    unit: per verification order
+    estimated_range: "$2–$5 per order (volume-dependent)"
+  - name: Ongoing Business Monitoring
+    description: Continuous monitoring of business entities is billed per entity per month as an add-on. Enterprises with large portfolios should negotiate volume-based monitoring rates upfront.
+    unit: per entity per month
+    estimated_range: Contact sales
+  - name: Annual or Monthly Minimums
+    description: Many Middesk contracts include minimum spend commitments regardless of actual usage. Align minimums with realistic monthly verification volumes to avoid over-paying.
+    unit: contract minimum
+    estimated_range: Varies by contract
+  - name: Professional Services
+    description: Complex workflow integrations, custom data mapping, or implementation support may incur one-time or recurring professional services fees.
+    unit: engagement-based
+    estimated_range: Contact sales
+optimization_strategies:
+  - strategy: Negotiate Volume Discounts
+    description: Higher monthly verification volumes (1,000–5,000+) and multi-year agreements unlock deeper per-request discounts. Forecast realistic volumes before signing.
+  - strategy: Right-size Monitoring Portfolio
+    description: Only enable ongoing monitoring for entities that require active compliance oversight. Audit the monitored entity list regularly and use the bulk-disable API endpoint to remove entities that no longer need monitoring.
+  - strategy: Use Sandbox for Development
+    description: All development and testing should use the free sandbox environment (api-sandbox.middesk.com) with mk_test API keys to avoid incurring production verification costs during integration work.
+  - strategy: Minimize Redundant Verifications
+    description: Cache verification results and use Middesk's update/retrieve endpoints to retrieve existing business data rather than re-ordering full verifications for the same business.
+  - strategy: Align Minimums with Actual Usage
+    description: Negotiate contract minimums that match realistic usage patterns, especially if verification volumes are seasonal or variable. Monthly minimums can result in unused spend if volumes fall short.
+  - strategy: Bundle Products
+    description: Bundling multiple data products (TIN match, sanctions, adverse media) into a single verification order is typically more cost-effective than ordering individual products separately.
+budgeting_notes:
+  - Middesk does not publish fixed public pricing; all costs require direct sales engagement and a custom quote.
+  - Pricing is highly volume-sensitive; model costs at your expected monthly verification volume before negotiating.
+  - Multi-year agreements provide the best per-verification economics but reduce flexibility.
+  - Factor in monitoring costs separately from one-time verification costs when budgeting for compliance programs.

@@ -1,0 +1,36 @@
+name: Middesk API Rate Limits
+description: Middesk enforces rate limiting on its REST API to ensure high availability and performance across all customers. Rate limiting operates at the IP address level. Specific numeric limits are not publicly documented and are subject to account-level agreements.
+url: https://docs.middesk.com/reference/introduction
+rate_limit_scope: IP address
+enforcement: Automatic — exceeding limits returns HTTP 429 Too Many Requests
+limits:
+  - scope: API requests (general)
+    description: Rate limiting is applied at the IP address level to prevent automated abuse. Middesk does not publish specific numeric thresholds publicly; limits are enforced to maintain sub-second response times for all customers.
+    limit: Not publicly specified
+    window: Not publicly specified
+    notes: Contact Middesk support for account-level rate limit details.
+  - scope: Sandbox environment
+    description: The sandbox environment (https://api-sandbox.middesk.com/v1/) is intended for development and testing. Rate limits in sandbox may differ from production.
+    limit: Not publicly specified
+    window: Not publicly specified
+    notes: Use mk_test prefixed API keys with the sandbox base URL.
+environments:
+  - name: Production
+    base_url: https://api.middesk.com/v1/
+    api_key_prefix: mk_live
+  - name: Sandbox
+    base_url: https://api-sandbox.middesk.com/v1/
+    api_key_prefix: mk_test
+authentication:
+  methods:
+    - type: HTTP Basic Auth
+      description: Provide the API key as the username value with no password required.
+    - type: Bearer Token
+      description: Pass header value of "Authorization: Bearer mk_live_YOUR_API_KEY" or "Authorization: Bearer mk_test_YOUR_API_KEY".
+  notes:
+    - All requests must use HTTPS.
+    - API key type and base URL must match (production key with production URL, test key with sandbox URL).
+    - API keys are managed in the Middesk Dashboard under Settings > Developer > Credentials.
+error_codes:
+  - code: 429
+    description: Too Many Requests — rate limit exceeded; retry after backing off.
