@@ -2,7 +2,7 @@ aid: middesk
 name: Middesk
 description: Middesk is a business identity and verification platform providing a REST API for KYB (Know Your Business) compliance, EIN/TIN validation, business registration verification, UBO research, sanctions screening, and ongoing business monitoring. Used by fintechs, lenders, and banks to automate onboarding and compliance workflows.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/middesk/refs/heads/main/apis.yml
 created: 2026-06-13
 modified: 2026-06-13
@@ -22,7 +22,7 @@ tags:
 apis:
   - name: Middesk Business Verification API
     description: REST API for verifying business identities, including Secretary of State registrations, EIN/TIN validation, UBO and officer research, sanctions and adverse media screening, and real-time business monitoring. Supports both sandbox and production environments.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.middesk.com/reference/introduction
     baseURL: https://api.middesk.com/v1/
     tags:
