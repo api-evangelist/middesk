@@ -1,0 +1,12 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/middesk-business-verification-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearer_auth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/middesk-business-verification-openapi.yml
