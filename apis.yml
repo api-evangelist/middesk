@@ -44,6 +44,8 @@ apis:
         url: https://docs.middesk.com
         email: support@middesk.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/middesk-agentic-access.yml
   - type: DomainSecurity
     url: security/middesk-domain-security.yml
   - type: Authentication
