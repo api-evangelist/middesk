@@ -1,0 +1,557 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_liens API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_liens
+paths:
+  /v1/businesses/{business_id}/liens:
+    get:
+      operationId: list-liens
+      summary: List liens for a business
+      tags:
+      - subpackage_liens
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: liens found
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: business not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+    post:
+      operationId: create-lien
+      summary: Create a lien for a business
+      tags:
+      - subpackage_liens
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: lien created using account defaults
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '400':
+          description: invalid secured parties configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+        '403':
+          description: identity or verify order required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+        '404':
+          description: business not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  $ref: '#/components/schemas/type_liens:LienRequestParamState'
+                  description: State where the lien will be filed. Use `state` for a single state or `states` for multiple states. If both are provided, `states` takes precedence.
+                states:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/type_liens:LienRequestParamStatesItem'
+                  description: Array of states to file the lien in. Creates one lien per state. Returns a list response. Either `state` or `states` is required.
+                debtors:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/type_liens:LienRequestParamDebtorsItem'
+                  description: Array of debtor details
+                secured_parties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/type_liens:LienRequestParamSecuredPartiesItem'
+                  description: Array of secured party details (optional - uses account defaults if not provided)
+                secured_party:
+                  $ref: '#/components/schemas/type_liens:LienRequestParamSecuredParty'
+                  description: Single secured party (alternative to secured_parties array)
+                collateral:
+                  type: string
+                  description: Collateral description (optional - uses account default if not provided)
+                loan_principal_amount_cents:
+                  type: integer
+                  description: Loan principal amount in cents
+                packet_number:
+                  type: string
+                  description: Packet number for the filing (optional - auto-generated if not provided)
+                alternative_designation:
+                  type: string
+                  description: Alternative designation (for Tennessee filings)
+              required:
+              - debtors
+  /v1/businesses/{business_id}/liens/batch:
+    post:
+      operationId: create-lien-filings-in-batch
+      summary: Create lien filings in batch
+      description: Creates multiple lien filings in a single request. Each entry is processed independently. Successful entries return lien objects, failed entries return per-item errors.
+      tags:
+      - subpackage_liens
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: batch processed
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: batch validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:CreateLienFilingsInBatchRequestUnprocessableEntityErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                liens:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/type_liens:LienBatchRequestParamLiensItem'
+                  description: Array of lien filing entries. Each entry creates one lien. Each entry must have a unique state. Maximum 50 entries per request.
+              required:
+              - liens
+components:
+  schemas:
+    type_liens:LienRequestParamStatesItem:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: LienRequestParamStatesItem
+    type_:LienAddress:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          type: string
+        state:
+          $ref: '#/components/schemas/type_:LienAddressState'
+        postal_code:
+          type: string
+      title: LienAddress
+    type_liens:LienBatchRequestParamLiensItemSecuredPartiesItem:
+      type: object
+      properties:
+        organization_name:
+          type: string
+        role:
+          $ref: '#/components/schemas/type_liens:LienBatchRequestParamLiensItemSecuredPartiesItemRole'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:LienAddress'
+      title: LienBatchRequestParamLiensItemSecuredPartiesItem
+    type_liens:LienBatchRequestParamLiensItemState:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      description: State where the lien will be filed
+      title: LienBatchRequestParamLiensItemState
+    type_liens:LienRequestParamSecuredPartiesItemRole:
+      type: string
+      enum:
+      - assignee
+      - assignor
+      description: Role (assignee or assignor)
+      title: LienRequestParamSecuredPartiesItemRole
+    type_liens:LienBatchRequestParamLiensItemSecuredPartiesItemRole:
+      type: string
+      enum:
+      - assignee
+      - assignor
+      title: LienBatchRequestParamLiensItemSecuredPartiesItemRole
+    type_liens:LienRequestParamDebtorsItem:
+      type: object
+      properties:
+        organization_name:
+          type: string
+          description: Debtor organization name
+        tin:
+          type: string
+          description: Tax identification number (required for certain states)
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:LienAddress'
+      title: LienRequestParamDebtorsItem
+    type_liens:LienRequestParamSecuredParty:
+      type: object
+      properties:
+        organization_name:
+          type: string
+          description: Secured party organization name
+        role:
+          $ref: '#/components/schemas/type_liens:LienRequestParamSecuredPartyRole'
+          description: Role (assignee or assignor)
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:LienAddress'
+      description: Single secured party (alternative to secured_parties array)
+      title: LienRequestParamSecuredParty
+    type_:CreateLienFilingsInBatchRequestUnprocessableEntityErrorBody:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      title: CreateLienFilingsInBatchRequestUnprocessableEntityErrorBody
+    type_liens:LienRequestParamState:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      description: State where the lien will be filed. Use `state` for a single state or `states` for multiple states. If both are provided, `states` takes precedence.
+      title: LienRequestParamState
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_liens:LienBatchRequestParamLiensItemDebtorsItem:
+      type: object
+      properties:
+        organization_name:
+          type: string
+          description: Debtor organization name
+        tin:
+          type: string
+          description: Tax identification number (required for certain states)
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:LienAddress'
+      title: LienBatchRequestParamLiensItemDebtorsItem
+    type_liens:LienRequestParamSecuredPartiesItem:
+      type: object
+      properties:
+        organization_name:
+          type: string
+          description: Secured party organization name
+        role:
+          $ref: '#/components/schemas/type_liens:LienRequestParamSecuredPartiesItemRole'
+          description: Role (assignee or assignor)
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:LienAddress'
+      title: LienRequestParamSecuredPartiesItem
+    type_:LienAddressState:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: LienAddressState
+    type_liens:LienRequestParamSecuredPartyRole:
+      type: string
+      enum:
+      - assignee
+      - assignor
+      description: Role (assignee or assignor)
+      title: LienRequestParamSecuredPartyRole
+    type_liens:LienBatchRequestParamLiensItem:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/type_liens:LienBatchRequestParamLiensItemState'
+          description: State where the lien will be filed
+        debtors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_liens:LienBatchRequestParamLiensItemDebtorsItem'
+          description: Array of debtor details
+        secured_parties:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_liens:LienBatchRequestParamLiensItemSecuredPartiesItem'
+          description: Secured party details for this entry. Falls back to account defaults if not provided.
+        collateral:
+          type: string
+          description: Collateral description. Falls back to account default if not provided.
+        loan_principal_amount_cents:
+          type: integer
+          description: Loan principal amount in cents
+        packet_number:
+          type: string
+          description: Packet number for the filing. Auto-generated if not provided.
+        alternative_designation:
+          type: string
+          description: Alternative designation (for Tennessee filings)
+      required:
+      - state
+      - debtors
+      title: LienBatchRequestParamLiensItem
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,349 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_reviews API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_reviews
+paths:
+  /v1/businesses/{business_id}/review:
+    get:
+      operationId: get-business-review
+      summary: Retrieve a review for a business
+      description: Returns the review associated with a business
+      tags:
+      - subpackage_reviews
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: review found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:Review'
+        '404':
+          description: business not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+components:
+  schemas:
+    type_:Review:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type_:ReviewObject'
+        id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          nullable: true
+          format: date-time
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ReviewTask'
+        assignee:
+          oneOf:
+          - $ref: '#/components/schemas/type_:User'
+          - type: 'null'
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - tasks
+      title: Review
+    type_:ReviewTaskKey:
+      type: string
+      enum:
+      - location_frequency
+      - bankruptcies
+      - sos_unknown
+      - address_deliverability
+      - website_url_discovery
+      - entity_type
+      - web_person_verification
+      - global_watchlists
+      - website_status
+      - name
+      - sos_sub_status
+      - name_and_entity_type
+      - sos_active
+      - profile_status
+      - phone
+      - sos_domestic
+      - address_high_risk
+      - web_address_verification
+      - address_property_type
+      - sos_not_found
+      - time_in_business
+      - web_phone_number_verification
+      - adverse_media
+      - litigations
+      - address_verification
+      - people_litigations
+      - dba_name
+      - watchlist
+      - entity_type_match
+      - people_criminal_history
+      - formation_state
+      - tin_error
+      - sos_inactive
+      - address_frequency
+      - web_business_name_verification
+      - web_presence_quality
+      - tin_type
+      - tin_issued
+      - sos_domestic_sub_status
+      - risky_keywords
+      - address_registered_agent
+      - sos
+      - kyc_decision
+      - ppp_loans
+      - web_email_address_verification
+      - tin
+      - address
+      - liens
+      - sos_status
+      - industry
+      - sos_match
+      - address_risk
+      - website_url_domain_ownership
+      - website_parked
+      - domain_redirect
+      - people_bankruptcies
+      - politically_exposed_persons
+      - person_verification
+      - profile_discovery
+      - address_cmra
+      - website_verification
+      - website
+      - people_liens
+      - email_risk
+      title: ReviewTaskKey
+    type_:ReviewTaskStatus:
+      type: string
+      enum:
+      - success
+      - failure
+      - warning
+      - neutral
+      title: ReviewTaskStatus
+    type_:ReviewObject:
+      type: string
+      enum:
+      - review
+      title: ReviewObject
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:ReviewTaskCategory:
+      type: string
+      enum:
+      - bankruptcies
+      - global_watchlists
+      - name
+      - people_litigations
+      - loans
+      - kyc
+      - watchlist
+      - phone
+      - formation
+      - people_criminal_history
+      - adverse_media
+      - litigations
+      - tin_type
+      - address
+      - sos
+      - web
+      - liens
+      - people_bankruptcies
+      - industry
+      - tin
+      - people
+      - people_liens
+      - website
+      - politically_exposed_persons
+      - email
+      title: ReviewTaskCategory
+    type_:User:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        roles:
+          type: array
+          items:
+            type: string
+        image_url:
+          type: string
+          format: uri
+        directory_managed:
+          type: boolean
+        last_login_at:
+          type: string
+          nullable: true
+          format: date-time
+        settings:
+          type: object
+          additionalProperties:
+            description: Any type
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - object
+      - id
+      - name
+      - email
+      - roles
+      - created_at
+      title: User
+    type_:ReviewTask:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/type_:ReviewTaskCategory'
+        key:
+          $ref: '#/components/schemas/type_:ReviewTaskKey'
+        label:
+          $ref: '#/components/schemas/type_:ReviewTaskLabel'
+        message:
+          type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/type_:ReviewTaskStatus'
+        sub_label:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Source'
+      required:
+      - category
+      - key
+      - label
+      - message
+      - name
+      - status
+      - sub_label
+      - sources
+      title: ReviewTask
+    type_:ReviewTaskLabel:
+      type: string
+      enum:
+      - Politically Exposed Persons
+      - Web Presence Quality
+      - KYC
+      - People Bankruptcies
+      - Address Risk
+      - Global Watchlists
+      - Phone Number
+      - Third Party Profile Status
+      - Liens
+      - Third Party Profiles
+      - Time in Business
+      - Web - Email Address
+      - Risky Keywords
+      - SOS Domestic Sub‑status
+      - PPP Loans
+      - Secretary of State Filings
+      - Entity Type
+      - SOS Filings
+      - People Criminal History
+      - Adverse Media
+      - Web - People
+      - Office Address
+      - Entity Type Match
+      - Web - Phone Number
+      - Business Name
+      - Bankruptcies
+      - Industry Classification
+      - TIN Match
+      - Watchlists
+      - People Litigations
+      - True Industry
+      - People
+      - DBA Name
+      - Domain Ownership
+      - Domain Redirect
+      - TIN Type
+      - Website
+      - TIN Error
+      - Watchlist
+      - Litigations
+      - Web - Business Name
+      - Name Entity Type
+      - Formation State
+      - People Liens
+      - Web - Office Address
+      - Email Risk
+      title: ReviewTaskLabel
+    type_:Source:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+      required:
+      - id
+      - type
+      - metadata
+      title: Source
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

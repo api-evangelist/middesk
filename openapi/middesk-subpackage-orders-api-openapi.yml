@@ -1,0 +1,392 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_orders API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_orders
+paths:
+  /v1/businesses/{business_id}/orders:
+    get:
+      operationId: list-orders
+      summary: List orders for a business
+      tags:
+      - subpackage_orders
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: packages
+        in: query
+        description: Comma-separated list of packages to filter by
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page number for pagination
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Number of items per page
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: orders found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_orders:ListOrdersResponse'
+    post:
+      operationId: create-order
+      summary: Create an order for a business
+      tags:
+      - subpackage_orders
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: order created
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '400':
+          description: bad request - missing package
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+        '422':
+          description: unprocessable entity - reorder validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product:
+                  $ref: '#/components/schemas/type_orders:OrderRequestParamProduct'
+                  description: Product type for the order
+                subproducts:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/type_orders:OrderRequestParamSubproductsItem'
+                  description: Array of subproducts
+                options:
+                  $ref: '#/components/schemas/type_orders:OrderRequestParamOptions'
+                  description: Additional options for the order
+  /v1/businesses/{business_id}/orders/{id}:
+    get:
+      operationId: get-order
+      summary: Retrieve an order
+      tags:
+      - subpackage_orders
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Order ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: order found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:Order'
+  /v1/orders/{id}:
+    get:
+      operationId: get-order-by-id
+      summary: Retrieve an order by ID
+      tags:
+      - subpackage_orders
+      parameters:
+      - name: id
+        in: path
+        description: Order ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: order found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:Order'
+    put:
+      operationId: update-order
+      summary: Update an order
+      tags:
+      - subpackage_orders
+      parameters:
+      - name: id
+        in: path
+        description: Order ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: order updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:Order'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee_id:
+                  type: string
+                  description: ID of the user to assign the order to
+                status:
+                  type: string
+                  description: New status for the order
+components:
+  schemas:
+    type_:OrderRequester:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        type:
+          oneOf:
+          - $ref: '#/components/schemas/type_:OrderRequesterType'
+          - type: 'null'
+      title: OrderRequester
+    type_:OrderProduct:
+      type: string
+      enum:
+      - identity
+      - liens
+      - adverse_media
+      - bankruptcies
+      - business_enrichment
+      - documents
+      - enhanced_screenings
+      - kyc
+      - litigations
+      - people_litigations
+      - people_bankruptcies
+      - people_tax_liens
+      - people_ucc_liens
+      - people_criminal_history
+      - tin
+      - website
+      - business_verification_qualify
+      - business_verification_verify
+      - tax_liens
+      - ucc_liens
+      - email_risk
+      title: OrderProduct
+    type_orders:OrderRequestParamSubproductsItem:
+      type: string
+      enum:
+      - articles_of_incorporation
+      - certificate_of_good_standing
+      - articles_of_incorporation_with_fallback
+      - ucc_documents
+      - web_analysis
+      - industry_classification
+      title: OrderRequestParamSubproductsItem
+    type_:OrderStatus:
+      type: string
+      enum:
+      - created
+      - pending
+      - audited
+      - completed
+      - approved
+      - rejected
+      title: OrderStatus
+    type_orders:OrderRequestParamOptions:
+      type: object
+      properties:
+        person_match:
+          type: boolean
+      description: Additional options for the order
+      title: OrderRequestParamOptions
+    type_:OrderSubproductsItem:
+      type: string
+      enum:
+      - Articles of Incorporation
+      - Certificate of Good Standing
+      - Articles of Incorporation with Certificate of Good Standing fallback
+      - ucc_documents
+      - web_analysis
+      - industry_classification
+      title: OrderSubproductsItem
+    type_orders:OrderRequestParamProduct:
+      type: string
+      enum:
+      - identity
+      - liens
+      - adverse_media
+      - bankruptcies
+      - business_enrichment
+      - documents
+      - enhanced_screenings
+      - kyc
+      - litigations
+      - people_litigations
+      - people_bankruptcies
+      - people_tax_liens
+      - people_ucc_liens
+      - people_criminal_history
+      - tin
+      - website
+      - business_verification_qualify
+      - business_verification_verify
+      - tax_liens
+      - ucc_liens
+      - email_risk
+      description: Product type for the order
+      title: OrderRequestParamProduct
+    type_:Order:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/type_:OrderStatus'
+        business_id:
+          type: string
+          format: uuid
+        subproducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:OrderSubproductsItem'
+        completed_at:
+          type: string
+          nullable: true
+          format: date-time
+        monitoring:
+          type: boolean
+        product:
+          $ref: '#/components/schemas/type_:OrderProduct'
+        requester:
+          $ref: '#/components/schemas/type_:OrderRequester'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - object
+      - id
+      - status
+      - business_id
+      - product
+      - created_at
+      - updated_at
+      title: Order
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:OrderRequesterType:
+      type: string
+      enum:
+      - account
+      - user
+      - api_key
+      title: OrderRequesterType
+    type_orders:ListOrdersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Order'
+        object:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - has_more
+      title: ListOrdersResponse
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

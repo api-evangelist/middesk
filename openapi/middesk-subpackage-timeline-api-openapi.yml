@@ -1,0 +1,97 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_timeline API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_timeline
+paths:
+  /v1/businesses/{business_id}/timeline:
+    get:
+      operationId: get-business-timeline
+      summary: Retrieve timeline for a business
+      description: Returns a paginated list of timeline events for a business. Timeline events include Secretary of State (SOS) history events and SOS monitoring events, providing a chronological record of changes to the business's registration data.
+      tags:
+      - subpackage_timeline
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: 'Page number (default: 1)'
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: 'Number of events per page (default: 100, max: 100)'
+        required: false
+        schema:
+          type: integer
+      - name: start_date
+        in: query
+        description: Filter events on or after this date (YYYY-MM-DD format)
+        required: false
+        schema:
+          type: string
+      - name: end_date
+        in: query
+        description: Filter events on or before this date (YYYY-MM-DD format)
+        required: false
+        schema:
+          type: string
+      - name: event_types
+        in: query
+        description: Comma-separated list of event types to filter by
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: timeline events list
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: business not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+components:
+  schemas:
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

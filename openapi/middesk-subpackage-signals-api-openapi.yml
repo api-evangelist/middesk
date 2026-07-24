@@ -1,0 +1,366 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_signals API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_signals
+paths:
+  /v1/signals:
+    get:
+      operationId: list-signals
+      summary: List signals
+      tags:
+      - subpackage_signals
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+      - name: q
+        in: query
+        description: Search query
+        required: false
+        schema:
+          type: string
+      - name: external_id
+        in: query
+        description: Filter by external ID
+        required: false
+        schema:
+          type: string
+      - name: start_date
+        in: query
+        description: Start date filter (YYYY-MM-DD)
+        required: false
+        schema:
+          type: string
+      - name: end_date
+        in: query
+        description: End date filter (YYYY-MM-DD)
+        required: false
+        schema:
+          type: string
+      - name: starting_at
+        in: query
+        description: Start timestamp filter
+        required: false
+        schema:
+          type: string
+      - name: ending_at
+        in: query
+        description: End timestamp filter
+        required: false
+        schema:
+          type: string
+      - name: batch_id
+        in: query
+        description: Filter by batch ID
+        required: false
+        schema:
+          type: string
+      - name: model_slug
+        in: query
+        description: Filter by model slug
+        required: false
+        schema:
+          type: string
+      - name: reason_codes
+        in: query
+        description: Filter by reason codes
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: signals list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_signals:ListSignalsResponse'
+    post:
+      operationId: create-signal
+      summary: Create a signal
+      tags:
+      - subpackage_signals
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: signal created
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Company name
+                tin:
+                  type: string
+                  description: Tax identification number
+                external_id:
+                  type: string
+                  description: External identifier
+                model_slug:
+                  type: string
+                  description: Scoring model slug
+                addresses:
+                  type: array
+                  items:
+                    type: string
+                  description: Array of addresses
+                people:
+                  type: array
+                  items:
+                    type: string
+                  description: Array of people names
+              required:
+              - name
+              - addresses
+  /v1/signals/{id}:
+    get:
+      operationId: get-signal
+      summary: Retrieve a signal
+      tags:
+      - subpackage_signals
+      parameters:
+      - name: id
+        in: path
+        description: Signal ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: signal found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:Signal'
+        '404':
+          description: signal not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+components:
+  schemas:
+    type_signals:ListSignalsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Signal'
+        object:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - has_more
+      title: ListSignalsResponse
+    type_:Signal:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        tin:
+          type: string
+          nullable: true
+        external_id:
+          type: string
+          nullable: true
+        model_slug:
+          type: string
+        score:
+          type: number
+          nullable: true
+          format: double
+        business_id:
+          type: string
+          nullable: true
+          format: uuid
+        batch_id:
+          type: string
+          nullable: true
+          format: uuid
+        requester:
+          $ref: '#/components/schemas/type_:SignalRequester'
+        reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:SignalReasonsItem'
+        addresses:
+          type: array
+          items:
+            type: string
+        people:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - object
+      - id
+      - name
+      - created_at
+      title: Signal
+    type_:SignalRequester:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - type
+      - name
+      title: SignalRequester
+    type_:SignalReasonsItem:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/type_:SignalReasonsItemCategory'
+        group:
+          type: string
+        description:
+          type: string
+        code:
+          $ref: '#/components/schemas/type_:SignalReasonsItemCode'
+        importance:
+          type: number
+          format: double
+      required:
+      - category
+      - group
+      - description
+      - code
+      title: SignalReasonsItem
+    type_:SignalReasonsItemCategory:
+      type: string
+      enum:
+      - identification
+      - verification
+      - evaluation
+      title: SignalReasonsItemCategory
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:SignalReasonsItemCode:
+      type: string
+      enum:
+      - I301
+      - I302
+      - I304
+      - I102
+      - I103
+      - I107
+      - I108
+      - I109
+      - I111
+      - I601
+      - I603
+      - I201
+      - I202
+      - I203
+      - I204
+      - V010
+      - V011
+      - V101
+      - V102
+      - V103
+      - V104
+      - V501
+      - V502
+      - V503
+      - V505
+      - V748
+      - V749
+      - V750
+      - V751
+      - V752
+      - V753
+      - V801
+      - V1101
+      - V1201
+      - V1302
+      - E500
+      - E501
+      - E502
+      - E503
+      - E1101
+      - E1102
+      - E1201
+      title: SignalReasonsItemCode
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

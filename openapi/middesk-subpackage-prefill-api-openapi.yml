@@ -1,0 +1,238 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_prefill API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_prefill
+paths:
+  /v1/prefill/businesses:
+    post:
+      operationId: business
+      summary: Prefill business information
+      description: Smart populate business attributes by searching with name and address, TIN, or website URL. Returns enriched business data.
+      tags:
+      - subpackage_prefill
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: prefill results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:PrefillBusiness'
+        '400':
+          description: invalid request - missing required parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                names:
+                  type: array
+                  items:
+                    type: string
+                  description: Business name(s) to search for
+                addresses:
+                  type: array
+                  items:
+                    type: string
+                  description: Business address(es) to search for
+                tin:
+                  type: string
+                  description: Taxpayer Identification Number
+                website_url:
+                  type: string
+                  description: Business website URL
+                autocomplete_result_id:
+                  type: string
+                  description: ID of an autocomplete result to use for direct lookup
+components:
+  schemas:
+    type_:PrefillBusinessIndustryClassificationsItem:
+      type: object
+      properties:
+        name:
+          type: string
+        score:
+          type: number
+          format: double
+        sector:
+          type: string
+          nullable: true
+        category:
+          type: string
+          nullable: true
+        high_risk:
+          type: boolean
+        mcc_codes:
+          type: array
+          nullable: true
+          items:
+            type: string
+        sic_codes:
+          type: array
+          nullable: true
+          items:
+            type: string
+        naics_codes:
+          type: array
+          nullable: true
+          items:
+            type: string
+        prohibited_labels:
+          type: array
+          items:
+            type: string
+        classification_system:
+          type: string
+      title: PrefillBusinessIndustryClassificationsItem
+    type_:PrefillBusinessTin:
+      type: object
+      properties:
+        last_four:
+          type: string
+          description: Last four digits of the TIN
+        tin_type:
+          type: string
+          description: Type of TIN (EIN, SSN, etc.)
+      description: TIN information if verified
+      title: PrefillBusinessTin
+    type_:PrefillBusinessNamesItem:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          oneOf:
+          - $ref: '#/components/schemas/type_:PrefillBusinessNamesItemType'
+          - type: 'null'
+      title: PrefillBusinessNamesItem
+    type_:PrefillBusinessPeopleItem:
+      type: object
+      properties:
+        name:
+          type: string
+        titles:
+          type: array
+          items:
+            type: string
+      title: PrefillBusinessPeopleItem
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:PrefillBusinessWebsite:
+      type: object
+      properties:
+        url:
+          type: string
+      description: Website information
+      title: PrefillBusinessWebsite
+    type_:PrefillBusinessAddressesItem:
+      type: object
+      properties:
+        full_address:
+          type: string
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+      title: PrefillBusinessAddressesItem
+    type_:PrefillBusinessNamesItemType:
+      type: string
+      enum:
+      - legal
+      - dba
+      title: PrefillBusinessNamesItemType
+    type_:PrefillBusiness:
+      type: object
+      properties:
+        object:
+          type: string
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:PrefillBusinessNamesItem'
+          description: Business names
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:PrefillBusinessAddressesItem'
+          description: Business addresses
+        tin:
+          oneOf:
+          - $ref: '#/components/schemas/type_:PrefillBusinessTin'
+          - type: 'null'
+          description: TIN information if verified
+        formation:
+          $ref: '#/components/schemas/type_:PrefillBusinessFormation'
+          description: Formation details
+        industry_classifications:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/type_:PrefillBusinessIndustryClassificationsItem'
+          description: Industry classifications
+        people:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:PrefillBusinessPeopleItem'
+          description: Associated persons
+        website:
+          oneOf:
+          - $ref: '#/components/schemas/type_:PrefillBusinessWebsite'
+          - type: 'null'
+          description: Website information
+      description: Prefilled business information
+      title: PrefillBusiness
+    type_:PrefillBusinessFormation:
+      type: object
+      properties:
+        entity_type:
+          type: string
+          nullable: true
+      description: Formation details
+      title: PrefillBusinessFormation
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

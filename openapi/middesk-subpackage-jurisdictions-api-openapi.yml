@@ -1,0 +1,194 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_jurisdictions API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_jurisdictions
+paths:
+  /v1/agent/jurisdictions/search:
+    get:
+      operationId: search-jurisdictions
+      summary: Search jurisdictions
+      description: Search for jurisdictions by name, PSD code, or other criteria. Supports filtering by state, tax type, and jurisdiction type. Results are paginated.
+      tags:
+      - subpackage_jurisdictions
+      parameters:
+      - name: state
+        in: query
+        description: Two-letter US state abbreviation (e.g., OH, PA)
+        required: false
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: Search query (name, PSD code, or municipality)
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page number for pagination
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Number of results per page
+        required: false
+        schema:
+          type: integer
+      - name: tax_type
+        in: query
+        description: Filter by tax type (e.g., CITY, EIT, LST)
+        required: false
+        schema:
+          type: string
+      - name: local_only
+        in: query
+        description: When true, returns only local jurisdictions
+        required: false
+        schema:
+          type: string
+      - name: supported_only
+        in: query
+        description: When true, returns only supported jurisdictions
+        required: false
+        schema:
+          type: string
+      - name: slug
+        in: query
+        description: Filter by jurisdiction slug
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: jurisdictions search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_jurisdictions:SearchJurisdictionsResponse'
+  /v1/agent/jurisdictions:
+    get:
+      operationId: list-jurisdictions
+      summary: Fetch supported local jurisdictions
+      tags:
+      - subpackage_jurisdictions
+      parameters:
+      - name: state
+        in: query
+        description: US state abbreviation (e.g., CO, CA, NY)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: jurisdictions list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_jurisdictions:ListJurisdictionsResponse'
+components:
+  schemas:
+    type_jurisdictions:ListJurisdictionsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentJurisdiction'
+        search_config:
+          oneOf:
+          - $ref: '#/components/schemas/type_jurisdictions:ListJurisdictionsResponseSearchConfig'
+          - type: 'null'
+      title: ListJurisdictionsResponse
+    type_jurisdictions:ListJurisdictionsResponseSearchConfig:
+      type: object
+      properties:
+        hint:
+          type: string
+        help_text:
+          type: string
+          nullable: true
+        help_url:
+          type: string
+          nullable: true
+      title: ListJurisdictionsResponseSearchConfig
+    type_jurisdictions:SearchJurisdictionsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentJurisdiction'
+        url:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      title: SearchJurisdictionsResponse
+    type_:AgentJurisdiction:
+      type: object
+      properties:
+        object:
+          type: string
+        slug:
+          type: string
+          description: Unique identifier for the jurisdiction
+        type:
+          type: string
+          description: Type of tax (e.g., City Tax, State Tax)
+        label:
+          type: string
+          description: Display label for the jurisdiction
+        name:
+          type: string
+          description: Full name of the jurisdiction
+        agency_name:
+          type: string
+          description: Name of the tax agency
+        agency_slug:
+          type: string
+          description: Unique identifier for the agency
+        agency_items:
+          type: array
+          items:
+            type: string
+          description: List of items collected by the agency
+        city:
+          type: string
+          nullable: true
+          description: City name if applicable
+        state:
+          type: string
+          description: US state abbreviation
+      required:
+      - object
+      - slug
+      - name
+      - state
+      title: AgentJurisdiction
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

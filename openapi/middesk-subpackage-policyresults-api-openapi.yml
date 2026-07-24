@@ -1,0 +1,167 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_policyResults API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_policyResults
+paths:
+  /v1/businesses/{business_id}/policy_results:
+    get:
+      operationId: list-business-policy-results
+      summary: List policy results for a business
+      description: Returns policy results for enabled policy versions only
+      tags:
+      - subpackage_policyResults
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: multiple policy results with different versions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:PolicyResultsList'
+        '404':
+          description: business not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+components:
+  schemas:
+    type_:PolicyResult:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          description: Policy result ID
+        result:
+          type: string
+          description: Policy result outcome
+        created_at:
+          type: string
+          description: Creation timestamp
+        matched:
+          type: string
+          nullable: true
+          description: Match status
+        executed:
+          type: boolean
+          description: Execution status
+        name:
+          type: string
+          nullable: true
+          description: Policy name
+        details:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Additional details
+        owner_id:
+          type: string
+          description: Owner ID
+        owner_type:
+          type: string
+          description: Owner type
+        business_id:
+          type: string
+          description: Business ID
+        type_of:
+          type: string
+          description: Type of policy result
+        policy_action_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:PolicyActionResult'
+      title: PolicyResult
+    type_:PolicyResultsList:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:PolicyResult'
+        url:
+          type: string
+          description: API endpoint URL
+      required:
+      - object
+      - data
+      title: PolicyResultsList
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:PolicyActionResultPolicyAction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Policy action ID
+        action_type:
+          type: string
+          description: Type of action
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Action options
+        policy_version_id:
+          type: string
+          description: Policy version ID
+      title: PolicyActionResultPolicyAction
+    type_:PolicyActionResult:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          description: Policy action result ID
+        details:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Action details
+        executed:
+          type: boolean
+          description: Execution status
+        policy_action:
+          $ref: '#/components/schemas/type_:PolicyActionResultPolicyAction'
+      title: PolicyActionResult
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,216 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_documents API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_documents
+paths:
+  /v1/businesses/{business_id}/documents:
+    get:
+      operationId: list-documents
+      summary: List documents for a business
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: documents found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_documents:ListDocumentsResponse'
+        '404':
+          description: business not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+  /v1/documents/{id}:
+    get:
+      operationId: get-document
+      summary: Get a document
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: id
+        in: path
+        description: Document ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: document found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:Document'
+        '404':
+          description: document not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+  /v1/documents/{id}/download_url:
+    get:
+      operationId: get-document-download-url
+      summary: Get document download URL
+      tags:
+      - subpackage_documents
+      parameters:
+      - name: id
+        in: path
+        description: Document ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: download URL returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_documents:GetDocumentDownloadUrlResponse'
+        '404':
+          description: document not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+components:
+  schemas:
+    type_:DocumentObject:
+      type: string
+      enum:
+      - document
+      title: DocumentObject
+    type_:Document:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type_:DocumentObject'
+        id:
+          type: string
+          format: uuid
+        document_type:
+          type: string
+          description: 'Type of document. Common values include: Initial_Filing, Certificate of Good Standing, Articles of Incorporation, Initial Filing (UCC1), Amendment (UCC3)'
+        filename:
+          type: string
+          description: Name of the document file
+        content_type:
+          type: string
+          description: MIME type of the document
+        size:
+          type: integer
+          description: File size in bytes
+        download_url:
+          type: string
+          format: uri
+          description: URL to download the document
+        created_at:
+          type: string
+          format: date-time
+        source:
+          $ref: '#/components/schemas/type_:DocumentSource'
+        filing_date:
+          type: string
+          nullable: true
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Additional document metadata
+      required:
+      - object
+      - id
+      - document_type
+      - filename
+      - content_type
+      - size
+      - download_url
+      - created_at
+      title: Document
+    type_:DocumentSource:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Source type (e.g., registration)
+        id:
+          type: string
+          format: uuid
+          description: Source record ID
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Additional source metadata
+      title: DocumentSource
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_documents:ListDocumentsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Document'
+      title: ListDocumentsResponse
+    type_documents:GetDocumentDownloadUrlResponse:
+      type: object
+      properties:
+        data:
+          type: string
+          format: uri
+      title: GetDocumentDownloadUrlResponse
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,368 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_questions API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_questions
+paths:
+  /v1/agent/questions:
+    get:
+      operationId: list-questions
+      summary: List questions
+      description: Retrieve the set of dynamic questions required for a registration in a given state or local jurisdiction. The questions returned depend on the jurisdiction and registration type.
+      tags:
+      - subpackage_questions
+      parameters:
+      - name: state
+        in: query
+        description: Two-letter US state abbreviation (e.g., CA, NY). Required when jurisdiction_slugs is not provided and states is not used.
+        required: false
+        schema:
+          type: string
+      - name: states[]
+        in: query
+        description: Array of two-letter US state abbreviations. Used when fetching questions for multiple states.
+        required: false
+        schema:
+          type: string
+      - name: jurisdiction_slugs[]
+        in: query
+        description: Array of local jurisdiction slug identifiers. Used to fetch questions specific to local jurisdictions. Must be provided together with the state parameter.
+        required: false
+        schema:
+          type: string
+      - name: categories[]
+        in: query
+        description: Filter questions by registration type. Only applicable to state-level questions; omit for local jurisdiction questions.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_questions:ListQuestionsRequestCategoriesItem'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: questions list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_questions:ListQuestionsResponse'
+        '400':
+          description: bad request — state or states param missing
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: unprocessable entity — invalid state abbreviation
+          content:
+            application/json:
+              schema:
+                description: Any type
+components:
+  schemas:
+    type_:AgentQuestion:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Unique identifier for the question. Use this key when submitting answers.
+        label:
+          type: string
+          description: Human-readable display text for the question.
+        type:
+          $ref: '#/components/schemas/type_:AgentQuestionType'
+          description: Input type for the question.
+        categories:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Registration types this question applies to.
+        optional:
+          type: boolean
+          nullable: true
+          description: Whether the question is optional.
+        validation:
+          oneOf:
+          - $ref: '#/components/schemas/type_:AgentQuestionValidation'
+          - type: 'null'
+          description: Validation rules for the answer.
+        company_dependencies:
+          type: array
+          nullable: true
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/type_:AgentQuestionCompanyDependenciesItemItem'
+          description: 'Conditions under which this question is shown, based on company properties. Each element is an array of conditions that are ANDed together; the outer array elements are ORed. For example, [[{field: A}, {field: B}], [{field: C}]] means (A AND B) OR C.'
+        options:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Available options for select and multiselect type questions.
+        sublabel:
+          type: string
+          nullable: true
+          description: Additional descriptive text displayed below the question label.
+        components:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: For date_part type questions, specifies which date components to display.
+        question_dependency:
+          oneOf:
+          - $ref: '#/components/schemas/type_:AgentQuestionQuestionDependency'
+          - type: 'null'
+          description: Defines a dependency on another question's answer. The question is only shown when the dependency condition is met.
+        warning:
+          oneOf:
+          - $ref: '#/components/schemas/type_:AgentQuestionWarning'
+          - type: 'null'
+          description: Warning rules for the question.
+        api_only:
+          type: boolean
+          nullable: true
+          description: If true, this question is only used for API submissions.
+        tooltip:
+          type: string
+          nullable: true
+          description: Help text displayed in a tooltip alongside the question.
+        jurisdiction_slugs:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Jurisdiction slugs this question applies to.
+        updated_at:
+          type: string
+          nullable: true
+          description: Date the question was last updated (YYYY-MM-DD).
+        ai_validated:
+          type: boolean
+          nullable: true
+          description: Whether the question answer is validated by AI.
+      required:
+      - key
+      - label
+      - type
+      title: AgentQuestion
+    type_:AgentQuestionCompanyDependenciesItemItemValue:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+      description: The value to compare against.
+      title: AgentQuestionCompanyDependenciesItemItemValue
+    type_:AgentQuestionCompanyDependenciesItemItem:
+      type: object
+      properties:
+        field:
+          type: string
+          description: The company property to evaluate (e.g., entity_type, non_profit, formation_state, household).
+        value:
+          $ref: '#/components/schemas/type_:AgentQuestionCompanyDependenciesItemItemValue'
+          description: The value to compare against.
+        comparator:
+          oneOf:
+          - $ref: '#/components/schemas/type_:AgentQuestionCompanyDependenciesItemItemComparator'
+          - type: 'null'
+          description: Comparison operator. Defaults to == (equality). For array values, membership is checked.
+      required:
+      - field
+      - value
+      title: AgentQuestionCompanyDependenciesItemItem
+    type_:AgentQuestionValidation:
+      type: object
+      properties:
+        date:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentQuestionValidationDateItem'
+          description: Array of date-based validation rules.
+        format:
+          type: array
+          items:
+            type: string
+          description: Array of accepted format patterns for text input.
+        min_value:
+          type: integer
+          description: Minimum accepted numeric value.
+      description: Validation rules for the answer.
+      title: AgentQuestionValidation
+    type_questions:ListQuestionsRequestCategoriesItem:
+      type: string
+      enum:
+      - state_tax_withholdings
+      - state_unemployment_insurance
+      - foreign_qualification
+      - annual_filing
+      title: ListQuestionsRequestCategoriesItem
+    type_:AgentQuestionQuestionDependencyComparator:
+      type: string
+      enum:
+      - ==
+      - '!='
+      - '>'
+      - <
+      - '>='
+      - <=
+      - len_gt
+      description: Comparison operator. Defaults to == (equality).
+      title: AgentQuestionQuestionDependencyComparator
+    type_questions:ListQuestionsResponseData:
+      oneOf:
+      - type: array
+        items:
+          $ref: '#/components/schemas/type_:AgentQuestion'
+      - type: array
+        items:
+          $ref: '#/components/schemas/type_questions:ListQuestionsResponseDataOneItem'
+      - type: object
+        additionalProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentQuestion'
+      title: ListQuestionsResponseData
+    type_:AgentQuestionQuestionDependencyValue:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+      description: The value(s) the dependent question's answer must match.
+      title: AgentQuestionQuestionDependencyValue
+    type_:AgentQuestionWarning:
+      type: object
+      properties:
+        date:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentQuestionWarningDateItem'
+          description: Array of date-based warning rules.
+      description: Warning rules for the question.
+      title: AgentQuestionWarning
+    type_:AgentQuestionCompanyDependenciesItemItemComparator:
+      type: string
+      enum:
+      - ==
+      - '!='
+      - '>'
+      - <
+      - '>='
+      - <=
+      - starts_with
+      - len_gt
+      - missing_suffix
+      - has_special_chars
+      description: Comparison operator. Defaults to == (equality). For array values, membership is checked.
+      title: AgentQuestionCompanyDependenciesItemItemComparator
+    type_:AgentQuestionWarningDateItem:
+      type: object
+      properties:
+        before:
+          type: boolean
+          description: If true, warn when the answer is before the reference date.
+        date:
+          type: string
+          nullable: true
+          description: ISO 8601 timestamp used as the reference date.
+        key:
+          type: string
+          description: Key of another question whose answer is used as the reference date.
+        offset_days:
+          type: integer
+          description: Number of days to offset from the reference date.
+        message:
+          type: string
+          description: Warning message displayed to the user.
+      required:
+      - before
+      - message
+      title: AgentQuestionWarningDateItem
+    type_questions:ListQuestionsResponseDataOneItem:
+      type: object
+      properties:
+        state:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentQuestion'
+      title: ListQuestionsResponseDataOneItem
+    type_:AgentQuestionQuestionDependency:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The key of the question this depends on.
+        value:
+          $ref: '#/components/schemas/type_:AgentQuestionQuestionDependencyValue'
+          description: The value(s) the dependent question's answer must match.
+        comparator:
+          oneOf:
+          - $ref: '#/components/schemas/type_:AgentQuestionQuestionDependencyComparator'
+          - type: 'null'
+          description: Comparison operator. Defaults to == (equality).
+      required:
+      - key
+      - value
+      description: Defines a dependency on another question's answer. The question is only shown when the dependency condition is met.
+      title: AgentQuestionQuestionDependency
+    type_:AgentQuestionValidationDateItem:
+      type: object
+      properties:
+        before:
+          type: boolean
+          description: If true, the answer must be before the reference date.
+        date:
+          type: string
+          nullable: true
+          description: ISO 8601 timestamp used as the reference date.
+        key:
+          type: string
+          description: Key of another question whose answer is used as the reference date.
+        message:
+          type: string
+          description: Error message displayed when validation fails.
+      required:
+      - before
+      title: AgentQuestionValidationDateItem
+    type_questions:ListQuestionsResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_questions:ListQuestionsResponseData'
+      title: ListQuestionsResponse
+    type_:AgentQuestionType:
+      type: string
+      enum:
+      - text
+      - number
+      - date
+      - date_part
+      - select
+      - multiselect
+      - boolean
+      - address
+      - document
+      - account
+      - textarea
+      - phone
+      - officers_table
+      - string
+      description: Input type for the question.
+      title: AgentQuestionType
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

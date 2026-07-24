@@ -1,0 +1,104 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_lienTerminations API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_lienTerminations
+paths:
+  /v1/liens/{lien_id}/termination:
+    post:
+      operationId: create-lien-termination
+      summary: Create a termination for a lien
+      description: Creates a lien termination or returns existing one if already terminated
+      tags:
+      - subpackage_lienTerminations
+      parameters:
+      - name: lien_id
+        in: path
+        description: Lien ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: lien termination created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_lienTerminations:CreateLienTerminationResponse'
+        '404':
+          description: lien not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+        '422':
+          description: lien in created status cannot be terminated
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                packet_number:
+                  type: string
+                  description: Packet number for the termination filing (optional - auto-generated if not provided)
+components:
+  schemas:
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_lienTerminations:CreateLienTerminationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Lien termination ID
+        lien_id:
+          type: string
+          description: Associated lien ID
+        status:
+          type: string
+          description: Termination status
+        packet_number:
+          type: string
+          description: Filing packet number
+        created_at:
+          type: string
+          description: Creation timestamp
+        updated_at:
+          type: string
+          description: Last update timestamp
+      title: CreateLienTerminationResponse
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,194 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_identities API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_identities
+paths:
+  /v1/identities/autocomplete:
+    post:
+      operationId: autocomplete-business-identities
+      summary: Autocomplete business identities
+      description: Search for business identities using partial name matching. Returns matching businesses with names, addresses, people, and entity type.
+      tags:
+      - subpackage_identities
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: autocomplete results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:BusinessIdentityList'
+        '422':
+          description: invalid request - name too short
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Business name to search for (minimum 3 characters)
+                entity_type:
+                  $ref: '#/components/schemas/type_identities:BusinessIdentityRequestParamEntityType'
+                  description: Entity type filter
+                addresses:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/type_identities:BusinessIdentityRequestParamAddressesItem'
+                  description: Address filters
+              required:
+              - name
+components:
+  schemas:
+    type_:BusinessIdentityNamesItem:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/type_:BusinessIdentityNamesItemType'
+      title: BusinessIdentityNamesItem
+    type_identities:BusinessIdentityRequestParamEntityType:
+      type: string
+      enum:
+      - LLC
+      - CORPORATION
+      - NON_PROFIT
+      - PARTNERSHIP
+      - TRUST
+      description: Entity type filter
+      title: BusinessIdentityRequestParamEntityType
+    type_:BusinessIdentity:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this autocomplete result
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:BusinessIdentityNamesItem'
+          description: Business names (legal or DBA)
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:BusinessIdentityAddressesItem'
+          description: Known business addresses
+        people:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:BusinessIdentityPeopleItem'
+          description: Associated persons
+        entity_type:
+          oneOf:
+          - $ref: '#/components/schemas/type_:BusinessIdentityEntityType'
+          - type: 'null'
+          description: Business entity type
+      description: Business result from autocomplete search
+      title: BusinessIdentity
+    type_identities:BusinessIdentityRequestParamAddressesItem:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+      title: BusinessIdentityRequestParamAddressesItem
+    type_:BusinessIdentityNamesItemType:
+      type: string
+      enum:
+      - legal
+      - dba
+      title: BusinessIdentityNamesItemType
+    type_:BusinessIdentityPeopleItem:
+      type: object
+      properties:
+        name:
+          type: string
+        titles:
+          type: array
+          items:
+            type: string
+      title: BusinessIdentityPeopleItem
+    type_:BusinessIdentityAddressesItem:
+      type: object
+      properties:
+        full_address:
+          type: string
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+      title: BusinessIdentityAddressesItem
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:BusinessIdentityEntityType:
+      type: string
+      enum:
+      - LLC
+      - CORPORATION
+      - NON_PROFIT
+      - PARTNERSHIP
+      - TRUST
+      description: Business entity type
+      title: BusinessIdentityEntityType
+    type_:BusinessIdentityList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:BusinessIdentity'
+      description: List of business identity autocomplete results
+      title: BusinessIdentityList
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

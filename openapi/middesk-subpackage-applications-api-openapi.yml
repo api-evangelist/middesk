@@ -1,0 +1,98 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_applications API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_applications
+paths:
+  /v1/partner/applications:
+    post:
+      operationId: create-application
+      summary: Create an application
+      tags:
+      - subpackage_applications
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: application created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_applications:CreateApplicationResponse'
+        '422':
+          description: validation errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company_id:
+                  type: string
+                  format: uuid
+                  description: Company ID
+                company_external_id:
+                  type: string
+                  description: Company external ID
+                redirect_uri:
+                  type: string
+                  format: uri
+                  description: Redirect URI
+                redirect_back_uri:
+                  type: string
+                  format: uri
+                  description: Redirect back URI
+components:
+  schemas:
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_applications:CreateApplicationResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        company_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+        invite_link:
+          type: string
+          format: uri
+      title: CreateApplicationResponse
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

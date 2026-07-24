@@ -1,0 +1,435 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_registrationRequests API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_registrationRequests
+paths:
+  /v1/partner/registration_requests:
+    get:
+      operationId: list-registration-requests
+      summary: List registration requests
+      tags:
+      - subpackage_registrationRequests
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: registration requests list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_registrationRequests:ListRegistrationRequestsResponse'
+    post:
+      operationId: create-registration-request
+      summary: Create a registration request
+      tags:
+      - subpackage_registrationRequests
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: registration request created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:RegistrationRequest'
+        '400':
+          description: validation errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  $ref: '#/components/schemas/type_registrationRequests:RegistrationRequestParamState'
+                  description: US state abbreviation (required)
+                email:
+                  type: string
+                  format: email
+                  description: User email (required)
+                company_id:
+                  type: string
+                  format: uuid
+                  description: Existing company ID
+                company_name:
+                  type: string
+                  description: Company name for new company
+                external_id:
+                  type: string
+                  description: External company identifier
+                tax_registration_types:
+                  type: array
+                  items:
+                    type: string
+                  description: Types of tax registrations (e.g., sales_tax, payroll_tax)
+                jurisdictions:
+                  type: array
+                  items:
+                    type: string
+                  description: Tax jurisdictions
+                redirect_uri:
+                  type: string
+                  format: uri
+                  description: Success redirect URL
+                redirect_back_uri:
+                  type: string
+                  format: uri
+                  description: Back redirect URL
+              required:
+              - state
+              - email
+  /v1/partner/registration_requests/{id}:
+    get:
+      operationId: get-registration-request
+      summary: Retrieve a registration request
+      tags:
+      - subpackage_registrationRequests
+      parameters:
+      - name: id
+        in: path
+        description: Registration Request ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: registration request found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:RegistrationRequest'
+        '404':
+          description: registration request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+    delete:
+      operationId: delete-registration-request
+      summary: Delete a registration request
+      tags:
+      - subpackage_registrationRequests
+      parameters:
+      - name: id
+        in: path
+        description: Registration Request ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: registration request already submitted
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: registration request not found
+          content:
+            application/json:
+              schema:
+                description: Any type
+  /v1/partner/registration_requests/{id}/guest_dashboard:
+    get:
+      operationId: get-registration-request-guest-dashboard
+      summary: Fetch guest dashboard link for a registration request
+      tags:
+      - subpackage_registrationRequests
+      parameters:
+      - name: id
+        in: path
+        description: Registration Request ID
+        required: true
+        schema:
+          type: string
+      - name: section
+        in: query
+        description: Dashboard section to link to
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: guest dashboard link
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_registrationRequests:GetRegistrationRequestGuestDashboardResponse'
+        '404':
+          description: registration request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+components:
+  schemas:
+    type_registrationRequests:ListRegistrationRequestsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:RegistrationRequest'
+        url:
+          type: string
+      title: ListRegistrationRequestsResponse
+    type_:RegistrationRequestState:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      description: US state abbreviation
+      title: RegistrationRequestState
+    type_:RegistrationRequest:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        state:
+          $ref: '#/components/schemas/type_:RegistrationRequestState'
+          description: US state abbreviation
+        status:
+          type: string
+          description: Request status
+        tax_registration_types:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Types of tax registrations requested
+        company_id:
+          type: string
+          format: uuid
+        external_id:
+          type: string
+          nullable: true
+        submitted_at:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+        agencies:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+          description: Tax agency registrations
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+          description: Registration items
+        tax_registration:
+          type: object
+          nullable: true
+          additionalProperties:
+            description: Any type
+          description: Tax registration details
+        invite_link:
+          type: string
+          format: uri
+      required:
+      - object
+      - id
+      - state
+      - status
+      - tax_registration_types
+      - company_id
+      - created_at
+      - agencies
+      - items
+      - invite_link
+      title: RegistrationRequest
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_registrationRequests:GetRegistrationRequestGuestDashboardResponse:
+      type: object
+      properties:
+        guest_dashboard_url:
+          type: string
+          format: uri
+      required:
+      - guest_dashboard_url
+      title: GetRegistrationRequestGuestDashboardResponse
+    type_registrationRequests:RegistrationRequestParamState:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      description: US state abbreviation (required)
+      title: RegistrationRequestParamState
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

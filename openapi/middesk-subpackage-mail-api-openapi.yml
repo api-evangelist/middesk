@@ -1,0 +1,350 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_mail API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_mail
+paths:
+  /v1/partner/mail:
+    get:
+      operationId: list-mail-items
+      summary: List mail items
+      tags:
+      - subpackage_mail
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+      - name: state
+        in: query
+        description: Filter by state
+        required: false
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: Search query
+        required: false
+        schema:
+          type: string
+      - name: sort_by
+        in: query
+        description: Sort field
+        required: false
+        schema:
+          type: string
+      - name: sort_order
+        in: query
+        description: Sort order
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: mail items list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_mail:ListMailItemsResponse'
+  /v1/partner/mail/{id}:
+    get:
+      operationId: get-mail-item
+      summary: Retrieve a mail item
+      tags:
+      - subpackage_mail
+      parameters:
+      - name: id
+        in: path
+        description: Mail item ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: mail item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+    patch:
+      operationId: update-mail-item
+      summary: Update a mail item
+      tags:
+      - subpackage_mail
+      parameters:
+      - name: id
+        in: path
+        description: Mail item ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: mail item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+components:
+  schemas:
+    type_mail:ListMailItemsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentMail'
+        url:
+          type: string
+        has_more:
+          type: boolean
+        count:
+          type: integer
+      title: ListMailItemsResponse
+    type_:AgentMail:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        arrived_at:
+          type: string
+          nullable: true
+          format: date-time
+        external_id:
+          type: string
+          nullable: true
+        sender_name:
+          type: string
+          nullable: true
+        recipient_name:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        mail_viewed:
+          type: boolean
+        agency_name:
+          type: string
+          nullable: true
+        tag_names:
+          type: array
+          items:
+            type: string
+          description: List of tags associated with the mail item
+        internal_status:
+          type: string
+          description: Internal processing status
+        notes:
+          type: string
+          nullable: true
+        document_url:
+          type: string
+          nullable: true
+          format: uri
+        summary_payload:
+          type: object
+          nullable: true
+          additionalProperties:
+            description: Any type
+        suggested_mail_tag:
+          type: string
+          nullable: true
+        suggested_partner_name:
+          type: string
+          nullable: true
+        suggested_action_request:
+          type: boolean
+        mailbox_name:
+          type: string
+          nullable: true
+        registration_request_id:
+          type: string
+          nullable: true
+          format: uuid
+        state:
+          oneOf:
+          - $ref: '#/components/schemas/type_:AgentMailState'
+          - type: 'null'
+          description: State from associated mailable
+        source:
+          $ref: '#/components/schemas/type_:AgentMailSource'
+        company:
+          $ref: '#/components/schemas/type_:AgentMailCompany'
+        document:
+          type: object
+          nullable: true
+          additionalProperties:
+            description: Any type
+          description: Associated document details
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - mail_viewed
+      - tag_names
+      - suggested_action_request
+      - source
+      - company
+      title: AgentMail
+    type_:AgentMailSource:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the source object
+        id:
+          type: string
+          nullable: true
+          format: uuid
+          description: ID of the source object
+      title: AgentMailSource
+    type_:AgentMailState:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      description: State from associated mailable
+      title: AgentMailState
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:AgentMailCompany:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        legal_name:
+          type: string
+          nullable: true
+        dba_name:
+          type: string
+          nullable: true
+        provider_company_id:
+          type: string
+          nullable: true
+        external_id:
+          type: string
+          nullable: true
+        parent_account_name:
+          type: string
+          nullable: true
+      title: AgentMailCompany
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

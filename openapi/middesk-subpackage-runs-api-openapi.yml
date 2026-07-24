@@ -1,0 +1,636 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_runs API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_runs
+paths:
+  /v1/runs:
+    get:
+      operationId: list-agent-runs
+      summary: List agent runs
+      description: Returns a paginated list of agent runs
+      tags:
+      - subpackage_runs
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: agent runs list with pagination
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_runs:ListAgentRunsResponse'
+    post:
+      operationId: create-agent-run
+      summary: Create an agent run
+      description: Creates a new agent run
+      tags:
+      - subpackage_runs
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: agent run created within existing agent thread
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:AgentsRun'
+        '400':
+          description: missing context when thread_id is not provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+        '404':
+          description: agent thread not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+        '422':
+          description: inline business payload refers to business in audit
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The agent type to use for this agent run
+                business_id:
+                  type: string
+                  format: uuid
+                  description: Business to use as context for the run. Shorthand for context_type=business. Required when thread_id is not provided (unless context_type and context_id are given).
+                context_type:
+                  type: string
+                  description: The type of context resource (e.g., "business")
+                context_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the context resource. Must be provided with context_type.
+                thread_id:
+                  type: string
+                  format: uuid
+                  description: Optional agent thread ID in which to execute the agent run
+              required:
+              - type
+  /v1/runs/{id}:
+    get:
+      operationId: get-agent-run
+      summary: Retrieve an agent run
+      description: Retrieves details of a specific agent run
+      tags:
+      - subpackage_runs
+      parameters:
+      - name: id
+        in: path
+        description: Agent run ID
+        required: true
+        schema:
+          type: string
+      - name: include
+        in: query
+        description: Comma-separated list of optional sub-resources to include. Pass `steps` to populate the `steps` array with this run's execution trace; omitted by default to avoid the cost of fetching step state from the underlying execution backend.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: agent run found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:AgentsRun'
+        '404':
+          description: agent run not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+  /v1/runs/{id}/feedback:
+    post:
+      operationId: submit-agent-run-feedback
+      summary: Submit feedback on an agent run
+      description: Records a rating on an agent run artifact. The rating can be POSITIVE or NEGATIVE. Attribution defaults to the authenticated user; API-key callers are attributed to their account instead.
+      tags:
+      - subpackage_runs
+      parameters:
+      - name: id
+        in: path
+        description: Agent run ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: feedback recorded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:AgentsRunFeedback'
+        '403':
+          description: operator_feedback feature is not enabled on the account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+        '404':
+          description: agent run not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+        '422':
+          description: request payload is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rating:
+                  $ref: '#/components/schemas/type_runs:AgentsRunFeedbackRequestParamRating'
+                  description: Rating value to record for this artifact.
+                artifact_id:
+                  type: string
+                  format: uuid
+                  description: Identifier of the artifact to rate.
+                comment:
+                  type: string
+                  nullable: true
+                  description: Optional free-text comment explaining the rating. Whitespace is stripped server-side; empty or whitespace-only strings are normalized to null.
+              required:
+              - rating
+              - artifact_id
+  /v1/runs/{id}/stream:
+    get:
+      operationId: stream-agent-run-events
+      summary: Stream agent run events
+      description: 'Streams real-time events for an agent run using Server-Sent Events (SSE). Events are emitted in AG-UI format: `RUN_STARTED`, `STATE_SNAPSHOT`, and `RUN_FINISHED`.'
+      tags:
+      - subpackage_runs
+      parameters:
+      - name: id
+        in: path
+        description: Agent run ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: event stream
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: agent run not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+components:
+  schemas:
+    type_:AgentsStep:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the step.
+        run_id:
+          type: string
+          format: uuid
+          description: Identifier of the agent run that produced the step.
+        agent:
+          type: string
+          description: Agent identifier that generated this step.
+        type:
+          $ref: '#/components/schemas/type_:AgentsStepType'
+          description: Category of step output.
+        name:
+          type: string
+          description: Internal step name.
+        label:
+          type: string
+          description: Human-readable step label.
+        parent_step_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Parent step identifier for nested steps.
+        status:
+          $ref: '#/components/schemas/type_:AgentsStepStatus'
+          description: Current execution status for the step.
+        started_at:
+          type: string
+          format: date-time
+          description: Timestamp when the step started.
+        completed_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Timestamp when the step completed.
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsStep'
+          description: Nested child steps.
+        result:
+          $ref: '#/components/schemas/type_:AgentsStepResult'
+          description: Structured result payload for the step.
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsArtifact'
+          description: Artifacts produced by the step.
+      required:
+      - id
+      - run_id
+      - type
+      - name
+      - label
+      - status
+      - started_at
+      description: A step in an agent workflow execution timeline.
+      title: AgentsStep
+    type_:AgentsRunFeedback:
+      type: object
+      properties:
+        object:
+          type: string
+          description: Object type identifier.
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the feedback record.
+        run_id:
+          type: string
+          format: uuid
+          description: Identifier of the agent run the feedback is attached to.
+        rating:
+          $ref: '#/components/schemas/type_:AgentsRunFeedbackRating'
+          description: Rating value submitted by the reviewer.
+        artifact_id:
+          type: string
+          format: uuid
+          description: Identifier of the artifact within the run that was rated.
+        comment:
+          type: string
+          nullable: true
+          description: Optional free-text comment submitted with the rating.
+        reviewer:
+          $ref: '#/components/schemas/type_:AgentsRunFeedbackReviewer'
+          description: The actor that submitted the feedback. Sidepanel/session callers attribute to a User; API-key callers attribute to the Account.
+        superseded_prior:
+          type: boolean
+          description: True if a prior active rating from the same reviewer for the same (run, artifact) tuple was superseded by this new rating.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the feedback was created.
+      required:
+      - object
+      - id
+      - run_id
+      - rating
+      - artifact_id
+      - comment
+      - reviewer
+      - superseded_prior
+      - created_at
+      description: POSITIVE or NEGATIVE rating on an agent run artifact.
+      title: AgentsRunFeedback
+    type_:AgentsRunFeedbackReviewer:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_:AgentsRunFeedbackReviewerType'
+          description: Class of the reviewer record.
+        id:
+          type: string
+          format: uuid
+          description: Identifier of the reviewer record.
+      required:
+      - type
+      - id
+      description: The actor that submitted the feedback. Sidepanel/session callers attribute to a User; API-key callers attribute to the Account.
+      title: AgentsRunFeedbackReviewer
+    type_:AgentsSource:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Canonical source URL.
+        source_name:
+          type: string
+          description: Human-readable source name.
+        source_tier:
+          type: string
+          description: Source quality or trust tier.
+        source_type:
+          type: string
+          description: Source category.
+      required:
+      - url
+      description: A source reference used by an agent artifact.
+      title: AgentsSource
+    type_:AgentsRunOutput:
+      type: object
+      properties:
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsArtifact'
+          description: Artifacts produced by the agent during this run.
+      required:
+      - artifacts
+      description: Artifact envelope produced by the agent. Non-null only when `status` is `completed`; `null` for `running`, `interrupted`, and `error` runs.
+      title: AgentsRunOutput
+    type_:AgentsStepStatus:
+      type: string
+      enum:
+      - running
+      - completed
+      - error
+      description: Current execution status for the step.
+      title: AgentsStepStatus
+    type_:AgentsRunInterruptsItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifier of the interrupt request.
+        value:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: 'Agent-defined interrupt payload. Shape varies by agent, but typically carries `agent` (the sub-agent that raised the interrupt), `label` (human-readable prompt), and `artifacts` (proposed changes awaiting review). The orchestrator agent (`cip_orchestrator`) wraps sub-agent interrupts under a `proposals` array with `type: combined_proposal`.'
+        agent:
+          type: string
+          nullable: true
+          description: Agent type that raised the interrupt. Lifted from `value.agent` and surfaced at the top level for convenience; omitted when the interrupt did not declare an agent.
+      required:
+      - id
+      - value
+      title: AgentsRunInterruptsItem
+    type_runs:AgentsRunFeedbackRequestParamRating:
+      type: string
+      enum:
+      - POSITIVE
+      - NEGATIVE
+      description: Rating value to record for this artifact.
+      title: AgentsRunFeedbackRequestParamRating
+    type_:AgentsRunFeedbackRating:
+      type: string
+      enum:
+      - POSITIVE
+      - NEGATIVE
+      description: Rating value submitted by the reviewer.
+      title: AgentsRunFeedbackRating
+    type_:AgentsStepResultResolution:
+      type: string
+      enum:
+      - auto_approve
+      - skip
+      description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
+      title: AgentsStepResultResolution
+    type_runs:ListAgentRunsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsRun'
+        object:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - has_more
+      title: ListAgentRunsResponse
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:AgentsStepType:
+      type: string
+      enum:
+      - activity
+      - output
+      - interrupt
+      - error
+      description: Category of step output.
+      title: AgentsStepType
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type_:AgentsStepResult:
+      type: object
+      properties:
+        resolution:
+          $ref: '#/components/schemas/type_:AgentsStepResultResolution'
+          description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
+      description: Structured result payload for the step.
+      title: AgentsStepResult
+    type_:AgentsRunStatus:
+      type: string
+      enum:
+      - running
+      - completed
+      - error
+      - interrupted
+      description: Current lifecycle status of the agent run.
+      title: AgentsRunStatus
+    type_:AgentsRunFeedbackReviewerType:
+      type: string
+      enum:
+      - User
+      - Account
+      description: Class of the reviewer record.
+      title: AgentsRunFeedbackReviewerType
+    type_:AgentsRunRequester:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Identifier of the requesting user or account.
+        name:
+          type: string
+          description: Display name of the requester.
+        email:
+          type: string
+          nullable: true
+          format: email
+          description: Email address of the requester. Populated for user requesters and `null` for account requesters.
+      required:
+      - id
+      - name
+      description: Principal that initiated the run. Populated with the authenticated user's identity when a session caller initiates the run, and with the account when an API key caller initiates the run. `null` for system-initiated runs.
+      title: AgentsRunRequester
+    type_:AgentsRun:
+      type: object
+      properties:
+        object:
+          type: string
+          description: Object type identifier.
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the agent run.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the agent run record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the agent run record was last updated.
+        status:
+          $ref: '#/components/schemas/type_:AgentsRunStatus'
+          description: Current lifecycle status of the agent run.
+        thread_id:
+          type: string
+          format: uuid
+          description: Identifier of the agent thread this run belongs to.
+        agent:
+          type: string
+          description: Agent type that produced this run (for example, `cip_orchestrator`).
+        requester:
+          oneOf:
+          - $ref: '#/components/schemas/type_:AgentsRunRequester'
+          - type: 'null'
+          description: Principal that initiated the run. Populated with the authenticated user's identity when a session caller initiates the run, and with the account when an API key caller initiates the run. `null` for system-initiated runs.
+        started_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Timestamp when the agent run started.
+        ended_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Timestamp when the agent run finished.
+        output:
+          oneOf:
+          - $ref: '#/components/schemas/type_:AgentsRunOutput'
+          - type: 'null'
+          description: Artifact envelope produced by the agent. Non-null only when `status` is `completed`; `null` for `running`, `interrupted`, and `error` runs.
+        interrupts:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsRunInterruptsItem'
+          description: Pending interrupt requests awaiting input. Empty when the run is not interrupted. To resume a run, POST the interrupt's `id` along with the caller-supplied input to `POST /v1/runs/{id}/resume`.
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsStep'
+          description: 'Top-level execution steps for this run. Opt-in: pass `?include=steps` on `GET /v1/runs/{id}` (or `POST /v1/runs/{id}/resume`) to populate this field. Omitted by default to avoid the cost of fetching step state from the underlying execution backend.'
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - status
+      description: A single agent run execution within an agent thread.
+      title: AgentsRun
+    type_:AgentsArtifact:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Human-readable title for the artifact.
+        type:
+          type: string
+          description: Artifact type identifier.
+        confidence:
+          type: string
+          nullable: true
+          description: Optional confidence label for artifact quality.
+        summary:
+          type: string
+          nullable: true
+          description: Optional summary of the artifact contents.
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsSource'
+          description: Source references used to produce the artifact.
+      required:
+      - title
+      - type
+      description: A structured artifact produced by an agent step.
+      title: AgentsArtifact
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

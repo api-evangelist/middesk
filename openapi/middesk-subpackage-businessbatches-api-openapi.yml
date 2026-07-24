@@ -1,0 +1,247 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_businessBatches API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_businessBatches
+paths:
+  /v1/business_batches:
+    get:
+      operationId: list-business-batches
+      summary: List business batches
+      tags:
+      - subpackage_businessBatches
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: business batches list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_businessBatches:ListBusinessBatchesResponse'
+    post:
+      operationId: create-business-batch
+      summary: Create a business batch
+      tags:
+      - subpackage_businessBatches
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: business batch created
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '400':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: validation errors
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name for the business batch
+                filename:
+                  type: string
+                  description: CSV filename
+                csv:
+                  type: string
+                  description: Base64 encoded CSV data
+              required:
+              - name
+              - filename
+              - csv
+  /v1/business_batches/{id}:
+    get:
+      operationId: get-business-batch
+      summary: Retrieve a business batch
+      tags:
+      - subpackage_businessBatches
+      parameters:
+      - name: id
+        in: path
+        description: Business Batch ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: business batch found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:BusinessBatch'
+        '404':
+          description: business batch not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+  /v1/business_batches/{id}/csv:
+    get:
+      operationId: get-business-batch-csv
+      summary: Download business batch CSV
+      tags:
+      - subpackage_businessBatches
+      parameters:
+      - name: id
+        in: path
+        description: Business Batch ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: csv download
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: business batch not found
+          content:
+            application/json:
+              schema:
+                description: Any type
+components:
+  schemas:
+    type_:BusinessBatch:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        filename:
+          type: string
+        business_count:
+          type: integer
+        completed_business_count:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        account:
+          $ref: '#/components/schemas/type_:BusinessBatchAccount'
+      required:
+      - object
+      - id
+      - name
+      - filename
+      - business_count
+      - completed_business_count
+      - created_at
+      - account
+      title: BusinessBatch
+    type_:BusinessBatchAccount:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        slug:
+          type: string
+        pilot:
+          type: boolean
+      required:
+      - id
+      - name
+      - slug
+      - pilot
+      title: BusinessBatchAccount
+    type_businessBatches:ListBusinessBatchesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:BusinessBatch'
+        object:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - has_more
+      title: ListBusinessBatchesResponse
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

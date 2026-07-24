@@ -1,0 +1,211 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_monitoring API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_monitoring
+paths:
+  /v1/businesses/{business_id}/monitor:
+    get:
+      operationId: get-business-monitor
+      summary: Retrieve a monitor for a business
+      tags:
+      - subpackage_monitoring
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: monitor found
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: monitor not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+    post:
+      operationId: create-business-monitor
+      summary: Create a monitor for a business
+      tags:
+      - subpackage_monitoring
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: monitor created
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_:MonitoringEventTypesParam'
+    put:
+      operationId: update-business-monitor
+      summary: Update a monitor for a business
+      tags:
+      - subpackage_monitoring
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: monitor updated
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: monitor not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_:MonitoringEventTypesParam'
+    delete:
+      operationId: delete-business-monitor
+      summary: Delete a monitor for a business
+      tags:
+      - subpackage_monitoring
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: monitor not found
+          content:
+            application/json:
+              schema:
+                description: Any type
+  /v1/monitoring/bulk_disable:
+    post:
+      operationId: bulk-disable-monitors
+      summary: Bulk disable monitors
+      description: Disables monitors for all businesses in the account. This operation is processed asynchronously. When monitor_types is omitted, all monitor types allowed for the account are disabled.
+      tags:
+      - subpackage_monitoring
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                monitor_types:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/type_monitoring:BulkDisableMonitorsParamMonitorTypesItem'
+                  description: Array of monitor types to disable. Defaults to all types allowed for the account.
+                notification_email:
+                  type: string
+                  description: Email address to notify when bulk disable operation completes
+components:
+  schemas:
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_monitoring:BulkDisableMonitorsParamMonitorTypesItem:
+      type: string
+      enum:
+      - bankruptcy
+      - certification
+      - registration
+      - tin
+      - watchlist_result
+      - lien
+      title: BulkDisableMonitorsParamMonitorTypesItem
+    type_:MonitoringEventTypesParam:
+      type: object
+      properties:
+        event_types:
+          type: array
+          items:
+            type: string
+          description: Array of event types to monitor, or ["*"] for all types
+      required:
+      - event_types
+      title: MonitoringEventTypesParam
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

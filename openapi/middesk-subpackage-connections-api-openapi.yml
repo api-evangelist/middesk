@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_connections API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_connections
+paths:
+  /v1/businesses/{business_id}/connections:
+    get:
+      operationId: list-connections
+      summary: List connections
+      description: Returns businesses connected to the specified business, ordered by confidence score. Each connection includes connecting people, addresses, and businesses that link them. Results are paginated.
+      tags:
+      - subpackage_connections
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: connections found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_connections:GetV1BusinessesBusinessIdConnectionsResponse'
+        '403':
+          description: feature not enabled for account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+components:
+  schemas:
+    type_:ConnectionConnectingPeopleItem:
+      type: object
+      properties:
+        name:
+          type: string
+        titles:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Source'
+      title: ConnectionConnectingPeopleItem
+    type_:Source:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+      required:
+      - id
+      - type
+      - metadata
+      title: Source
+    type_:ConnectionConnectingBusinessesItem:
+      type: object
+      properties:
+        name:
+          type: string
+        titles:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Source'
+      title: ConnectionConnectingBusinessesItem
+    type_:ConnectionConnectingAddressesItem:
+      type: object
+      properties:
+        full_address:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Source'
+      title: ConnectionConnectingAddressesItem
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:Connection:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        confidence:
+          type: number
+          format: double
+        connected_business_id:
+          type: string
+          nullable: true
+          format: uuid
+        connecting_people:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ConnectionConnectingPeopleItem'
+        connecting_addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ConnectionConnectingAddressesItem'
+        connecting_businesses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ConnectionConnectingBusinessesItem'
+      required:
+      - object
+      - id
+      - name
+      - confidence
+      - connecting_people
+      - connecting_addresses
+      - connecting_businesses
+      title: Connection
+    type_connections:GetV1BusinessesBusinessIdConnectionsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Connection'
+        url:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - data
+      title: GetV1BusinessesBusinessIdConnectionsResponse
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

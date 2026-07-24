@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_tinMatch API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_tinMatch
+paths:
+  /v1/tin_match/availability:
+    get:
+      operationId: get-tin-match-availability
+      summary: Check TIN match service availability
+      description: Returns the availability status of the IRS TIN matching service
+      tags:
+      - subpackage_tinMatch
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: TIN match service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:TinMatchAvailability'
+components:
+  schemas:
+    type_:TinMatchAvailability:
+      type: object
+      properties:
+        available:
+          type: boolean
+          description: Whether the TIN match service is currently available
+      required:
+      - available
+      title: TinMatchAvailability
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

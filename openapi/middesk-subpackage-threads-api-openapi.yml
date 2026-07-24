@@ -1,0 +1,368 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_threads API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_threads
+paths:
+  /v1/threads:
+    get:
+      operationId: list-agent-threads
+      summary: List agent threads
+      description: Returns a paginated list of agent threads
+      tags:
+      - subpackage_threads
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+      - name: business_id
+        in: query
+        description: Optional business ID filter
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: agent threads list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_threads:ListAgentThreadsResponse'
+    post:
+      operationId: create-agent-thread
+      summary: Create an agent thread
+      description: Creates a new agent thread for running agent workflows
+      tags:
+      - subpackage_threads
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: agent thread created with context_type and context_id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:AgentsThread'
+        '404':
+          description: agent type not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The agent type to use for this agent thread
+                business_id:
+                  type: string
+                  format: uuid
+                  description: Business to use as context for the thread. Shorthand for context_type=business. Required unless context_type and context_id are provided.
+                context_type:
+                  type: string
+                  description: The type of context resource (e.g., "business")
+                context_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the context resource. Must be provided with context_type.
+              required:
+              - type
+  /v1/threads/{id}:
+    get:
+      operationId: get-agent-thread
+      summary: Retrieve an agent thread
+      description: Retrieves details of a specific agent thread
+      tags:
+      - subpackage_threads
+      parameters:
+      - name: id
+        in: path
+        description: Agent thread ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: agent thread found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:AgentsThread'
+        '404':
+          description: agent thread not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+components:
+  schemas:
+    type_:AgentsSource:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Canonical source URL.
+        source_name:
+          type: string
+          description: Human-readable source name.
+        source_tier:
+          type: string
+          description: Source quality or trust tier.
+        source_type:
+          type: string
+          description: Source category.
+      required:
+      - url
+      description: A source reference used by an agent artifact.
+      title: AgentsSource
+    type_:AgentsThreadStatus:
+      type: string
+      enum:
+      - running
+      - completed
+      - error
+      - interrupted
+      description: Current lifecycle status of the agent thread.
+      title: AgentsThreadStatus
+    type_:AgentsStep:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the step.
+        run_id:
+          type: string
+          format: uuid
+          description: Identifier of the agent run that produced the step.
+        agent:
+          type: string
+          description: Agent identifier that generated this step.
+        type:
+          $ref: '#/components/schemas/type_:AgentsStepType'
+          description: Category of step output.
+        name:
+          type: string
+          description: Internal step name.
+        label:
+          type: string
+          description: Human-readable step label.
+        parent_step_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Parent step identifier for nested steps.
+        status:
+          $ref: '#/components/schemas/type_:AgentsStepStatus'
+          description: Current execution status for the step.
+        started_at:
+          type: string
+          format: date-time
+          description: Timestamp when the step started.
+        completed_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Timestamp when the step completed.
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsStep'
+          description: Nested child steps.
+        result:
+          $ref: '#/components/schemas/type_:AgentsStepResult'
+          description: Structured result payload for the step.
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsArtifact'
+          description: Artifacts produced by the step.
+      required:
+      - id
+      - run_id
+      - type
+      - name
+      - label
+      - status
+      - started_at
+      description: A step in an agent workflow execution timeline.
+      title: AgentsStep
+    type_threads:ListAgentThreadsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsThread'
+        object:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - has_more
+      title: ListAgentThreadsResponse
+    type_:AgentsStepStatus:
+      type: string
+      enum:
+      - running
+      - completed
+      - error
+      description: Current execution status for the step.
+      title: AgentsStepStatus
+    type_:AgentsThread:
+      type: object
+      properties:
+        object:
+          type: string
+          description: Object type identifier.
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the agent thread.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the agent thread was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the agent thread was last updated.
+        status:
+          $ref: '#/components/schemas/type_:AgentsThreadStatus'
+          description: Current lifecycle status of the agent thread.
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties:
+            description: Any type
+          description: Internal metadata associated with the agent thread.
+        requester:
+          type: object
+          nullable: true
+          additionalProperties:
+            description: Any type
+          description: Requester context associated with the agent thread.
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsStep'
+          description: Execution steps emitted by the underlying agent state
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - status
+      description: A conversation thread for agent workflows.
+      title: AgentsThread
+    type_:AgentsStepResult:
+      type: object
+      properties:
+        resolution:
+          $ref: '#/components/schemas/type_:AgentsStepResultResolution'
+          description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
+      description: Structured result payload for the step.
+      title: AgentsStepResult
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:AgentsArtifact:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Human-readable title for the artifact.
+        type:
+          type: string
+          description: Artifact type identifier.
+        confidence:
+          type: string
+          nullable: true
+          description: Optional confidence label for artifact quality.
+        summary:
+          type: string
+          nullable: true
+          description: Optional summary of the artifact contents.
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsSource'
+          description: Source references used to produce the artifact.
+      required:
+      - title
+      - type
+      description: A structured artifact produced by an agent step.
+      title: AgentsArtifact
+    type_:AgentsStepType:
+      type: string
+      enum:
+      - activity
+      - output
+      - interrupt
+      - error
+      description: Category of step output.
+      title: AgentsStepType
+    type_:AgentsStepResultResolution:
+      type: string
+      enum:
+      - auto_approve
+      - skip
+      description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
+      title: AgentsStepResultResolution
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

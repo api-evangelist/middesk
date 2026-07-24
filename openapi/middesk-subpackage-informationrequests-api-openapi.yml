@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_informationRequests API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_informationRequests
+paths:
+  /v1/partner/exceptions:
+    get:
+      operationId: list-information-requests
+      summary: List Information Requests
+      tags:
+      - subpackage_informationRequests
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: information requests list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_informationRequests:ListInformationRequestsResponse'
+components:
+  schemas:
+    type_informationRequests:ListInformationRequestsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentInformationRequest'
+        url:
+          type: string
+        has_more:
+          type: boolean
+        count:
+          type: integer
+      title: ListInformationRequestsResponse
+    type_:AgentInformationRequestCompany:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        legal_name:
+          type: string
+          nullable: true
+        dba_name:
+          type: string
+          nullable: true
+        external_id:
+          type: string
+          nullable: true
+      required:
+      - id
+      title: AgentInformationRequestCompany
+    type_:AgentInformationRequestContact:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+      title: AgentInformationRequestContact
+    type_:AgentInformationRequest:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        url:
+          type: string
+          nullable: true
+          format: uri
+        information_requested:
+          type: string
+          description: Description of what information is required
+        contact:
+          $ref: '#/components/schemas/type_:AgentInformationRequestContact'
+        company:
+          $ref: '#/components/schemas/type_:AgentInformationRequestCompany'
+      required:
+      - object
+      - id
+      - created_at
+      - information_requested
+      - company
+      title: AgentInformationRequest
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

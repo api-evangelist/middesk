@@ -1,0 +1,468 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_websites API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_websites
+paths:
+  /v1/businesses/{business_id}/website:
+    get:
+      operationId: get-business-website
+      summary: Retrieve website analysis for a business
+      description: Returns website analysis data including domain info, pages, and quality indicators
+      tags:
+      - subpackage_websites
+      parameters:
+      - name: business_id
+        in: path
+        description: Business ID
+        required: true
+        schema:
+          type: string
+      - name: include
+        in: query
+        description: Include additional data. Use "indicator_details" to include source examples and explanations for each indicator
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: website analysis found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:Website'
+        '404':
+          description: website not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+components:
+  schemas:
+    type_:WebsiteStatus:
+      type: string
+      enum:
+      - online
+      - offline
+      - unknown
+      title: WebsiteStatus
+    type_:WebsiteObject:
+      type: string
+      enum:
+      - website
+      title: WebsiteObject
+    type_:WebsiteAddressesItem:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        address_line1:
+          type: string
+          nullable: true
+        address_line2:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+        postal_code:
+          type: string
+          nullable: true
+        full_address:
+          type: string
+        submitted:
+          type: boolean
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Source'
+      title: WebsiteAddressesItem
+    type_:WebsiteRatingQualityRating:
+      type: string
+      enum:
+      - low
+      - moderate
+      - high
+      - not_available
+      title: WebsiteRatingQualityRating
+    type_:WebsiteRating:
+      type: object
+      properties:
+        indicators:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:WebsiteIndicator'
+        quality_rating:
+          $ref: '#/components/schemas/type_:WebsiteRatingQualityRating'
+      required:
+      - quality_rating
+      title: WebsiteRating
+    type_:WebsitePhoneNumber:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type_:WebsitePhoneNumberObject'
+        id:
+          type: string
+          format: uuid
+        number:
+          type: string
+        contact_type:
+          type: string
+          nullable: true
+        recommended:
+          type: boolean
+          nullable: true
+        submitted:
+          type: boolean
+        sources:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/type_:Source'
+      title: WebsitePhoneNumber
+    type_:NameType:
+      type: string
+      enum:
+      - legal
+      - dba
+      title: NameType
+    type_:WebsiteDomainRegistrar:
+      type: object
+      properties:
+        organization:
+          type: string
+          nullable: true
+        name:
+          type: string
+        url:
+          type: string
+          nullable: true
+          format: uri
+      title: WebsiteDomainRegistrar
+    type_:WebsiteIndicator:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_:WebsiteIndicatorType'
+        name:
+          type: string
+        rating:
+          $ref: '#/components/schemas/type_:WebsiteIndicatorRating'
+        value:
+          type: string
+        description:
+          type: string
+      required:
+      - type
+      - name
+      - rating
+      - value
+      - description
+      title: WebsiteIndicator
+    type_:WebsiteIndicatorType:
+      type: string
+      enum:
+      - domain_age
+      - top_level_domain
+      - content_diversity
+      - contact_info
+      - compliance_info
+      - page_count
+      - broken_links
+      - domain_consistency
+      - update_frequency
+      - filler_text
+      - image_quality
+      - last_updated
+      - third_party_profile_links
+      - us_business_presence
+      - spelling_and_grammar
+      - https
+      - domain_ownership
+      title: WebsiteIndicatorType
+    type_:Website:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type_:WebsiteObject'
+        id:
+          type: string
+          format: uuid
+        url:
+          type: string
+          nullable: true
+          format: uri
+          description: The URL that was passed or found for the Business
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/type_:WebsiteStatus'
+        http_status_code:
+          type: integer
+          nullable: true
+          description: HTTP response status code
+        title:
+          type: string
+          nullable: true
+          description: Website page title
+        description:
+          type: string
+          nullable: true
+          description: Website meta description
+        domain:
+          oneOf:
+          - $ref: '#/components/schemas/type_:WebsiteDomain'
+          - type: 'null'
+          description: Domain registration and redirect information
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:WebsitePagesItem'
+          description: Website pages with screenshots
+        parked:
+          type: boolean
+          nullable: true
+          description: Whether the domain is parked
+        submitted:
+          type: boolean
+          description: Whether the website was submitted by user
+        error:
+          type: string
+          nullable: true
+          description: Error message if website analysis failed
+        category:
+          type: string
+          nullable: true
+          description: Website category classification
+        platform:
+          type: string
+          nullable: true
+          description: Website platform (e.g., instagram.com, facebook.com)
+        posts_summary:
+          type: string
+          nullable: true
+          description: Summary of posts found on the website or linked social media profiles
+        reviews_summary:
+          type: string
+          nullable: true
+          description: Summary of reviews found on the website or linked third-party profiles
+        business_id:
+          type: string
+          format: uuid
+        business_name_match:
+          type: boolean
+          description: Whether website content matches business name
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Name'
+          description: Names found on website
+        phone_numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:WebsitePhoneNumber'
+          description: Phone numbers found on website
+        people:
+          type: array
+          nullable: true
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+          description: People found on website
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:WebsiteAddressesItem'
+          description: Addresses found on website
+        email_addresses:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/type_:WebsiteEmailAddressesItem'
+          description: Email addresses found on website
+        rating:
+          oneOf:
+          - $ref: '#/components/schemas/type_:WebsiteRating'
+          - type: 'null'
+      required:
+      - object
+      - id
+      - url
+      - created_at
+      - updated_at
+      - status
+      - parked
+      - submitted
+      - business_id
+      - business_name_match
+      - phone_numbers
+      - addresses
+      title: Website
+    type_:WebsiteDomain:
+      type: object
+      properties:
+        domain:
+          type: string
+        domain_id:
+          type: string
+          nullable: true
+        creation_date:
+          type: string
+          format: date-time
+        expiration_date:
+          type: string
+          format: date-time
+        registrar:
+          $ref: '#/components/schemas/type_:WebsiteDomainRegistrar'
+        redirected:
+          type: boolean
+          nullable: true
+          description: Whether the domain redirects to a different URL
+        url_shortener:
+          type: boolean
+          nullable: true
+          description: Whether the domain uses a URL shortener service
+        resolved_url:
+          type: string
+          nullable: true
+          format: uri
+          description: The final URL after redirect resolution (present when redirected is true)
+      title: WebsiteDomain
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:WebsiteEmailAddressesItemObject:
+      type: string
+      enum:
+      - email_address
+      title: WebsiteEmailAddressesItemObject
+    type_:Source:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+      required:
+      - id
+      - type
+      - metadata
+      title: Source
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type_:WebsiteEmailAddressesItem:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type_:WebsiteEmailAddressesItemObject'
+        email:
+          type: string
+        id:
+          type: string
+          format: uuid
+        submitted:
+          type: boolean
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Source'
+      title: WebsiteEmailAddressesItem
+    type_:WebsitePagesItem:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        category:
+          type: string
+        screenshot_url:
+          type: string
+          format: uri
+      title: WebsitePagesItem
+    type_:Name:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        submitted:
+          type: boolean
+        type:
+          oneOf:
+          - $ref: '#/components/schemas/type_:NameType'
+          - type: 'null'
+        business_id:
+          type: string
+          format: uuid
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:Source'
+      required:
+      - object
+      - id
+      - name
+      - submitted
+      - business_id
+      - sources
+      title: Name
+    type_:WebsiteIndicatorRating:
+      type: string
+      enum:
+      - positive
+      - negative
+      - neutral
+      title: WebsiteIndicatorRating
+    type_:WebsitePhoneNumberObject:
+      type: string
+      enum:
+      - phone_number
+      title: WebsitePhoneNumberObject
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

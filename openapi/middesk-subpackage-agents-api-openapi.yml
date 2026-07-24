@@ -1,0 +1,133 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_agents API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_agents
+paths:
+  /v1/agents:
+    get:
+      operationId: list-agents
+      summary: List agents
+      description: Returns a list of available agents for running workflows
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: agents list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_agents:ListAgentsResponse'
+  /v1/agents/{id}:
+    get:
+      operationId: get-agent
+      summary: Retrieve an agent
+      description: Retrieves details of a specific agent
+      tags:
+      - subpackage_agents
+      parameters:
+      - name: id
+        in: path
+        description: Agent ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: agent found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:AgentsAgent'
+        '404':
+          description: agent not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+components:
+  schemas:
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type_agents:ListAgentsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:AgentsAgent'
+      required:
+      - data
+      title: ListAgentsResponse
+    type_:AgentsAgent:
+      type: object
+      properties:
+        object:
+          type: string
+          description: Object type identifier.
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the agent
+        type:
+          type: string
+          description: The agent type identifier
+        name:
+          type: string
+          description: Human-readable name of the agent
+        description:
+          type: string
+          description: Description of the agent's capabilities
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the agent was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the agent was last updated.
+      required:
+      - object
+      - id
+      - type
+      - created_at
+      - updated_at
+      description: An agent that can execute workflows.
+      title: AgentsAgent
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

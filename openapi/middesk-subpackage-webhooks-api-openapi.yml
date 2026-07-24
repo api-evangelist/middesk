@@ -1,0 +1,343 @@
+openapi: 3.0.3
+info:
+  title: Middesk subpackage_actions subpackage_webhooks API
+  version: 1.0.0
+servers:
+- url: https://api.middesk.com
+  description: Default
+tags:
+- name: subpackage_webhooks
+paths:
+  /v1/webhooks:
+    get:
+      operationId: list-webhooks
+      summary: List webhooks
+      tags:
+      - subpackage_webhooks
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+      - name: account
+        in: query
+        description: Account slug (super admin only)
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: webhooks list
+          content:
+            application/json:
+              schema:
+                description: Any type
+    post:
+      operationId: create-webhook
+      summary: Create a webhook
+      tags:
+      - subpackage_webhooks
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: webhook created with wildcard events
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: Webhook endpoint URL
+                secret:
+                  type: string
+                  description: Secret for webhook signature verification
+                enabled_events:
+                  type: array
+                  items:
+                    type: string
+                  description: Array of event types to subscribe to, or ["*"] for all events
+                include:
+                  type: string
+                  description: Comma-delimited list of associations to include in webhook payloads. Omit or set to "*" for all. Use "identifiers" to receive only top-level scalar fields (id, external_id, name, status, etc.) with no associations.
+                oidc_auth_method:
+                  $ref: '#/components/schemas/type_webhooks:WebhookCreateParamOidcAuthMethod'
+                  description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
+                oidc_client_id:
+                  type: string
+                  description: OIDC client ID. Required for both auth methods.
+                oidc_client_secret:
+                  type: string
+                  description: OIDC client secret. Required when oidc_auth_method is 'client_secret'. Write-only; never returned in responses.
+                oidc_token_endpoint:
+                  type: string
+                  description: OIDC token endpoint URL. Required for both auth methods.
+                oidc_resource_uri:
+                  type: string
+                  description: Optional. OIDC resource URI (Microsoft-specific; use oidc_scope for standard OAuth 2.0).
+                oidc_scope:
+                  type: string
+                  description: Optional. OAuth 2.0 scope for the token request (e.g. "api://<app-id>/.default").
+                oidc_access_token_ttl_seconds:
+                  type: integer
+                  description: OIDC access token TTL in seconds. Required for both auth methods.
+              required:
+              - url
+              - enabled_events
+  /v1/webhooks/{id}:
+    get:
+      operationId: get-webhook
+      summary: Retrieve a webhook
+      tags:
+      - subpackage_webhooks
+      parameters:
+      - name: id
+        in: path
+        description: Webhook ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: webhook found
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: webhook not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+    put:
+      operationId: update-webhook
+      summary: Update a webhook
+      tags:
+      - subpackage_webhooks
+      parameters:
+      - name: id
+        in: path
+        description: Webhook ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: webhook updated
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: webhook not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: Webhook endpoint URL
+                secret:
+                  type: string
+                  description: Secret for webhook signature verification
+                disabled_at:
+                  type: string
+                  description: Timestamp when webhook was disabled
+                enabled_events:
+                  type: array
+                  items:
+                    type: string
+                  description: Array of event types to subscribe to
+                include:
+                  type: string
+                  description: Comma-delimited list of associations to include in webhook payloads. Omit or set to "*" for all. Use "identifiers" to receive only top-level scalar fields (id, external_id, name, status, etc.) with no associations.
+                oidc_auth_method:
+                  $ref: '#/components/schemas/type_webhooks:WebhookUpdateParamOidcAuthMethod'
+                  description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
+                oidc_client_id:
+                  type: string
+                  description: OIDC client ID. Required for both auth methods.
+                oidc_client_secret:
+                  type: string
+                  description: OIDC client secret. Required when oidc_auth_method is 'client_secret'. Write-only; never returned in responses.
+                oidc_token_endpoint:
+                  type: string
+                  description: OIDC token endpoint URL. Required for both auth methods.
+                oidc_resource_uri:
+                  type: string
+                  description: Optional. OIDC resource URI (Microsoft-specific; use oidc_scope for standard OAuth 2.0).
+                oidc_scope:
+                  type: string
+                  description: Optional. OAuth 2.0 scope for the token request (e.g. "api://<app-id>/.default").
+                oidc_access_token_ttl_seconds:
+                  type: integer
+                  description: OIDC access token TTL in seconds. Required for both auth methods.
+    delete:
+      operationId: delete-webhook
+      summary: Delete a webhook
+      tags:
+      - subpackage_webhooks
+      parameters:
+      - name: id
+        in: path
+        description: Webhook ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: webhook not found
+          content:
+            application/json:
+              schema:
+                description: Any type
+  /v1/webhooks/oidc_keys:
+    get:
+      operationId: get-oidc-keys
+      summary: Retrieve OIDC public keys
+      description: Returns the public keys used for OIDC JWT signature verification
+      tags:
+      - subpackage_webhooks
+      responses:
+        '200':
+          description: OIDC keys retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_:OidcKey'
+components:
+  schemas:
+    type_:OidcKeyKeysItem:
+      type: object
+      properties:
+        kty:
+          type: string
+          description: Key type
+        use:
+          type: string
+          description: Key usage
+        alg:
+          type: string
+          description: Algorithm
+        kid:
+          type: string
+          description: Key ID
+        x5t:
+          type: string
+          description: X.509 certificate thumbprint
+        n:
+          type: string
+          description: RSA modulus
+        e:
+          type: string
+          description: RSA public exponent
+        x5c:
+          type: array
+          items:
+            type: string
+          description: X.509 certificate chain
+      title: OidcKeyKeysItem
+    type_webhooks:WebhookCreateParamOidcAuthMethod:
+      type: string
+      enum:
+      - private_key_jwt
+      - client_secret
+      description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
+      title: WebhookCreateParamOidcAuthMethod
+    type_webhooks:WebhookUpdateParamOidcAuthMethod:
+      type: string
+      enum:
+      - private_key_jwt
+      - client_secret
+      description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
+      title: WebhookUpdateParamOidcAuthMethod
+    type_:ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_:OidcKey:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:OidcKeyKeysItem'
+      required:
+      - keys
+      title: OidcKey
+    type_:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
