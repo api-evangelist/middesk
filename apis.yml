@@ -2,7 +2,20 @@ aid: middesk
 name: Middesk
 description: Middesk is a business identity and verification platform providing a REST API for KYB (Know Your Business) compliance, EIN/TIN validation, business registration verification, UBO research, sanctions screening, and ongoing business monitoring. Used by fintechs, lenders, and banks to automate onboarding and compliance workflows.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/middesk.png
 url: https://raw.githubusercontent.com/api-evangelist/middesk/refs/heads/main/apis.yml
 created: 2026-06-13
 modified: 2026-06-13
@@ -20,29 +33,461 @@ tags:
   - Fintech
   - RegTech
 apis:
-  - name: Middesk Business Verification API
-    description: REST API for verifying business identities, including Secretary of State registrations, EIN/TIN validation, UBO and officer research, sanctions and adverse media screening, and real-time business monitoring. Supports both sandbox and production environments.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.middesk.com/reference/introduction
-    baseURL: https://api.middesk.com/v1/
-    tags:
-      - Business Verification
-      - KYB
-      - Identity Verification
-      - Compliance
-    properties:
-      - type: Documentation
-        url: https://docs.middesk.com/docs
-      - type: OpenAPI
-        url: https://docs.middesk.com/openapi.json
-      - type: PostmanCollection
-        url: https://github.com/middesk/middesk-postman
-      - type: Sandbox
-        url: https://api-sandbox.middesk.com/v1/
-    contact:
-      - FN: Middesk Support
-        url: https://docs.middesk.com
-        email: support@middesk.com
+- aid: middesk:middesk-subpackage-actions-api
+  name: Middesk subpackage_actions API
+  description: The subpackage_actions API from Middesk — 2 operation(s) for subpackage_actions.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_actions
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-actions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-agents-api
+  name: Middesk subpackage_agents API
+  description: The subpackage_agents API from Middesk — 2 operation(s) for subpackage_agents.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_agents
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-agents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-applications-api
+  name: Middesk subpackage_applications API
+  description: >-
+    The subpackage_applications API from Middesk — 1 operation(s) for subpackage_applications.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_applications
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-applications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-businessbatches-api
+  name: Middesk subpackage_businessBatches API
+  description: >-
+    The subpackage_businessBatches API from Middesk — 3 operation(s) for subpackage_businessbatches.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_businessBatches
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-businessbatches-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-businesses-api
+  name: Middesk subpackage_businesses API
+  description: The subpackage_businesses API from Middesk — 3 operation(s) for subpackage_businesses.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_businesses
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-businesses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-companies-api
+  name: Middesk subpackage_companies API
+  description: The subpackage_companies API from Middesk — 1 operation(s) for subpackage_companies.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_companies
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-companies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-connections-api
+  name: Middesk subpackage_connections API
+  description: The subpackage_connections API from Middesk — 1 operation(s) for subpackage_connections.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_connections
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-connections-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-documents-api
+  name: Middesk subpackage_documents API
+  description: The subpackage_documents API from Middesk — 3 operation(s) for subpackage_documents.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_documents
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-documents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-identities-api
+  name: Middesk subpackage_identities API
+  description: The subpackage_identities API from Middesk — 1 operation(s) for subpackage_identities.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_identities
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-identities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-informationrequests-api
+  name: Middesk subpackage_informationRequests API
+  description: >-
+    The subpackage_informationRequests API from Middesk — 1 operation(s) for subpackage_informationrequests.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_informationRequests
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-informationrequests-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-jurisdictions-api
+  name: Middesk subpackage_jurisdictions API
+  description: >-
+    The subpackage_jurisdictions API from Middesk — 2 operation(s) for subpackage_jurisdictions.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_jurisdictions
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-jurisdictions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-liens-api
+  name: Middesk subpackage_liens API
+  description: The subpackage_liens API from Middesk — 2 operation(s) for subpackage_liens.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_liens
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-liens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-lienterminations-api
+  name: Middesk subpackage_lienTerminations API
+  description: >-
+    The subpackage_lienTerminations API from Middesk — 1 operation(s) for subpackage_lienterminations.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_lienTerminations
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-lienterminations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-mail-api
+  name: Middesk subpackage_mail API
+  description: The subpackage_mail API from Middesk — 2 operation(s) for subpackage_mail.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_mail
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-mail-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-monitoring-api
+  name: Middesk subpackage_monitoring API
+  description: The subpackage_monitoring API from Middesk — 2 operation(s) for subpackage_monitoring.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-orders-api
+  name: Middesk subpackage_orders API
+  description: The subpackage_orders API from Middesk — 3 operation(s) for subpackage_orders.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_orders
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-policyresults-api
+  name: Middesk subpackage_policyResults API
+  description: >-
+    The subpackage_policyResults API from Middesk — 1 operation(s) for subpackage_policyresults.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_policyResults
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-policyresults-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-prefill-api
+  name: Middesk subpackage_prefill API
+  description: The subpackage_prefill API from Middesk — 1 operation(s) for subpackage_prefill.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_prefill
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-prefill-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-questions-api
+  name: Middesk subpackage_questions API
+  description: The subpackage_questions API from Middesk — 1 operation(s) for subpackage_questions.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_questions
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-questions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-registrationrequests-api
+  name: Middesk subpackage_registrationRequests API
+  description: >-
+    The subpackage_registrationRequests API from Middesk — 3 operation(s) for subpackage_registrationrequests.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_registrationRequests
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-registrationrequests-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-reviews-api
+  name: Middesk subpackage_reviews API
+  description: The subpackage_reviews API from Middesk — 1 operation(s) for subpackage_reviews.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_reviews
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-reviews-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-runs-api
+  name: Middesk subpackage_runs API
+  description: The subpackage_runs API from Middesk — 4 operation(s) for subpackage_runs.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_runs
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-runs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-signals-api
+  name: Middesk subpackage_signals API
+  description: The subpackage_signals API from Middesk — 2 operation(s) for subpackage_signals.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_signals
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-signals-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-threads-api
+  name: Middesk subpackage_threads API
+  description: The subpackage_threads API from Middesk — 2 operation(s) for subpackage_threads.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_threads
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-threads-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-timeline-api
+  name: Middesk subpackage_timeline API
+  description: The subpackage_timeline API from Middesk — 1 operation(s) for subpackage_timeline.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_timeline
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-timeline-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-tinmatch-api
+  name: Middesk subpackage_tinMatch API
+  description: The subpackage_tinMatch API from Middesk — 1 operation(s) for subpackage_tinmatch.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_tinMatch
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-tinmatch-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-webhooks-api
+  name: Middesk subpackage_webhooks API
+  description: The subpackage_webhooks API from Middesk — 3 operation(s) for subpackage_webhooks.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
+- aid: middesk:middesk-subpackage-websites-api
+  name: Middesk subpackage_websites API
+  description: The subpackage_websites API from Middesk — 1 operation(s) for subpackage_websites.
+  humanURL: https://docs.middesk.com/reference/introduction
+  baseURL: https://api.middesk.com/v1/
+  tags:
+  - subpackage_websites
+  properties:
+  - type: OpenAPI
+    url: openapi/middesk-subpackage-websites-api-openapi.yml
+  - type: Documentation
+    url: https://docs.middesk.com/docs
+  - type: PostmanCollection
+    url: https://github.com/middesk/middesk-postman
+  - type: Sandbox
+    url: https://api-sandbox.middesk.com/v1/
 common:
   - type: AgenticAccess
     url: agentic-access/middesk-agentic-access.yml
