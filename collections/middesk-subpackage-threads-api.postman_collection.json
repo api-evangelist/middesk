@@ -1,0 +1,438 @@
+{
+  "item": [
+    {
+      "id": "81693f45-582d-4619-8fb6-bd916e278c8e",
+      "name": "subpackage_threads",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d050c7d2-2bd3-437b-bc95-cdefff8aea12",
+          "name": "List agent threads",
+          "request": {
+            "name": "List agent threads",
+            "description": {
+              "content": "Returns a paginated list of agent threads",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "business_id",
+                  "value": "<string>",
+                  "description": "Optional business ID filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e4ef64d-2301-4a02-b5bd-46a5c285c951",
+              "name": "agent threads list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "business_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"has_more\": false,\n  \"data\": [\n    {\n      \"object\": \"string\",\n      \"id\": \"cf2858dc-697c-896d-16f9-925bbd67c684\",\n      \"created_at\": \"2001-01-06T02:52:25.132Z\",\n      \"updated_at\": \"1973-01-18T01:24:03.393Z\",\n      \"status\": \"running\",\n      \"metadata\": {\n        \"key_0\": {}\n      },\n      \"requester\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"steps\": [\n        {\n          \"id\": \"78db99dc-6951-c68a-5e57-eeeae6e01b73\",\n          \"run_id\": \"d6deddd1-4e70-db67-c5ec-54a10120e6d0\",\n          \"type\": \"error\",\n          \"name\": \"string\",\n          \"label\": \"string\",\n          \"status\": \"error\",\n          \"started_at\": \"2008-03-24T01:29:20.054Z\",\n          \"agent\": \"string\",\n          \"parent_step_id\": \"7cb8dcf8-268a-d7bf-1b8e-f67ad8fbad40\",\n          \"completed_at\": \"2008-06-10T18:50:00.993Z\",\n          \"steps\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n            }\n          ],\n          \"result\": {\n            \"resolution\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"artifacts\": [\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"b4982976-65ec-f0fe-21e4-62aa4cc97a97\",\n          \"run_id\": \"e4e78e2c-01ad-5342-edba-f6b05519874e\",\n          \"type\": \"activity\",\n          \"name\": \"string\",\n          \"label\": \"string\",\n          \"status\": \"error\",\n          \"started_at\": \"1990-05-18T22:10:51.651Z\",\n          \"agent\": \"string\",\n          \"parent_step_id\": \"1deda204-6e76-d410-c1be-d89da4a40c52\",\n          \"completed_at\": \"2024-07-06T05:40:22.976Z\",\n          \"steps\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n            }\n          ],\n          \"result\": {\n            \"resolution\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"artifacts\": [\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"object\": \"string\",\n      \"id\": \"64e6ffde-6946-4db3-d96a-06b17a039105\",\n      \"created_at\": \"1977-02-14T06:15:58.262Z\",\n      \"updated_at\": \"2016-11-26T20:50:17.210Z\",\n      \"status\": \"running\",\n      \"metadata\": {\n        \"key_0\": {}\n      },\n      \"requester\": {\n        \"key_0\": {}\n      },\n      \"steps\": [\n        {\n          \"id\": \"6dd6ee8c-0d94-bec2-dd63-630974458233\",\n          \"run_id\": \"051511af-c7fe-ff59-772f-7debdcee5ac1\",\n          \"type\": \"error\",\n          \"name\": \"string\",\n          \"label\": \"string\",\n          \"status\": \"running\",\n          \"started_at\": \"2005-02-08T06:39:10.272Z\",\n          \"agent\": \"string\",\n          \"parent_step_id\": \"e4cd88b5-8c64-0d5f-4bf0-4ab902ea3309\",\n          \"completed_at\": \"1982-08-20T22:23:35.968Z\",\n          \"steps\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n            }\n          ],\n          \"result\": {\n            \"resolution\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"artifacts\": [\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"cc9cad6e-dd83-acba-96d3-be9d265b9cda\",\n          \"run_id\": \"fc5fbe6c-4db4-297e-a503-8693de80cabf\",\n          \"type\": \"output\",\n          \"name\": \"string\",\n          \"label\": \"string\",\n          \"status\": \"completed\",\n          \"started_at\": \"2021-02-12T22:23:43.322Z\",\n          \"agent\": \"string\",\n          \"parent_step_id\": \"34c29f41-8a38-7b85-b9bd-2acb208f85d4\",\n          \"completed_at\": \"1949-04-05T23:08:27.110Z\",\n          \"steps\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n            }\n          ],\n          \"result\": {\n            \"resolution\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"artifacts\": [\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confidence\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"summary\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"total_count\": 1785\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1adefce6-9c7b-4289-af9e-d3abed54e736",
+          "name": "Create an agent thread",
+          "request": {
+            "name": "Create an agent thread",
+            "description": {
+              "content": "Creates a new agent thread for running agent workflows",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"business_id\": \"<uuid>\",\n  \"context_type\": \"<string>\",\n  \"context_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d078ff4f-6241-4480-bfef-91c36d89259b",
+              "name": "agent thread created with context_type and context_id",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"business_id\": \"<uuid>\",\n  \"context_type\": \"<string>\",\n  \"context_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"id\": \"86e9b1f8-1ee4-27af-7f75-3863e57820f5\",\n  \"created_at\": \"1963-06-08T23:06:24.819Z\",\n  \"updated_at\": \"1969-05-29T13:28:56.884Z\",\n  \"status\": \"error\",\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"requester\": {\n    \"key_0\": {}\n  },\n  \"steps\": [\n    {\n      \"id\": \"e4296a84-b9c6-5c98-faff-b951130a7bee\",\n      \"run_id\": \"867ac5fc-a373-7c23-53e4-5df5548f0b96\",\n      \"type\": \"output\",\n      \"name\": \"string\",\n      \"label\": \"string\",\n      \"status\": \"error\",\n      \"started_at\": \"2018-02-08T02:39:40.229Z\",\n      \"agent\": \"string\",\n      \"parent_step_id\": \"0f012c7e-db07-806f-b2c4-3283815a0bd4\",\n      \"completed_at\": \"2011-04-05T13:25:56.350Z\",\n      \"steps\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n        }\n      ],\n      \"result\": {\n        \"resolution\": \"auto_approve\"\n      },\n      \"artifacts\": [\n        {\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"confidence\": \"string\",\n          \"summary\": \"string\",\n          \"sources\": [\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"confidence\": \"string\",\n          \"summary\": \"string\",\n          \"sources\": [\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"5f6cb913-85b8-018f-ec80-ffc046f44609\",\n      \"run_id\": \"aa03e4a8-0499-ee95-96a1-c85e0efbc019\",\n      \"type\": \"error\",\n      \"name\": \"string\",\n      \"label\": \"string\",\n      \"status\": \"error\",\n      \"started_at\": \"1970-05-22T09:25:45.939Z\",\n      \"agent\": \"string\",\n      \"parent_step_id\": \"3a7da2cc-bc2c-b81a-c725-648294755b83\",\n      \"completed_at\": \"1962-10-31T10:36:23.641Z\",\n      \"steps\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n        }\n      ],\n      \"result\": {\n        \"resolution\": \"auto_approve\"\n      },\n      \"artifacts\": [\n        {\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"confidence\": \"string\",\n          \"summary\": \"string\",\n          \"sources\": [\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"confidence\": \"string\",\n          \"summary\": \"string\",\n          \"sources\": [\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "664c0963-50c9-46fa-87a8-4ceb0cdc6fa0",
+              "name": "agent type not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"business_id\": \"<uuid>\",\n  \"context_type\": \"<string>\",\n  \"context_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16dbc254-8436-42ca-b561-a3630531db09",
+          "name": "Retrieve an agent thread",
+          "request": {
+            "name": "Retrieve an agent thread",
+            "description": {
+              "content": "Retrieves details of a specific agent thread",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "threads",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Agent thread ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c591fc5f-beb8-4779-8589-4330cbd90678",
+              "name": "agent thread found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "threads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent thread ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"id\": \"2ddc2f67-46f2-085d-ca76-1e7f6e16ec0f\",\n  \"created_at\": \"1959-03-15T03:10:16.785Z\",\n  \"updated_at\": \"2012-08-26T23:02:32.556Z\",\n  \"status\": \"interrupted\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"requester\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"steps\": [\n    {\n      \"id\": \"f923a4b7-9832-9e80-9c47-36c64694eb89\",\n      \"run_id\": \"8b5826c2-a1d8-9cc6-7da3-e4c411e01bcd\",\n      \"type\": \"interrupt\",\n      \"name\": \"string\",\n      \"label\": \"string\",\n      \"status\": \"running\",\n      \"started_at\": \"1998-04-26T16:55:16.195Z\",\n      \"agent\": \"string\",\n      \"parent_step_id\": \"aaed185b-e255-99a3-0815-c8901fed3bc8\",\n      \"completed_at\": \"1993-04-30T21:05:25.033Z\",\n      \"steps\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n        }\n      ],\n      \"result\": {\n        \"resolution\": \"auto_approve\"\n      },\n      \"artifacts\": [\n        {\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"confidence\": \"string\",\n          \"summary\": \"string\",\n          \"sources\": [\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"confidence\": \"string\",\n          \"summary\": \"string\",\n          \"sources\": [\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"275e5b1a-9ddf-f212-91ca-d5826cd5cd26\",\n      \"run_id\": \"1bbd54ed-04f3-0cf2-e480-6d53a14a5cfe\",\n      \"type\": \"interrupt\",\n      \"name\": \"string\",\n      \"label\": \"string\",\n      \"status\": \"running\",\n      \"started_at\": \"1950-09-26T03:35:15.300Z\",\n      \"agent\": \"string\",\n      \"parent_step_id\": \"3e8388ad-8f19-63e2-c34e-319ca680f861\",\n      \"completed_at\": \"1958-04-20T01:36:37.172Z\",\n      \"steps\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/type_:AgentsStep detected>\"\n        }\n      ],\n      \"result\": {\n        \"resolution\": \"auto_approve\"\n      },\n      \"artifacts\": [\n        {\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"confidence\": \"string\",\n          \"summary\": \"string\",\n          \"sources\": [\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"confidence\": \"string\",\n          \"summary\": \"string\",\n          \"sources\": [\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_tier\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d27eae43-8e14-4d91-af87-f211bacd664d",
+              "name": "agent thread not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "threads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent thread ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.middesk.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "97e1427f-38a9-4127-8815-b11533521813",
+    "name": "Middesk subpackage_actions subpackage_threads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

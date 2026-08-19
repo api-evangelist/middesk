@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_agents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/agents",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns a list of available agents for running workflows"
+        },
+        {
+          "info": {
+            "name": "Retrieve an agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/agents/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent ID"
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific agent"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

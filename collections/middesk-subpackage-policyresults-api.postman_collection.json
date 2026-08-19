@@ -1,0 +1,182 @@
+{
+  "item": [
+    {
+      "id": "7b6b2168-7d45-48ed-9871-cf31dcf5a19c",
+      "name": "subpackage_policyResults",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3c1813ba-6961-4915-8671-62daf5537ea7",
+          "name": "List policy results for a business",
+          "request": {
+            "name": "List policy results for a business",
+            "description": {
+              "content": "Returns policy results for enabled policy versions only",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "businesses",
+                ":business_id",
+                "policy_results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_id",
+                  "description": "(Required) Business ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9852939d-acdc-4f8b-8795-ebe79262211d",
+              "name": "multiple policy results with different versions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "businesses",
+                    ":business_id",
+                    "policy_results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_id",
+                      "description": "(Required) Business ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"data\": [\n    {\n      \"object\": \"string\",\n      \"id\": \"string\",\n      \"result\": \"string\",\n      \"created_at\": \"string\",\n      \"matched\": \"string\",\n      \"executed\": true,\n      \"name\": \"string\",\n      \"details\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"owner_id\": \"string\",\n      \"owner_type\": \"string\",\n      \"business_id\": \"string\",\n      \"type_of\": \"string\",\n      \"policy_action_results\": [\n        {\n          \"object\": \"string\",\n          \"id\": \"string\",\n          \"details\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {},\n            \"key_3\": {},\n            \"key_4\": {}\n          },\n          \"executed\": false,\n          \"policy_action\": {\n            \"id\": \"string\",\n            \"action_type\": \"string\",\n            \"options\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"policy_version_id\": \"string\"\n          }\n        },\n        {\n          \"object\": \"string\",\n          \"id\": \"string\",\n          \"details\": {\n            \"key_0\": {}\n          },\n          \"executed\": true,\n          \"policy_action\": {\n            \"id\": \"string\",\n            \"action_type\": \"string\",\n            \"options\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"policy_version_id\": \"string\"\n          }\n        }\n      ]\n    },\n    {\n      \"object\": \"string\",\n      \"id\": \"string\",\n      \"result\": \"string\",\n      \"created_at\": \"string\",\n      \"matched\": \"string\",\n      \"executed\": false,\n      \"name\": \"string\",\n      \"details\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {}\n      },\n      \"owner_id\": \"string\",\n      \"owner_type\": \"string\",\n      \"business_id\": \"string\",\n      \"type_of\": \"string\",\n      \"policy_action_results\": [\n        {\n          \"object\": \"string\",\n          \"id\": \"string\",\n          \"details\": {\n            \"key_0\": {}\n          },\n          \"executed\": true,\n          \"policy_action\": {\n            \"id\": \"string\",\n            \"action_type\": \"string\",\n            \"options\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"policy_version_id\": \"string\"\n          }\n        },\n        {\n          \"object\": \"string\",\n          \"id\": \"string\",\n          \"details\": {\n            \"key_0\": {}\n          },\n          \"executed\": true,\n          \"policy_action\": {\n            \"id\": \"string\",\n            \"action_type\": \"string\",\n            \"options\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"policy_version_id\": \"string\"\n          }\n        }\n      ]\n    }\n  ],\n  \"url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31f45f11-efdd-4cac-a552-064ae4f85e57",
+              "name": "business not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "businesses",
+                    ":business_id",
+                    "policy_results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_id",
+                      "description": "(Required) Business ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.middesk.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d5b88e23-025d-4ad2-bd01-da41c0a2be22",
+    "name": "Middesk subpackage_actions subpackage_policyResults API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

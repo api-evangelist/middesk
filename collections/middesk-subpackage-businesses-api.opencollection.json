@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_businesses API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_businesses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List businesses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/businesses",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "List businesses"
+        },
+        {
+          "info": {
+            "name": "Create a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/businesses",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a business"
+        },
+        {
+          "info": {
+            "name": "Retrieve a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/businesses/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Business ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a business"
+        },
+        {
+          "info": {
+            "name": "Update a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.middesk.com/v1/businesses/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Business ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a business"
+        },
+        {
+          "info": {
+            "name": "Retrieve a business PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/businesses/:id/pdf",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Business ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a business PDF"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_questions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_questions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List questions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/agent/questions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter US state abbreviation (e.g., CA, NY). Required when jurisdiction_slugs is not provided and states is not used."
+              },
+              {
+                "name": "states[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of two-letter US state abbreviations. Used when fetching questions for multiple states."
+              },
+              {
+                "name": "jurisdiction_slugs[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of local jurisdiction slug identifiers. Used to fetch questions specific to local jurisdictions. Must be provided together with the state parameter."
+              },
+              {
+                "name": "categories[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter questions by registration type. Only applicable to state-level questions; omit for local jurisdiction questions."
+              }
+            ]
+          },
+          "docs": "Retrieve the set of dynamic questions required for a registration in a given state or local jurisdiction. The questions returned depend on the jurisdiction and registration type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

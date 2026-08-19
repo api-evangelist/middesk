@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_businessBatches API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_businessBatches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List business batches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/business_batches",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page"
+              }
+            ]
+          },
+          "docs": "List business batches"
+        },
+        {
+          "info": {
+            "name": "Create a business batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/business_batches",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a business batch"
+        },
+        {
+          "info": {
+            "name": "Retrieve a business batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/business_batches/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Business Batch ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a business batch"
+        },
+        {
+          "info": {
+            "name": "Download business batch CSV",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/business_batches/:id/csv",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Business Batch ID"
+              }
+            ]
+          },
+          "docs": "Download business batch CSV"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

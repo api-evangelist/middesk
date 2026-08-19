@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_threads API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_threads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List agent threads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/threads",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page"
+              },
+              {
+                "name": "business_id",
+                "value": "",
+                "type": "query",
+                "description": "Optional business ID filter"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of agent threads"
+        },
+        {
+          "info": {
+            "name": "Create an agent thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/threads",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new agent thread for running agent workflows"
+        },
+        {
+          "info": {
+            "name": "Retrieve an agent thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/threads/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent thread ID"
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific agent thread"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

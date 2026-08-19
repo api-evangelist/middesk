@@ -1,0 +1,486 @@
+{
+  "item": [
+    {
+      "id": "9144c3f3-f5b1-42cc-835c-fb624f6d07a4",
+      "name": "subpackage_mail",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb2e2bfd-06f7-4349-a8b5-eb031e960d34",
+          "name": "List mail items",
+          "request": {
+            "name": "List mail items",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "partner",
+                "mail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter by state"
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Search query"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "Sort field"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "<string>",
+                  "description": "Sort order"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a7491e1-0621-4092-bed1-a4b52f01a480",
+              "name": "mail items list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    "mail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"data\": [\n    {\n      \"object\": \"string\",\n      \"id\": \"555cdb8f-cdcf-0234-a2b3-f80421560c30\",\n      \"created_at\": \"1975-02-22T14:34:03.838Z\",\n      \"updated_at\": \"1952-06-20T14:42:52.858Z\",\n      \"mail_viewed\": false,\n      \"tag_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"suggested_action_request\": false,\n      \"source\": {\n        \"type\": \"string\",\n        \"id\": \"85053b7e-9a8b-6482-b072-28f11f91ca38\"\n      },\n      \"company\": {\n        \"id\": \"404f6e5b-aae9-0837-03dd-71ddd2c7ae69\",\n        \"legal_name\": \"string\",\n        \"dba_name\": \"string\",\n        \"provider_company_id\": \"string\",\n        \"external_id\": \"string\",\n        \"parent_account_name\": \"string\"\n      },\n      \"arrived_at\": \"1961-10-08T12:20:57.810Z\",\n      \"external_id\": \"string\",\n      \"sender_name\": \"string\",\n      \"recipient_name\": \"string\",\n      \"agency_name\": \"string\",\n      \"internal_status\": \"string\",\n      \"notes\": \"string\",\n      \"document_url\": \"https://Sw.efbFzij\",\n      \"summary_payload\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"suggested_mail_tag\": \"string\",\n      \"suggested_partner_name\": \"string\",\n      \"mailbox_name\": \"string\",\n      \"registration_request_id\": \"b5e925e3-8f97-f058-f1c8-a167dbee49cc\",\n      \"state\": \"FL\",\n      \"document\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"object\": \"string\",\n      \"id\": \"de3381c8-a59c-734b-c66f-a56296db72f5\",\n      \"created_at\": \"1976-10-13T03:43:38.611Z\",\n      \"updated_at\": \"1979-04-21T22:30:33.528Z\",\n      \"mail_viewed\": true,\n      \"tag_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"suggested_action_request\": true,\n      \"source\": {\n        \"type\": \"string\",\n        \"id\": \"ef1cdd29-7053-593a-ed7f-49506514e76e\"\n      },\n      \"company\": {\n        \"id\": \"ef66412c-c06d-db13-73f3-c90d1cf0a2b0\",\n        \"legal_name\": \"string\",\n        \"dba_name\": \"string\",\n        \"provider_company_id\": \"string\",\n        \"external_id\": \"string\",\n        \"parent_account_name\": \"string\"\n      },\n      \"arrived_at\": \"1986-11-05T05:10:09.930Z\",\n      \"external_id\": \"string\",\n      \"sender_name\": \"string\",\n      \"recipient_name\": \"string\",\n      \"agency_name\": \"string\",\n      \"internal_status\": \"string\",\n      \"notes\": \"string\",\n      \"document_url\": \"http://htJSdkEjzZkgdgiRaSVfHIKFX.ecLV6cnm2uc0lUdmwxMHDf6uZDJOQ\",\n      \"summary_payload\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"suggested_mail_tag\": \"string\",\n      \"suggested_partner_name\": \"string\",\n      \"mailbox_name\": \"string\",\n      \"registration_request_id\": \"8fc913a0-e587-4761-1280-123a1fa26f37\",\n      \"state\": \"LA\",\n      \"document\": {\n        \"key_0\": {}\n      }\n    }\n  ],\n  \"url\": \"string\",\n  \"has_more\": false,\n  \"count\": 7001\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50d8e6f4-cb4d-4845-9568-528808ebbfa0",
+          "name": "Retrieve a mail item",
+          "request": {
+            "name": "Retrieve a mail item",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "partner",
+                "mail",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Mail item ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc8a4098-0c6b-463d-b30a-1f10afe79285",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    "mail",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Mail item ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d6007f93-52f3-4e35-bd38-222d023ef8aa",
+              "name": "mail item not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    "mail",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Mail item ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c0307f0-ccb6-44db-9c99-162297befd5a",
+          "name": "Update a mail item",
+          "request": {
+            "name": "Update a mail item",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "partner",
+                "mail",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Mail item ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ccc025f3-df83-4604-aea2-10b5219611f1",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    "mail",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Mail item ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "240fb66b-4bda-4a9a-b3f5-a5d26afadb5f",
+              "name": "mail item not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    "mail",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Mail item ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.middesk.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "19069699-2863-43c1-a1e6-e7b5d0b68080",
+    "name": "Middesk subpackage_actions subpackage_mail API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_signals API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_signals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/signals",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by external ID"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date filter (YYYY-MM-DD)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date filter (YYYY-MM-DD)"
+              },
+              {
+                "name": "starting_at",
+                "value": "",
+                "type": "query",
+                "description": "Start timestamp filter"
+              },
+              {
+                "name": "ending_at",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp filter"
+              },
+              {
+                "name": "batch_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by batch ID"
+              },
+              {
+                "name": "model_slug",
+                "value": "",
+                "type": "query",
+                "description": "Filter by model slug"
+              },
+              {
+                "name": "reason_codes",
+                "value": "",
+                "type": "query",
+                "description": "Filter by reason codes"
+              }
+            ]
+          },
+          "docs": "List signals"
+        },
+        {
+          "info": {
+            "name": "Create a signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/signals",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a signal"
+        },
+        {
+          "info": {
+            "name": "Retrieve a signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/signals/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Signal ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a signal"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

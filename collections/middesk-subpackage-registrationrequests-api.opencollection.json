@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_registrationRequests API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_registrationRequests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List registration requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/partner/registration_requests",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page"
+              }
+            ]
+          },
+          "docs": "List registration requests"
+        },
+        {
+          "info": {
+            "name": "Create a registration request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/partner/registration_requests",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a registration request"
+        },
+        {
+          "info": {
+            "name": "Retrieve a registration request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/partner/registration_requests/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Registration Request ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a registration request"
+        },
+        {
+          "info": {
+            "name": "Delete a registration request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.middesk.com/v1/partner/registration_requests/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Registration Request ID"
+              }
+            ]
+          },
+          "docs": "Delete a registration request"
+        },
+        {
+          "info": {
+            "name": "Fetch guest dashboard link for a registration request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/partner/registration_requests/:id/guest_dashboard",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Registration Request ID"
+              },
+              {
+                "name": "section",
+                "value": "",
+                "type": "query",
+                "description": "Dashboard section to link to"
+              }
+            ]
+          },
+          "docs": "Fetch guest dashboard link for a registration request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

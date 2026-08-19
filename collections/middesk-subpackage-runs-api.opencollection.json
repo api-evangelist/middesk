@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_runs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List agent runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/runs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of agent runs"
+        },
+        {
+          "info": {
+            "name": "Create an agent run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/runs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new agent run"
+        },
+        {
+          "info": {
+            "name": "Retrieve an agent run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/runs/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent run ID"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of optional sub-resources to include. Pass `steps` to populate the `steps` array with this run's execution trace; omitted by default to avoid the cost of fetching step state from the underlying execution backend."
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific agent run"
+        },
+        {
+          "info": {
+            "name": "Submit feedback on an agent run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/runs/:id/feedback",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent run ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Records a rating on an agent run artifact. The rating can be POSITIVE or NEGATIVE. Attribution defaults to the authenticated user; API-key callers are attributed to their account instead."
+        },
+        {
+          "info": {
+            "name": "Stream agent run events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/runs/:id/stream",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent run ID"
+              }
+            ]
+          },
+          "docs": "Streams real-time events for an agent run using Server-Sent Events (SSE). Events are emitted in AG-UI format: `RUN_STARTED`, `STATE_SNAPSHOT`, and `RUN_FINISHED`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

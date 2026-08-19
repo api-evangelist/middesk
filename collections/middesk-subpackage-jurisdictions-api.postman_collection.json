@@ -1,0 +1,285 @@
+{
+  "item": [
+    {
+      "id": "140bc352-cdca-49ff-ac95-a43281315174",
+      "name": "subpackage_jurisdictions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec4ec9db-4b24-4c63-a9a1-8b8ddf013d52",
+          "name": "Search jurisdictions",
+          "request": {
+            "name": "Search jurisdictions",
+            "description": {
+              "content": "Search for jurisdictions by name, PSD code, or other criteria. Supports filtering by state, tax type, and jurisdiction type. Results are paginated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "agent",
+                "jurisdictions",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Two-letter US state abbreviation (e.g., OH, PA)"
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Search query (name, PSD code, or municipality)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "tax_type",
+                  "value": "<string>",
+                  "description": "Filter by tax type (e.g., CITY, EIT, LST)"
+                },
+                {
+                  "disabled": false,
+                  "key": "local_only",
+                  "value": "<string>",
+                  "description": "When true, returns only local jurisdictions"
+                },
+                {
+                  "disabled": false,
+                  "key": "supported_only",
+                  "value": "<string>",
+                  "description": "When true, returns only supported jurisdictions"
+                },
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>",
+                  "description": "Filter by jurisdiction slug"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f68bf6f6-483f-4fce-b41e-0a9d2e709a95",
+              "name": "jurisdictions search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agent",
+                    "jurisdictions",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tax_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "local_only",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "supported_only",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"data\": [\n    {\n      \"object\": \"string\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"string\",\n      \"type\": \"string\",\n      \"label\": \"string\",\n      \"agency_name\": \"string\",\n      \"agency_slug\": \"string\",\n      \"agency_items\": [\n        \"string\",\n        \"string\"\n      ],\n      \"city\": \"string\"\n    },\n    {\n      \"object\": \"string\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"string\",\n      \"type\": \"string\",\n      \"label\": \"string\",\n      \"agency_name\": \"string\",\n      \"agency_slug\": \"string\",\n      \"agency_items\": [\n        \"string\",\n        \"string\"\n      ],\n      \"city\": \"string\"\n    }\n  ],\n  \"url\": \"string\",\n  \"has_more\": true,\n  \"total_count\": 769\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7567362a-534d-4d0a-a8eb-e60fe69313bd",
+          "name": "Fetch supported local jurisdictions",
+          "request": {
+            "name": "Fetch supported local jurisdictions",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agent",
+                "jurisdictions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "(Required) US state abbreviation (e.g., CO, CA, NY)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8694bcbb-6a94-431c-9dc8-e7fc6a7f8d10",
+              "name": "jurisdictions list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agent",
+                    "jurisdictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"data\": [\n    {\n      \"object\": \"string\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"string\",\n      \"type\": \"string\",\n      \"label\": \"string\",\n      \"agency_name\": \"string\",\n      \"agency_slug\": \"string\",\n      \"agency_items\": [\n        \"string\",\n        \"string\"\n      ],\n      \"city\": \"string\"\n    },\n    {\n      \"object\": \"string\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"string\",\n      \"type\": \"string\",\n      \"label\": \"string\",\n      \"agency_name\": \"string\",\n      \"agency_slug\": \"string\",\n      \"agency_items\": [\n        \"string\",\n        \"string\"\n      ],\n      \"city\": \"string\"\n    }\n  ],\n  \"search_config\": {\n    \"hint\": \"string\",\n    \"help_text\": \"string\",\n    \"help_url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.middesk.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8a32d438-09ec-4435-8b9c-800abcd73f08",
+    "name": "Middesk subpackage_actions subpackage_jurisdictions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_lienTerminations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_lienTerminations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a termination for a lien",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/liens/:lien_id/termination",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "lien_id",
+                "value": "",
+                "type": "path",
+                "description": "Lien ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a lien termination or returns existing one if already terminated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

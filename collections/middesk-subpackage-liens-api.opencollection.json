@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_liens API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_liens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List liens for a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/businesses/:business_id/liens",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "business_id",
+                "value": "",
+                "type": "path",
+                "description": "Business ID"
+              }
+            ]
+          },
+          "docs": "List liens for a business"
+        },
+        {
+          "info": {
+            "name": "Create a lien for a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/businesses/:business_id/liens",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "business_id",
+                "value": "",
+                "type": "path",
+                "description": "Business ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a lien for a business"
+        },
+        {
+          "info": {
+            "name": "Create lien filings in batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/businesses/:business_id/liens/batch",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "business_id",
+                "value": "",
+                "type": "path",
+                "description": "Business ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates multiple lien filings in a single request. Each entry is processed independently. Successful entries return lien objects, failed entries return per-item errors."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

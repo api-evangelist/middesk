@@ -1,0 +1,112 @@
+{
+  "item": [
+    {
+      "id": "3e10a9b6-212e-4136-b628-13a1abf71d91",
+      "name": "subpackage_tinMatch",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0294f0ce-d241-4b4d-96c1-8b21635a72be",
+          "name": "Check TIN match service availability",
+          "request": {
+            "name": "Check TIN match service availability",
+            "description": {
+              "content": "Returns the availability status of the IRS TIN matching service",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tin_match",
+                "availability"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ddc30ee-da9f-4d7e-a280-f99119ad4b16",
+              "name": "TIN match service is unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tin_match",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"available\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.middesk.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bafd5813-6224-4af2-9b13-c2fae97f3d03",
+    "name": "Middesk subpackage_actions subpackage_tinMatch API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

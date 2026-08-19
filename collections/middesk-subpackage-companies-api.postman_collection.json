@@ -1,0 +1,181 @@
+{
+  "item": [
+    {
+      "id": "4932a248-d409-455f-a9e2-d1ca18a0d25d",
+      "name": "subpackage_companies",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "90cfca3a-25af-4133-83de-a02f26fa057d",
+          "name": "Create a company",
+          "request": {
+            "name": "Create a company",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "partner",
+                "companies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"legal_name\": \"<string>\",\n  \"ein\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"dba_name\": \"<string>\",\n  \"contact_email\": \"<email>\",\n  \"contact_name\": \"<string>\",\n  \"contact_phone_number\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"formation_state\": \"<string>\",\n  \"formation_date\": \"<date>\",\n  \"addresses\": [\n    {\n      \"address_line1\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"address_type\": \"<string>\"\n    },\n    {\n      \"address_line1\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"address_type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ef1e3a2-9bd3-4c4e-ba08-81dffe89d233",
+              "name": "company created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"legal_name\": \"<string>\",\n  \"ein\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"dba_name\": \"<string>\",\n  \"contact_email\": \"<email>\",\n  \"contact_name\": \"<string>\",\n  \"contact_phone_number\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"formation_state\": \"<string>\",\n  \"formation_date\": \"<date>\",\n  \"addresses\": [\n    {\n      \"address_line1\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"address_type\": \"<string>\"\n    },\n    {\n      \"address_line1\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"address_type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"id\": \"ed09639f-cb3c-8700-274c-f39e4db7d1d1\",\n  \"legal_name\": \"string\",\n  \"account_id\": \"3a34d812-781f-f3c1-45ab-a9f0f22ead4e\",\n  \"dba_name\": \"string\",\n  \"external_id\": \"string\",\n  \"parent_account\": {\n    \"id\": \"75d96306-7ab0-80bc-cfc8-12ca2522631f\",\n    \"name\": \"string\",\n    \"slug\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f600c043-b8f7-4b70-8049-36851e6ddc56",
+              "name": "company already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"legal_name\": \"<string>\",\n  \"ein\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"dba_name\": \"<string>\",\n  \"contact_email\": \"<email>\",\n  \"contact_name\": \"<string>\",\n  \"contact_phone_number\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"formation_state\": \"<string>\",\n  \"formation_date\": \"<date>\",\n  \"addresses\": [\n    {\n      \"address_line1\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"address_type\": \"<string>\"\n    },\n    {\n      \"address_line1\": \"<string>\",\n      \"address_line2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"address_type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"id\": \"ed09639f-cb3c-8700-274c-f39e4db7d1d1\",\n  \"legal_name\": \"string\",\n  \"account_id\": \"3a34d812-781f-f3c1-45ab-a9f0f22ead4e\",\n  \"dba_name\": \"string\",\n  \"external_id\": \"string\",\n  \"parent_account\": {\n    \"id\": \"75d96306-7ab0-80bc-cfc8-12ca2522631f\",\n    \"name\": \"string\",\n    \"slug\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.middesk.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "15a8fbc2-de05-4d90-b0b0-0810dde931a0",
+    "name": "Middesk subpackage_actions subpackage_companies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

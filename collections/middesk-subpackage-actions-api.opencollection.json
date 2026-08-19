@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List actions for an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/actions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of object to list actions for"
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the object to list actions for"
+              }
+            ]
+          },
+          "docs": "List actions for an object"
+        },
+        {
+          "info": {
+            "name": "Create an action on an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/actions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an action on an object"
+        },
+        {
+          "info": {
+            "name": "Retrieve an action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/actions/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Action ID"
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of object the action belongs to"
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the object the action belongs to"
+              }
+            ]
+          },
+          "docs": "Retrieve an action"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

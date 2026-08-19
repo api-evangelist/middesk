@@ -1,0 +1,184 @@
+{
+  "item": [
+    {
+      "id": "183c75f3-9746-4686-95da-f8cf20040426",
+      "name": "subpackage_prefill",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2734cb11-d834-4843-bc4e-7e9875144091",
+          "name": "Prefill business information",
+          "request": {
+            "name": "Prefill business information",
+            "description": {
+              "content": "Smart populate business attributes by searching with name and address, TIN, or website URL. Returns enriched business data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prefill",
+                "businesses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"addresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tin\": \"<string>\",\n  \"website_url\": \"<string>\",\n  \"autocomplete_result_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c777727d-2193-4aa1-8ba2-2c55eb51f0d1",
+              "name": "prefill results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prefill",
+                    "businesses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"addresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tin\": \"<string>\",\n  \"website_url\": \"<string>\",\n  \"autocomplete_result_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"names\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"dba\"\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"legal\"\n    }\n  ],\n  \"addresses\": [\n    {\n      \"full_address\": \"string\",\n      \"address_line1\": \"string\",\n      \"address_line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"full_address\": \"string\",\n      \"address_line1\": \"string\",\n      \"address_line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"tin\": {\n    \"last_four\": \"string\",\n    \"tin_type\": \"string\"\n  },\n  \"formation\": {\n    \"entity_type\": \"string\"\n  },\n  \"industry_classifications\": [\n    {\n      \"name\": \"string\",\n      \"score\": 2211.8017061020023,\n      \"sector\": \"string\",\n      \"category\": \"string\",\n      \"high_risk\": false,\n      \"mcc_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sic_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"naics_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"prohibited_labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"classification_system\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"score\": 8809.000082283133,\n      \"sector\": \"string\",\n      \"category\": \"string\",\n      \"high_risk\": true,\n      \"mcc_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sic_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"naics_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"prohibited_labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"classification_system\": \"string\"\n    }\n  ],\n  \"people\": [\n    {\n      \"name\": \"string\",\n      \"titles\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"titles\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"website\": {\n    \"url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a872589-44b7-428b-b322-f5d7df1e0821",
+              "name": "invalid request - missing required parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prefill",
+                    "businesses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"addresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tin\": \"<string>\",\n  \"website_url\": \"<string>\",\n  \"autocomplete_result_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.middesk.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "037d73a0-a9f2-4b0f-8eb0-295e0c8a3035",
+    "name": "Middesk subpackage_actions subpackage_prefill API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

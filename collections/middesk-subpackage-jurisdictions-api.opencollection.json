@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_jurisdictions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_jurisdictions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search jurisdictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/agent/jurisdictions/search",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter US state abbreviation (e.g., OH, PA)"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query (name, PSD code, or municipality)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "tax_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tax type (e.g., CITY, EIT, LST)"
+              },
+              {
+                "name": "local_only",
+                "value": "",
+                "type": "query",
+                "description": "When true, returns only local jurisdictions"
+              },
+              {
+                "name": "supported_only",
+                "value": "",
+                "type": "query",
+                "description": "When true, returns only supported jurisdictions"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "query",
+                "description": "Filter by jurisdiction slug"
+              }
+            ]
+          },
+          "docs": "Search for jurisdictions by name, PSD code, or other criteria. Supports filtering by state, tax type, and jurisdiction type. Results are paginated."
+        },
+        {
+          "info": {
+            "name": "Fetch supported local jurisdictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/agent/jurisdictions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "US state abbreviation (e.g., CO, CA, NY)"
+              }
+            ]
+          },
+          "docs": "Fetch supported local jurisdictions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

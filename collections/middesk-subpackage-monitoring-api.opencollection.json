@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_monitoring API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a monitor for a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/businesses/:business_id/monitor",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "business_id",
+                "value": "",
+                "type": "path",
+                "description": "Business ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a monitor for a business"
+        },
+        {
+          "info": {
+            "name": "Create a monitor for a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/businesses/:business_id/monitor",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "business_id",
+                "value": "",
+                "type": "path",
+                "description": "Business ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a monitor for a business"
+        },
+        {
+          "info": {
+            "name": "Update a monitor for a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.middesk.com/v1/businesses/:business_id/monitor",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "business_id",
+                "value": "",
+                "type": "path",
+                "description": "Business ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a monitor for a business"
+        },
+        {
+          "info": {
+            "name": "Delete a monitor for a business",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.middesk.com/v1/businesses/:business_id/monitor",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "business_id",
+                "value": "",
+                "type": "path",
+                "description": "Business ID"
+              }
+            ]
+          },
+          "docs": "Delete a monitor for a business"
+        },
+        {
+          "info": {
+            "name": "Bulk disable monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/monitoring/bulk_disable",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Disables monitors for all businesses in the account. This operation is processed asynchronously. When monitor_types is omitted, all monitor types allowed for the account are disabled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

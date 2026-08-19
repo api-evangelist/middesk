@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_tinMatch API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_tinMatch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check TIN match service availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.middesk.com/v1/tin_match/availability",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns the availability status of the IRS TIN matching service"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,199 @@
+{
+  "item": [
+    {
+      "id": "0b535d10-619b-4a21-9563-f798f00c8f05",
+      "name": "subpackage_websites",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "813b3057-8ce6-4401-85d4-f1af38a2bf1c",
+          "name": "Retrieve website analysis for a business",
+          "request": {
+            "name": "Retrieve website analysis for a business",
+            "description": {
+              "content": "Returns website analysis data including domain info, pages, and quality indicators",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "businesses",
+                ":business_id",
+                "website"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Include additional data. Use \"indicator_details\" to include source examples and explanations for each indicator"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_id",
+                  "description": "(Required) Business ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62f2b064-4808-4a6a-9d90-8037078f2657",
+              "name": "website analysis found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "businesses",
+                    ":business_id",
+                    "website"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_id",
+                      "description": "(Required) Business ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"website\",\n  \"id\": \"199c967d-7e14-cec8-b561-b920ed510bef\",\n  \"url\": \"http://lvJjcn.fhmfDdmrx0JnsmW8upR+ubhywfg49wtbBJbjcBnDm,nHhWHGcfYGG\",\n  \"created_at\": \"2022-12-25T20:19:58.010Z\",\n  \"updated_at\": \"1960-08-08T19:52:01.506Z\",\n  \"status\": \"online\",\n  \"parked\": false,\n  \"submitted\": false,\n  \"business_id\": \"68774687-2de2-be89-9f7c-cbbbc140a276\",\n  \"business_name_match\": false,\n  \"phone_numbers\": [\n    {\n      \"object\": \"phone_number\",\n      \"id\": \"f0ae5e1b-d495-38d5-0c36-81fcefa3c260\",\n      \"number\": \"string\",\n      \"contact_type\": \"string\",\n      \"recommended\": true,\n      \"submitted\": false,\n      \"sources\": [\n        {\n          \"id\": \"311f8944-a61c-ffd6-9451-da694aeb1395\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {}\n          }\n        },\n        {\n          \"id\": \"5a7671a4-c504-99bb-a9cd-de0a1486703a\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          }\n        }\n      ]\n    },\n    {\n      \"object\": \"phone_number\",\n      \"id\": \"bf4911cd-3a02-1f35-abd1-b8de99a6892f\",\n      \"number\": \"string\",\n      \"contact_type\": \"string\",\n      \"recommended\": false,\n      \"submitted\": false,\n      \"sources\": [\n        {\n          \"id\": \"e5752f4e-68da-0c0f-8924-056f3e7741e4\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          }\n        },\n        {\n          \"id\": \"a5038b1b-5c6d-20ba-bde0-1fb13b438c27\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {}\n          }\n        }\n      ]\n    }\n  ],\n  \"addresses\": [\n    {\n      \"object\": \"string\",\n      \"id\": \"09a9dec9-abd0-c74c-c370-2f932159342c\",\n      \"address_line1\": \"string\",\n      \"address_line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"full_address\": \"string\",\n      \"submitted\": false,\n      \"sources\": [\n        {\n          \"id\": \"b16d429f-cb9d-b4db-5e6c-f85423e7b121\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        },\n        {\n          \"id\": \"8555da35-8c91-892a-d116-bd648df42566\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        }\n      ]\n    },\n    {\n      \"object\": \"string\",\n      \"id\": \"15c157c1-e758-2ddd-36e3-167f36ef57de\",\n      \"address_line1\": \"string\",\n      \"address_line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"full_address\": \"string\",\n      \"submitted\": false,\n      \"sources\": [\n        {\n          \"id\": \"168ac4ef-1479-de4d-b89f-5c2f95c8e192\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {}\n          }\n        },\n        {\n          \"id\": \"483d25c6-d56e-650d-9f2e-38a550b7beb4\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        }\n      ]\n    }\n  ],\n  \"http_status_code\": 2662,\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"domain\": {\n    \"domain\": \"string\",\n    \"domain_id\": \"string\",\n    \"creation_date\": \"2022-03-22T02:34:37.457Z\",\n    \"expiration_date\": \"1985-08-18T07:31:26.124Z\",\n    \"registrar\": {\n      \"organization\": \"string\",\n      \"name\": \"string\",\n      \"url\": \"http://GWSBqAdIAyKCPtvNRkWctlPgBaWokj.xjeaBvFTbraf4.iMHwbW.ijqp\"\n    },\n    \"redirected\": false,\n    \"url_shortener\": true,\n    \"resolved_url\": \"https://qszvrAWIuNnwwCihZgjwVFKHJHjMqF.xurvadfAcX+g\"\n  },\n  \"pages\": [\n    {\n      \"url\": \"https://MhyvGQzxhhKMsIrQEoyLA.jgKSg-JcTn-nT7EvxfUM2X+cyqtUjPCmlO\",\n      \"category\": \"string\",\n      \"screenshot_url\": \"http://zrTumqHVqofspNwwXf.xxkfTOkPSR-5vGDXCM5PDTT,Ahpf+wJ.,Gf9BxwEyvm,TcFSlBB\"\n    },\n    {\n      \"url\": \"https://knopMZyDPbXdMEiZbnaQFmfUQugwcGc.sjhnLhtok3NOfHIBJl6Ph5-mWBHySefB\",\n      \"category\": \"string\",\n      \"screenshot_url\": \"http://xzFzYuMrHXGbqEGpLx.qrkr+NsJ\"\n    }\n  ],\n  \"error\": \"string\",\n  \"category\": \"string\",\n  \"platform\": \"string\",\n  \"posts_summary\": \"string\",\n  \"reviews_summary\": \"string\",\n  \"names\": [\n    {\n      \"object\": \"string\",\n      \"id\": \"75f6b6b0-59eb-7a0f-da91-b81725b92049\",\n      \"name\": \"string\",\n      \"submitted\": true,\n      \"business_id\": \"9d3c9bcd-7921-a29e-64ef-0ac4ca38453f\",\n      \"sources\": [\n        {\n          \"id\": \"ba1a43b7-cf04-a65f-de52-9c306fc32087\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        },\n        {\n          \"id\": \"619fc47a-ca20-7ea3-aed7-bc6ab3997ea5\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        }\n      ],\n      \"type\": \"dba\"\n    },\n    {\n      \"object\": \"string\",\n      \"id\": \"9df7ee4f-a6f2-a144-6ef0-91b991526535\",\n      \"name\": \"string\",\n      \"submitted\": false,\n      \"business_id\": \"39543707-85b3-b411-29b4-6bc48b4bbfd7\",\n      \"sources\": [\n        {\n          \"id\": \"6392da59-86e7-ca80-c008-60f512440d5d\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {}\n          }\n        },\n        {\n          \"id\": \"a220b465-723c-1e4b-9301-4445b5fecbfa\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        }\n      ],\n      \"type\": \"dba\"\n    }\n  ],\n  \"people\": [\n    {\n      \"key_0\": {}\n    },\n    {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ],\n  \"email_addresses\": [\n    {\n      \"object\": \"email_address\",\n      \"email\": \"string\",\n      \"id\": \"4663acb4-94f2-1680-3153-2087dcee1205\",\n      \"submitted\": true,\n      \"sources\": [\n        {\n          \"id\": \"43a45ac1-e81b-bfb2-b8f6-e5c437872c6c\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {},\n            \"key_3\": {}\n          }\n        },\n        {\n          \"id\": \"d903e939-360c-0cd1-22ae-56aea5ac5208\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        }\n      ]\n    },\n    {\n      \"object\": \"email_address\",\n      \"email\": \"string\",\n      \"id\": \"c95a6c91-869b-05cb-3afb-d7b8a1e98c68\",\n      \"submitted\": true,\n      \"sources\": [\n        {\n          \"id\": \"c67af8d1-04ad-cb0e-a7e2-987f4df88b06\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {},\n            \"key_3\": {}\n          }\n        },\n        {\n          \"id\": \"a0596d0c-1846-0a5d-faed-3338820c5793\",\n          \"type\": \"string\",\n          \"metadata\": {\n            \"key_0\": {}\n          }\n        }\n      ]\n    }\n  ],\n  \"rating\": {\n    \"quality_rating\": \"high\",\n    \"indicators\": [\n      {\n        \"type\": \"us_business_presence\",\n        \"name\": \"string\",\n        \"rating\": \"positive\",\n        \"value\": \"string\",\n        \"description\": \"string\"\n      },\n      {\n        \"type\": \"update_frequency\",\n        \"name\": \"string\",\n        \"rating\": \"positive\",\n        \"value\": \"string\",\n        \"description\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eadd640a-b5dc-45ca-84a5-936b154cd147",
+              "name": "website not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "businesses",
+                    ":business_id",
+                    "website"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_id",
+                      "description": "(Required) Business ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.middesk.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ab1a19c5-db12-474a-bc93-393e349b3a82",
+    "name": "Middesk subpackage_actions subpackage_websites API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

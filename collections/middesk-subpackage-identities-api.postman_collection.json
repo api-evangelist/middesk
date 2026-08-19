@@ -1,0 +1,184 @@
+{
+  "item": [
+    {
+      "id": "f18061e4-970e-45cf-8dde-e0308beb7b3b",
+      "name": "subpackage_identities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "23433e00-41fe-4e4a-9811-61782a08ad4b",
+          "name": "Autocomplete business identities",
+          "request": {
+            "name": "Autocomplete business identities",
+            "description": {
+              "content": "Search for business identities using partial name matching. Returns matching businesses with names, addresses, people, and entity type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "identities",
+                "autocomplete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"addresses\": [\n    {\n      \"address_line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\"\n    },\n    {\n      \"address_line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "af3d1558-2aff-40d8-a501-e1fc86ed189e",
+              "name": "autocomplete results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "identities",
+                    "autocomplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"addresses\": [\n    {\n      \"address_line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\"\n    },\n    {\n      \"address_line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"names\": [\n        {\n          \"name\": \"string\",\n          \"type\": \"legal\"\n        },\n        {\n          \"name\": \"string\",\n          \"type\": \"dba\"\n        }\n      ],\n      \"addresses\": [\n        {\n          \"full_address\": \"string\",\n          \"address_line1\": \"string\",\n          \"address_line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postal_code\": \"string\",\n          \"labels\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"full_address\": \"string\",\n          \"address_line1\": \"string\",\n          \"address_line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postal_code\": \"string\",\n          \"labels\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"people\": [\n        {\n          \"name\": \"string\",\n          \"titles\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"titles\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"entity_type\": \"TRUST\"\n    },\n    {\n      \"id\": \"string\",\n      \"names\": [\n        {\n          \"name\": \"string\",\n          \"type\": \"dba\"\n        },\n        {\n          \"name\": \"string\",\n          \"type\": \"legal\"\n        }\n      ],\n      \"addresses\": [\n        {\n          \"full_address\": \"string\",\n          \"address_line1\": \"string\",\n          \"address_line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postal_code\": \"string\",\n          \"labels\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"full_address\": \"string\",\n          \"address_line1\": \"string\",\n          \"address_line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postal_code\": \"string\",\n          \"labels\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"people\": [\n        {\n          \"name\": \"string\",\n          \"titles\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"titles\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"entity_type\": \"NON_PROFIT\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1cef5ae-e540-4a9e-9bec-f2f3ee585d46",
+              "name": "invalid request - name too short",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "identities",
+                    "autocomplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"addresses\": [\n    {\n      \"address_line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\"\n    },\n    {\n      \"address_line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.middesk.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cc5a26ff-652c-4a96-ad7b-bc622120151b",
+    "name": "Middesk subpackage_actions subpackage_identities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

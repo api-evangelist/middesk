@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Middesk subpackage_actions subpackage_prefill API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subpackage_prefill",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Prefill business information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.middesk.com/v1/prefill/businesses",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Smart populate business attributes by searching with name and address, TIN, or website URL. Returns enriched business data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

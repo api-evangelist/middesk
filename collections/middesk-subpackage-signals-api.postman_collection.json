@@ -1,0 +1,509 @@
+{
+  "item": [
+    {
+      "id": "35bc3a6f-3a76-45f8-9959-f37acb970a58",
+      "name": "subpackage_signals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a66fec0-9170-4c56-a26c-841ec501160a",
+          "name": "List signals",
+          "request": {
+            "name": "List signals",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "signals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Search query"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "Filter by external ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "Start date filter (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "End date filter (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_at",
+                  "value": "<string>",
+                  "description": "Start timestamp filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_at",
+                  "value": "<string>",
+                  "description": "End timestamp filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "batch_id",
+                  "value": "<string>",
+                  "description": "Filter by batch ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "model_slug",
+                  "value": "<string>",
+                  "description": "Filter by model slug"
+                },
+                {
+                  "disabled": false,
+                  "key": "reason_codes",
+                  "value": "<string>",
+                  "description": "Filter by reason codes"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c3d0999-cce5-45d2-a99d-3cdac2274d9e",
+              "name": "signals list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "starting_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "batch_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "model_slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reason_codes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"has_more\": false,\n  \"data\": [\n    {\n      \"object\": \"string\",\n      \"id\": \"8dab55e4-3e60-ed96-1b22-76c09aacf282\",\n      \"name\": \"string\",\n      \"created_at\": \"1966-07-20T05:10:10.673Z\",\n      \"tin\": \"string\",\n      \"external_id\": \"string\",\n      \"model_slug\": \"string\",\n      \"score\": 3572.9496885195445,\n      \"business_id\": \"2ecb7134-058c-9e29-5c23-f39fea22ec0c\",\n      \"batch_id\": \"1f9429a7-9dc3-e32b-96ab-11bd32e1e1bf\",\n      \"requester\": {\n        \"id\": \"941097e7-b4fc-61d2-63da-45a5245721de\",\n        \"type\": \"string\",\n        \"name\": \"string\"\n      },\n      \"reasons\": [\n        {\n          \"category\": \"identification\",\n          \"group\": \"string\",\n          \"description\": \"string\",\n          \"code\": \"V103\",\n          \"importance\": 3371.2991591368545\n        },\n        {\n          \"category\": \"identification\",\n          \"group\": \"string\",\n          \"description\": \"string\",\n          \"code\": \"I103\",\n          \"importance\": 3539.7083305918695\n        }\n      ],\n      \"addresses\": [\n        \"string\",\n        \"string\"\n      ],\n      \"people\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"object\": \"string\",\n      \"id\": \"c1c22b56-f58d-5d2d-2d21-b519a9976d5f\",\n      \"name\": \"string\",\n      \"created_at\": \"1977-11-27T10:28:27.040Z\",\n      \"tin\": \"string\",\n      \"external_id\": \"string\",\n      \"model_slug\": \"string\",\n      \"score\": 6360.47792795677,\n      \"business_id\": \"f0354b44-0b77-a94a-8bb1-3b8f1725c135\",\n      \"batch_id\": \"192f84e1-807b-e11f-f94a-9d0de672faf7\",\n      \"requester\": {\n        \"id\": \"b656b7fe-e9b6-9e2c-395a-20683fc215c9\",\n        \"type\": \"string\",\n        \"name\": \"string\"\n      },\n      \"reasons\": [\n        {\n          \"category\": \"evaluation\",\n          \"group\": \"string\",\n          \"description\": \"string\",\n          \"code\": \"I111\",\n          \"importance\": 9039.576997937616\n        },\n        {\n          \"category\": \"identification\",\n          \"group\": \"string\",\n          \"description\": \"string\",\n          \"code\": \"I107\",\n          \"importance\": 4765.828273158178\n        }\n      ],\n      \"addresses\": [\n        \"string\",\n        \"string\"\n      ],\n      \"people\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"total_count\": 3928\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "480d2600-8afb-4db9-90fd-834ed744f123",
+          "name": "Create a signal",
+          "request": {
+            "name": "Create a signal",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "signals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"addresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tin\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"model_slug\": \"<string>\",\n  \"people\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c1594d56-8926-41ca-9656-c07a3563a305",
+              "name": "signal created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"addresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tin\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"model_slug\": \"<string>\",\n  \"people\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6f83bef-53ed-4ae9-8e4a-80735c886d09",
+              "name": "invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"addresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tin\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"model_slug\": \"<string>\",\n  \"people\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80b11c7c-efc7-4bf0-af32-c3dd29419f18",
+          "name": "Retrieve a signal",
+          "request": {
+            "name": "Retrieve a signal",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "signals",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Signal ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "126159e4-685d-49e2-9e9d-38fa28249b7b",
+              "name": "signal found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "signals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Signal ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"id\": \"d0fb8d39-68bc-807a-0276-396f26bf1c8f\",\n  \"name\": \"string\",\n  \"created_at\": \"1994-04-16T10:39:20.245Z\",\n  \"tin\": \"string\",\n  \"external_id\": \"string\",\n  \"model_slug\": \"string\",\n  \"score\": 8091.367114392197,\n  \"business_id\": \"8f4741db-ecdf-457b-edf8-f388d1ea8507\",\n  \"batch_id\": \"fe9eca59-d07d-7e68-7c83-0709e1cc661e\",\n  \"requester\": {\n    \"id\": \"74501a1c-85d2-5fac-0740-44164c698c47\",\n    \"type\": \"string\",\n    \"name\": \"string\"\n  },\n  \"reasons\": [\n    {\n      \"category\": \"evaluation\",\n      \"group\": \"string\",\n      \"description\": \"string\",\n      \"code\": \"I102\",\n      \"importance\": 5006.919944801703\n    },\n    {\n      \"category\": \"identification\",\n      \"group\": \"string\",\n      \"description\": \"string\",\n      \"code\": \"I301\",\n      \"importance\": 8048.139632202173\n    }\n  ],\n  \"addresses\": [\n    \"string\",\n    \"string\"\n  ],\n  \"people\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e1d0756-c0b2-415a-9140-99c9da905fc6",
+              "name": "signal not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "signals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Signal ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"string\"\n    },\n    {\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.middesk.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ca1e59e6-723f-4f17-95bf-06d589bc31ad",
+    "name": "Middesk subpackage_actions subpackage_signals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

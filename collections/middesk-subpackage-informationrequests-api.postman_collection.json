@@ -1,0 +1,131 @@
+{
+  "item": [
+    {
+      "id": "5270990b-a1af-42dd-83f6-5ef0525ad432",
+      "name": "subpackage_informationRequests",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d41a73f4-16d4-4140-bda8-6f068e4f5694",
+          "name": "List Information Requests",
+          "request": {
+            "name": "List Information Requests",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "partner",
+                "exceptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Items per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b101355e-170d-47d7-8200-d5f8c672aff4",
+              "name": "information requests list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partner",
+                    "exceptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"data\": [\n    {\n      \"object\": \"string\",\n      \"id\": \"c22c872a-33ab-4508-46fe-3efc4c21f5af\",\n      \"created_at\": \"1986-03-06T12:46:48.731Z\",\n      \"information_requested\": \"string\",\n      \"company\": {\n        \"id\": \"fa75ae67-2f08-9445-7aee-534a9ba4f64e\",\n        \"legal_name\": \"string\",\n        \"dba_name\": \"string\",\n        \"external_id\": \"string\"\n      },\n      \"url\": \"http://JKRUtccbYlrIJOaSwdZJWLHyfrAVySYLY.gktOSVBx4vlJ+FYLU0kAN5SDxNCKxNq7YSdHUkmLbH0N1yIVZrICZndz,dNxM5LLug5gRmRZuV4C,Ql1X8\",\n      \"contact\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"HOaITX@IDeDEwJwupwMNbvvZDGDAlRQdHBBHPP.yqz\",\n        \"phone\": \"string\"\n      }\n    },\n    {\n      \"object\": \"string\",\n      \"id\": \"ced1287c-183a-5398-f08a-c21e0bcef8ee\",\n      \"created_at\": \"1946-09-19T18:28:42.701Z\",\n      \"information_requested\": \"string\",\n      \"company\": {\n        \"id\": \"6127bb84-c532-25d4-3eea-b046389cc86d\",\n        \"legal_name\": \"string\",\n        \"dba_name\": \"string\",\n        \"external_id\": \"string\"\n      },\n      \"url\": \"http://bC.unkmCkgAnc7v.BkxjWlhHy\",\n      \"contact\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"uBDippipgtP2iU@SHyHocTNCoYpZKgmJpbqAalbDl.lclq\",\n        \"phone\": \"string\"\n      }\n    }\n  ],\n  \"url\": \"string\",\n  \"has_more\": false,\n  \"count\": 9410\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.middesk.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "baab5b1c-25dc-40ea-b16f-6464f2fff1e0",
+    "name": "Middesk subpackage_actions subpackage_informationRequests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
