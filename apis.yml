@@ -38,7 +38,8 @@ apis:
   description: The subpackage_actions API from Middesk — 2 operation(s) for subpackage_actions.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_actions
   properties:
   - type: OpenAPI
@@ -54,7 +55,8 @@ apis:
   description: The subpackage_agents API from Middesk — 2 operation(s) for subpackage_agents.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_agents
   properties:
   - type: OpenAPI
@@ -71,7 +73,8 @@ apis:
     The subpackage_applications API from Middesk — 1 operation(s) for subpackage_applications.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_applications
   properties:
   - type: OpenAPI
@@ -104,7 +107,8 @@ apis:
   description: The subpackage_businesses API from Middesk — 3 operation(s) for subpackage_businesses.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_businesses
   properties:
   - type: OpenAPI
@@ -120,7 +124,8 @@ apis:
   description: The subpackage_companies API from Middesk — 1 operation(s) for subpackage_companies.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_companies
   properties:
   - type: OpenAPI
@@ -136,7 +141,8 @@ apis:
   description: The subpackage_connections API from Middesk — 1 operation(s) for subpackage_connections.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_connections
   properties:
   - type: OpenAPI
@@ -152,7 +158,8 @@ apis:
   description: The subpackage_documents API from Middesk — 3 operation(s) for subpackage_documents.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_documents
   properties:
   - type: OpenAPI
@@ -168,7 +175,8 @@ apis:
   description: The subpackage_identities API from Middesk — 1 operation(s) for subpackage_identities.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_identities
   properties:
   - type: OpenAPI
@@ -202,7 +210,8 @@ apis:
     The subpackage_jurisdictions API from Middesk — 2 operation(s) for subpackage_jurisdictions.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_jurisdictions
   properties:
   - type: OpenAPI
@@ -218,7 +227,8 @@ apis:
   description: The subpackage_liens API from Middesk — 2 operation(s) for subpackage_liens.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_liens
   properties:
   - type: OpenAPI
@@ -251,7 +261,8 @@ apis:
   description: The subpackage_mail API from Middesk — 2 operation(s) for subpackage_mail.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_mail
   properties:
   - type: OpenAPI
@@ -267,7 +278,8 @@ apis:
   description: The subpackage_monitoring API from Middesk — 2 operation(s) for subpackage_monitoring.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_monitoring
   properties:
   - type: OpenAPI
@@ -283,7 +295,8 @@ apis:
   description: The subpackage_orders API from Middesk — 3 operation(s) for subpackage_orders.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_orders
   properties:
   - type: OpenAPI
@@ -316,7 +329,8 @@ apis:
   description: The subpackage_prefill API from Middesk — 1 operation(s) for subpackage_prefill.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_prefill
   properties:
   - type: OpenAPI
@@ -332,7 +346,8 @@ apis:
   description: The subpackage_questions API from Middesk — 1 operation(s) for subpackage_questions.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_questions
   properties:
   - type: OpenAPI
@@ -365,7 +380,8 @@ apis:
   description: The subpackage_reviews API from Middesk — 1 operation(s) for subpackage_reviews.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_reviews
   properties:
   - type: OpenAPI
@@ -381,7 +397,8 @@ apis:
   description: The subpackage_runs API from Middesk — 4 operation(s) for subpackage_runs.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_runs
   properties:
   - type: OpenAPI
@@ -397,7 +414,8 @@ apis:
   description: The subpackage_signals API from Middesk — 2 operation(s) for subpackage_signals.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_signals
   properties:
   - type: OpenAPI
@@ -413,7 +431,8 @@ apis:
   description: The subpackage_threads API from Middesk — 2 operation(s) for subpackage_threads.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_threads
   properties:
   - type: OpenAPI
@@ -429,7 +448,8 @@ apis:
   description: The subpackage_timeline API from Middesk — 1 operation(s) for subpackage_timeline.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_timeline
   properties:
   - type: OpenAPI
@@ -461,7 +481,8 @@ apis:
   description: The subpackage_webhooks API from Middesk — 3 operation(s) for subpackage_webhooks.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_webhooks
   properties:
   - type: OpenAPI
@@ -477,7 +498,8 @@ apis:
   description: The subpackage_websites API from Middesk — 1 operation(s) for subpackage_websites.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - subpackage_websites
   properties:
   - type: OpenAPI
