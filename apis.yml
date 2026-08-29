@@ -2,6 +2,18 @@ aid: middesk
 name: Middesk
 description: Middesk is a business identity and verification platform providing a REST API for KYB (Know Your Business) compliance, EIN/TIN validation, business registration verification, UBO research, sanctions screening, and ongoing business monitoring. Used by fintechs, lenders, and banks to automate onboarding and compliance workflows.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
