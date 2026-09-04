@@ -16,16 +16,17 @@ deliveryModel:
   method: derived
 accessModel:
   pricing: paid
-  onboarding: self-serve
+  onboarding: unknown
   trial: false
   try_now: false
   public: false
-  label: Paid · Self-serve signup
-  confidence: high
+  label: Paid
+  confidence: medium
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/middesk.png
 url: https://raw.githubusercontent.com/api-evangelist/middesk/refs/heads/main/apis.yml
@@ -523,6 +524,9 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 common:
+  - type: CapabilityMap
+    url: capabilities/middesk-capability-edges.yml
+    name: Middesk Business Capability Map
   - type: AgenticAccess
     url: agentic-access/middesk-agentic-access.yml
   - type: DomainSecurity
