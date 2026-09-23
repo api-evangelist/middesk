@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_jurisdictions API
+  title: Middesk Subpackage Jurisdictions API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -76,7 +76,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_jurisdictions:SearchJurisdictionsResponse'
+                $ref: '#/components/schemas/type_jurisdictions_SearchJurisdictionsResponse'
   /v1/agent/jurisdictions:
     get:
       operationId: list-jurisdictions
@@ -102,36 +102,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_jurisdictions:ListJurisdictionsResponse'
+                $ref: '#/components/schemas/type_jurisdictions_ListJurisdictionsResponse'
 components:
   schemas:
-    type_jurisdictions:ListJurisdictionsResponse:
-      type: object
-      properties:
-        object:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:AgentJurisdiction'
-        search_config:
-          oneOf:
-          - $ref: '#/components/schemas/type_jurisdictions:ListJurisdictionsResponseSearchConfig'
-          - type: 'null'
-      title: ListJurisdictionsResponse
-    type_jurisdictions:ListJurisdictionsResponseSearchConfig:
+    type_jurisdictions_ListJurisdictionsResponseSearchConfig:
       type: object
       properties:
         hint:
           type: string
         help_text:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         help_url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       title: ListJurisdictionsResponseSearchConfig
-    type_jurisdictions:SearchJurisdictionsResponse:
+    type_jurisdictions_ListJurisdictionsResponse:
       type: object
       properties:
         object:
@@ -139,7 +127,21 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_:AgentJurisdiction'
+            $ref: '#/components/schemas/type__AgentJurisdiction'
+        search_config:
+          oneOf:
+          - $ref: '#/components/schemas/type_jurisdictions_ListJurisdictionsResponseSearchConfig'
+          - type: 'null'
+      title: ListJurisdictionsResponse
+    type_jurisdictions_SearchJurisdictionsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentJurisdiction'
         url:
           type: string
         has_more:
@@ -147,7 +149,7 @@ components:
         total_count:
           type: integer
       title: SearchJurisdictionsResponse
-    type_:AgentJurisdiction:
+    type__AgentJurisdiction:
       type: object
       properties:
         object:
@@ -176,8 +178,9 @@ components:
             type: string
           description: List of items collected by the agency
         city:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: City name if applicable
         state:
           type: string

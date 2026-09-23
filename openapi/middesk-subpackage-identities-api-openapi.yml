@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_identities API
+  title: Middesk Subpackage Identities API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -28,13 +28,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:BusinessIdentityList'
+                $ref: '#/components/schemas/type__BusinessIdentityList'
         '422':
           description: invalid request - name too short
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
       requestBody:
         content:
           application/json:
@@ -45,26 +45,24 @@ paths:
                   type: string
                   description: Business name to search for (minimum 3 characters)
                 entity_type:
-                  $ref: '#/components/schemas/type_identities:BusinessIdentityRequestParamEntityType'
+                  $ref: '#/components/schemas/type_identities_BusinessIdentityRequestParamEntityType'
                   description: Entity type filter
                 addresses:
                   type: array
                   items:
-                    $ref: '#/components/schemas/type_identities:BusinessIdentityRequestParamAddressesItem'
+                    $ref: '#/components/schemas/type_identities_BusinessIdentityRequestParamAddressesItem'
                   description: Address filters
               required:
               - name
 components:
   schemas:
-    type_:BusinessIdentityNamesItem:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/type_:BusinessIdentityNamesItemType'
-      title: BusinessIdentityNamesItem
-    type_identities:BusinessIdentityRequestParamEntityType:
+    type__BusinessIdentityNamesItemType:
+      type: string
+      enum:
+      - legal
+      - dba
+      title: BusinessIdentityNamesItemType
+    type_identities_BusinessIdentityRequestParamEntityType:
       type: string
       enum:
       - LLC
@@ -74,63 +72,7 @@ components:
       - TRUST
       description: Entity type filter
       title: BusinessIdentityRequestParamEntityType
-    type_:BusinessIdentity:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for this autocomplete result
-        names:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:BusinessIdentityNamesItem'
-          description: Business names (legal or DBA)
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:BusinessIdentityAddressesItem'
-          description: Known business addresses
-        people:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:BusinessIdentityPeopleItem'
-          description: Associated persons
-        entity_type:
-          oneOf:
-          - $ref: '#/components/schemas/type_:BusinessIdentityEntityType'
-          - type: 'null'
-          description: Business entity type
-      description: Business result from autocomplete search
-      title: BusinessIdentity
-    type_identities:BusinessIdentityRequestParamAddressesItem:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postal_code:
-          type: string
-      title: BusinessIdentityRequestParamAddressesItem
-    type_:BusinessIdentityNamesItemType:
-      type: string
-      enum:
-      - legal
-      - dba
-      title: BusinessIdentityNamesItemType
-    type_:BusinessIdentityPeopleItem:
-      type: object
-      properties:
-        name:
-          type: string
-        titles:
-          type: array
-          items:
-            type: string
-      title: BusinessIdentityPeopleItem
-    type_:BusinessIdentityAddressesItem:
+    type__BusinessIdentityAddressesItem:
       type: object
       properties:
         full_address:
@@ -138,8 +80,9 @@ components:
         address_line1:
           type: string
         address_line2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         city:
           type: string
         state:
@@ -151,7 +94,16 @@ components:
           items:
             type: string
       title: BusinessIdentityAddressesItem
-    type_:ErrorResponseErrorsItem:
+    type__BusinessIdentityList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__BusinessIdentity'
+      description: List of business identity autocomplete results
+      title: BusinessIdentityList
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
         message:
@@ -159,7 +111,19 @@ components:
       required:
       - message
       title: ErrorResponseErrorsItem
-    type_:BusinessIdentityEntityType:
+    type_identities_BusinessIdentityRequestParamAddressesItem:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+      title: BusinessIdentityRequestParamAddressesItem
+    type__BusinessIdentityEntityType:
       type: string
       enum:
       - LLC
@@ -169,25 +133,62 @@ components:
       - TRUST
       description: Business entity type
       title: BusinessIdentityEntityType
-    type_:BusinessIdentityList:
+    type__BusinessIdentityPeopleItem:
       type: object
       properties:
-        data:
+        name:
+          type: string
+        titles:
           type: array
           items:
-            $ref: '#/components/schemas/type_:BusinessIdentity'
-      description: List of business identity autocomplete results
-      title: BusinessIdentityList
-    type_:ErrorResponse:
+            type: string
+      title: BusinessIdentityPeopleItem
+    type__BusinessIdentity:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this autocomplete result
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__BusinessIdentityNamesItem'
+          description: Business names (legal or DBA)
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__BusinessIdentityAddressesItem'
+          description: Known business addresses
+        people:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__BusinessIdentityPeopleItem'
+          description: Associated persons
+        entity_type:
+          oneOf:
+          - $ref: '#/components/schemas/type__BusinessIdentityEntityType'
+          - type: 'null'
+          description: Business entity type
+      description: Business result from autocomplete search
+      title: BusinessIdentity
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse
+    type__BusinessIdentityNamesItem:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/type__BusinessIdentityNamesItemType'
+      title: BusinessIdentityNamesItem
   securitySchemes:
     bearer_auth:
       type: http

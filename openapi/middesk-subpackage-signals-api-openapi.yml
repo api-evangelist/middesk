@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_signals API
+  title: Middesk Subpackage Signals API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -93,7 +93,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_signals:ListSignalsResponse'
+                $ref: '#/components/schemas/type_signals_ListSignalsResponse'
     post:
       operationId: create-signal
       summary: Create a signal
@@ -175,33 +175,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:Signal'
+                $ref: '#/components/schemas/type__Signal'
         '404':
           description: signal not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type_signals:ListSignalsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:Signal'
-        object:
-          type: string
-        has_more:
-          type: boolean
-        total_count:
-          type: integer
-      required:
-      - object
-      - has_more
-      title: ListSignalsResponse
-    type_:Signal:
+    type__Signal:
       type: object
       properties:
         object:
@@ -212,31 +195,36 @@ components:
         name:
           type: string
         tin:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         external_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         model_slug:
           type: string
         score:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           format: double
         business_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uuid
         batch_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uuid
         requester:
-          $ref: '#/components/schemas/type_:SignalRequester'
+          $ref: '#/components/schemas/type__SignalRequester'
         reasons:
           type: array
           items:
-            $ref: '#/components/schemas/type_:SignalReasonsItem'
+            $ref: '#/components/schemas/type__SignalReasonsItem'
         addresses:
           type: array
           items:
@@ -254,7 +242,42 @@ components:
       - name
       - created_at
       title: Signal
-    type_:SignalRequester:
+    type__SignalReasonsItem:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/type__SignalReasonsItemCategory'
+        group:
+          type: string
+        description:
+          type: string
+        code:
+          $ref: '#/components/schemas/type__SignalReasonsItemCode'
+        importance:
+          type: number
+          format: double
+      required:
+      - category
+      - group
+      - description
+      - code
+      title: SignalReasonsItem
+    type__SignalReasonsItemCategory:
+      type: string
+      enum:
+      - identification
+      - verification
+      - evaluation
+      title: SignalReasonsItemCategory
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__SignalRequester:
       type: object
       properties:
         id:
@@ -269,42 +292,7 @@ components:
       - type
       - name
       title: SignalRequester
-    type_:SignalReasonsItem:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/type_:SignalReasonsItemCategory'
-        group:
-          type: string
-        description:
-          type: string
-        code:
-          $ref: '#/components/schemas/type_:SignalReasonsItemCode'
-        importance:
-          type: number
-          format: double
-      required:
-      - category
-      - group
-      - description
-      - code
-      title: SignalReasonsItem
-    type_:SignalReasonsItemCategory:
-      type: string
-      enum:
-      - identification
-      - verification
-      - evaluation
-      title: SignalReasonsItemCategory
-    type_:ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_:SignalReasonsItemCode:
+    type__SignalReasonsItemCode:
       type: string
       enum:
       - I301
@@ -350,13 +338,30 @@ components:
       - E1102
       - E1201
       title: SignalReasonsItemCode
-    type_:ErrorResponse:
+    type_signals_ListSignalsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Signal'
+        object:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - has_more
+      title: ListSignalsResponse
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse

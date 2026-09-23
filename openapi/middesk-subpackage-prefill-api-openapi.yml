@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_prefill API
+  title: Middesk Subpackage Prefill API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -28,13 +28,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:PrefillBusiness'
+                $ref: '#/components/schemas/type__PrefillBusiness'
         '400':
           description: invalid request - missing required parameters
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
       requestBody:
         content:
           application/json:
@@ -62,7 +62,7 @@ paths:
                   description: ID of an autocomplete result to use for direct lookup
 components:
   schemas:
-    type_:PrefillBusinessIndustryClassificationsItem:
+    type__PrefillBusinessIndustryClassificationsItem:
       type: object
       properties:
         name:
@@ -71,26 +71,31 @@ components:
           type: number
           format: double
         sector:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         category:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         high_risk:
           type: boolean
         mcc_codes:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
         sic_codes:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
         naics_codes:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
         prohibited_labels:
@@ -100,38 +105,72 @@ components:
         classification_system:
           type: string
       title: PrefillBusinessIndustryClassificationsItem
-    type_:PrefillBusinessTin:
+    type__PrefillBusiness:
       type: object
       properties:
-        last_four:
+        object:
           type: string
-          description: Last four digits of the TIN
-        tin_type:
-          type: string
-          description: Type of TIN (EIN, SSN, etc.)
-      description: TIN information if verified
-      title: PrefillBusinessTin
-    type_:PrefillBusinessNamesItem:
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__PrefillBusinessNamesItem'
+          description: Business names
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__PrefillBusinessAddressesItem'
+          description: Business addresses
+        tin:
+          oneOf:
+          - $ref: '#/components/schemas/type__PrefillBusinessTin'
+          - type: 'null'
+          description: TIN information if verified
+        formation:
+          $ref: '#/components/schemas/type__PrefillBusinessFormation'
+          description: Formation details
+        industry_classifications:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/type__PrefillBusinessIndustryClassificationsItem'
+          description: Industry classifications
+        people:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__PrefillBusinessPeopleItem'
+          description: Associated persons
+        website:
+          oneOf:
+          - $ref: '#/components/schemas/type__PrefillBusinessWebsite'
+          - type: 'null'
+          description: Website information
+      description: Prefilled business information
+      title: PrefillBusiness
+    type__PrefillBusinessNamesItem:
       type: object
       properties:
         name:
           type: string
         type:
           oneOf:
-          - $ref: '#/components/schemas/type_:PrefillBusinessNamesItemType'
+          - $ref: '#/components/schemas/type__PrefillBusinessNamesItemType'
           - type: 'null'
       title: PrefillBusinessNamesItem
-    type_:PrefillBusinessPeopleItem:
+    type__PrefillBusinessWebsite:
       type: object
       properties:
-        name:
+        url:
           type: string
-        titles:
-          type: array
-          items:
-            type: string
-      title: PrefillBusinessPeopleItem
-    type_:ErrorResponseErrorsItem:
+      description: Website information
+      title: PrefillBusinessWebsite
+    type__PrefillBusinessNamesItemType:
+      type: string
+      enum:
+      - legal
+      - dba
+      title: PrefillBusinessNamesItemType
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
         message:
@@ -139,14 +178,7 @@ components:
       required:
       - message
       title: ErrorResponseErrorsItem
-    type_:PrefillBusinessWebsite:
-      type: object
-      properties:
-        url:
-          type: string
-      description: Website information
-      title: PrefillBusinessWebsite
-    type_:PrefillBusinessAddressesItem:
+    type__PrefillBusinessAddressesItem:
       type: object
       properties:
         full_address:
@@ -154,8 +186,9 @@ components:
         address_line1:
           type: string
         address_line2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         city:
           type: string
         state:
@@ -167,68 +200,43 @@ components:
           items:
             type: string
       title: PrefillBusinessAddressesItem
-    type_:PrefillBusinessNamesItemType:
-      type: string
-      enum:
-      - legal
-      - dba
-      title: PrefillBusinessNamesItemType
-    type_:PrefillBusiness:
+    type__PrefillBusinessTin:
       type: object
       properties:
-        object:
+        last_four:
           type: string
-        names:
+          description: Last four digits of the TIN
+        tin_type:
+          type: string
+          description: Type of TIN (EIN, SSN, etc.)
+      description: TIN information if verified
+      title: PrefillBusinessTin
+    type__PrefillBusinessPeopleItem:
+      type: object
+      properties:
+        name:
+          type: string
+        titles:
           type: array
           items:
-            $ref: '#/components/schemas/type_:PrefillBusinessNamesItem'
-          description: Business names
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:PrefillBusinessAddressesItem'
-          description: Business addresses
-        tin:
-          oneOf:
-          - $ref: '#/components/schemas/type_:PrefillBusinessTin'
-          - type: 'null'
-          description: TIN information if verified
-        formation:
-          $ref: '#/components/schemas/type_:PrefillBusinessFormation'
-          description: Formation details
-        industry_classifications:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/type_:PrefillBusinessIndustryClassificationsItem'
-          description: Industry classifications
-        people:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:PrefillBusinessPeopleItem'
-          description: Associated persons
-        website:
-          oneOf:
-          - $ref: '#/components/schemas/type_:PrefillBusinessWebsite'
-          - type: 'null'
-          description: Website information
-      description: Prefilled business information
-      title: PrefillBusiness
-    type_:PrefillBusinessFormation:
+            type: string
+      title: PrefillBusinessPeopleItem
+    type__PrefillBusinessFormation:
       type: object
       properties:
         entity_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       description: Formation details
       title: PrefillBusinessFormation
-    type_:ErrorResponse:
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse

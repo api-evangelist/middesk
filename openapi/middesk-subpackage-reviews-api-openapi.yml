@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_reviews API
+  title: Middesk Subpackage Reviews API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -34,20 +34,64 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:Review'
+                $ref: '#/components/schemas/type__Review'
         '404':
           description: business not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type_:Review:
+    type__ReviewObject:
+      type: string
+      enum:
+      - review
+      title: ReviewObject
+    type__ReviewTask:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/type__ReviewTaskCategory'
+        key:
+          $ref: '#/components/schemas/type__ReviewTaskKey'
+        label:
+          $ref: '#/components/schemas/type__ReviewTaskLabel'
+        message:
+          type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/type__ReviewTaskStatus'
+        sub_label:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      required:
+      - category
+      - key
+      - label
+      - message
+      - name
+      - status
+      - sub_label
+      - sources
+      title: ReviewTask
+    type__ReviewTaskStatus:
+      type: string
+      enum:
+      - success
+      - failure
+      - warning
+      - neutral
+      title: ReviewTaskStatus
+    type__Review:
       type: object
       properties:
         object:
-          $ref: '#/components/schemas/type_:ReviewObject'
+          $ref: '#/components/schemas/type__ReviewObject'
         id:
           type: string
           format: uuid
@@ -58,16 +102,17 @@ components:
           type: string
           format: date-time
         completed_at:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: date-time
         tasks:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ReviewTask'
+            $ref: '#/components/schemas/type__ReviewTask'
         assignee:
           oneOf:
-          - $ref: '#/components/schemas/type_:User'
+          - $ref: '#/components/schemas/type__User'
           - type: 'null'
       required:
       - object
@@ -76,7 +121,7 @@ components:
       - updated_at
       - tasks
       title: Review
-    type_:ReviewTaskKey:
+    type__ReviewTaskKey:
       type: string
       enum:
       - location_frequency
@@ -144,28 +189,7 @@ components:
       - people_liens
       - email_risk
       title: ReviewTaskKey
-    type_:ReviewTaskStatus:
-      type: string
-      enum:
-      - success
-      - failure
-      - warning
-      - neutral
-      title: ReviewTaskStatus
-    type_:ReviewObject:
-      type: string
-      enum:
-      - review
-      title: ReviewObject
-    type_:ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_:ReviewTaskCategory:
+    type__ReviewTaskCategory:
       type: string
       enum:
       - bankruptcies
@@ -194,7 +218,15 @@ components:
       - politically_exposed_persons
       - email
       title: ReviewTaskCategory
-    type_:User:
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__User:
       type: object
       properties:
         object:
@@ -217,8 +249,9 @@ components:
         directory_managed:
           type: boolean
         last_login_at:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: date-time
         settings:
           type: object
@@ -235,38 +268,7 @@ components:
       - roles
       - created_at
       title: User
-    type_:ReviewTask:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/type_:ReviewTaskCategory'
-        key:
-          $ref: '#/components/schemas/type_:ReviewTaskKey'
-        label:
-          $ref: '#/components/schemas/type_:ReviewTaskLabel'
-        message:
-          type: string
-        name:
-          type: string
-        status:
-          $ref: '#/components/schemas/type_:ReviewTaskStatus'
-        sub_label:
-          type: string
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:Source'
-      required:
-      - category
-      - key
-      - label
-      - message
-      - name
-      - status
-      - sub_label
-      - sources
-      title: ReviewTask
-    type_:ReviewTaskLabel:
+    type__ReviewTaskLabel:
       type: string
       enum:
       - Politically Exposed Persons
@@ -316,7 +318,17 @@ components:
       - Web - Office Address
       - Email Risk
       title: ReviewTaskLabel
-    type_:Source:
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type__Source:
       type: object
       properties:
         id:
@@ -333,16 +345,6 @@ components:
       - type
       - metadata
       title: Source
-    type_:ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http

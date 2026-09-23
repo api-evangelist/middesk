@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_companies API
+  title: Middesk Subpackage Companies API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -27,13 +27,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:AgentCompany'
+                $ref: '#/components/schemas/type__AgentCompany'
         '409':
           description: company already exists
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:AgentCompany'
+                $ref: '#/components/schemas/type__AgentCompany'
       requestBody:
         content:
           application/json:
@@ -69,43 +69,12 @@ paths:
                 addresses:
                   type: array
                   items:
-                    $ref: '#/components/schemas/type_companies:CreateCompanyRequestAddressesItem'
+                    $ref: '#/components/schemas/type_companies_CreateCompanyRequestAddressesItem'
               required:
               - legal_name
 components:
   schemas:
-    type_:AgentCompany:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        legal_name:
-          type: string
-          description: Legal name of the company
-        dba_name:
-          type: string
-          nullable: true
-          description: Doing business as name
-        external_id:
-          type: string
-          nullable: true
-          description: External identifier for the company
-        account_id:
-          type: string
-          format: uuid
-          description: Account ID the company belongs to
-        parent_account:
-          $ref: '#/components/schemas/type_:AgentCompanyParentAccount'
-      required:
-      - object
-      - id
-      - legal_name
-      - account_id
-      title: AgentCompany
-    type_companies:CreateCompanyRequestAddressesItem:
+    type_companies_CreateCompanyRequestAddressesItem:
       type: object
       properties:
         address_line1:
@@ -121,7 +90,7 @@ components:
         address_type:
           type: string
       title: CreateCompanyRequestAddressesItem
-    type_:AgentCompanyParentAccount:
+    type__AgentCompanyParentAccount:
       type: object
       properties:
         id:
@@ -132,6 +101,39 @@ components:
         slug:
           type: string
       title: AgentCompanyParentAccount
+    type__AgentCompany:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        legal_name:
+          type: string
+          description: Legal name of the company
+        dba_name:
+          type:
+          - string
+          - 'null'
+          description: Doing business as name
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: External identifier for the company
+        account_id:
+          type: string
+          format: uuid
+          description: Account ID the company belongs to
+        parent_account:
+          $ref: '#/components/schemas/type__AgentCompanyParentAccount'
+      required:
+      - object
+      - id
+      - legal_name
+      - account_id
+      title: AgentCompany
   securitySchemes:
     bearer_auth:
       type: http

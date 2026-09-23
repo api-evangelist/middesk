@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_monitoring API
+  title: Middesk Subpackage Monitoring API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -39,7 +39,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
     post:
       operationId: create-business-monitor
       summary: Create a monitor for a business
@@ -69,7 +69,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_:MonitoringEventTypesParam'
+              $ref: '#/components/schemas/type__MonitoringEventTypesParam'
     put:
       operationId: update-business-monitor
       summary: Update a monitor for a business
@@ -100,12 +100,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_:MonitoringEventTypesParam'
+              $ref: '#/components/schemas/type__MonitoringEventTypesParam'
     delete:
       operationId: delete-business-monitor
       summary: Delete a monitor for a business
@@ -159,22 +159,14 @@ paths:
                 monitor_types:
                   type: array
                   items:
-                    $ref: '#/components/schemas/type_monitoring:BulkDisableMonitorsParamMonitorTypesItem'
+                    $ref: '#/components/schemas/type_monitoring_BulkDisableMonitorsParamMonitorTypesItem'
                   description: Array of monitor types to disable. Defaults to all types allowed for the account.
                 notification_email:
                   type: string
                   description: Email address to notify when bulk disable operation completes
 components:
   schemas:
-    type_:ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_monitoring:BulkDisableMonitorsParamMonitorTypesItem:
+    type_monitoring_BulkDisableMonitorsParamMonitorTypesItem:
       type: string
       enum:
       - bankruptcy
@@ -184,7 +176,7 @@ components:
       - watchlist_result
       - lien
       title: BulkDisableMonitorsParamMonitorTypesItem
-    type_:MonitoringEventTypesParam:
+    type__MonitoringEventTypesParam:
       type: object
       properties:
         event_types:
@@ -195,13 +187,21 @@ components:
       required:
       - event_types
       title: MonitoringEventTypesParam
-    type_:ErrorResponse:
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse

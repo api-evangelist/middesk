@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions API
+  title: Middesk Subpackage Actions API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -20,7 +20,7 @@ paths:
         description: Type of object to list actions for
         required: true
         schema:
-          $ref: '#/components/schemas/type_actions:ListActionsRequestObjectType'
+          $ref: '#/components/schemas/type_actions_ListActionsRequestObjectType'
       - name: object_id
         in: query
         description: ID of the object to list actions for
@@ -39,13 +39,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_actions:ListActionsResponse'
+                $ref: '#/components/schemas/type_actions_ListActionsResponse'
         '400':
           description: invalid object_type
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
     post:
       operationId: create-action
       summary: Create an action on an object
@@ -64,25 +64,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:Action'
+                $ref: '#/components/schemas/type__Action'
         '400':
           description: invalid action type
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
         '404':
           description: object not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
         '422':
           description: invalid payload
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
       requestBody:
         content:
           application/json:
@@ -90,14 +90,14 @@ paths:
               type: object
               properties:
                 object_type:
-                  $ref: '#/components/schemas/type_actions:ActionRequestParamObjectType'
+                  $ref: '#/components/schemas/type_actions_ActionRequestParamObjectType'
                   description: Type of object to perform the action on
                 object_id:
                   type: string
                   format: uuid
                   description: ID of the object to perform the action on
                 type:
-                  $ref: '#/components/schemas/type_actions:ActionRequestParamType'
+                  $ref: '#/components/schemas/type_actions_ActionRequestParamType'
                   description: The type of action to perform
                 note:
                   type: string
@@ -138,7 +138,7 @@ paths:
         description: Type of object the action belongs to
         required: true
         schema:
-          $ref: '#/components/schemas/type_actions:GetActionRequestObjectType'
+          $ref: '#/components/schemas/type_actions_GetActionRequestObjectType'
       - name: object_id
         in: query
         description: ID of the object the action belongs to
@@ -157,146 +157,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:Action'
+                $ref: '#/components/schemas/type__Action'
         '404':
           description: action not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type_actions:GetActionRequestObjectType:
-      type: string
-      enum:
-      - businesses
-      - watchlist_result
-      title: GetActionRequestObjectType
-    type_actions:ActionRequestParamType:
-      type: string
-      enum:
-      - add_sources
-      - add_attributes
-      - verify_tin
-      - decision
-      - dismissal
-      description: The type of action to perform
-      title: ActionRequestParamType
-    type_:Action:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/type_:ActionType'
-          description: The action type that was performed
-        object_type:
-          $ref: '#/components/schemas/type_:ActionObjectType'
-          description: The type of object the action was performed on
-        object_id:
-          type: string
-          format: uuid
-          description: The ID of the object the action was performed on
-        created_at:
-          type: string
-          format: date-time
-        note:
-          type: string
-          nullable: true
-          description: Optional text note describing the reason for the action
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Additional metadata associated with the action
-        effects:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:ActionEffect'
-          description: List of effects describing what changed
-        actors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:ActionActor'
-          description: List of actors describing who initiated the action
-      required:
-      - id
-      - type
-      - object_type
-      - object_id
-      - created_at
-      - effects
-      - actors
-      title: Action
-    type_actions:ListActionsResponse:
-      type: object
-      properties:
-        object:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:Action'
-        url:
-          type: string
-      required:
-      - object
-      - data
-      title: ListActionsResponse
-    type_:ActionType:
-      type: string
-      enum:
-      - add_sources
-      - add_attributes
-      - update_address_risk
-      - verify_tin
-      - decision
-      - dismissal
-      description: The action type that was performed
-      title: ActionType
-    type_:ActionEffect:
-      type: object
-      properties:
-        operation:
-          $ref: '#/components/schemas/type_:ActionEffectOperation'
-          description: The type of change that was made
-        diff:
-          type: object
-          nullable: true
-          additionalProperties:
-            description: Any type
-          description: Before/after values for each changed field
-        target:
-          oneOf:
-          - $ref: '#/components/schemas/type_:ActionEffectTarget'
-          - type: 'null'
-      required:
-      - operation
-      - diff
-      - target
-      title: ActionEffect
-    type_actions:ActionRequestParamObjectType:
-      type: string
-      enum:
-      - businesses
-      - watchlist_result
-      description: Type of object to perform the action on
-      title: ActionRequestParamObjectType
-    type_actions:ListActionsRequestObjectType:
-      type: string
-      enum:
-      - businesses
-      - watchlist_result
-      title: ListActionsRequestObjectType
-    type_:ActionObjectType:
-      type: string
-      enum:
-      - Business
-      - Watchlist::Result
-      description: The type of object the action was performed on
-      title: ActionObjectType
-    type_:ActionEffectTarget:
+    type__ActionEffectTarget:
       type: object
       properties:
         object:
@@ -310,7 +180,60 @@ components:
       - object
       - id
       title: ActionEffectTarget
-    type_:ErrorResponseErrorsItem:
+    type__ActionEffect:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/type__ActionEffectOperation'
+          description: The type of change that was made
+        diff:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Before/after values for each changed field
+        target:
+          oneOf:
+          - $ref: '#/components/schemas/type__ActionEffectTarget'
+          - type: 'null'
+      required:
+      - operation
+      - diff
+      - target
+      title: ActionEffect
+    type_actions_ActionRequestParamType:
+      type: string
+      enum:
+      - add_sources
+      - add_attributes
+      - verify_tin
+      - decision
+      - dismissal
+      description: The type of action to perform
+      title: ActionRequestParamType
+    type_actions_ListActionsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Action'
+        url:
+          type: string
+      required:
+      - object
+      - data
+      title: ListActionsResponse
+    type_actions_GetActionRequestObjectType:
+      type: string
+      enum:
+      - businesses
+      - watchlist_result
+      title: GetActionRequestObjectType
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
         message:
@@ -318,15 +241,66 @@ components:
       required:
       - message
       title: ErrorResponseErrorsItem
-    type_:ActionActorActorType:
+    type__Action:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/type__ActionType'
+          description: The action type that was performed
+        object_type:
+          $ref: '#/components/schemas/type__ActionObjectType'
+          description: The type of object the action was performed on
+        object_id:
+          type: string
+          format: uuid
+          description: The ID of the object the action was performed on
+        created_at:
+          type: string
+          format: date-time
+        note:
+          type:
+          - string
+          - 'null'
+          description: Optional text note describing the reason for the action
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Additional metadata associated with the action
+        effects:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ActionEffect'
+          description: List of effects describing what changed
+        actors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ActionActor'
+          description: List of actors describing who initiated the action
+      required:
+      - id
+      - type
+      - object_type
+      - object_id
+      - created_at
+      - effects
+      - actors
+      title: Action
+    type__ActionType:
       type: string
       enum:
-      - account
-      - user
-      - run
-      description: The type of actor
-      title: ActionActorActorType
-    type_:ActionEffectOperation:
+      - add_sources
+      - add_attributes
+      - update_address_risk
+      - verify_tin
+      - decision
+      - dismissal
+      description: The action type that was performed
+      title: ActionType
+    type__ActionEffectOperation:
       type: string
       enum:
       - created
@@ -334,11 +308,11 @@ components:
       - linked
       description: The type of change that was made
       title: ActionEffectOperation
-    type_:ActionActor:
+    type__ActionActor:
       type: object
       properties:
         actor_type:
-          $ref: '#/components/schemas/type_:ActionActorActorType'
+          $ref: '#/components/schemas/type__ActionActorActorType'
           description: The type of actor
         data:
           type: object
@@ -348,16 +322,44 @@ components:
       required:
       - actor_type
       title: ActionActor
-    type_:ErrorResponse:
+    type_actions_ListActionsRequestObjectType:
+      type: string
+      enum:
+      - businesses
+      - watchlist_result
+      title: ListActionsRequestObjectType
+    type_actions_ActionRequestParamObjectType:
+      type: string
+      enum:
+      - businesses
+      - watchlist_result
+      description: Type of object to perform the action on
+      title: ActionRequestParamObjectType
+    type__ActionObjectType:
+      type: string
+      enum:
+      - Business
+      - Watchlist::Result
+      description: The type of object the action was performed on
+      title: ActionObjectType
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse
+    type__ActionActorActorType:
+      type: string
+      enum:
+      - account
+      - user
+      - run
+      description: The type of actor
+      title: ActionActorActorType
   securitySchemes:
     bearer_auth:
       type: http

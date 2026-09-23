@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_webhooks API
+  title: Middesk Subpackage Webhooks API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -92,7 +92,7 @@ paths:
                   type: string
                   description: Comma-delimited list of associations to include in webhook payloads. Omit or set to "*" for all. Use "identifiers" to receive only top-level scalar fields (id, external_id, name, status, etc.) with no associations.
                 oidc_auth_method:
-                  $ref: '#/components/schemas/type_webhooks:WebhookCreateParamOidcAuthMethod'
+                  $ref: '#/components/schemas/type_webhooks_WebhookCreateParamOidcAuthMethod'
                   description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
                 oidc_client_id:
                   type: string
@@ -146,7 +146,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
     put:
       operationId: update-webhook
       summary: Update a webhook
@@ -177,7 +177,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
       requestBody:
         content:
           application/json:
@@ -202,7 +202,7 @@ paths:
                   type: string
                   description: Comma-delimited list of associations to include in webhook payloads. Omit or set to "*" for all. Use "identifiers" to receive only top-level scalar fields (id, external_id, name, status, etc.) with no associations.
                 oidc_auth_method:
-                  $ref: '#/components/schemas/type_webhooks:WebhookUpdateParamOidcAuthMethod'
+                  $ref: '#/components/schemas/type_webhooks_WebhookUpdateParamOidcAuthMethod'
                   description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
                 oidc_client_id:
                   type: string
@@ -262,10 +262,52 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:OidcKey'
+                $ref: '#/components/schemas/type__OidcKey'
 components:
   schemas:
-    type_:OidcKeyKeysItem:
+    type__OidcKey:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__OidcKeyKeysItem'
+      required:
+      - keys
+      title: OidcKey
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_webhooks_WebhookCreateParamOidcAuthMethod:
+      type: string
+      enum:
+      - private_key_jwt
+      - client_secret
+      description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
+      title: WebhookCreateParamOidcAuthMethod
+    type_webhooks_WebhookUpdateParamOidcAuthMethod:
+      type: string
+      enum:
+      - private_key_jwt
+      - client_secret
+      description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
+      title: WebhookUpdateParamOidcAuthMethod
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type__OidcKeyKeysItem:
       type: object
       properties:
         kty:
@@ -295,48 +337,6 @@ components:
             type: string
           description: X.509 certificate chain
       title: OidcKeyKeysItem
-    type_webhooks:WebhookCreateParamOidcAuthMethod:
-      type: string
-      enum:
-      - private_key_jwt
-      - client_secret
-      description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
-      title: WebhookCreateParamOidcAuthMethod
-    type_webhooks:WebhookUpdateParamOidcAuthMethod:
-      type: string
-      enum:
-      - private_key_jwt
-      - client_secret
-      description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
-      title: WebhookUpdateParamOidcAuthMethod
-    type_:ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_:OidcKey:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:OidcKeyKeysItem'
-      required:
-      - keys
-      title: OidcKey
-    type_:ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_applications API
+  title: Middesk Subpackage Applications API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -27,13 +27,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_applications:CreateApplicationResponse'
+                $ref: '#/components/schemas/type_applications_CreateApplicationResponse'
         '422':
           description: validation errors
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
       requestBody:
         content:
           application/json:
@@ -57,15 +57,7 @@ paths:
                   description: Redirect back URI
 components:
   schemas:
-    type_:ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_applications:CreateApplicationResponse:
+    type_applications_CreateApplicationResponse:
       type: object
       properties:
         object:
@@ -82,13 +74,21 @@ components:
           type: string
           format: uri
       title: CreateApplicationResponse
-    type_:ErrorResponse:
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse

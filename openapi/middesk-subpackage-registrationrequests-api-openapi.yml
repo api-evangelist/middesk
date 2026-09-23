@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_registrationRequests API
+  title: Middesk Subpackage Registration Requests API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -39,7 +39,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_registrationRequests:ListRegistrationRequestsResponse'
+                $ref: '#/components/schemas/type_registrationRequests_ListRegistrationRequestsResponse'
     post:
       operationId: create-registration-request
       summary: Create a registration request
@@ -58,13 +58,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:RegistrationRequest'
+                $ref: '#/components/schemas/type__RegistrationRequest'
         '400':
           description: validation errors
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
       requestBody:
         content:
           application/json:
@@ -72,7 +72,7 @@ paths:
               type: object
               properties:
                 state:
-                  $ref: '#/components/schemas/type_registrationRequests:RegistrationRequestParamState'
+                  $ref: '#/components/schemas/type_registrationRequests_RegistrationRequestParamState'
                   description: US state abbreviation (required)
                 email:
                   type: string
@@ -134,13 +134,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:RegistrationRequest'
+                $ref: '#/components/schemas/type__RegistrationRequest'
         '404':
           description: registration request not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
     delete:
       operationId: delete-registration-request
       summary: Delete a registration request
@@ -205,16 +205,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_registrationRequests:GetRegistrationRequestGuestDashboardResponse'
+                $ref: '#/components/schemas/type_registrationRequests_GetRegistrationRequestGuestDashboardResponse'
         '404':
           description: registration request not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type_registrationRequests:ListRegistrationRequestsResponse:
+    type_registrationRequests_ListRegistrationRequestsResponse:
       type: object
       properties:
         object:
@@ -222,11 +222,89 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_:RegistrationRequest'
+            $ref: '#/components/schemas/type__RegistrationRequest'
         url:
           type: string
       title: ListRegistrationRequestsResponse
-    type_:RegistrationRequestState:
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__RegistrationRequest:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        state:
+          $ref: '#/components/schemas/type__RegistrationRequestState'
+          description: US state abbreviation
+        status:
+          type: string
+          description: Request status
+        tax_registration_types:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Types of tax registrations requested
+        company_id:
+          type: string
+          format: uuid
+        external_id:
+          type:
+          - string
+          - 'null'
+        submitted_at:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+        agencies:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+          description: Tax agency registrations
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+          description: Registration items
+        tax_registration:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Tax registration details
+        invite_link:
+          type: string
+          format: uri
+      required:
+      - object
+      - id
+      - state
+      - status
+      - tax_registration_types
+      - company_id
+      - created_at
+      - agencies
+      - items
+      - invite_link
+      title: RegistrationRequest
+    type__RegistrationRequestState:
       type: string
       enum:
       - AL
@@ -281,90 +359,7 @@ components:
       - WY
       description: US state abbreviation
       title: RegistrationRequestState
-    type_:RegistrationRequest:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        state:
-          $ref: '#/components/schemas/type_:RegistrationRequestState'
-          description: US state abbreviation
-        status:
-          type: string
-          description: Request status
-        tax_registration_types:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: Types of tax registrations requested
-        company_id:
-          type: string
-          format: uuid
-        external_id:
-          type: string
-          nullable: true
-        submitted_at:
-          type: string
-          nullable: true
-        created_at:
-          type: string
-        agencies:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-          description: Tax agency registrations
-        items:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-          description: Registration items
-        tax_registration:
-          type: object
-          nullable: true
-          additionalProperties:
-            description: Any type
-          description: Tax registration details
-        invite_link:
-          type: string
-          format: uri
-      required:
-      - object
-      - id
-      - state
-      - status
-      - tax_registration_types
-      - company_id
-      - created_at
-      - agencies
-      - items
-      - invite_link
-      title: RegistrationRequest
-    type_:ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_registrationRequests:GetRegistrationRequestGuestDashboardResponse:
-      type: object
-      properties:
-        guest_dashboard_url:
-          type: string
-          format: uri
-      required:
-      - guest_dashboard_url
-      title: GetRegistrationRequestGuestDashboardResponse
-    type_registrationRequests:RegistrationRequestParamState:
+    type_registrationRequests_RegistrationRequestParamState:
       type: string
       enum:
       - AL
@@ -419,13 +414,22 @@ components:
       - WY
       description: US state abbreviation (required)
       title: RegistrationRequestParamState
-    type_:ErrorResponse:
+    type_registrationRequests_GetRegistrationRequestGuestDashboardResponse:
+      type: object
+      properties:
+        guest_dashboard_url:
+          type: string
+          format: uri
+      required:
+      - guest_dashboard_url
+      title: GetRegistrationRequestGuestDashboardResponse
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse

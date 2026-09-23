@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_orders API
+  title: Middesk Subpackage Orders API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -51,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_orders:ListOrdersResponse'
+                $ref: '#/components/schemas/type_orders_ListOrdersResponse'
     post:
       operationId: create-order
       summary: Create an order for a business
@@ -82,13 +82,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
         '422':
           description: unprocessable entity - reorder validation failed
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
       requestBody:
         content:
           application/json:
@@ -96,15 +96,15 @@ paths:
               type: object
               properties:
                 product:
-                  $ref: '#/components/schemas/type_orders:OrderRequestParamProduct'
+                  $ref: '#/components/schemas/type_orders_OrderRequestParamProduct'
                   description: Product type for the order
                 subproducts:
                   type: array
                   items:
-                    $ref: '#/components/schemas/type_orders:OrderRequestParamSubproductsItem'
+                    $ref: '#/components/schemas/type_orders_OrderRequestParamSubproductsItem'
                   description: Array of subproducts
                 options:
-                  $ref: '#/components/schemas/type_orders:OrderRequestParamOptions'
+                  $ref: '#/components/schemas/type_orders_OrderRequestParamOptions'
                   description: Additional options for the order
   /v1/businesses/{business_id}/orders/{id}:
     get:
@@ -137,7 +137,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:Order'
+                $ref: '#/components/schemas/type__Order'
   /v1/orders/{id}:
     get:
       operationId: get-order-by-id
@@ -163,7 +163,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:Order'
+                $ref: '#/components/schemas/type__Order'
     put:
       operationId: update-order
       summary: Update an order
@@ -188,7 +188,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:Order'
+                $ref: '#/components/schemas/type__Order'
       requestBody:
         content:
           application/json:
@@ -203,70 +203,7 @@ paths:
                   description: New status for the order
 components:
   schemas:
-    type_:OrderRequester:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-        type:
-          oneOf:
-          - $ref: '#/components/schemas/type_:OrderRequesterType'
-          - type: 'null'
-      title: OrderRequester
-    type_:OrderProduct:
-      type: string
-      enum:
-      - identity
-      - liens
-      - adverse_media
-      - bankruptcies
-      - business_enrichment
-      - documents
-      - enhanced_screenings
-      - kyc
-      - litigations
-      - people_litigations
-      - people_bankruptcies
-      - people_tax_liens
-      - people_ucc_liens
-      - people_criminal_history
-      - tin
-      - website
-      - business_verification_qualify
-      - business_verification_verify
-      - tax_liens
-      - ucc_liens
-      - email_risk
-      title: OrderProduct
-    type_orders:OrderRequestParamSubproductsItem:
-      type: string
-      enum:
-      - articles_of_incorporation
-      - certificate_of_good_standing
-      - articles_of_incorporation_with_fallback
-      - ucc_documents
-      - web_analysis
-      - industry_classification
-      title: OrderRequestParamSubproductsItem
-    type_:OrderStatus:
-      type: string
-      enum:
-      - created
-      - pending
-      - audited
-      - completed
-      - approved
-      - rejected
-      title: OrderStatus
-    type_orders:OrderRequestParamOptions:
-      type: object
-      properties:
-        person_match:
-          type: boolean
-      description: Additional options for the order
-      title: OrderRequestParamOptions
-    type_:OrderSubproductsItem:
+    type__OrderSubproductsItem:
       type: string
       enum:
       - Articles of Incorporation
@@ -276,7 +213,65 @@ components:
       - web_analysis
       - industry_classification
       title: OrderSubproductsItem
-    type_orders:OrderRequestParamProduct:
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_orders_OrderRequestParamOptions:
+      type: object
+      properties:
+        person_match:
+          type: boolean
+      description: Additional options for the order
+      title: OrderRequestParamOptions
+    type__Order:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/type__OrderStatus'
+        business_id:
+          type: string
+          format: uuid
+        subproducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__OrderSubproductsItem'
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        monitoring:
+          type: boolean
+        product:
+          $ref: '#/components/schemas/type__OrderProduct'
+        requester:
+          $ref: '#/components/schemas/type__OrderRequester'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - object
+      - id
+      - status
+      - business_id
+      - product
+      - created_at
+      - updated_at
+      title: Order
+    type_orders_OrderRequestParamProduct:
       type: string
       enum:
       - identity
@@ -302,70 +297,13 @@ components:
       - email_risk
       description: Product type for the order
       title: OrderRequestParamProduct
-    type_:Order:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        status:
-          $ref: '#/components/schemas/type_:OrderStatus'
-        business_id:
-          type: string
-          format: uuid
-        subproducts:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:OrderSubproductsItem'
-        completed_at:
-          type: string
-          nullable: true
-          format: date-time
-        monitoring:
-          type: boolean
-        product:
-          $ref: '#/components/schemas/type_:OrderProduct'
-        requester:
-          $ref: '#/components/schemas/type_:OrderRequester'
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-      - object
-      - id
-      - status
-      - business_id
-      - product
-      - created_at
-      - updated_at
-      title: Order
-    type_:ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_:OrderRequesterType:
-      type: string
-      enum:
-      - account
-      - user
-      - api_key
-      title: OrderRequesterType
-    type_orders:ListOrdersResponse:
+    type_orders_ListOrdersResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_:Order'
+            $ref: '#/components/schemas/type__Order'
         object:
           type: string
         has_more:
@@ -376,13 +314,77 @@ components:
       - object
       - has_more
       title: ListOrdersResponse
-    type_:ErrorResponse:
+    type__OrderRequester:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        type:
+          oneOf:
+          - $ref: '#/components/schemas/type__OrderRequesterType'
+          - type: 'null'
+      title: OrderRequester
+    type__OrderRequesterType:
+      type: string
+      enum:
+      - account
+      - user
+      - api_key
+      title: OrderRequesterType
+    type__OrderStatus:
+      type: string
+      enum:
+      - created
+      - pending
+      - audited
+      - completed
+      - approved
+      - rejected
+      title: OrderStatus
+    type__OrderProduct:
+      type: string
+      enum:
+      - identity
+      - liens
+      - adverse_media
+      - bankruptcies
+      - business_enrichment
+      - documents
+      - enhanced_screenings
+      - kyc
+      - litigations
+      - people_litigations
+      - people_bankruptcies
+      - people_tax_liens
+      - people_ucc_liens
+      - people_criminal_history
+      - tin
+      - website
+      - business_verification_qualify
+      - business_verification_verify
+      - tax_liens
+      - ucc_liens
+      - email_risk
+      title: OrderProduct
+    type_orders_OrderRequestParamSubproductsItem:
+      type: string
+      enum:
+      - articles_of_incorporation
+      - certificate_of_good_standing
+      - articles_of_incorporation_with_fallback
+      - ucc_documents
+      - web_analysis
+      - industry_classification
+      title: OrderRequestParamSubproductsItem
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse

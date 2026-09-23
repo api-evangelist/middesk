@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_businessBatches API
+  title: Middesk Subpackage Business Batches API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -39,7 +39,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_businessBatches:ListBusinessBatchesResponse'
+                $ref: '#/components/schemas/type_businessBatches_ListBusinessBatchesResponse'
     post:
       operationId: create-business-batch
       summary: Create a business batch
@@ -115,13 +115,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:BusinessBatch'
+                $ref: '#/components/schemas/type__BusinessBatch'
         '404':
           description: business batch not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
   /v1/business_batches/{id}/csv:
     get:
       operationId: get-business-batch-csv
@@ -157,7 +157,7 @@ paths:
                 description: Any type
 components:
   schemas:
-    type_:BusinessBatch:
+    type__BusinessBatch:
       type: object
       properties:
         object:
@@ -177,7 +177,7 @@ components:
           type: string
           format: date-time
         account:
-          $ref: '#/components/schemas/type_:BusinessBatchAccount'
+          $ref: '#/components/schemas/type__BusinessBatchAccount'
       required:
       - object
       - id
@@ -188,7 +188,32 @@ components:
       - created_at
       - account
       title: BusinessBatch
-    type_:BusinessBatchAccount:
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_businessBatches_ListBusinessBatchesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__BusinessBatch'
+        object:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - has_more
+      title: ListBusinessBatchesResponse
+    type__BusinessBatchAccount:
       type: object
       properties:
         id:
@@ -206,38 +231,13 @@ components:
       - slug
       - pilot
       title: BusinessBatchAccount
-    type_businessBatches:ListBusinessBatchesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:BusinessBatch'
-        object:
-          type: string
-        has_more:
-          type: boolean
-        total_count:
-          type: integer
-      required:
-      - object
-      - has_more
-      title: ListBusinessBatchesResponse
-    type_:ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_:ErrorResponse:
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse

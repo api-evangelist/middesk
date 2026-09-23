@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_tinMatch API
+  title: Middesk Subpackage Tin Match API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -28,10 +28,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:TinMatchAvailability'
+                $ref: '#/components/schemas/type__TinMatchAvailability'
 components:
   schemas:
-    type_:TinMatchAvailability:
+    type__TinMatchAvailability:
       type: object
       properties:
         available:

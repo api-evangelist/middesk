@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_documents API
+  title: Middesk Subpackage Documents API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -33,13 +33,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_documents:ListDocumentsResponse'
+                $ref: '#/components/schemas/type_documents_ListDocumentsResponse'
         '404':
           description: business not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
   /v1/documents/{id}:
     get:
       operationId: get-document
@@ -65,13 +65,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:Document'
+                $ref: '#/components/schemas/type__Document'
         '404':
           description: document not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
   /v1/documents/{id}/download_url:
     get:
       operationId: get-document-download-url
@@ -97,25 +97,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_documents:GetDocumentDownloadUrlResponse'
+                $ref: '#/components/schemas/type_documents_GetDocumentDownloadUrlResponse'
         '404':
           description: document not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type_:DocumentObject:
-      type: string
-      enum:
-      - document
-      title: DocumentObject
-    type_:Document:
+    type_documents_ListDocumentsResponse:
       type: object
       properties:
         object:
-          $ref: '#/components/schemas/type_:DocumentObject'
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Document'
+      title: ListDocumentsResponse
+    type__Document:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__DocumentObject'
         id:
           type: string
           format: uuid
@@ -139,10 +144,11 @@ components:
           type: string
           format: date-time
         source:
-          $ref: '#/components/schemas/type_:DocumentSource'
+          $ref: '#/components/schemas/type__DocumentSource'
         filing_date:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: date-time
         metadata:
           type: object
@@ -159,7 +165,7 @@ components:
       - download_url
       - created_at
       title: Document
-    type_:DocumentSource:
+    type__DocumentSource:
       type: object
       properties:
         type:
@@ -175,7 +181,7 @@ components:
             description: Any type
           description: Additional source metadata
       title: DocumentSource
-    type_:ErrorResponseErrorsItem:
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
         message:
@@ -183,30 +189,25 @@ components:
       required:
       - message
       title: ErrorResponseErrorsItem
-    type_documents:ListDocumentsResponse:
-      type: object
-      properties:
-        object:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:Document'
-      title: ListDocumentsResponse
-    type_documents:GetDocumentDownloadUrlResponse:
+    type__DocumentObject:
+      type: string
+      enum:
+      - document
+      title: DocumentObject
+    type_documents_GetDocumentDownloadUrlResponse:
       type: object
       properties:
         data:
           type: string
           format: uri
       title: GetDocumentDownloadUrlResponse
-    type_:ErrorResponse:
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_timeline API
+  title: Middesk Subpackage Timeline API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -70,10 +70,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type_:ErrorResponseErrorsItem:
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
         message:
@@ -81,13 +81,13 @@ components:
       required:
       - message
       title: ErrorResponseErrorsItem
-    type_:ErrorResponse:
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse

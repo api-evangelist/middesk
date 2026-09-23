@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Middesk subpackage_actions subpackage_policyResults API
+  title: Middesk Subpackage Policy Results API
   version: 1.0.0
 servers:
 - url: https://api.middesk.com
@@ -34,16 +34,77 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:PolicyResultsList'
+                $ref: '#/components/schemas/type__PolicyResultsList'
         '404':
           description: business not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_:ErrorResponse'
+                $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type_:PolicyResult:
+    type__PolicyActionResult:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          description: Policy action result ID
+        details:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Action details
+        executed:
+          type: boolean
+          description: Execution status
+        policy_action:
+          $ref: '#/components/schemas/type__PolicyActionResultPolicyAction'
+      title: PolicyActionResult
+    type__PolicyResultsList:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__PolicyResult'
+        url:
+          type: string
+          description: API endpoint URL
+      required:
+      - object
+      - data
+      title: PolicyResultsList
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__PolicyActionResultPolicyAction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Policy action ID
+        action_type:
+          type: string
+          description: Type of action
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Action options
+        policy_version_id:
+          type: string
+          description: Policy version ID
+      title: PolicyActionResultPolicyAction
+    type__PolicyResult:
       type: object
       properties:
         object:
@@ -58,15 +119,17 @@ components:
           type: string
           description: Creation timestamp
         matched:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Match status
         executed:
           type: boolean
           description: Execution status
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Policy name
         details:
           type: object
@@ -88,76 +151,15 @@ components:
         policy_action_results:
           type: array
           items:
-            $ref: '#/components/schemas/type_:PolicyActionResult'
+            $ref: '#/components/schemas/type__PolicyActionResult'
       title: PolicyResult
-    type_:PolicyResultsList:
-      type: object
-      properties:
-        object:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_:PolicyResult'
-        url:
-          type: string
-          description: API endpoint URL
-      required:
-      - object
-      - data
-      title: PolicyResultsList
-    type_:ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_:PolicyActionResultPolicyAction:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Policy action ID
-        action_type:
-          type: string
-          description: Type of action
-        options:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Action options
-        policy_version_id:
-          type: string
-          description: Policy version ID
-      title: PolicyActionResultPolicyAction
-    type_:PolicyActionResult:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          description: Policy action result ID
-        details:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Action details
-        executed:
-          type: boolean
-          description: Execution status
-        policy_action:
-          $ref: '#/components/schemas/type_:PolicyActionResultPolicyAction'
-      title: PolicyActionResult
-    type_:ErrorResponse:
+    type__ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_:ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
       - errors
       title: ErrorResponse
