@@ -57,6 +57,24 @@ paths:
                   description: Redirect back URI
 components:
   schemas:
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
     type_applications_CreateApplicationResponse:
       type: object
       properties:
@@ -74,24 +92,6 @@ components:
           type: string
           format: uri
       title: CreateApplicationResponse
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http

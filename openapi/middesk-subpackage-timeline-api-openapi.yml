@@ -73,14 +73,6 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
     type__ErrorResponse:
       type: object
       properties:
@@ -91,6 +83,14 @@ components:
       required:
       - errors
       title: ErrorResponse
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
   securitySchemes:
     bearer_auth:
       type: http

@@ -55,6 +55,28 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
+    type__ConnectionConnectingAddressesItem:
+      type: object
+      properties:
+        full_address:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      title: ConnectionConnectingAddressesItem
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
     type__ConnectionConnectingPeopleItem:
       type: object
       properties:
@@ -69,28 +91,6 @@ components:
           items:
             $ref: '#/components/schemas/type__Source'
       title: ConnectionConnectingPeopleItem
-    type__ConnectionConnectingBusinessesItem:
-      type: object
-      properties:
-        name:
-          type: string
-        titles:
-          type: array
-          items:
-            type: string
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
-      title: ConnectionConnectingBusinessesItem
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
     type__Connection:
       type: object
       properties:
@@ -149,30 +149,6 @@ components:
       - object
       - data
       title: GetV1BusinessesBusinessIdConnectionsResponse
-    type__ConnectionConnectingAddressesItem:
-      type: object
-      properties:
-        full_address:
-          type: string
-        labels:
-          type: array
-          items:
-            type: string
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
-      title: ConnectionConnectingAddressesItem
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
     type__Source:
       type: object
       properties:
@@ -190,6 +166,30 @@ components:
       - type
       - metadata
       title: Source
+    type__ConnectionConnectingBusinessesItem:
+      type: object
+      properties:
+        name:
+          type: string
+        titles:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      title: ConnectionConnectingBusinessesItem
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http

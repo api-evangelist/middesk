@@ -184,6 +184,49 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
+    type__SignalReasonsItem:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/type__SignalReasonsItemCategory'
+        group:
+          type: string
+        description:
+          type: string
+        code:
+          $ref: '#/components/schemas/type__SignalReasonsItemCode'
+        importance:
+          type: number
+          format: double
+      required:
+      - category
+      - group
+      - description
+      - code
+      title: SignalReasonsItem
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__SignalRequester:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - type
+      - name
+      title: SignalRequester
     type__Signal:
       type: object
       properties:
@@ -242,56 +285,6 @@ components:
       - name
       - created_at
       title: Signal
-    type__SignalReasonsItem:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/type__SignalReasonsItemCategory'
-        group:
-          type: string
-        description:
-          type: string
-        code:
-          $ref: '#/components/schemas/type__SignalReasonsItemCode'
-        importance:
-          type: number
-          format: double
-      required:
-      - category
-      - group
-      - description
-      - code
-      title: SignalReasonsItem
-    type__SignalReasonsItemCategory:
-      type: string
-      enum:
-      - identification
-      - verification
-      - evaluation
-      title: SignalReasonsItemCategory
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__SignalRequester:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - type
-      - name
-      title: SignalRequester
     type__SignalReasonsItemCode:
       type: string
       enum:
@@ -338,6 +331,13 @@ components:
       - E1102
       - E1201
       title: SignalReasonsItemCode
+    type__SignalReasonsItemCategory:
+      type: string
+      enum:
+      - identification
+      - verification
+      - evaluation
+      title: SignalReasonsItemCategory
     type_signals_ListSignalsResponse:
       type: object
       properties:

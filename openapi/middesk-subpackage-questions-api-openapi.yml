@@ -67,6 +67,20 @@ paths:
                 description: Any type
 components:
   schemas:
+    type_questions_ListQuestionsResponseData:
+      oneOf:
+      - type: array
+        items:
+          $ref: '#/components/schemas/type__AgentQuestion'
+      - type: array
+        items:
+          $ref: '#/components/schemas/type_questions_ListQuestionsResponseDataOneItem'
+      - type: object
+        additionalProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentQuestion'
+      title: ListQuestionsResponseData
     type__AgentQuestionQuestionDependency:
       type: object
       properties:
@@ -86,55 +100,25 @@ components:
       - value
       description: Defines a dependency on another question's answer. The question is only shown when the dependency condition is met.
       title: AgentQuestionQuestionDependency
-    type__AgentQuestionQuestionDependencyValue:
-      oneOf:
-      - type: string
-      - type: array
-        items:
-          type: string
-      description: The value(s) the dependent question's answer must match.
-      title: AgentQuestionQuestionDependencyValue
-    type__AgentQuestionQuestionDependencyComparator:
+    type__AgentQuestionType:
       type: string
       enum:
-      - ==
-      - '!='
-      - '>'
-      - <
-      - '>='
-      - <=
-      - len_gt
-      description: Comparison operator. Defaults to == (equality).
-      title: AgentQuestionQuestionDependencyComparator
-    type_questions_ListQuestionsResponseData:
-      oneOf:
-      - type: array
-        items:
-          $ref: '#/components/schemas/type__AgentQuestion'
-      - type: array
-        items:
-          $ref: '#/components/schemas/type_questions_ListQuestionsResponseDataOneItem'
-      - type: object
-        additionalProperties:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AgentQuestion'
-      title: ListQuestionsResponseData
-    type__AgentQuestionCompanyDependenciesItemItemComparator:
-      type: string
-      enum:
-      - ==
-      - '!='
-      - '>'
-      - <
-      - '>='
-      - <=
-      - starts_with
-      - len_gt
-      - missing_suffix
-      - has_special_chars
-      description: Comparison operator. Defaults to == (equality). For array values, membership is checked.
-      title: AgentQuestionCompanyDependenciesItemItemComparator
+      - text
+      - number
+      - date
+      - date_part
+      - select
+      - multiselect
+      - boolean
+      - address
+      - document
+      - account
+      - textarea
+      - phone
+      - officers_table
+      - string
+      description: Input type for the question.
+      title: AgentQuestionType
     type__AgentQuestionValidation:
       type: object
       properties:
@@ -153,24 +137,6 @@ components:
           description: Minimum accepted numeric value.
       description: Validation rules for the answer.
       title: AgentQuestionValidation
-    type_questions_ListQuestionsResponseDataOneItem:
-      type: object
-      properties:
-        state:
-          type: string
-        questions:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AgentQuestion'
-      title: ListQuestionsResponseDataOneItem
-    type__AgentQuestionCompanyDependenciesItemItemValue:
-      oneOf:
-      - type: string
-      - type: array
-        items:
-          type: string
-      description: The value to compare against.
-      title: AgentQuestionCompanyDependenciesItemItemValue
     type__AgentQuestionCompanyDependenciesItemItem:
       type: object
       properties:
@@ -189,6 +155,44 @@ components:
       - field
       - value
       title: AgentQuestionCompanyDependenciesItemItem
+    type__AgentQuestionWarning:
+      type: object
+      properties:
+        date:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentQuestionWarningDateItem'
+          description: Array of date-based warning rules.
+      description: Warning rules for the question.
+      title: AgentQuestionWarning
+    type__AgentQuestionValidationDateItem:
+      type: object
+      properties:
+        before:
+          type: boolean
+          description: If true, the answer must be before the reference date.
+        date:
+          type:
+          - string
+          - 'null'
+          description: ISO 8601 timestamp used as the reference date.
+        key:
+          type: string
+          description: Key of another question whose answer is used as the reference date.
+        message:
+          type: string
+          description: Error message displayed when validation fails.
+      required:
+      - before
+      title: AgentQuestionValidationDateItem
+    type__AgentQuestionCompanyDependenciesItemItemValue:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+      description: The value to compare against.
+      title: AgentQuestionCompanyDependenciesItemItemValue
     type__AgentQuestionWarningDateItem:
       type: object
       properties:
@@ -221,41 +225,34 @@ components:
       - foreign_qualification
       - annual_filing
       title: ListQuestionsRequestCategoriesItem
-    type__AgentQuestionType:
+    type__AgentQuestionQuestionDependencyComparator:
       type: string
       enum:
-      - text
-      - number
-      - date
-      - date_part
-      - select
-      - multiselect
-      - boolean
-      - address
-      - document
-      - account
-      - textarea
-      - phone
-      - officers_table
-      - string
-      description: Input type for the question.
-      title: AgentQuestionType
+      - ==
+      - '!='
+      - '>'
+      - <
+      - '>='
+      - <=
+      - len_gt
+      description: Comparison operator. Defaults to == (equality).
+      title: AgentQuestionQuestionDependencyComparator
+    type_questions_ListQuestionsResponseDataOneItem:
+      type: object
+      properties:
+        state:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentQuestion'
+      title: ListQuestionsResponseDataOneItem
     type_questions_ListQuestionsResponse:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/type_questions_ListQuestionsResponseData'
       title: ListQuestionsResponse
-    type__AgentQuestionWarning:
-      type: object
-      properties:
-        date:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AgentQuestionWarningDateItem'
-          description: Array of date-based warning rules.
-      description: Warning rules for the question.
-      title: AgentQuestionWarning
     type__AgentQuestion:
       type: object
       properties:
@@ -355,26 +352,29 @@ components:
       - label
       - type
       title: AgentQuestion
-    type__AgentQuestionValidationDateItem:
-      type: object
-      properties:
-        before:
-          type: boolean
-          description: If true, the answer must be before the reference date.
-        date:
-          type:
-          - string
-          - 'null'
-          description: ISO 8601 timestamp used as the reference date.
-        key:
+    type__AgentQuestionQuestionDependencyValue:
+      oneOf:
+      - type: string
+      - type: array
+        items:
           type: string
-          description: Key of another question whose answer is used as the reference date.
-        message:
-          type: string
-          description: Error message displayed when validation fails.
-      required:
-      - before
-      title: AgentQuestionValidationDateItem
+      description: The value(s) the dependent question's answer must match.
+      title: AgentQuestionQuestionDependencyValue
+    type__AgentQuestionCompanyDependenciesItemItemComparator:
+      type: string
+      enum:
+      - ==
+      - '!='
+      - '>'
+      - <
+      - '>='
+      - <=
+      - starts_with
+      - len_gt
+      - missing_suffix
+      - has_special_chars
+      description: Comparison operator. Defaults to == (equality). For array values, membership is checked.
+      title: AgentQuestionCompanyDependenciesItemItemComparator
   securitySchemes:
     bearer_auth:
       type: http

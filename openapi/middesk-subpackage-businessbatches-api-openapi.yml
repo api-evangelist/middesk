@@ -213,6 +213,16 @@ components:
       - object
       - has_more
       title: ListBusinessBatchesResponse
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
     type__BusinessBatchAccount:
       type: object
       properties:
@@ -231,16 +241,6 @@ components:
       - slug
       - pilot
       title: BusinessBatchAccount
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http

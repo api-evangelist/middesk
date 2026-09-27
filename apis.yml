@@ -36,6 +36,17 @@ specificationVersion: '0.23'
 tags:
   - Business Verification
   - KYB
+  - Identity Verification
+  - Compliance
+  - EIN Validation
+  - TIN Verification
+  - Sanctions Screening
+  - Business Monitoring
+  - Fintech
+  - RegTech
+tags_raw:
+  - Business Verification
+  - KYB
   - Know Your Business
   - Identity Verification
   - Compliance
@@ -47,7 +58,7 @@ tags:
   - RegTech
 apis:
 - aid: middesk:middesk-subpackage-actions-api
-  name: Middesk subpackage_actions API
+  name: Middesk Subpackage Actions API
   description: The subpackage_actions API from Middesk — 2 operation(s) for subpackage_actions.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -64,7 +75,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-agents-api
-  name: Middesk subpackage_agents API
+  name: Middesk Subpackage Agents API
   description: The subpackage_agents API from Middesk — 2 operation(s) for subpackage_agents.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -81,7 +92,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-applications-api
-  name: Middesk subpackage_applications API
+  name: Middesk Subpackage Applications API
   description: >-
     The subpackage_applications API from Middesk — 1 operation(s) for subpackage_applications.
   humanURL: https://docs.middesk.com/reference/introduction
@@ -99,7 +110,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-businessbatches-api
-  name: Middesk subpackage_businessBatches API
+  name: Middesk Subpackage Business Batches API
   description: >-
     The subpackage_businessBatches API from Middesk — 3 operation(s) for subpackage_businessbatches.
   humanURL: https://docs.middesk.com/reference/introduction
@@ -116,7 +127,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-businesses-api
-  name: Middesk subpackage_businesses API
+  name: Middesk Subpackage Businesses API
   description: The subpackage_businesses API from Middesk — 3 operation(s) for subpackage_businesses.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -133,7 +144,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-companies-api
-  name: Middesk subpackage_companies API
+  name: Middesk Subpackage Companies API
   description: The subpackage_companies API from Middesk — 1 operation(s) for subpackage_companies.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -150,7 +161,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-connections-api
-  name: Middesk subpackage_connections API
+  name: Middesk Subpackage Connections API
   description: The subpackage_connections API from Middesk — 1 operation(s) for subpackage_connections.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -167,7 +178,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-documents-api
-  name: Middesk subpackage_documents API
+  name: Middesk Subpackage Documents API
   description: The subpackage_documents API from Middesk — 3 operation(s) for subpackage_documents.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -184,7 +195,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-identities-api
-  name: Middesk subpackage_identities API
+  name: Middesk Subpackage Identities API
   description: The subpackage_identities API from Middesk — 1 operation(s) for subpackage_identities.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -201,7 +212,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-informationrequests-api
-  name: Middesk subpackage_informationRequests API
+  name: Middesk Subpackage Information Requests API
   description: >-
     The subpackage_informationRequests API from Middesk — 1 operation(s) for subpackage_informationrequests.
   humanURL: https://docs.middesk.com/reference/introduction
@@ -218,7 +229,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-jurisdictions-api
-  name: Middesk subpackage_jurisdictions API
+  name: Middesk Subpackage Jurisdictions API
   description: >-
     The subpackage_jurisdictions API from Middesk — 2 operation(s) for subpackage_jurisdictions.
   humanURL: https://docs.middesk.com/reference/introduction
@@ -236,7 +247,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-liens-api
-  name: Middesk subpackage_liens API
+  name: Middesk Subpackage Liens API
   description: The subpackage_liens API from Middesk — 2 operation(s) for subpackage_liens.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -253,7 +264,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-lienterminations-api
-  name: Middesk subpackage_lienTerminations API
+  name: Middesk Subpackage Lien Terminations API
   description: >-
     The subpackage_lienTerminations API from Middesk — 1 operation(s) for subpackage_lienterminations.
   humanURL: https://docs.middesk.com/reference/introduction
@@ -270,7 +281,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-mail-api
-  name: Middesk subpackage_mail API
+  name: Middesk Subpackage Mail API
   description: The subpackage_mail API from Middesk — 2 operation(s) for subpackage_mail.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -287,7 +298,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-monitoring-api
-  name: Middesk subpackage_monitoring API
+  name: Middesk Subpackage Monitoring API
   description: The subpackage_monitoring API from Middesk — 2 operation(s) for subpackage_monitoring.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -304,7 +315,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-orders-api
-  name: Middesk subpackage_orders API
+  name: Middesk Subpackage Orders API
   description: The subpackage_orders API from Middesk — 3 operation(s) for subpackage_orders.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -321,7 +332,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-policyresults-api
-  name: Middesk subpackage_policyResults API
+  name: Middesk Subpackage Policy Results API
   description: >-
     The subpackage_policyResults API from Middesk — 1 operation(s) for subpackage_policyresults.
   humanURL: https://docs.middesk.com/reference/introduction
@@ -338,7 +349,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-prefill-api
-  name: Middesk subpackage_prefill API
+  name: Middesk Subpackage Prefill API
   description: The subpackage_prefill API from Middesk — 1 operation(s) for subpackage_prefill.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -355,7 +366,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-questions-api
-  name: Middesk subpackage_questions API
+  name: Middesk Subpackage Questions API
   description: The subpackage_questions API from Middesk — 1 operation(s) for subpackage_questions.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -372,7 +383,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-registrationrequests-api
-  name: Middesk subpackage_registrationRequests API
+  name: Middesk Subpackage Registration Requests API
   description: >-
     The subpackage_registrationRequests API from Middesk — 3 operation(s) for subpackage_registrationrequests.
   humanURL: https://docs.middesk.com/reference/introduction
@@ -389,7 +400,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-reviews-api
-  name: Middesk subpackage_reviews API
+  name: Middesk Subpackage Reviews API
   description: The subpackage_reviews API from Middesk — 1 operation(s) for subpackage_reviews.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -406,7 +417,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-runs-api
-  name: Middesk subpackage_runs API
+  name: Middesk Subpackage Runs API
   description: The subpackage_runs API from Middesk — 4 operation(s) for subpackage_runs.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -423,7 +434,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-signals-api
-  name: Middesk subpackage_signals API
+  name: Middesk Subpackage Signals API
   description: The subpackage_signals API from Middesk — 2 operation(s) for subpackage_signals.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -440,7 +451,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-threads-api
-  name: Middesk subpackage_threads API
+  name: Middesk Subpackage Threads API
   description: The subpackage_threads API from Middesk — 2 operation(s) for subpackage_threads.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -457,7 +468,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-timeline-api
-  name: Middesk subpackage_timeline API
+  name: Middesk Subpackage Timeline API
   description: The subpackage_timeline API from Middesk — 1 operation(s) for subpackage_timeline.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -474,7 +485,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-tinmatch-api
-  name: Middesk subpackage_tinMatch API
+  name: Middesk Subpackage Tin Match API
   description: The subpackage_tinMatch API from Middesk — 1 operation(s) for subpackage_tinmatch.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -490,7 +501,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-webhooks-api
-  name: Middesk subpackage_webhooks API
+  name: Middesk Subpackage Webhooks API
   description: The subpackage_webhooks API from Middesk — 3 operation(s) for subpackage_webhooks.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/
@@ -507,7 +518,7 @@ apis:
   - type: Sandbox
     url: https://api-sandbox.middesk.com/v1/
 - aid: middesk:middesk-subpackage-websites-api
-  name: Middesk subpackage_websites API
+  name: Middesk Subpackage Websites API
   description: The subpackage_websites API from Middesk — 1 operation(s) for subpackage_websites.
   humanURL: https://docs.middesk.com/reference/introduction
   baseURL: https://api.middesk.com/v1/

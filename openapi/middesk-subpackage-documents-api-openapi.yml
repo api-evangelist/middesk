@@ -106,16 +106,52 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type_documents_ListDocumentsResponse:
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
-        object:
+        message:
           type: string
-        data:
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/type__Document'
-      title: ListDocumentsResponse
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type__DocumentSource:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Source type (e.g., registration)
+        id:
+          type: string
+          format: uuid
+          description: Source record ID
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Additional source metadata
+      title: DocumentSource
+    type_documents_GetDocumentDownloadUrlResponse:
+      type: object
+      properties:
+        data:
+          type: string
+          format: uri
+      title: GetDocumentDownloadUrlResponse
+    type__DocumentObject:
+      type: string
+      enum:
+      - document
+      title: DocumentObject
     type__Document:
       type: object
       properties:
@@ -165,52 +201,16 @@ components:
       - download_url
       - created_at
       title: Document
-    type__DocumentSource:
+    type_documents_ListDocumentsResponse:
       type: object
       properties:
-        type:
+        object:
           type: string
-          description: Source type (e.g., registration)
-        id:
-          type: string
-          format: uuid
-          description: Source record ID
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Additional source metadata
-      title: DocumentSource
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__DocumentObject:
-      type: string
-      enum:
-      - document
-      title: DocumentObject
-    type_documents_GetDocumentDownloadUrlResponse:
-      type: object
-      properties:
         data:
-          type: string
-          format: uri
-      title: GetDocumentDownloadUrlResponse
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
           type: array
           items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
+            $ref: '#/components/schemas/type__Document'
+      title: ListDocumentsResponse
   securitySchemes:
     bearer_auth:
       type: http

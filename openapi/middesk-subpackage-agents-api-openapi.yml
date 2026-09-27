@@ -64,6 +64,34 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_agents_ListAgentsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentsAgent'
+      required:
+      - data
+      title: ListAgentsResponse
     type__AgentsAgent:
       type: object
       properties:
@@ -99,34 +127,6 @@ components:
       - updated_at
       description: An agent that can execute workflows.
       title: AgentsAgent
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
-    type_agents_ListAgentsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AgentsAgent'
-      required:
-      - data
-      title: ListAgentsResponse
   securitySchemes:
     bearer_auth:
       type: http

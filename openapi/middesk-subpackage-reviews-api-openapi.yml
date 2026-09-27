@@ -43,84 +43,14 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type__ReviewObject:
-      type: string
-      enum:
-      - review
-      title: ReviewObject
-    type__ReviewTask:
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
-        category:
-          $ref: '#/components/schemas/type__ReviewTaskCategory'
-        key:
-          $ref: '#/components/schemas/type__ReviewTaskKey'
-        label:
-          $ref: '#/components/schemas/type__ReviewTaskLabel'
         message:
           type: string
-        name:
-          type: string
-        status:
-          $ref: '#/components/schemas/type__ReviewTaskStatus'
-        sub_label:
-          type: string
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
       required:
-      - category
-      - key
-      - label
       - message
-      - name
-      - status
-      - sub_label
-      - sources
-      title: ReviewTask
-    type__ReviewTaskStatus:
-      type: string
-      enum:
-      - success
-      - failure
-      - warning
-      - neutral
-      title: ReviewTaskStatus
-    type__Review:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__ReviewObject'
-        id:
-          type: string
-          format: uuid
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        completed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ReviewTask'
-        assignee:
-          oneOf:
-          - $ref: '#/components/schemas/type__User'
-          - type: 'null'
-      required:
-      - object
-      - id
-      - created_at
-      - updated_at
-      - tasks
-      title: Review
+      title: ErrorResponseErrorsItem
     type__ReviewTaskKey:
       type: string
       enum:
@@ -218,56 +148,103 @@ components:
       - politically_exposed_persons
       - email
       title: ReviewTaskCategory
-    type__ErrorResponseErrorsItem:
+    type__ReviewObject:
+      type: string
+      enum:
+      - review
+      title: ReviewObject
+    type__ReviewTask:
       type: object
       properties:
+        category:
+          $ref: '#/components/schemas/type__ReviewTaskCategory'
+        key:
+          $ref: '#/components/schemas/type__ReviewTaskKey'
+        label:
+          $ref: '#/components/schemas/type__ReviewTaskLabel'
         message:
           type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/type__ReviewTaskStatus'
+        sub_label:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
       required:
+      - category
+      - key
+      - label
       - message
-      title: ErrorResponseErrorsItem
-    type__User:
+      - name
+      - status
+      - sub_label
+      - sources
+      title: ReviewTask
+    type__Review:
       type: object
       properties:
         object:
-          type: string
+          $ref: '#/components/schemas/type__ReviewObject'
         id:
           type: string
           format: uuid
-        name:
+        created_at:
           type: string
-        email:
+          format: date-time
+        updated_at:
           type: string
-          format: email
-        roles:
-          type: array
-          items:
-            type: string
-        image_url:
-          type: string
-          format: uri
-        directory_managed:
-          type: boolean
-        last_login_at:
+          format: date-time
+        completed_at:
           type:
           - string
           - 'null'
           format: date-time
-        settings:
-          type: object
-          additionalProperties:
-            description: Any type
-        created_at:
-          type: string
-          format: date-time
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ReviewTask'
+        assignee:
+          oneOf:
+          - $ref: '#/components/schemas/type__User'
+          - type: 'null'
       required:
       - object
       - id
-      - name
-      - email
-      - roles
       - created_at
-      title: User
+      - updated_at
+      - tasks
+      title: Review
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type__Source:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+      required:
+      - id
+      - type
+      - metadata
+      title: Source
     type__ReviewTaskLabel:
       type: string
       enum:
@@ -318,33 +295,56 @@ components:
       - Web - Office Address
       - Email Risk
       title: ReviewTaskLabel
-    type__ErrorResponse:
+    type__User:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
-    type__Source:
-      type: object
-      properties:
+        object:
+          type: string
         id:
           type: string
           format: uuid
-        type:
+        name:
           type: string
-        metadata:
+        email:
+          type: string
+          format: email
+        roles:
+          type: array
+          items:
+            type: string
+        image_url:
+          type: string
+          format: uri
+        directory_managed:
+          type: boolean
+        last_login_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        settings:
           type: object
           additionalProperties:
             description: Any type
+        created_at:
+          type: string
+          format: date-time
       required:
+      - object
       - id
-      - type
-      - metadata
-      title: Source
+      - name
+      - email
+      - roles
+      - created_at
+      title: User
+    type__ReviewTaskStatus:
+      type: string
+      enum:
+      - success
+      - failure
+      - warning
+      - neutral
+      title: ReviewTaskStatus
   securitySchemes:
     bearer_auth:
       type: http

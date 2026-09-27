@@ -128,22 +128,14 @@ paths:
                 type: string
 components:
   schemas:
-    type_mail_ListMailItemsResponse:
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
-        object:
+        message:
           type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AgentMail'
-        url:
-          type: string
-        has_more:
-          type: boolean
-        count:
-          type: integer
-      title: ListMailItemsResponse
+      required:
+      - message
+      title: ErrorResponseErrorsItem
     type__AgentMail:
       type: object
       properties:
@@ -250,14 +242,56 @@ components:
       - source
       - company
       title: AgentMail
-    type__ErrorResponseErrorsItem:
+    type__AgentMailSource:
       type: object
       properties:
-        message:
+        type:
           type: string
+          description: Type of the source object
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: ID of the source object
+      title: AgentMailSource
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
-      - message
-      title: ErrorResponseErrorsItem
+      - errors
+      title: ErrorResponse
+    type__AgentMailCompany:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        legal_name:
+          type:
+          - string
+          - 'null'
+        dba_name:
+          type:
+          - string
+          - 'null'
+        provider_company_id:
+          type:
+          - string
+          - 'null'
+        external_id:
+          type:
+          - string
+          - 'null'
+        parent_account_name:
+          type:
+          - string
+          - 'null'
+      title: AgentMailCompany
     type__AgentMailState:
       type: string
       enum:
@@ -313,56 +347,22 @@ components:
       - WY
       description: State from associated mailable
       title: AgentMailState
-    type__AgentMailCompany:
+    type_mail_ListMailItemsResponse:
       type: object
       properties:
-        id:
+        object:
           type: string
-          format: uuid
-        legal_name:
-          type:
-          - string
-          - 'null'
-        dba_name:
-          type:
-          - string
-          - 'null'
-        provider_company_id:
-          type:
-          - string
-          - 'null'
-        external_id:
-          type:
-          - string
-          - 'null'
-        parent_account_name:
-          type:
-          - string
-          - 'null'
-      title: AgentMailCompany
-    type__AgentMailSource:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of the source object
-        id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: ID of the source object
-      title: AgentMailSource
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
+            $ref: '#/components/schemas/type__AgentMail'
+        url:
+          type: string
+        has_more:
+          type: boolean
+        count:
+          type: integer
+      title: ListMailItemsResponse
   securitySchemes:
     bearer_auth:
       type: http

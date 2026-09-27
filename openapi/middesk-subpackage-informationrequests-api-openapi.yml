@@ -42,22 +42,6 @@ paths:
                 $ref: '#/components/schemas/type_informationRequests_ListInformationRequestsResponse'
 components:
   schemas:
-    type_informationRequests_ListInformationRequestsResponse:
-      type: object
-      properties:
-        object:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AgentInformationRequest'
-        url:
-          type: string
-        has_more:
-          type: boolean
-        count:
-          type: integer
-      title: ListInformationRequestsResponse
     type__AgentInformationRequest:
       type: object
       properties:
@@ -109,6 +93,22 @@ components:
       required:
       - id
       title: AgentInformationRequestCompany
+    type_informationRequests_ListInformationRequestsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentInformationRequest'
+        url:
+          type: string
+        has_more:
+          type: boolean
+        count:
+          type: integer
+      title: ListInformationRequestsResponse
     type__AgentInformationRequestContact:
       type: object
       properties:

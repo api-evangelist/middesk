@@ -215,405 +215,6 @@ paths:
                 description: Any type
 components:
   schemas:
-    type__Signal:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        tin:
-          type:
-          - string
-          - 'null'
-        external_id:
-          type:
-          - string
-          - 'null'
-        model_slug:
-          type: string
-        score:
-          type:
-          - number
-          - 'null'
-          format: double
-        business_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        batch_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        requester:
-          $ref: '#/components/schemas/type__SignalRequester'
-        reasons:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__SignalReasonsItem'
-        addresses:
-          type: array
-          items:
-            type: string
-        people:
-          type: array
-          items:
-            type: string
-        created_at:
-          type: string
-          format: date-time
-      required:
-      - object
-      - id
-      - name
-      - created_at
-      title: Signal
-    type__SignalReasonsItem:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/type__SignalReasonsItemCategory'
-        group:
-          type: string
-        description:
-          type: string
-        code:
-          $ref: '#/components/schemas/type__SignalReasonsItemCode'
-        importance:
-          type: number
-          format: double
-      required:
-      - category
-      - group
-      - description
-      - code
-      title: SignalReasonsItem
-    type__WebsitePhoneNumber:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__WebsitePhoneNumberObject'
-        id:
-          type: string
-          format: uuid
-        number:
-          type: string
-        contact_type:
-          type:
-          - string
-          - 'null'
-        recommended:
-          type:
-          - boolean
-          - 'null'
-        submitted:
-          type: boolean
-        sources:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/type__Source'
-      title: WebsitePhoneNumber
-    type__BusinessSubscriptionAvailabilityBankruptcy:
-      type: string
-      enum:
-      - subscribable
-      - account_unsubscribable
-      title: BusinessSubscriptionAvailabilityBankruptcy
-    type__PoliticallyExposedPersonScreeningSettingsMatchScore:
-      type: string
-      enum:
-      - LOW
-      - MEDIUM
-      - HIGH
-      title: PoliticallyExposedPersonScreeningSettingsMatchScore
-    type__MonitorEventTypesItem:
-      type: object
-      properties:
-        type:
-          type: string
-        enabled_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        status:
-          $ref: '#/components/schemas/type__MonitorEventTypesItemStatus'
-      title: MonitorEventTypesItem
-    type__LitigationCaseStatus:
-      type: string
-      enum:
-      - OPEN
-      - CLOSED
-      - UNKNOWN
-      title: LitigationCaseStatus
-    type__EmailAddressAddressType:
-      type: string
-      enum:
-      - disposable
-      - free
-      - private
-      description: Classification of the email address. Included when email risk data is present.
-      title: EmailAddressAddressType
-    type__Website:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__WebsiteObject'
-        id:
-          type: string
-          format: uuid
-        url:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: The URL that was passed or found for the Business
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        status:
-          $ref: '#/components/schemas/type__WebsiteStatus'
-        http_status_code:
-          type:
-          - integer
-          - 'null'
-          description: HTTP response status code
-        title:
-          type:
-          - string
-          - 'null'
-          description: Website page title
-        description:
-          type:
-          - string
-          - 'null'
-          description: Website meta description
-        domain:
-          oneOf:
-          - $ref: '#/components/schemas/type__WebsiteDomain'
-          - type: 'null'
-          description: Domain registration and redirect information
-        pages:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__WebsitePagesItem'
-          description: Website pages with screenshots
-        parked:
-          type:
-          - boolean
-          - 'null'
-          description: Whether the domain is parked
-        submitted:
-          type: boolean
-          description: Whether the website was submitted by user
-        error:
-          type:
-          - string
-          - 'null'
-          description: Error message if website analysis failed
-        category:
-          type:
-          - string
-          - 'null'
-          description: Website category classification
-        platform:
-          type:
-          - string
-          - 'null'
-          description: Website platform (e.g., instagram.com, facebook.com)
-        posts_summary:
-          type:
-          - string
-          - 'null'
-          description: Summary of posts found on the website or linked social media profiles
-        reviews_summary:
-          type:
-          - string
-          - 'null'
-          description: Summary of reviews found on the website or linked third-party profiles
-        business_id:
-          type: string
-          format: uuid
-        business_name_match:
-          type: boolean
-          description: Whether website content matches business name
-        names:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Name'
-          description: Names found on website
-        phone_numbers:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__WebsitePhoneNumber'
-          description: Phone numbers found on website
-        people:
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-          description: People found on website
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__WebsiteAddressesItem'
-          description: Addresses found on website
-        email_addresses:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/type__WebsiteEmailAddressesItem'
-          description: Email addresses found on website
-        rating:
-          oneOf:
-          - $ref: '#/components/schemas/type__WebsiteRating'
-          - type: 'null'
-      required:
-      - object
-      - id
-      - url
-      - created_at
-      - updated_at
-      - status
-      - parked
-      - submitted
-      - business_id
-      - business_name_match
-      - phone_numbers
-      - addresses
-      title: Website
-    type__AddressIndicatorType:
-      type: string
-      enum:
-      - valid_us_address
-      - deliverability
-      - geographical_location
-      - registered_agent
-      - private_mailbox
-      - location_frequency
-      - property_type
-      - virtual_address
-      title: AddressIndicatorType
-    type_businesses_BusinessUpdateParamTin:
-      type: object
-      properties:
-        tin:
-          type: string
-      title: BusinessUpdateParamTin
-    type__CriminalHistoryChargeSentencesItem:
-      type: object
-      properties:
-        details:
-          type: string
-      title: CriminalHistoryChargeSentencesItem
-    type__IndustryClassificationCategoriesItem:
-      type: object
-      properties:
-        classification_system:
-          $ref: '#/components/schemas/type__IndustryClassificationCategoriesItemClassificationSystem'
-        name:
-          type: string
-          description: Industry name
-        sector:
-          type:
-          - string
-          - 'null'
-          description: Industry sector in CONSTANT_CASE
-        category:
-          type: string
-          description: Industry category in CONSTANT_CASE
-        score:
-          type: number
-          format: double
-          description: Classification confidence score (0.0 to 1.0)
-        high_risk:
-          type: boolean
-          description: Whether this industry is considered high risk
-        naics_codes:
-          type: array
-          items:
-            type: string
-          description: NAICS (2022) classification codes
-        sic_codes:
-          type: array
-          items:
-            type: string
-          description: SIC classification codes
-        mcc_codes:
-          type: array
-          items:
-            type: string
-          description: MCC classification codes
-        prohibited_labels:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Prohibited classification labels if applicable
-      title: IndustryClassificationCategoriesItem
-    type__Certification:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__CertificationObject'
-        id:
-          type: string
-          format: uuid
-        business_id:
-          type: string
-          format: uuid
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        entrance_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        exit_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        certification_id:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        key:
-          type: string
-        certification_type:
-          $ref: '#/components/schemas/type__CertificationCertificationType'
-        external_sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__CertificationExternalSourcesItem'
-      required:
-      - object
-      - name
-      - key
-      - certification_type
-      - external_sources
-      title: Certification
     type__AddressDeliverabilityAnalysis:
       type: object
       properties:
@@ -624,105 +225,114 @@ components:
         sub_key:
           $ref: '#/components/schemas/type__AddressDeliverabilityAnalysisSubKey'
       title: AddressDeliverabilityAnalysis
-    type__BusinessSubscriptionAvailabilityLien:
+    type__ReviewTaskCategory:
       type: string
       enum:
-      - subscribable
-      - account_unsubscribable
-      title: BusinessSubscriptionAvailabilityLien
-    type__RequesterType:
-      type: string
-      enum:
-      - account
-      - user
-      title: RequesterType
-    type__BankruptcyCaseUpdatesItem:
+      - bankruptcies
+      - global_watchlists
+      - name
+      - people_litigations
+      - loans
+      - kyc
+      - watchlist
+      - phone
+      - formation
+      - people_criminal_history
+      - adverse_media
+      - litigations
+      - tin_type
+      - address
+      - sos
+      - web
+      - liens
+      - people_bankruptcies
+      - industry
+      - tin
+      - people
+      - people_liens
+      - website
+      - politically_exposed_persons
+      - email
+      title: ReviewTaskCategory
+    type__LoanDetails:
       type: object
       properties:
-        guid:
+        gender:
+          type:
+          - string
+          - 'null'
+        veteran:
+          type:
+          - string
+          - 'null'
+        naics_code:
+          oneOf:
+          - $ref: '#/components/schemas/type__LoanDetailsNaicsCode'
+          - type: 'null'
+        non_profit:
+          type:
+          - string
+          - 'null'
+        business_type:
+          type:
+          - string
+          - 'null'
+        jobs_reported:
+          type:
+          - string
+          - 'null'
+        race_ethnicity:
+          type:
+          - string
+          - 'null'
+      title: LoanDetails
+    type__BankruptcyDebtorsItem:
+      type: object
+      properties:
+        name:
           type: string
-        pub_date:
-          type: string
-        description:
-          type: string
-      title: BankruptcyCaseUpdatesItem
-    type__WatchlistResult:
+      title: BankruptcyDebtorsItem
+    type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemConfidenceLevel:
+      type: string
+      enum:
+      - low
+      - moderate
+      - high
+      title: AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemConfidenceLevel
+    type__IndustryClassification:
       type: object
       properties:
         object:
-          $ref: '#/components/schemas/type__WatchlistResultObject'
+          $ref: '#/components/schemas/type__IndustryClassificationObject'
         id:
           type: string
           format: uuid
         status:
-          type: string
-        entity_name:
-          type: string
-        entity_aliases:
+          $ref: '#/components/schemas/type__IndustryClassificationStatus'
+        categories:
           type: array
           items:
-            type: string
-        listed_at:
+            $ref: '#/components/schemas/type__IndustryClassificationCategoriesItem'
+        created_at:
+          type: string
+          format: date-time
+        completed_at:
           type:
           - string
           - 'null'
           format: date-time
-        agency_information_url:
-          type: string
-        agency_list_url:
-          type: string
-        score:
-          type:
-          - number
-          - 'null'
-          format: double
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__WatchlistResultAddressesItem'
-        url:
-          type:
-          - string
-          - 'null'
-          format: uri
-        list_country:
-          type: string
-        list_url:
-          type:
-          - string
-          - 'null'
-          format: uri
-        list_region:
-          type: string
-        categories:
-          type: array
-          items:
-            type: string
+        website:
+          oneOf:
+          - $ref: '#/components/schemas/type__IndustryClassificationWebsite'
+          - type: 'null'
       required:
       - object
       - id
       - status
-      - entity_name
-      - entity_aliases
-      - agency_information_url
-      - agency_list_url
-      - score
-      title: WatchlistResult
-    type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemName:
-      type: string
-      enum:
-      - positive
-      - negative
-      - neutral
-      title: AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemName
-    type__IndustryClassificationWebsiteStatus:
-      type: string
-      enum:
-      - online
-      - offline
-      - unknown
-      title: IndustryClassificationWebsiteStatus
-    type__Address:
+      - categories
+      - created_at
+      title: IndustryClassification
+    type__Litigation:
       type: object
       properties:
         object:
@@ -730,198 +340,49 @@ components:
         id:
           type: string
           format: uuid
-        address_line1:
-          type:
-          - string
-          - 'null'
-        address_line2:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        state:
-          oneOf:
-          - $ref: '#/components/schemas/type__AddressState'
-          - type: 'null'
-        postal_code:
-          type:
-          - string
-          - 'null'
-        full_address:
+        case_name:
           type: string
-        submitted:
-          type: boolean
-        latitude:
-          type:
-          - number
-          - 'null'
-          format: double
-        longitude:
-          type:
-          - number
-          - 'null'
-          format: double
-        property_type:
-          oneOf:
-          - $ref: '#/components/schemas/type__AddressPropertyType'
-          - type: 'null'
-        deliverable:
-          type: boolean
-        deliverability_analysis:
-          oneOf:
-          - $ref: '#/components/schemas/type__AddressDeliverabilityAnalysis'
-          - type: 'null'
-        street_view_available:
-          type:
-          - boolean
-          - 'null'
-        labels:
+        case_number:
+          type: string
+        case_status:
+          $ref: '#/components/schemas/type__LitigationCaseStatus'
+        case_type:
+          type: string
+        filing_date:
+          type: string
+          format: date
+        judgments:
           type: array
           items:
-            type: string
-        created_at:
+            $ref: '#/components/schemas/type__Judgment'
+        jurisdiction:
           type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        registered_agent_name:
+        jurisdiction_state:
           type:
           - string
           - 'null'
-        cmra:
-          type: boolean
-        business_id:
+        party_type:
           type: string
-          format: uuid
-        location_count:
-          type:
-          - integer
-          - 'null'
-        is_registered_agent:
-          type:
-          - boolean
-          - 'null'
-        sources:
+        parties:
           type: array
           items:
-            $ref: '#/components/schemas/type__Source'
-        rating:
-          $ref: '#/components/schemas/type__AddressRating'
+            $ref: '#/components/schemas/type__LitigationPartiesItem'
       required:
       - object
       - id
-      - full_address
-      - submitted
-      - created_at
-      - updated_at
-      - business_id
-      - sources
-      - rating
-      title: Address
-    type__IndustryClassificationStatus:
-      type: string
-      enum:
-      - pending
-      - completed
-      - failed
-      title: IndustryClassificationStatus
-    type__PolicyResult:
+      - case_name
+      - case_number
+      - case_status
+      - case_type
+      - filing_date
+      - party_type
+      title: Litigation
+    type__CriminalHistoryChargeSentencesItem:
       type: object
       properties:
-        object:
-          type: string
-        id:
-          type: string
-          description: Policy result ID
-        result:
-          type: string
-          description: Policy result outcome
-        created_at:
-          type: string
-          description: Creation timestamp
-        matched:
-          type:
-          - string
-          - 'null'
-          description: Match status
-        executed:
-          type: boolean
-          description: Execution status
-        name:
-          type:
-          - string
-          - 'null'
-          description: Policy name
         details:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Additional details
-        owner_id:
           type: string
-          description: Owner ID
-        owner_type:
-          type: string
-          description: Owner type
-        business_id:
-          type: string
-          description: Business ID
-        type_of:
-          type: string
-          description: Type of policy result
-        policy_action_results:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__PolicyActionResult'
-      title: PolicyResult
-    type__Requester:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/type__RequesterType'
-        name:
-          type: string
-        requested_at:
-          type: string
-          format: date-time
-      required:
-      - id
-      - type
-      - name
-      - requested_at
-      title: Requester
-    type__SubmittedAddressComponent:
-      type: object
-      properties:
-        address_line_1:
-          type: string
-        address_line_2:
-          type: string
-        city:
-          type: string
-        state:
-          $ref: '#/components/schemas/type__SubmittedAddressComponentState'
-        postal_code:
-          type: string
-        country:
-          type: string
-      required:
-      - address_line_1
-      - city
-      - state
-      title: SubmittedAddressComponent
-    type__AdverseMediaScreeningResultsItemObject:
-      type: string
-      enum:
-      - adverse_media_screening_result
-      title: AdverseMediaScreeningResultsItemObject
+      title: CriminalHistoryChargeSentencesItem
     type__LienDebtorsItemAddressesItem:
       type: object
       properties:
@@ -940,6 +401,62 @@ components:
         postal_code:
           type: string
       title: LienDebtorsItemAddressesItem
+    type__WebsiteRatingQualityRating:
+      type: string
+      enum:
+      - low
+      - moderate
+      - high
+      - not_available
+      title: WebsiteRatingQualityRating
+    type__AddressIndicatorRating:
+      type: string
+      enum:
+      - positive
+      - negative
+      - neutral
+      title: AddressIndicatorRating
+    type__EmailRatingRiskRating:
+      type: string
+      enum:
+      - low
+      - moderate
+      - high
+      title: EmailRatingRiskRating
+    type__Profile:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/type__ProfileType'
+        external_id:
+          type:
+          - string
+          - 'null'
+        url:
+          type: string
+          format: uri
+        metadata:
+          $ref: '#/components/schemas/type__ProfileMetadata'
+        rating:
+          type:
+          - number
+          - 'null'
+          format: double
+        rating_count:
+          type:
+          - integer
+          - 'null'
+      required:
+      - object
+      - id
+      - type
+      - url
+      title: Profile
     type__IndustryClassificationWebsite:
       type: object
       properties:
@@ -948,598 +465,15 @@ components:
         parked:
           type: boolean
       title: IndustryClassificationWebsite
-    type_businesses_BusinessRequestParamAddressesItem:
-      oneOf:
-      - $ref: '#/components/schemas/type__SubmittedAddressFull'
-      - $ref: '#/components/schemas/type__SubmittedAddressComponent'
-      title: BusinessRequestParamAddressesItem
-    type__CriminalHistoryChargeDispositionsItem:
-      type: object
-      properties:
-        disposition:
-          type:
-          - string
-          - 'null'
-        disposition_date:
-          type:
-          - string
-          - 'null'
-          format: date
-        disposition_type:
-          type:
-          - string
-          - 'null'
-      title: CriminalHistoryChargeDispositionsItem
-    type__LienStatusCategory:
+    type__ReviewTaskStatus:
       type: string
       enum:
-      - active
-      - open
-      - closed
-      - terminated
-      - processing
-      - unknown
-      description: Categorized status of the lien
-      title: LienStatusCategory
-    type__AddressDeliverabilityAnalysisSubKey:
-      type: string
-      enum:
-      - deliverable
-      - undeliverable
-      - unknown
-      title: AddressDeliverabilityAnalysisSubKey
-    type__CriminalHistoryRecordPerson:
-      type: object
-      properties:
-        dob:
-          type:
-          - string
-          - 'null'
-          format: date
-      title: CriminalHistoryRecordPerson
-    type_businesses_BusinessRequestParamOrdersItemSubproductsItem:
-      type: string
-      enum:
-      - articles_of_incorporation
-      - certificate_of_good_standing
-      - articles_of_incorporation_with_fallback
-      - ucc_documents
-      - web_analysis
-      - industry_classification
-      title: BusinessRequestParamOrdersItemSubproductsItem
-    type__AdverseMediaScreeningResultsItem:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemObject'
-        id:
-          type: string
-          format: uuid
-        risk_scores:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        match_score:
-          type: number
-          format: double
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItem'
-      title: AdverseMediaScreeningResultsItem
-    type__PolicyActionResultPolicyAction:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Policy action ID
-        action_type:
-          type: string
-          description: Type of action
-        options:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Action options
-        policy_version_id:
-          type: string
-          description: Policy version ID
-      title: PolicyActionResultPolicyAction
-    type__FmcsaRegistration:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__FmcsaRegistrationObject'
-        id:
-          type: string
-          format: uuid
-        dot_number:
-          type: string
-          description: Department of Transportation (DOT) number
-        legal_name:
-          type: string
-          description: Legal name of the carrier
-        dba_name:
-          type:
-          - string
-          - 'null'
-          description: Doing Business As name
-        source:
-          type: string
-          format: uri
-          description: Source URL for the FMCSA registration data
-        addresses:
-          type: array
-          items:
-            type: string
-          description: List of carrier addresses
-      required:
-      - object
-      - id
-      - dot_number
-      - legal_name
-      - source
-      - addresses
-      title: FmcsaRegistration
-    type_businesses_BusinessRequestParamOrdersItemProduct:
-      type: string
-      enum:
-      - identity
-      - liens
-      - adverse_media
-      - bankruptcies
-      - business_enrichment
-      - documents
-      - enhanced_screenings
-      - kyc
-      - litigations
-      - people_litigations
-      - people_bankruptcies
-      - people_tax_liens
-      - people_ucc_liens
-      - people_criminal_history
-      - tin
-      - website
-      - business_verification_qualify
-      - business_verification_verify
-      - tax_liens
-      - ucc_liens
-      - email_risk
-      description: The product to order.
-      title: BusinessRequestParamOrdersItemProduct
-    type_businesses_ListBusinessesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__BusinessItem'
-        object:
-          type: string
-        has_more:
-          type: boolean
-        total_count:
-          type: integer
-      required:
-      - object
-      - has_more
-      title: ListBusinessesResponse
-    type__PoliticallyExposedPersonScreeningResultsItemObject:
-      type: string
-      enum:
-      - politically_exposed_person_screening_result
-      title: PoliticallyExposedPersonScreeningResultsItemObject
-    type__Name:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        submitted:
-          type: boolean
-        type:
-          oneOf:
-          - $ref: '#/components/schemas/type__NameType'
-          - type: 'null'
-        business_id:
-          type: string
-          format: uuid
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
-      required:
-      - object
-      - id
-      - name
-      - submitted
-      - business_id
-      - sources
-      title: Name
-    type__AdverseMediaScreeningExclusionSettings:
-      type: object
-      properties:
-        criteria_match_threshold:
-          type: number
-          format: double
-        max_people_screened:
-          type: integer
-        max_names_screened:
-          type: integer
-        people:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-      title: AdverseMediaScreeningExclusionSettings
-    type__EmailIndicatorType:
-      type: string
-      enum:
-      - email_validity
-      - email_deliverability
-      - email_domain_reputation
-      - email_domain_configuration
-      - email_account_activity
-      - email_data_breach_exposure
-      - email_address_type
-      title: EmailIndicatorType
-    type__BusinessSubscriptionAvailability:
-      type: object
-      properties:
-        bankruptcy:
-          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityBankruptcy'
-        certification:
-          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityCertification'
-        registration:
-          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityRegistration'
-        tin:
-          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityTin'
-        watchlist_result:
-          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityWatchlistResult'
-        lien:
-          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityLien'
-      title: BusinessSubscriptionAvailability
-    type__Judgment:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        litigation_id:
-          type: string
-          format: uuid
-        docket_entry_date:
-          type: string
-          format: date
-        text:
-          type: string
-        amount_cents:
-          type:
-          - integer
-          - 'null'
-          description: The judgment amount in cents. For example, 5000000 represents $50,000.00. Null if no monetary amount is associated with the judgment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-      - id
-      - litigation_id
-      - docket_entry_date
-      - text
-      - created_at
-      - updated_at
-      title: Judgment
-    type__LienSecuredPartiesItemType:
-      type: string
-      enum:
-      - ORGANIZATION
-      - INDIVIDUAL
-      title: LienSecuredPartiesItemType
-    type__LitigationPartiesItem:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        role:
-          $ref: '#/components/schemas/type__LitigationPartiesItemRole'
-        litigation_id:
-          type: string
-          format: uuid
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - role
-      - litigation_id
-      title: LitigationPartiesItem
-    type__WatchlistResultObject:
-      type: string
-      enum:
-      - watchlist_result
-      title: WatchlistResultObject
-    type__CertificationCertificationType:
-      type: string
-      enum:
-      - federal
-      - self_certified
-      title: CertificationCertificationType
-    type__OrderRequester:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        type:
-          oneOf:
-          - $ref: '#/components/schemas/type__OrderRequesterType'
-          - type: 'null'
-      title: OrderRequester
-    type__OrderRequesterType:
-      type: string
-      enum:
-      - account
-      - user
-      - api_key
-      title: OrderRequesterType
-    type__AdverseMediaScreeningResultsItemItemsItemFlags:
-      type: object
-      properties:
-        risks:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlagsRisksItem'
-        sentiments:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItem'
-      title: AdverseMediaScreeningResultsItemItemsItemFlags
-    type__ReviewTaskLabel:
-      type: string
-      enum:
-      - Politically Exposed Persons
-      - Web Presence Quality
-      - KYC
-      - People Bankruptcies
-      - Address Risk
-      - Global Watchlists
-      - Phone Number
-      - Third Party Profile Status
-      - Liens
-      - Third Party Profiles
-      - Time in Business
-      - Web - Email Address
-      - Risky Keywords
-      - SOS Domestic Sub‑status
-      - PPP Loans
-      - Secretary of State Filings
-      - Entity Type
-      - SOS Filings
-      - People Criminal History
-      - Adverse Media
-      - Web - People
-      - Office Address
-      - Entity Type Match
-      - Web - Phone Number
-      - Business Name
-      - Bankruptcies
-      - Industry Classification
-      - TIN Match
-      - Watchlists
-      - People Litigations
-      - True Industry
-      - People
-      - DBA Name
-      - Domain Ownership
-      - Domain Redirect
-      - TIN Type
-      - Website
-      - TIN Error
-      - Watchlist
-      - Litigations
-      - Web - Business Name
-      - Name Entity Type
-      - Formation State
-      - People Liens
-      - Web - Office Address
-      - Email Risk
-      title: ReviewTaskLabel
-    type__CriminalHistoryRecordObject:
-      type: string
-      enum:
-      - criminal_history/record
-      title: CriminalHistoryRecordObject
-    type__Person:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__PersonObject'
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        submitted:
-          type: boolean
-        business_id:
-          type: string
-          format: uuid
-        titles:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__PersonTitlesItem'
-        people_bankruptcies:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-        litigations:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Litigation'
-        liens:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Lien'
-        criminal_records:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__CriminalHistoryRecord'
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
-      title: Person
-    type__Loan:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__LoanObject'
-        id:
-          type: string
-          format: uuid
-        issued_date:
-          type:
-          - string
-          - 'null'
-          format: date
-        amount:
-          type:
-          - number
-          - 'null'
-          format: double
-        lender:
-          type:
-          - string
-          - 'null'
-        details:
-          oneOf:
-          - $ref: '#/components/schemas/type__LoanDetails'
-          - type: 'null'
-      required:
-      - object
-      - id
-      title: Loan
-    type__LienType:
-      type: string
-      enum:
-      - ucc
-      - state
-      - federal
-      - attachment
-      - judgment
-      description: Type of lien
-      title: LienType
-    type__BusinessSubscriptionAvailabilityWatchlistResult:
-      type: string
-      enum:
-      - subscribable
-      - account_unsubscribable
-      title: BusinessSubscriptionAvailabilityWatchlistResult
-    type__FmcsaRegistrationObject:
-      type: string
-      enum:
-      - fmcsa_registration
-      title: FmcsaRegistrationObject
-    type__WatchlistSource:
-      type: object
-      properties:
-        object:
-          type: string
-        agency:
-          type: string
-        agency_abbr:
-          type: string
-        organization:
-          type: string
-        title:
-          type: string
-        abbr:
-          type: string
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__WatchlistResult'
-      required:
-      - object
-      - agency
-      - agency_abbr
-      - organization
-      - title
-      - abbr
-      - results
-      title: WatchlistSource
-    type__SignalReasonsItemCode:
-      type: string
-      enum:
-      - I301
-      - I302
-      - I304
-      - I102
-      - I103
-      - I107
-      - I108
-      - I109
-      - I111
-      - I601
-      - I603
-      - I201
-      - I202
-      - I203
-      - I204
-      - V010
-      - V011
-      - V101
-      - V102
-      - V103
-      - V104
-      - V501
-      - V502
-      - V503
-      - V505
-      - V748
-      - V749
-      - V750
-      - V751
-      - V752
-      - V753
-      - V801
-      - V1101
-      - V1201
-      - V1302
-      - E500
-      - E501
-      - E502
-      - E503
-      - E1101
-      - E1102
-      - E1201
-      title: SignalReasonsItemCode
-    type__SubmittedAddressComponentState:
+      - success
+      - failure
+      - warning
+      - neutral
+      title: ReviewTaskStatus
+    type__RegistrationState:
       type: string
       enum:
       - AL
@@ -1592,165 +526,7 @@ components:
       - WV
       - WI
       - WY
-      title: SubmittedAddressComponentState
-    type__IndustryClassificationCategoriesItemClassificationSystem:
-      type: string
-      enum:
-      - NAICS
-      - MCC
-      - Prohibited
-      title: IndustryClassificationCategoriesItemClassificationSystem
-    type__SubmittedPerson:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Full name of the person
-        title:
-          type: string
-          description: Job title or role
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-      required:
-      - name
-      title: SubmittedPerson
-    type__CriminalHistoryChargeObject:
-      type: string
-      enum:
-      - criminal_history/charge
-      title: CriminalHistoryChargeObject
-    type__LienDebtorsItemType:
-      type: string
-      enum:
-      - ORGANIZATION
-      - INDIVIDUAL
-      - UNKNOWN
-      - Business
-      title: LienDebtorsItemType
-    type__OrderStatus:
-      type: string
-      enum:
-      - created
-      - pending
-      - audited
-      - completed
-      - approved
-      - rejected
-      title: OrderStatus
-    type__IndustryClassification:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__IndustryClassificationObject'
-        id:
-          type: string
-          format: uuid
-        status:
-          $ref: '#/components/schemas/type__IndustryClassificationStatus'
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__IndustryClassificationCategoriesItem'
-        created_at:
-          type: string
-          format: date-time
-        completed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        website:
-          oneOf:
-          - $ref: '#/components/schemas/type__IndustryClassificationWebsite'
-          - type: 'null'
-      required:
-      - object
-      - id
-      - status
-      - categories
-      - created_at
-      title: IndustryClassification
-    type__MonitorEventTypesItemStatus:
-      type: string
-      enum:
-      - active
-      - unavailable
-      - pending
-      title: MonitorEventTypesItemStatus
-    type__Subscription:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-      title: Subscription
-    type__BusinessSubscriptionAvailabilityTin:
-      type: string
-      enum:
-      - subscribable
-      - account_unsubscribable
-      title: BusinessSubscriptionAvailabilityTin
-    type__PoliticallyExposedPersonScreeningSettings:
-      type: object
-      properties:
-        people:
-          type: string
-        match_score:
-          $ref: '#/components/schemas/type__PoliticallyExposedPersonScreeningSettingsMatchScore'
-      title: PoliticallyExposedPersonScreeningSettings
-    type__PolicyActionResult:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          description: Policy action result ID
-        details:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Action details
-        executed:
-          type: boolean
-          description: Execution status
-        policy_action:
-          $ref: '#/components/schemas/type__PolicyActionResultPolicyAction'
-      title: PolicyActionResult
-    type_businesses_BusinessRequestParamOrdersItemOptions:
-      type: object
-      properties:
-        person_match:
-          type: boolean
-          description: When true on a `tin` order, enables person-name matching against IRS records.
-      description: Per-order configuration flags.
-      title: BusinessRequestParamOrdersItemOptions
-    type__PersonObject:
-      type: string
-      enum:
-      - person
-      title: PersonObject
-    type__OrderSubproductsItem:
-      type: string
-      enum:
-      - Articles of Incorporation
-      - Certificate of Good Standing
-      - Articles of Incorporation with Certificate of Good Standing fallback
-      - ucc_documents
-      - web_analysis
-      - industry_classification
-      title: OrderSubproductsItem
-    type__AddressPropertyType:
-      type: string
-      enum:
-      - commercial
-      - residential
-      title: AddressPropertyType
+      title: RegistrationState
     type__WatchlistAgency:
       type: object
       properties:
@@ -1765,184 +541,679 @@ components:
       - name
       - org
       title: WatchlistAgency
-    type__CriminalHistoryCaseObject:
-      type: string
-      enum:
-      - criminal_history/case
-      title: CriminalHistoryCaseObject
-    type__LienSecuredPartiesItemAddressesItem:
+    type__WebsiteDomainRegistrar:
       type: object
       properties:
-        full_address:
-          type: string
-        address_line1:
-          type: string
-        address_line2:
+        organization:
           type:
           - string
           - 'null'
-        city:
+        name:
           type: string
-        state:
-          type: string
-        postal_code:
-          type: string
-      title: LienSecuredPartiesItemAddressesItem
-    type__AddressIndicatorName:
-      type: string
-      enum:
-      - Valid US address
-      - Commercial registered agent
-      - Geographical location
-      - Private mailbox
-      - Virtual address
-      - Location frequency
-      - Deliverability
-      - Property type
-      title: AddressIndicatorName
-    type__LitigationPartiesItemRole:
-      type: string
-      enum:
-      - Plaintiff
-      - Defendant
-      - Cross-Plaintiff
-      - Cross-Defendant
-      title: LitigationPartiesItemRole
-    type__Lien:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__LienObject'
-        type:
-          $ref: '#/components/schemas/type__LienType'
-          description: Type of lien
-        id:
-          type: string
-          format: uuid
-        business_id:
-          type: string
-          format: uuid
-        debtors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__LienDebtorsItem'
-        secured_parties:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__LienSecuredPartiesItem'
-        file_number:
-          type:
-          - string
-          - 'null'
-          description: Filing number for the lien
-        state:
-          $ref: '#/components/schemas/type__LienState'
-          description: State where the lien was filed
-        status:
-          $ref: '#/components/schemas/type__LienStatus'
-          description: Current status of the lien
-        filing_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: Date the lien was filed
-        updated_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: Date the lien was last updated
-        lapse_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: Date the lien lapses/expires
-        collateral:
-          type:
-          - string
-          - 'null'
-          description: Description of collateral securing the lien
-        collateral_type:
-          oneOf:
-          - $ref: '#/components/schemas/type__LienCollateralType'
-          - type: 'null'
-          description: Type of collateral
-        negative_pledge:
-          type: boolean
-          description: Whether this is a negative pledge
-        confirmation_number:
-          type:
-          - string
-          - 'null'
-        loan_principal_amount_cents:
-          type:
-          - integer
-          - 'null'
-          description: Loan principal amount in cents
-        source:
+        url:
           type:
           - string
           - 'null'
           format: uri
-          description: Source URL for the lien data
-        packet_number:
+      title: WebsiteDomainRegistrar
+    type__SignalRequester:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - type
+      - name
+      title: SignalRequester
+    type__WebsiteRating:
+      type: object
+      properties:
+        indicators:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__WebsiteIndicator'
+        quality_rating:
+          $ref: '#/components/schemas/type__WebsiteRatingQualityRating'
+      required:
+      - quality_rating
+      title: WebsiteRating
+    type__RequesterType:
+      type: string
+      enum:
+      - account
+      - user
+      title: RequesterType
+    type__TaxExemptOrganization:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        ein:
+          type: string
+        name:
+          type: string
+        section:
           type:
           - string
           - 'null'
-        lien_termination:
+        ruling_date:
           type:
-          - object
+          - string
           - 'null'
-          additionalProperties:
-            description: Any type
-          description: Lien termination details if terminated
-        liability_cents:
+          format: date
+        tax_period:
           type:
-          - integer
+          - string
           - 'null'
-          description: Liability amount in cents
-        alternative_designation:
-          oneOf:
-          - $ref: '#/components/schemas/type__LienAlternativeDesignation'
-          - type: 'null'
-        status_category:
-          $ref: '#/components/schemas/type__LienStatusCategory'
-          description: Categorized status of the lien
-        owner_id:
+          format: date
+        revoked_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      title: TaxExemptOrganization
+    type__SubmittedAddressComponent:
+      type: object
+      properties:
+        address_line_1:
           type: string
-          format: uuid
-          description: Polymorphic owner ID (typically business_id)
-        owner_type:
+        address_line_2:
           type: string
-          description: Polymorphic owner type (typically Business)
-        filed_by_account:
-          type:
-          - boolean
-          - 'null'
-          description: Whether the lien was filed by the account
-        documents:
+        city:
+          type: string
+        state:
+          $ref: '#/components/schemas/type__SubmittedAddressComponentState'
+        postal_code:
+          type: string
+        country:
+          type: string
+      required:
+      - address_line_1
+      - city
+      - state
+      title: SubmittedAddressComponent
+    type__ReviewTask:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/type__ReviewTaskCategory'
+        key:
+          $ref: '#/components/schemas/type__ReviewTaskKey'
+        label:
+          $ref: '#/components/schemas/type__ReviewTaskLabel'
+        message:
+          type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/type__ReviewTaskStatus'
+        sub_label:
+          type: string
+        sources:
           type: array
           items:
-            $ref: '#/components/schemas/type__Document'
-          description: Associated lien documents
+            $ref: '#/components/schemas/type__Source'
+      required:
+      - category
+      - key
+      - label
+      - message
+      - name
+      - status
+      - sub_label
+      - sources
+      title: ReviewTask
+    type__Monitor:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        event_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__MonitorEventTypesItem'
       required:
       - object
-      - type
       - id
-      - business_id
-      - debtors
-      - secured_parties
-      - file_number
-      - state
+      - created_at
+      - event_types
+      title: Monitor
+    type__AdverseMediaScreening:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItem'
+        exclusion_settings:
+          $ref: '#/components/schemas/type__AdverseMediaScreeningExclusionSettings'
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - results
+      title: AdverseMediaScreening
+    type__LienDebtorsItemType:
+      type: string
+      enum:
+      - ORGANIZATION
+      - INDIVIDUAL
+      - UNKNOWN
+      - Business
+      title: LienDebtorsItemType
+    type_businesses_BusinessRequestParamAddressesItem:
+      oneOf:
+      - $ref: '#/components/schemas/type__SubmittedAddressFull'
+      - $ref: '#/components/schemas/type__SubmittedAddressComponent'
+      title: BusinessRequestParamAddressesItem
+    type__Watchlist:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        hit_count:
+          type: integer
+        agencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__WatchlistAgency'
+        lists:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__WatchlistSource'
+        people:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+      required:
+      - object
+      - id
+      - hit_count
+      - agencies
+      - lists
+      - people
+      title: Watchlist
+    type_businesses_ListBusinessesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__BusinessItem'
+        object:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - has_more
+      title: ListBusinessesResponse
+    type__IndustryClassificationObject:
+      type: string
+      enum:
+      - industry_classification
+      title: IndustryClassificationObject
+    type__EmailRating:
+      type: object
+      properties:
+        risk_rating:
+          $ref: '#/components/schemas/type__EmailRatingRiskRating'
+        indicators:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__EmailIndicator'
+      required:
+      - risk_rating
+      title: EmailRating
+    type_businesses_BusinessRequestParamOrdersItemSubproductsItem:
+      type: string
+      enum:
+      - articles_of_incorporation
+      - certificate_of_good_standing
+      - articles_of_incorporation_with_fallback
+      - ucc_documents
+      - web_analysis
+      - industry_classification
+      title: BusinessRequestParamOrdersItemSubproductsItem
+    type__LoanObject:
+      type: string
+      enum:
+      - loan
+      title: LoanObject
+    type__WatchlistResultObject:
+      type: string
+      enum:
+      - watchlist_result
+      title: WatchlistResultObject
+    type__User:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        roles:
+          type: array
+          items:
+            type: string
+        image_url:
+          type: string
+          format: uri
+        directory_managed:
+          type: boolean
+        last_login_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        settings:
+          type: object
+          additionalProperties:
+            description: Any type
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - object
+      - id
+      - name
+      - email
+      - roles
+      - created_at
+      title: User
+    type__LienCollateralType:
+      type: string
+      enum:
+      - Blanket
+      - Collateral
+      - Unknown
+      - All Assets and Receivables
+      - All Receivables
+      - All Assets
+      - Named Assets
+      - Unavailable
+      title: LienCollateralType
+    type__CriminalHistoryRecordPerson:
+      type: object
+      properties:
+        dob:
+          type:
+          - string
+          - 'null'
+          format: date
+      title: CriminalHistoryRecordPerson
+    type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemName:
+      type: string
+      enum:
+      - positive
+      - negative
+      - neutral
+      title: AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemName
+    type__WebsiteIndicator:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type__WebsiteIndicatorType'
+        name:
+          type: string
+        rating:
+          $ref: '#/components/schemas/type__WebsiteIndicatorRating'
+        value:
+          type: string
+        description:
+          type: string
+      required:
+      - type
+      - name
+      - rating
+      - value
+      - description
+      title: WebsiteIndicator
+    type__WebsiteIndicatorType:
+      type: string
+      enum:
+      - domain_age
+      - top_level_domain
+      - content_diversity
+      - contact_info
+      - compliance_info
+      - page_count
+      - broken_links
+      - domain_consistency
+      - update_frequency
+      - filler_text
+      - image_quality
+      - last_updated
+      - third_party_profile_links
+      - us_business_presence
+      - spelling_and_grammar
+      - https
+      - domain_ownership
+      title: WebsiteIndicatorType
+    type__EmailIndicator:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type__EmailIndicatorType'
+        name:
+          type: string
+        rating:
+          $ref: '#/components/schemas/type__EmailIndicatorRating'
+        value:
+          type: string
+        description:
+          type: string
+      required:
+      - type
+      - name
+      - rating
+      - value
+      - description
+      title: EmailIndicator
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type__CriminalHistoryChargeObject:
+      type: string
+      enum:
+      - criminal_history/charge
+      title: CriminalHistoryChargeObject
+    type__AdverseMediaScreeningResultsItemItemsItemFlagsRisksItemConfidenceLevel:
+      type: string
+      enum:
+      - low
+      - moderate
+      - high
+      title: AdverseMediaScreeningResultsItemItemsItemFlagsRisksItemConfidenceLevel
+    type__AdverseMediaScreeningResultsItemItemsItemFlags:
+      type: object
+      properties:
+        risks:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlagsRisksItem'
+        sentiments:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItem'
+      title: AdverseMediaScreeningResultsItemItemsItemFlags
+    type__WebsiteEmailAddressesItem:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__WebsiteEmailAddressesItemObject'
+        email:
+          type: string
+        id:
+          type: string
+          format: uuid
+        submitted:
+          type: boolean
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      title: WebsiteEmailAddressesItem
+    type__FmcsaRegistrationObject:
+      type: string
+      enum:
+      - fmcsa_registration
+      title: FmcsaRegistrationObject
+    type__BusinessSubscriptionAvailabilityCertification:
+      type: string
+      enum:
+      - subscribable
+      - account_unsubscribable
+      title: BusinessSubscriptionAvailabilityCertification
+    type__CertificationCertificationType:
+      type: string
+      enum:
+      - federal
+      - self_certified
+      title: CertificationCertificationType
+    type__EmailIndicatorType:
+      type: string
+      enum:
+      - email_validity
+      - email_deliverability
+      - email_domain_reputation
+      - email_domain_configuration
+      - email_account_activity
+      - email_data_breach_exposure
+      - email_address_type
+      title: EmailIndicatorType
+    type__AdverseMediaScreeningExclusionSettings:
+      type: object
+      properties:
+        criteria_match_threshold:
+          type: number
+          format: double
+        max_people_screened:
+          type: integer
+        max_names_screened:
+          type: integer
+        people:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+      title: AdverseMediaScreeningExclusionSettings
+    type__PoliticallyExposedPersonScreeningSettings:
+      type: object
+      properties:
+        people:
+          type: string
+        match_score:
+          $ref: '#/components/schemas/type__PoliticallyExposedPersonScreeningSettingsMatchScore'
+      title: PoliticallyExposedPersonScreeningSettings
+    type__Document:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__DocumentObject'
+        id:
+          type: string
+          format: uuid
+        document_type:
+          type: string
+          description: 'Type of document. Common values include: Initial_Filing, Certificate of Good Standing, Articles of Incorporation, Initial Filing (UCC1), Amendment (UCC3)'
+        filename:
+          type: string
+          description: Name of the document file
+        content_type:
+          type: string
+          description: MIME type of the document
+        size:
+          type: integer
+          description: File size in bytes
+        download_url:
+          type: string
+          format: uri
+          description: URL to download the document
+        created_at:
+          type: string
+          format: date-time
+        source:
+          $ref: '#/components/schemas/type__DocumentSource'
+        filing_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Additional document metadata
+      required:
+      - object
+      - id
+      - document_type
+      - filename
+      - content_type
+      - size
+      - download_url
+      - created_at
+      title: Document
+    type__AdverseMediaScreeningResultsItemObject:
+      type: string
+      enum:
+      - adverse_media_screening_result
+      title: AdverseMediaScreeningResultsItemObject
+    type__AdverseMediaScreeningResultsItemItemsItemFlagsRisksItem:
+      type: object
+      properties:
+        name:
+          type: string
+        confidence_level:
+          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlagsRisksItemConfidenceLevel'
+      title: AdverseMediaScreeningResultsItemItemsItemFlagsRisksItem
+    type__LitigationCaseStatus:
+      type: string
+      enum:
+      - OPEN
+      - CLOSED
+      - UNKNOWN
+      title: LitigationCaseStatus
+    type__WebsitePagesItem:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        category:
+          type: string
+        screenshot_url:
+          type: string
+          format: uri
+      title: WebsitePagesItem
+    type__AdverseMediaScreeningResultsItemItemsItem:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemObject'
+        source_name:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        flags:
+          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlags'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      title: AdverseMediaScreeningResultsItemItemsItem
+    type__Order:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/type__OrderStatus'
+        business_id:
+          type: string
+          format: uuid
+        subproducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__OrderSubproductsItem'
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        monitoring:
+          type: boolean
+        product:
+          $ref: '#/components/schemas/type__OrderProduct'
+        requester:
+          $ref: '#/components/schemas/type__OrderRequester'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - object
+      - id
       - status
-      - filing_date
-      - status_category
-      - owner_id
-      - owner_type
-      - documents
-      title: Lien
+      - business_id
+      - product
+      - created_at
+      - updated_at
+      title: Order
+    type__CertificationExternalSourcesItem:
+      type: object
+      properties:
+        organization:
+          type: string
+        link:
+          type: string
+      title: CertificationExternalSourcesItem
+    type__AddressDeliverabilityAnalysisSubType:
+      type: string
+      enum:
+      - Deliverable
+      - Undeliverable
+      - Unknown
+      title: AddressDeliverabilityAnalysisSubType
     type__Business:
       type: object
       properties:
@@ -2120,23 +1391,52 @@ components:
       - created_at
       - updated_at
       title: Business
-    type__AddressRating:
+    type__IndustryClassificationCategoriesItem:
       type: object
       properties:
-        indicators:
+        classification_system:
+          $ref: '#/components/schemas/type__IndustryClassificationCategoriesItemClassificationSystem'
+        name:
+          type: string
+          description: Industry name
+        sector:
+          type:
+          - string
+          - 'null'
+          description: Industry sector in CONSTANT_CASE
+        category:
+          type: string
+          description: Industry category in CONSTANT_CASE
+        score:
+          type: number
+          format: double
+          description: Classification confidence score (0.0 to 1.0)
+        high_risk:
+          type: boolean
+          description: Whether this industry is considered high risk
+        naics_codes:
           type: array
           items:
-            $ref: '#/components/schemas/type__AddressIndicator'
-        risk_rating:
-          $ref: '#/components/schemas/type__AddressRatingRiskRating'
-      required:
-      - risk_rating
-      title: AddressRating
-    type__IndustryClassificationObject:
-      type: string
-      enum:
-      - industry_classification
-      title: IndustryClassificationObject
+            type: string
+          description: NAICS (2022) classification codes
+        sic_codes:
+          type: array
+          items:
+            type: string
+          description: SIC classification codes
+        mcc_codes:
+          type: array
+          items:
+            type: string
+          description: MCC classification codes
+        prohibited_labels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Prohibited classification labels if applicable
+      title: IndustryClassificationCategoriesItem
     type__BusinessItem:
       type: object
       properties:
@@ -2193,6 +1493,75 @@ components:
       - updated_at
       description: Simplified business object returned in list endpoints
       title: BusinessItem
+    type__PoliticallyExposedPersonScreeningResultsItemObject:
+      type: string
+      enum:
+      - politically_exposed_person_screening_result
+      title: PoliticallyExposedPersonScreeningResultsItemObject
+    type__LienType:
+      type: string
+      enum:
+      - ucc
+      - state
+      - federal
+      - attachment
+      - judgment
+      description: Type of lien
+      title: LienType
+    type__AddressState:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: AddressState
     type__CriminalHistoryCharge:
       type: object
       properties:
@@ -2252,99 +1621,353 @@ components:
       required:
       - object
       title: CriminalHistoryCharge
-    type__WebsiteEmailAddressesItem:
+    type__Address:
       type: object
       properties:
         object:
-          $ref: '#/components/schemas/type__WebsiteEmailAddressesItemObject'
-        email:
           type: string
         id:
           type: string
           format: uuid
+        address_line1:
+          type:
+          - string
+          - 'null'
+        address_line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          oneOf:
+          - $ref: '#/components/schemas/type__AddressState'
+          - type: 'null'
+        postal_code:
+          type:
+          - string
+          - 'null'
+        full_address:
+          type: string
         submitted:
           type: boolean
+        latitude:
+          type:
+          - number
+          - 'null'
+          format: double
+        longitude:
+          type:
+          - number
+          - 'null'
+          format: double
+        property_type:
+          oneOf:
+          - $ref: '#/components/schemas/type__AddressPropertyType'
+          - type: 'null'
+        deliverable:
+          type: boolean
+        deliverability_analysis:
+          oneOf:
+          - $ref: '#/components/schemas/type__AddressDeliverabilityAnalysis'
+          - type: 'null'
+        street_view_available:
+          type:
+          - boolean
+          - 'null'
+        labels:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        registered_agent_name:
+          type:
+          - string
+          - 'null'
+        cmra:
+          type: boolean
+        business_id:
+          type: string
+          format: uuid
+        location_count:
+          type:
+          - integer
+          - 'null'
+        is_registered_agent:
+          type:
+          - boolean
+          - 'null'
         sources:
           type: array
           items:
             $ref: '#/components/schemas/type__Source'
-      title: WebsiteEmailAddressesItem
-    type__AdverseMediaScreeningResultsItemItemsItemFlagsRisksItemConfidenceLevel:
+        rating:
+          $ref: '#/components/schemas/type__AddressRating'
+      required:
+      - object
+      - id
+      - full_address
+      - submitted
+      - created_at
+      - updated_at
+      - business_id
+      - sources
+      - rating
+      title: Address
+    type__CriminalHistoryCaseObject:
       type: string
       enum:
-      - low
-      - moderate
-      - high
-      title: AdverseMediaScreeningResultsItemItemsItemFlagsRisksItemConfidenceLevel
-    type__AddressIndicatorRating:
-      type: string
-      enum:
-      - positive
-      - negative
-      - neutral
-      title: AddressIndicatorRating
-    type__WebsiteIndicatorType:
-      type: string
-      enum:
-      - domain_age
-      - top_level_domain
-      - content_diversity
-      - contact_info
-      - compliance_info
-      - page_count
-      - broken_links
-      - domain_consistency
-      - update_frequency
-      - filler_text
-      - image_quality
-      - last_updated
-      - third_party_profile_links
-      - us_business_presence
-      - spelling_and_grammar
-      - https
-      - domain_ownership
-      title: WebsiteIndicatorType
+      - criminal_history/case
+      title: CriminalHistoryCaseObject
+    type__AddressIndicator:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type__AddressIndicatorType'
+        name:
+          $ref: '#/components/schemas/type__AddressIndicatorName'
+        rating:
+          $ref: '#/components/schemas/type__AddressIndicatorRating'
+        value:
+          type: string
+        description:
+          type: string
+      required:
+      - type
+      - name
+      - rating
+      - value
+      - description
+      title: AddressIndicator
+    type__Judgment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        litigation_id:
+          type: string
+          format: uuid
+        docket_entry_date:
+          type: string
+          format: date
+        text:
+          type: string
+        amount_cents:
+          type:
+          - integer
+          - 'null'
+          description: The judgment amount in cents. For example, 5000000 represents $50,000.00. Null if no monetary amount is associated with the judgment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - litigation_id
+      - docket_entry_date
+      - text
+      - created_at
+      - updated_at
+      title: Judgment
+    type_businesses_BusinessRequestParamOrdersItemOptions:
+      type: object
+      properties:
+        person_match:
+          type: boolean
+          description: When true on a `tin` order, enables person-name matching against IRS records.
+      description: Per-order configuration flags.
+      title: BusinessRequestParamOrdersItemOptions
+    type__Lien:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__LienObject'
+        type:
+          $ref: '#/components/schemas/type__LienType'
+          description: Type of lien
+        id:
+          type: string
+          format: uuid
+        business_id:
+          type: string
+          format: uuid
+        debtors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__LienDebtorsItem'
+        secured_parties:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__LienSecuredPartiesItem'
+        file_number:
+          type:
+          - string
+          - 'null'
+          description: Filing number for the lien
+        state:
+          $ref: '#/components/schemas/type__LienState'
+          description: State where the lien was filed
+        status:
+          $ref: '#/components/schemas/type__LienStatus'
+          description: Current status of the lien
+        filing_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Date the lien was filed
+        updated_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Date the lien was last updated
+        lapse_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Date the lien lapses/expires
+        collateral:
+          type:
+          - string
+          - 'null'
+          description: Description of collateral securing the lien
+        collateral_type:
+          oneOf:
+          - $ref: '#/components/schemas/type__LienCollateralType'
+          - type: 'null'
+          description: Type of collateral
+        negative_pledge:
+          type: boolean
+          description: Whether this is a negative pledge
+        confirmation_number:
+          type:
+          - string
+          - 'null'
+        loan_principal_amount_cents:
+          type:
+          - integer
+          - 'null'
+          description: Loan principal amount in cents
+        source:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Source URL for the lien data
+        packet_number:
+          type:
+          - string
+          - 'null'
+        lien_termination:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Lien termination details if terminated
+        liability_cents:
+          type:
+          - integer
+          - 'null'
+          description: Liability amount in cents
+        alternative_designation:
+          oneOf:
+          - $ref: '#/components/schemas/type__LienAlternativeDesignation'
+          - type: 'null'
+        status_category:
+          $ref: '#/components/schemas/type__LienStatusCategory'
+          description: Categorized status of the lien
+        owner_id:
+          type: string
+          format: uuid
+          description: Polymorphic owner ID (typically business_id)
+        owner_type:
+          type: string
+          description: Polymorphic owner type (typically Business)
+        filed_by_account:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the lien was filed by the account
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Document'
+          description: Associated lien documents
+      required:
+      - object
+      - type
+      - id
+      - business_id
+      - debtors
+      - secured_parties
+      - file_number
+      - state
+      - status
+      - filing_date
+      - status_category
+      - owner_id
+      - owner_type
+      - documents
+      title: Lien
     type__WebsiteEmailAddressesItemObject:
       type: string
       enum:
       - email_address
       title: WebsiteEmailAddressesItemObject
-    type__CriminalHistoryRecord:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__CriminalHistoryRecordObject'
-        id:
-          type: string
-          format: uuid
-        category:
-          type: string
-        state:
-          type:
-          - string
-          - 'null'
-        person:
-          $ref: '#/components/schemas/type__CriminalHistoryRecordPerson'
-        cases:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__CriminalHistoryCase'
-      required:
-      - object
-      - id
-      - category
-      - cases
-      title: CriminalHistoryRecord
-    type__ProfileType:
+    type__WebsiteObject:
       type: string
       enum:
-      - facebook
-      - google
-      - yelp
-      - bbb
-      - linkedin
-      title: ProfileType
-    type__RegistrationState:
+      - website
+      title: WebsiteObject
+    type__ProfileMetadataReviewsItem:
+      type: object
+      properties:
+        rating:
+          type: number
+          format: double
+        posted_at:
+          type: string
+          format: date-time
+      title: ProfileMetadataReviewsItem
+    type__EmailAddressAddressType:
+      type: string
+      enum:
+      - disposable
+      - free
+      - private
+      description: Classification of the email address. Included when email risk data is present.
+      title: EmailAddressAddressType
+    type_businesses_BusinessRequestParamOrdersItem:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/type_businesses_BusinessRequestParamOrdersItemProduct'
+          description: The product to order.
+        subproducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_businesses_BusinessRequestParamOrdersItemSubproductsItem'
+          description: Subproducts to include with the order.
+        options:
+          $ref: '#/components/schemas/type_businesses_BusinessRequestParamOrdersItemOptions'
+          description: Per-order configuration flags.
+      required:
+      - product
+      title: BusinessRequestParamOrdersItem
+    type__SubmittedAddressComponentState:
       type: string
       enum:
       - AL
@@ -2397,214 +2020,360 @@ components:
       - WV
       - WI
       - WY
-      title: RegistrationState
-    type__LienStatus:
-      type: string
-      enum:
-      - created
-      - pending
-      - open
-      - closing
-      - closed
-      - unknown
-      - filed
-      description: Current status of the lien
-      title: LienStatus
-    type__AddressIndicator:
+      title: SubmittedAddressComponentState
+    type_businesses_BusinessUpdateParamTin:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/type__AddressIndicatorType'
-        name:
-          $ref: '#/components/schemas/type__AddressIndicatorName'
-        rating:
-          $ref: '#/components/schemas/type__AddressIndicatorRating'
-        value:
+        tin:
+          type: string
+      title: BusinessUpdateParamTin
+    type__SignalReasonsItem:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/type__SignalReasonsItemCategory'
+        group:
           type: string
         description:
           type: string
-      required:
-      - type
-      - name
-      - rating
-      - value
-      - description
-      title: AddressIndicator
-    type__CertificationExternalSourcesItem:
-      type: object
-      properties:
-        organization:
-          type: string
-        link:
-          type: string
-      title: CertificationExternalSourcesItem
-    type__ReviewObject:
-      type: string
-      enum:
-      - review
-      title: ReviewObject
-    type_businesses_BusinessRequestParamWebsite:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: The website URL for the business
-      description: Website information for the business. Required when name and addresses are not provided when ordering the web_analysis and/or industry_classification subproducts.
-      title: BusinessRequestParamWebsite
-    type__ProfileMetadataReviewsItem:
-      type: object
-      properties:
-        rating:
+        code:
+          $ref: '#/components/schemas/type__SignalReasonsItemCode'
+        importance:
           type: number
           format: double
-        posted_at:
+      required:
+      - category
+      - group
+      - description
+      - code
+      title: SignalReasonsItem
+    type__LitigationPartiesItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        role:
+          $ref: '#/components/schemas/type__LitigationPartiesItemRole'
+        litigation_id:
+          type: string
+          format: uuid
+        created_at:
           type: string
           format: date-time
-      title: ProfileMetadataReviewsItem
-    type__BusinessSupportedDocumentTypesItem:
-      type: string
-      enum:
-      - Articles of Incorporation
-      - Certificate of Good Standing
-      title: BusinessSupportedDocumentTypesItem
-    type__DocumentSource:
-      type: object
-      properties:
-        type:
+        updated_at:
           type: string
-          description: Source type (e.g., registration)
-        id:
-          type: string
-          format: uuid
-          description: Source record ID
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Additional source metadata
-      title: DocumentSource
-    type__SubmittedAddressFull:
-      type: object
-      properties:
-        full_address:
-          type: string
-          description: Complete address as a single string
+          format: date-time
       required:
-      - full_address
-      title: SubmittedAddressFull
-    type__WebsiteRating:
-      type: object
-      properties:
-        indicators:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__WebsiteIndicator'
-        quality_rating:
-          $ref: '#/components/schemas/type__WebsiteRatingQualityRating'
-      required:
-      - quality_rating
-      title: WebsiteRating
-    type__PhoneNumber:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__PhoneNumberObject'
-        number:
-          type: string
-        contact_type:
-          type:
-          - string
-          - 'null'
-        recommended:
-          type:
-          - boolean
-          - 'null'
-      title: PhoneNumber
-    type__Litigation:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        case_name:
-          type: string
-        case_number:
-          type: string
-        case_status:
-          $ref: '#/components/schemas/type__LitigationCaseStatus'
-        case_type:
-          type: string
-        filing_date:
-          type: string
-          format: date
-        judgments:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Judgment'
-        jurisdiction:
-          type: string
-        jurisdiction_state:
-          type:
-          - string
-          - 'null'
-        party_type:
-          type: string
-        parties:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__LitigationPartiesItem'
-      required:
-      - object
       - id
-      - case_name
-      - case_number
-      - case_status
-      - case_type
-      - filing_date
-      - party_type
-      title: Litigation
-    type_businesses_BusinessUpdateParamStatus:
+      - name
+      - role
+      - litigation_id
+      title: LitigationPartiesItem
+    type__ReviewTaskKey:
       type: string
       enum:
-      - in_review
-      - approved
-      - rejected
-      description: Status to set for the business (only final statuses allowed)
-      title: BusinessUpdateParamStatus
-    type__AddressDeliverabilityAnalysisSubType:
-      type: string
-      enum:
-      - Deliverable
-      - Undeliverable
-      - Unknown
-      title: AddressDeliverabilityAnalysisSubType
-    type__EmailIndicatorRating:
+      - location_frequency
+      - bankruptcies
+      - sos_unknown
+      - address_deliverability
+      - website_url_discovery
+      - entity_type
+      - web_person_verification
+      - global_watchlists
+      - website_status
+      - name
+      - sos_sub_status
+      - name_and_entity_type
+      - sos_active
+      - profile_status
+      - phone
+      - sos_domestic
+      - address_high_risk
+      - web_address_verification
+      - address_property_type
+      - sos_not_found
+      - time_in_business
+      - web_phone_number_verification
+      - adverse_media
+      - litigations
+      - address_verification
+      - people_litigations
+      - dba_name
+      - watchlist
+      - entity_type_match
+      - people_criminal_history
+      - formation_state
+      - tin_error
+      - sos_inactive
+      - address_frequency
+      - web_business_name_verification
+      - web_presence_quality
+      - tin_type
+      - tin_issued
+      - sos_domestic_sub_status
+      - risky_keywords
+      - address_registered_agent
+      - sos
+      - kyc_decision
+      - ppp_loans
+      - web_email_address_verification
+      - tin
+      - address
+      - liens
+      - sos_status
+      - industry
+      - sos_match
+      - address_risk
+      - website_url_domain_ownership
+      - website_parked
+      - domain_redirect
+      - people_bankruptcies
+      - politically_exposed_persons
+      - person_verification
+      - profile_discovery
+      - address_cmra
+      - website_verification
+      - website
+      - people_liens
+      - email_risk
+      title: ReviewTaskKey
+    type__WebsiteIndicatorRating:
       type: string
       enum:
       - positive
       - negative
       - neutral
-      title: EmailIndicatorRating
-    type__WebsiteStatus:
-      type: string
-      enum:
-      - online
-      - offline
-      - unknown
-      title: WebsiteStatus
-    type__ErrorResponse:
+      title: WebsiteIndicatorRating
+    type__Signal:
       type: object
       properties:
-        errors:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        tin:
+          type:
+          - string
+          - 'null'
+        external_id:
+          type:
+          - string
+          - 'null'
+        model_slug:
+          type: string
+        score:
+          type:
+          - number
+          - 'null'
+          format: double
+        business_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        batch_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        requester:
+          $ref: '#/components/schemas/type__SignalRequester'
+        reasons:
           type: array
           items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+            $ref: '#/components/schemas/type__SignalReasonsItem'
+        addresses:
+          type: array
+          items:
+            type: string
+        people:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
       required:
-      - errors
-      title: ErrorResponse
+      - object
+      - id
+      - name
+      - created_at
+      title: Signal
+    type__IndustryClassificationStatus:
+      type: string
+      enum:
+      - pending
+      - completed
+      - failed
+      title: IndustryClassificationStatus
+    type__OrderRequester:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        type:
+          oneOf:
+          - $ref: '#/components/schemas/type__OrderRequesterType'
+          - type: 'null'
+      title: OrderRequester
+    type__Tin:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        mismatch:
+          type: boolean
+        unknown:
+          type: boolean
+        verified:
+          type:
+          - boolean
+          - 'null'
+        error:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          type: string
+          format: date-time
+        issued:
+          type:
+          - boolean
+          - 'null'
+        verified_by:
+          type:
+          - string
+          - 'null'
+        business_id:
+          type: string
+          format: uuid
+        tin:
+          type: string
+      required:
+      - business_id
+      - tin
+      title: Tin
+    type__ReviewTaskLabel:
+      type: string
+      enum:
+      - Politically Exposed Persons
+      - Web Presence Quality
+      - KYC
+      - People Bankruptcies
+      - Address Risk
+      - Global Watchlists
+      - Phone Number
+      - Third Party Profile Status
+      - Liens
+      - Third Party Profiles
+      - Time in Business
+      - Web - Email Address
+      - Risky Keywords
+      - SOS Domestic Sub‑status
+      - PPP Loans
+      - Secretary of State Filings
+      - Entity Type
+      - SOS Filings
+      - People Criminal History
+      - Adverse Media
+      - Web - People
+      - Office Address
+      - Entity Type Match
+      - Web - Phone Number
+      - Business Name
+      - Bankruptcies
+      - Industry Classification
+      - TIN Match
+      - Watchlists
+      - People Litigations
+      - True Industry
+      - People
+      - DBA Name
+      - Domain Ownership
+      - Domain Redirect
+      - TIN Type
+      - Website
+      - TIN Error
+      - Watchlist
+      - Litigations
+      - Web - Business Name
+      - Name Entity Type
+      - Formation State
+      - People Liens
+      - Web - Office Address
+      - Email Risk
+      title: ReviewTaskLabel
+    type__PolicyResult:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          description: Policy result ID
+        result:
+          type: string
+          description: Policy result outcome
+        created_at:
+          type: string
+          description: Creation timestamp
+        matched:
+          type:
+          - string
+          - 'null'
+          description: Match status
+        executed:
+          type: boolean
+          description: Execution status
+        name:
+          type:
+          - string
+          - 'null'
+          description: Policy name
+        details:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Additional details
+        owner_id:
+          type: string
+          description: Owner ID
+        owner_type:
+          type: string
+          description: Owner type
+        business_id:
+          type: string
+          description: Business ID
+        type_of:
+          type: string
+          description: Type of policy result
+        policy_action_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__PolicyActionResult'
+      title: PolicyResult
+    type__LienSecuredPartiesItemType:
+      type: string
+      enum:
+      - ORGANIZATION
+      - INDIVIDUAL
+      title: LienSecuredPartiesItemType
+    type_businesses_BusinessRequestParamTin:
+      type: object
+      properties:
+        tin:
+          type: string
+      title: BusinessRequestParamTin
     type__WebsiteDomain:
       type: object
       properties:
@@ -2639,38 +2408,1025 @@ components:
           format: uri
           description: The final URL after redirect resolution (present when redirected is true)
       title: WebsiteDomain
-    type__LoanDetails:
+    type__WebsitePhoneNumberObject:
+      type: string
+      enum:
+      - phone_number
+      title: WebsitePhoneNumberObject
+    type__BusinessSubscriptionAvailabilityWatchlistResult:
+      type: string
+      enum:
+      - subscribable
+      - account_unsubscribable
+      title: BusinessSubscriptionAvailabilityWatchlistResult
+    type__CriminalHistoryCase:
       type: object
       properties:
-        gender:
+        object:
+          $ref: '#/components/schemas/type__CriminalHistoryCaseObject'
+        arrest_date:
           type:
           - string
           - 'null'
-        veteran:
+          format: date
+        case_number:
           type:
           - string
           - 'null'
-        naics_code:
+        case_type:
+          type:
+          - string
+          - 'null'
+        court_county:
+          type:
+          - string
+          - 'null'
+        court_name:
+          type:
+          - string
+          - 'null'
+        file_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        status:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        arresting_agency:
+          type:
+          - string
+          - 'null'
+        charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__CriminalHistoryCharge'
+      required:
+      - object
+      - charges
+      title: CriminalHistoryCase
+    type__PoliticallyExposedPersonScreeningResultsItemHitType:
+      type: string
+      enum:
+      - direct
+      - direct_alias
+      - association
+      title: PoliticallyExposedPersonScreeningResultsItemHitType
+    type__AdverseMediaScreeningResultsItem:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemObject'
+        id:
+          type: string
+          format: uuid
+        risk_scores:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        match_score:
+          type: number
+          format: double
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItem'
+      title: AdverseMediaScreeningResultsItem
+    type__BankruptcyCaseUpdatesItem:
+      type: object
+      properties:
+        guid:
+          type: string
+        pub_date:
+          type: string
+        description:
+          type: string
+      title: BankruptcyCaseUpdatesItem
+    type__PersonTitlesItem:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__PersonTitlesItemObject'
+        title:
+          type: string
+      title: PersonTitlesItem
+    type_businesses_BusinessRequestParamWebsite:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The website URL for the business
+      description: Website information for the business. Required when name and addresses are not provided when ordering the web_analysis and/or industry_classification subproducts.
+      title: BusinessRequestParamWebsite
+    type__PhoneNumber:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__PhoneNumberObject'
+        number:
+          type: string
+        contact_type:
+          type:
+          - string
+          - 'null'
+        recommended:
+          type:
+          - boolean
+          - 'null'
+      title: PhoneNumber
+    type__Review:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__ReviewObject'
+        id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ReviewTask'
+        assignee:
           oneOf:
-          - $ref: '#/components/schemas/type__LoanDetailsNaicsCode'
+          - $ref: '#/components/schemas/type__User'
           - type: 'null'
-        non_profit:
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - tasks
+      title: Review
+    type__WatchlistSource:
+      type: object
+      properties:
+        object:
+          type: string
+        agency:
+          type: string
+        agency_abbr:
+          type: string
+        organization:
+          type: string
+        title:
+          type: string
+        abbr:
+          type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__WatchlistResult'
+      required:
+      - object
+      - agency
+      - agency_abbr
+      - organization
+      - title
+      - abbr
+      - results
+      title: WatchlistSource
+    type__EmailAddress:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__EmailAddressObject'
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+        submitted:
+          type: boolean
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+        domain:
+          type: string
+          description: Domain portion of the email address. Included when email risk data is present.
+        valid:
+          type: boolean
+          description: Whether the email address is valid. Included when email risk data is present.
+        deliverability:
+          type: string
+          description: Likelihood that mail sent to this address will be delivered. Included when email risk data is present.
+        disposable:
+          type: boolean
+          description: Whether the email belongs to a disposable / temporary email service. Included when email risk data is present.
+        address_type:
+          $ref: '#/components/schemas/type__EmailAddressAddressType'
+          description: Classification of the email address. Included when email risk data is present.
+        business_id:
+          type: string
+          format: uuid
+          description: ID of the business the email address is associated with. Included when email risk data is present.
+        domain_age:
           type:
           - string
           - 'null'
-        business_type:
+          format: date-time
+          description: UTC datetime the email's domain was first registered. Included when email risk data is present.
+        first_seen:
           type:
           - string
           - 'null'
-        jobs_reported:
+          format: date-time
+          description: UTC datetime the email was first observed by our data provider. Included when email risk data is present.
+        rating:
+          $ref: '#/components/schemas/type__EmailRating'
+      required:
+      - object
+      - id
+      - email
+      - submitted
+      title: EmailAddress
+    type__SignalReasonsItemCategory:
+      type: string
+      enum:
+      - identification
+      - verification
+      - evaluation
+      title: SignalReasonsItemCategory
+    type__Person:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__PersonObject'
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        submitted:
+          type: boolean
+        business_id:
+          type: string
+          format: uuid
+        titles:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__PersonTitlesItem'
+        people_bankruptcies:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+        litigations:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Litigation'
+        liens:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Lien'
+        criminal_records:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__CriminalHistoryRecord'
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      title: Person
+    type__Formation:
+      type: object
+      properties:
+        entity_type:
+          type: string
+        formation_date:
+          type: string
+          format: date
+        formation_state:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      required:
+      - created_at
+      - updated_at
+      title: Formation
+    type__AdverseMediaScreeningResultsItemItemsItemObject:
+      type: string
+      enum:
+      - adverse_media_item
+      title: AdverseMediaScreeningResultsItemItemsItemObject
+    type__OrderRequesterType:
+      type: string
+      enum:
+      - account
+      - user
+      - api_key
+      title: OrderRequesterType
+    type__Requester:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/type__RequesterType'
+        name:
+          type: string
+        requested_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - type
+      - name
+      - requested_at
+      title: Requester
+    type__LienObject:
+      type: string
+      enum:
+      - lien
+      title: LienObject
+    type__PoliticallyExposedPersonScreeningResultsItem:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__PoliticallyExposedPersonScreeningResultsItemObject'
+        id:
+          type: string
+          format: uuid
+        aliases:
+          type: array
+          items:
+            type: string
+        birth_name:
           type:
           - string
           - 'null'
-        race_ethnicity:
+        birth_place:
           type:
           - string
           - 'null'
-      title: LoanDetails
+        citizenship_country:
+          type:
+          - string
+          - 'null'
+        dob:
+          type:
+          - string
+          - 'null'
+        employers:
+          type: array
+          items:
+            type: string
+        hit_type:
+          $ref: '#/components/schemas/type__PoliticallyExposedPersonScreeningResultsItemHitType'
+        memberships:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+        name:
+          type: string
+        professional_history:
+          type: array
+          items:
+            type: string
+        score:
+          type: number
+          format: double
+        source_urls:
+          type: array
+          items:
+            type: string
+        stakeholders:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+      title: PoliticallyExposedPersonScreeningResultsItem
+    type__Source:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+      required:
+      - id
+      - type
+      - metadata
+      title: Source
+    type__AddressPropertyType:
+      type: string
+      enum:
+      - commercial
+      - residential
+      title: AddressPropertyType
+    type__LienStatus:
+      type: string
+      enum:
+      - created
+      - pending
+      - open
+      - closing
+      - closed
+      - unknown
+      - filed
+      description: Current status of the lien
+      title: LienStatus
+    type__Bankruptcy:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__BankruptcyObject'
+        id:
+          type: string
+          format: uuid
+        business_id:
+          type: string
+          format: uuid
+        case_number:
+          type: string
+        case_updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__BankruptcyCaseUpdatesItem'
+        chapter:
+          type: number
+          format: double
+        court:
+          type: string
+        filing_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        debtors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__BankruptcyDebtorsItem'
+      required:
+      - object
+      - id
+      - business_id
+      - case_number
+      - case_updates
+      - chapter
+      - court
+      - filing_date
+      - debtors
+      title: Bankruptcy
+    type__BusinessSubscriptionAvailabilityBankruptcy:
+      type: string
+      enum:
+      - subscribable
+      - account_unsubscribable
+      title: BusinessSubscriptionAvailabilityBankruptcy
+    type__PersonObject:
+      type: string
+      enum:
+      - person
+      title: PersonObject
+    type_businesses_BusinessUpdateParamAddressesItem:
+      oneOf:
+      - $ref: '#/components/schemas/type__SubmittedAddressFull'
+      - $ref: '#/components/schemas/type__SubmittedAddressComponent'
+      title: BusinessUpdateParamAddressesItem
+    type__CriminalHistoryRecordObject:
+      type: string
+      enum:
+      - criminal_history/record
+      title: CriminalHistoryRecordObject
+    type__BusinessSubscriptionAvailabilityTin:
+      type: string
+      enum:
+      - subscribable
+      - account_unsubscribable
+      title: BusinessSubscriptionAvailabilityTin
+    type__Subscription:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+      title: Subscription
+    type__EmailAddressObject:
+      type: string
+      enum:
+      - email_address
+      title: EmailAddressObject
+    type__CriminalHistoryRecord:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__CriminalHistoryRecordObject'
+        id:
+          type: string
+          format: uuid
+        category:
+          type: string
+        state:
+          type:
+          - string
+          - 'null'
+        person:
+          $ref: '#/components/schemas/type__CriminalHistoryRecordPerson'
+        cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__CriminalHistoryCase'
+      required:
+      - object
+      - id
+      - category
+      - cases
+      title: CriminalHistoryRecord
+    type__ProfileType:
+      type: string
+      enum:
+      - facebook
+      - google
+      - yelp
+      - bbb
+      - linkedin
+      title: ProfileType
+    type__AddressDeliverabilityAnalysisSubKey:
+      type: string
+      enum:
+      - deliverable
+      - undeliverable
+      - unknown
+      title: AddressDeliverabilityAnalysisSubKey
+    type__PoliticallyExposedPersonScreening:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__PoliticallyExposedPersonScreeningResultsItem'
+        settings:
+          $ref: '#/components/schemas/type__PoliticallyExposedPersonScreeningSettings'
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - results
+      title: PoliticallyExposedPersonScreening
+    type__CriminalHistoryChargeDispositionsItem:
+      type: object
+      properties:
+        disposition:
+          type:
+          - string
+          - 'null'
+        disposition_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        disposition_type:
+          type:
+          - string
+          - 'null'
+      title: CriminalHistoryChargeDispositionsItem
+    type__PoliticallyExposedPersonScreeningSettingsMatchScore:
+      type: string
+      enum:
+      - LOW
+      - MEDIUM
+      - HIGH
+      title: PoliticallyExposedPersonScreeningSettingsMatchScore
+    type__FmcsaRegistration:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__FmcsaRegistrationObject'
+        id:
+          type: string
+          format: uuid
+        dot_number:
+          type: string
+          description: Department of Transportation (DOT) number
+        legal_name:
+          type: string
+          description: Legal name of the carrier
+        dba_name:
+          type:
+          - string
+          - 'null'
+          description: Doing Business As name
+        source:
+          type: string
+          format: uri
+          description: Source URL for the FMCSA registration data
+        addresses:
+          type: array
+          items:
+            type: string
+          description: List of carrier addresses
+      required:
+      - object
+      - id
+      - dot_number
+      - legal_name
+      - source
+      - addresses
+      title: FmcsaRegistration
+    type__DocumentObject:
+      type: string
+      enum:
+      - document
+      title: DocumentObject
+    type__PhoneNumberObject:
+      type: string
+      enum:
+      - phone_number
+      title: PhoneNumberObject
+    type__Loan:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__LoanObject'
+        id:
+          type: string
+          format: uuid
+        issued_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        lender:
+          type:
+          - string
+          - 'null'
+        details:
+          oneOf:
+          - $ref: '#/components/schemas/type__LoanDetails'
+          - type: 'null'
+      required:
+      - object
+      - id
+      title: Loan
+    type__BusinessStatus:
+      type: string
+      enum:
+      - open
+      - pending
+      - in_audit
+      - in_review
+      - approved
+      - rejected
+      description: Current status of the business verification
+      title: BusinessStatus
+    type__SubmittedAttributeOrdersItem:
+      type: object
+      properties:
+        product:
+          type: string
+      title: SubmittedAttributeOrdersItem
+    type__IndustryClassificationWebsiteStatus:
+      type: string
+      enum:
+      - online
+      - offline
+      - unknown
+      title: IndustryClassificationWebsiteStatus
+    type__OrderSubproductsItem:
+      type: string
+      enum:
+      - Articles of Incorporation
+      - Certificate of Good Standing
+      - Articles of Incorporation with Certificate of Good Standing fallback
+      - ucc_documents
+      - web_analysis
+      - industry_classification
+      title: OrderSubproductsItem
+    type__WebsiteAddressesItem:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        address_line1:
+          type:
+          - string
+          - 'null'
+        address_line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postal_code:
+          type:
+          - string
+          - 'null'
+        full_address:
+          type: string
+        submitted:
+          type: boolean
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      title: WebsiteAddressesItem
+    type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItem:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemName'
+        confidence_level:
+          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemConfidenceLevel'
+      title: AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItem
+    type__MonitorEventTypesItem:
+      type: object
+      properties:
+        type:
+          type: string
+        enabled_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          $ref: '#/components/schemas/type__MonitorEventTypesItemStatus'
+      title: MonitorEventTypesItem
+    type__LitigationPartiesItemRole:
+      type: string
+      enum:
+      - Plaintiff
+      - Defendant
+      - Cross-Plaintiff
+      - Cross-Defendant
+      title: LitigationPartiesItemRole
+    type_businesses_BusinessUpdateParamStatus:
+      type: string
+      enum:
+      - in_review
+      - approved
+      - rejected
+      description: Status to set for the business (only final statuses allowed)
+      title: BusinessUpdateParamStatus
+    type__Website:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__WebsiteObject'
+        id:
+          type: string
+          format: uuid
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: The URL that was passed or found for the Business
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/type__WebsiteStatus'
+        http_status_code:
+          type:
+          - integer
+          - 'null'
+          description: HTTP response status code
+        title:
+          type:
+          - string
+          - 'null'
+          description: Website page title
+        description:
+          type:
+          - string
+          - 'null'
+          description: Website meta description
+        domain:
+          oneOf:
+          - $ref: '#/components/schemas/type__WebsiteDomain'
+          - type: 'null'
+          description: Domain registration and redirect information
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__WebsitePagesItem'
+          description: Website pages with screenshots
+        parked:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the domain is parked
+        submitted:
+          type: boolean
+          description: Whether the website was submitted by user
+        error:
+          type:
+          - string
+          - 'null'
+          description: Error message if website analysis failed
+        category:
+          type:
+          - string
+          - 'null'
+          description: Website category classification
+        platform:
+          type:
+          - string
+          - 'null'
+          description: Website platform (e.g., instagram.com, facebook.com)
+        posts_summary:
+          type:
+          - string
+          - 'null'
+          description: Summary of posts found on the website or linked social media profiles
+        reviews_summary:
+          type:
+          - string
+          - 'null'
+          description: Summary of reviews found on the website or linked third-party profiles
+        business_id:
+          type: string
+          format: uuid
+        business_name_match:
+          type: boolean
+          description: Whether website content matches business name
+        names:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Name'
+          description: Names found on website
+        phone_numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__WebsitePhoneNumber'
+          description: Phone numbers found on website
+        people:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+          description: People found on website
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__WebsiteAddressesItem'
+          description: Addresses found on website
+        email_addresses:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/type__WebsiteEmailAddressesItem'
+          description: Email addresses found on website
+        rating:
+          oneOf:
+          - $ref: '#/components/schemas/type__WebsiteRating'
+          - type: 'null'
+      required:
+      - object
+      - id
+      - url
+      - created_at
+      - updated_at
+      - status
+      - parked
+      - submitted
+      - business_id
+      - business_name_match
+      - phone_numbers
+      - addresses
+      title: Website
+    type__AddressRatingRiskRating:
+      type: string
+      enum:
+      - low
+      - moderate
+      - high
+      - not_available
+      title: AddressRatingRiskRating
+    type__MonitorEventTypesItemStatus:
+      type: string
+      enum:
+      - active
+      - unavailable
+      - pending
+      title: MonitorEventTypesItemStatus
+    type__WebsiteStatus:
+      type: string
+      enum:
+      - online
+      - offline
+      - unknown
+      title: WebsiteStatus
+    type__LienDebtorsItem:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/type__LienDebtorsItemType'
+        party_type:
+          type: string
+        organization_name:
+          type: string
+        entity_type:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__LienDebtorsItemAddressesItem'
+      title: LienDebtorsItem
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__AddressIndicatorName:
+      type: string
+      enum:
+      - Valid US address
+      - Commercial registered agent
+      - Geographical location
+      - Private mailbox
+      - Virtual address
+      - Location frequency
+      - Deliverability
+      - Property type
+      title: AddressIndicatorName
     type__SubmittedAttribute:
       type: object
       properties:
@@ -2772,502 +3528,209 @@ components:
       - object
       - name
       title: SubmittedAttribute
-    type__PoliticallyExposedPersonScreeningResultsItemHitType:
+    type__ReviewObject:
       type: string
       enum:
-      - direct
-      - direct_alias
-      - association
-      title: PoliticallyExposedPersonScreeningResultsItemHitType
-    type__DocumentObject:
-      type: string
-      enum:
-      - document
-      title: DocumentObject
-    type__EmailAddress:
+      - review
+      title: ReviewObject
+    type__WatchlistResult:
       type: object
       properties:
         object:
-          $ref: '#/components/schemas/type__EmailAddressObject'
-        id:
-          type: string
-          format: uuid
-        email:
-          type: string
-        submitted:
-          type: boolean
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
-        domain:
-          type: string
-          description: Domain portion of the email address. Included when email risk data is present.
-        valid:
-          type: boolean
-          description: Whether the email address is valid. Included when email risk data is present.
-        deliverability:
-          type: string
-          description: Likelihood that mail sent to this address will be delivered. Included when email risk data is present.
-        disposable:
-          type: boolean
-          description: Whether the email belongs to a disposable / temporary email service. Included when email risk data is present.
-        address_type:
-          $ref: '#/components/schemas/type__EmailAddressAddressType'
-          description: Classification of the email address. Included when email risk data is present.
-        business_id:
-          type: string
-          format: uuid
-          description: ID of the business the email address is associated with. Included when email risk data is present.
-        domain_age:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: UTC datetime the email's domain was first registered. Included when email risk data is present.
-        first_seen:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: UTC datetime the email was first observed by our data provider. Included when email risk data is present.
-        rating:
-          $ref: '#/components/schemas/type__EmailRating'
-      required:
-      - object
-      - id
-      - email
-      - submitted
-      title: EmailAddress
-    type__Source:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          type: string
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-      required:
-      - id
-      - type
-      - metadata
-      title: Source
-    type__EmailRatingRiskRating:
-      type: string
-      enum:
-      - low
-      - moderate
-      - high
-      title: EmailRatingRiskRating
-    type__Document:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__DocumentObject'
-        id:
-          type: string
-          format: uuid
-        document_type:
-          type: string
-          description: 'Type of document. Common values include: Initial_Filing, Certificate of Good Standing, Articles of Incorporation, Initial Filing (UCC1), Amendment (UCC3)'
-        filename:
-          type: string
-          description: Name of the document file
-        content_type:
-          type: string
-          description: MIME type of the document
-        size:
-          type: integer
-          description: File size in bytes
-        download_url:
-          type: string
-          format: uri
-          description: URL to download the document
-        created_at:
-          type: string
-          format: date-time
-        source:
-          $ref: '#/components/schemas/type__DocumentSource'
-        filing_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Additional document metadata
-      required:
-      - object
-      - id
-      - document_type
-      - filename
-      - content_type
-      - size
-      - download_url
-      - created_at
-      title: Document
-    type__PoliticallyExposedPersonScreening:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__PoliticallyExposedPersonScreeningResultsItem'
-        settings:
-          $ref: '#/components/schemas/type__PoliticallyExposedPersonScreeningSettings'
-      required:
-      - object
-      - id
-      - created_at
-      - updated_at
-      - results
-      title: PoliticallyExposedPersonScreening
-    type_businesses_BusinessUpdateParamAddressesItem:
-      oneOf:
-      - $ref: '#/components/schemas/type__SubmittedAddressFull'
-      - $ref: '#/components/schemas/type__SubmittedAddressComponent'
-      title: BusinessUpdateParamAddressesItem
-    type__Order:
-      type: object
-      properties:
-        object:
-          type: string
+          $ref: '#/components/schemas/type__WatchlistResultObject'
         id:
           type: string
           format: uuid
         status:
-          $ref: '#/components/schemas/type__OrderStatus'
-        business_id:
           type: string
-          format: uuid
-        subproducts:
+        entity_name:
+          type: string
+        entity_aliases:
           type: array
           items:
-            $ref: '#/components/schemas/type__OrderSubproductsItem'
-        completed_at:
+            type: string
+        listed_at:
           type:
           - string
           - 'null'
           format: date-time
-        monitoring:
-          type: boolean
-        product:
-          $ref: '#/components/schemas/type__OrderProduct'
-        requester:
-          $ref: '#/components/schemas/type__OrderRequester'
-        created_at:
+        agency_information_url:
           type: string
-          format: date-time
-        updated_at:
+        agency_list_url:
           type: string
-          format: date-time
+        score:
+          type:
+          - number
+          - 'null'
+          format: double
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__WatchlistResultAddressesItem'
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        list_country:
+          type: string
+        list_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        list_region:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
       required:
       - object
       - id
       - status
-      - business_id
-      - product
-      - created_at
-      - updated_at
-      title: Order
-    type__EmailAddressObject:
-      type: string
-      enum:
-      - email_address
-      title: EmailAddressObject
-    type__SubmittedAttributeOrdersItem:
-      type: object
-      properties:
-        product:
-          type: string
-      title: SubmittedAttributeOrdersItem
-    type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItem:
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemName'
-        confidence_level:
-          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemConfidenceLevel'
-      title: AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItem
-    type__BusinessItemWebsite:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        url:
-          type: string
-        title:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-      title: BusinessItemWebsite
-    type__AdverseMediaScreeningResultsItemItemsItem:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemObject'
-        source_name:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-          format: uri
-        flags:
-          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlags'
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      title: AdverseMediaScreeningResultsItemItemsItem
-    type__AdverseMediaScreeningResultsItemItemsItemFlagsRisksItem:
-      type: object
-      properties:
-        name:
-          type: string
-        confidence_level:
-          $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItemItemsItemFlagsRisksItemConfidenceLevel'
-      title: AdverseMediaScreeningResultsItemItemsItemFlagsRisksItem
-    type__LienSecuredPartiesItem:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/type__LienSecuredPartiesItemType'
-        role:
-          type: string
-        organization_name:
-          type: string
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__LienSecuredPartiesItemAddressesItem'
-      title: LienSecuredPartiesItem
-    type__EmailIndicator:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type__EmailIndicatorType'
-        name:
-          type: string
-        rating:
-          $ref: '#/components/schemas/type__EmailIndicatorRating'
-        value:
-          type: string
-        description:
-          type: string
-      required:
-      - type
-      - name
-      - rating
-      - value
-      - description
-      title: EmailIndicator
-    type__ReviewTaskKey:
-      type: string
-      enum:
-      - location_frequency
-      - bankruptcies
-      - sos_unknown
-      - address_deliverability
-      - website_url_discovery
-      - entity_type
-      - web_person_verification
-      - global_watchlists
-      - website_status
-      - name
-      - sos_sub_status
-      - name_and_entity_type
-      - sos_active
-      - profile_status
-      - phone
-      - sos_domestic
-      - address_high_risk
-      - web_address_verification
-      - address_property_type
-      - sos_not_found
-      - time_in_business
-      - web_phone_number_verification
-      - adverse_media
-      - litigations
-      - address_verification
-      - people_litigations
-      - dba_name
-      - watchlist
-      - entity_type_match
-      - people_criminal_history
-      - formation_state
-      - tin_error
-      - sos_inactive
-      - address_frequency
-      - web_business_name_verification
-      - web_presence_quality
-      - tin_type
-      - tin_issued
-      - sos_domestic_sub_status
-      - risky_keywords
-      - address_registered_agent
-      - sos
-      - kyc_decision
-      - ppp_loans
-      - web_email_address_verification
-      - tin
-      - address
-      - liens
-      - sos_status
-      - industry
-      - sos_match
-      - address_risk
-      - website_url_domain_ownership
-      - website_parked
-      - domain_redirect
-      - people_bankruptcies
-      - politically_exposed_persons
-      - person_verification
-      - profile_discovery
-      - address_cmra
-      - website_verification
-      - website
-      - people_liens
-      - email_risk
-      title: ReviewTaskKey
-    type__WebsiteObject:
-      type: string
-      enum:
-      - website
-      title: WebsiteObject
-    type__User:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        roles:
-          type: array
-          items:
-            type: string
-        image_url:
-          type: string
-          format: uri
-        directory_managed:
-          type: boolean
-        last_login_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        settings:
-          type: object
-          additionalProperties:
-            description: Any type
-        created_at:
-          type: string
-          format: date-time
-      required:
-      - object
-      - id
-      - name
-      - email
-      - roles
-      - created_at
-      title: User
+      - entity_name
+      - entity_aliases
+      - agency_information_url
+      - agency_list_url
+      - score
+      title: WatchlistResult
     type__PersonTitlesItemObject:
       type: string
       enum:
       - person_title
       title: PersonTitlesItemObject
-    type__WebsitePhoneNumberObject:
+    type__SignalReasonsItemCode:
       type: string
       enum:
-      - phone_number
-      title: WebsitePhoneNumberObject
-    type__LoanObject:
+      - I301
+      - I302
+      - I304
+      - I102
+      - I103
+      - I107
+      - I108
+      - I109
+      - I111
+      - I601
+      - I603
+      - I201
+      - I202
+      - I203
+      - I204
+      - V010
+      - V011
+      - V101
+      - V102
+      - V103
+      - V104
+      - V501
+      - V502
+      - V503
+      - V505
+      - V748
+      - V749
+      - V750
+      - V751
+      - V752
+      - V753
+      - V801
+      - V1101
+      - V1201
+      - V1302
+      - E500
+      - E501
+      - E502
+      - E503
+      - E1101
+      - E1102
+      - E1201
+      title: SignalReasonsItemCode
+    type__LienStatusCategory:
       type: string
       enum:
-      - loan
-      title: LoanObject
-    type__AdverseMediaScreening:
+      - active
+      - open
+      - closed
+      - terminated
+      - processing
+      - unknown
+      description: Categorized status of the lien
+      title: LienStatusCategory
+    type__BusinessSupportedDocumentTypesItem:
+      type: string
+      enum:
+      - Articles of Incorporation
+      - Certificate of Good Standing
+      title: BusinessSupportedDocumentTypesItem
+    type__SubmittedPerson:
       type: object
       properties:
-        object:
+        name:
           type: string
+          description: Full name of the person
+        title:
+          type: string
+          description: Job title or role
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+      required:
+      - name
+      title: SubmittedPerson
+    type__OrderStatus:
+      type: string
+      enum:
+      - created
+      - pending
+      - audited
+      - completed
+      - approved
+      - rejected
+      title: OrderStatus
+    type__OrderProduct:
+      type: string
+      enum:
+      - identity
+      - liens
+      - adverse_media
+      - bankruptcies
+      - business_enrichment
+      - documents
+      - enhanced_screenings
+      - kyc
+      - litigations
+      - people_litigations
+      - people_bankruptcies
+      - people_tax_liens
+      - people_ucc_liens
+      - people_criminal_history
+      - tin
+      - website
+      - business_verification_qualify
+      - business_verification_verify
+      - tax_liens
+      - ucc_liens
+      - email_risk
+      title: OrderProduct
+    type__DocumentSource:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Source type (e.g., registration)
         id:
           type: string
           format: uuid
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AdverseMediaScreeningResultsItem'
-        exclusion_settings:
-          $ref: '#/components/schemas/type__AdverseMediaScreeningExclusionSettings'
-      required:
-      - object
-      - id
-      - created_at
-      - updated_at
-      - results
-      title: AdverseMediaScreening
-    type__Monitor:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        created_at:
-          type: string
-          format: date-time
-        event_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__MonitorEventTypesItem'
-      required:
-      - object
-      - id
-      - created_at
-      - event_types
-      title: Monitor
+          description: Source record ID
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Additional source metadata
+      title: DocumentSource
     type__Registration:
       type: object
       properties:
@@ -3339,119 +3802,265 @@ components:
       - lessee_lessor
       - licensee_licensor
       title: LienAlternativeDesignation
-    type__ReviewTask:
+    type__LoanDetailsNaicsCode:
       type: object
       properties:
-        category:
-          $ref: '#/components/schemas/type__ReviewTaskCategory'
-        key:
-          $ref: '#/components/schemas/type__ReviewTaskKey'
-        label:
-          $ref: '#/components/schemas/type__ReviewTaskLabel'
-        message:
+        code:
+          type: integer
+        title:
           type: string
+        description:
+          type: string
+      title: LoanDetailsNaicsCode
+    type__IndustryClassificationCategoriesItemClassificationSystem:
+      type: string
+      enum:
+      - NAICS
+      - MCC
+      - Prohibited
+      title: IndustryClassificationCategoriesItemClassificationSystem
+    type__ProfileMetadata:
+      type: object
+      properties:
         name:
           type: string
-        status:
-          $ref: '#/components/schemas/type__ReviewTaskStatus'
-        sub_label:
+        city:
           type: string
-        sources:
+        state:
+          type: string
+        full_address:
+          type: string
+        website_urls:
           type: array
           items:
-            $ref: '#/components/schemas/type__Source'
-      required:
-      - category
-      - key
-      - label
-      - message
-      - name
-      - status
-      - sub_label
-      - sources
-      title: ReviewTask
-    type__Bankruptcy:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__BankruptcyObject'
-        id:
-          type: string
-          format: uuid
-        business_id:
-          type: string
-          format: uuid
-        case_number:
-          type: string
-        case_updates:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__BankruptcyCaseUpdatesItem'
-        chapter:
+            type: string
+        latitude:
           type: number
           format: double
-        court:
+        longitude:
+          type: number
+          format: double
+        phone_number:
           type: string
-        filing_date:
-          type:
-          - string
-          - 'null'
-          format: date
-        debtors:
+        categories:
           type: array
           items:
-            $ref: '#/components/schemas/type__BankruptcyDebtorsItem'
-      required:
-      - object
-      - id
-      - business_id
-      - case_number
-      - case_updates
-      - chapter
-      - court
-      - filing_date
-      - debtors
-      title: Bankruptcy
-    type__Watchlist:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        hit_count:
-          type: integer
-        agencies:
+            type: string
+        reviews:
           type: array
           items:
-            $ref: '#/components/schemas/type__WatchlistAgency'
-        lists:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__WatchlistSource'
-        people:
+            $ref: '#/components/schemas/type__ProfileMetadataReviewsItem'
+        recent_posts:
           type: array
           items:
             type: object
             additionalProperties:
               description: Any type
-      required:
-      - object
-      - id
-      - hit_count
-      - agencies
-      - lists
-      - people
-      title: Watchlist
-    type__AddressRatingRiskRating:
+        recent_reviews:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+      title: ProfileMetadata
+    type__AddressIndicatorType:
       type: string
       enum:
-      - low
-      - moderate
-      - high
-      - not_available
-      title: AddressRatingRiskRating
+      - valid_us_address
+      - deliverability
+      - geographical_location
+      - registered_agent
+      - private_mailbox
+      - location_frequency
+      - property_type
+      - virtual_address
+      title: AddressIndicatorType
+    type__LienSecuredPartiesItem:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/type__LienSecuredPartiesItemType'
+        role:
+          type: string
+        organization_name:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__LienSecuredPartiesItemAddressesItem'
+      title: LienSecuredPartiesItem
+    type__BusinessSubscriptionAvailability:
+      type: object
+      properties:
+        bankruptcy:
+          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityBankruptcy'
+        certification:
+          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityCertification'
+        registration:
+          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityRegistration'
+        tin:
+          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityTin'
+        watchlist_result:
+          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityWatchlistResult'
+        lien:
+          $ref: '#/components/schemas/type__BusinessSubscriptionAvailabilityLien'
+      title: BusinessSubscriptionAvailability
+    type__LienSecuredPartiesItemAddressesItem:
+      type: object
+      properties:
+        full_address:
+          type: string
+        address_line1:
+          type: string
+        address_line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+      title: LienSecuredPartiesItemAddressesItem
+    type_businesses_BusinessRequestParamOrdersItemProduct:
+      type: string
+      enum:
+      - identity
+      - liens
+      - adverse_media
+      - bankruptcies
+      - business_enrichment
+      - documents
+      - enhanced_screenings
+      - kyc
+      - litigations
+      - people_litigations
+      - people_bankruptcies
+      - people_tax_liens
+      - people_ucc_liens
+      - people_criminal_history
+      - tin
+      - website
+      - business_verification_qualify
+      - business_verification_verify
+      - tax_liens
+      - ucc_liens
+      - email_risk
+      description: The product to order.
+      title: BusinessRequestParamOrdersItemProduct
+    type__PolicyActionResultPolicyAction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Policy action ID
+        action_type:
+          type: string
+          description: Type of action
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Action options
+        policy_version_id:
+          type: string
+          description: Policy version ID
+      title: PolicyActionResultPolicyAction
+    type__BusinessItemWebsite:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        url:
+          type: string
+        title:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+      title: BusinessItemWebsite
+    type__AddressRating:
+      type: object
+      properties:
+        indicators:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AddressIndicator'
+        risk_rating:
+          $ref: '#/components/schemas/type__AddressRatingRiskRating'
+      required:
+      - risk_rating
+      title: AddressRating
+    type__BusinessSubscriptionAvailabilityRegistration:
+      type: string
+      enum:
+      - subscribable
+      - account_unsubscribable
+      title: BusinessSubscriptionAvailabilityRegistration
+    type__BankruptcyObject:
+      type: string
+      enum:
+      - bankruptcy
+      title: BankruptcyObject
+    type__EmailIndicatorRating:
+      type: string
+      enum:
+      - positive
+      - negative
+      - neutral
+      title: EmailIndicatorRating
+    type__WebsitePhoneNumber:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__WebsitePhoneNumberObject'
+        id:
+          type: string
+          format: uuid
+        number:
+          type: string
+        contact_type:
+          type:
+          - string
+          - 'null'
+        recommended:
+          type:
+          - boolean
+          - 'null'
+        submitted:
+          type: boolean
+        sources:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/type__Source'
+      title: WebsitePhoneNumber
+    type__BusinessItemStatus:
+      type: string
+      enum:
+      - open
+      - pending
+      - in_audit
+      - in_review
+      - approved
+      - rejected
+      description: Current status of the business verification
+      title: BusinessItemStatus
+    type__CertificationObject:
+      type: string
+      enum:
+      - certification
+      title: CertificationObject
     type__LienState:
       type: string
       enum:
@@ -3507,546 +4116,55 @@ components:
       - WY
       description: State where the lien was filed
       title: LienState
-    type__CriminalHistoryCase:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__CriminalHistoryCaseObject'
-        arrest_date:
-          type:
-          - string
-          - 'null'
-          format: date
-        case_number:
-          type:
-          - string
-          - 'null'
-        case_type:
-          type:
-          - string
-          - 'null'
-        court_county:
-          type:
-          - string
-          - 'null'
-        court_name:
-          type:
-          - string
-          - 'null'
-        file_date:
-          type:
-          - string
-          - 'null'
-          format: date
-        status:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        arresting_agency:
-          type:
-          - string
-          - 'null'
-        charges:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__CriminalHistoryCharge'
-      required:
-      - object
-      - charges
-      title: CriminalHistoryCase
-    type__WebsiteRatingQualityRating:
-      type: string
-      enum:
-      - low
-      - moderate
-      - high
-      - not_available
-      title: WebsiteRatingQualityRating
-    type__TaxExemptOrganization:
+    type__PolicyActionResult:
       type: object
       properties:
         object:
           type: string
         id:
           type: string
-          format: uuid
-        ein:
-          type: string
-        name:
-          type: string
-        section:
-          type:
-          - string
-          - 'null'
-        ruling_date:
-          type:
-          - string
-          - 'null'
-          format: date
-        tax_period:
-          type:
-          - string
-          - 'null'
-          format: date
-        revoked_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      title: TaxExemptOrganization
-    type__BusinessItemStatus:
-      type: string
-      enum:
-      - open
-      - pending
-      - in_audit
-      - in_review
-      - approved
-      - rejected
-      description: Current status of the business verification
-      title: BusinessItemStatus
-    type__OrderProduct:
-      type: string
-      enum:
-      - identity
-      - liens
-      - adverse_media
-      - bankruptcies
-      - business_enrichment
-      - documents
-      - enhanced_screenings
-      - kyc
-      - litigations
-      - people_litigations
-      - people_bankruptcies
-      - people_tax_liens
-      - people_ucc_liens
-      - people_criminal_history
-      - tin
-      - website
-      - business_verification_qualify
-      - business_verification_verify
-      - tax_liens
-      - ucc_liens
-      - email_risk
-      title: OrderProduct
-    type__WebsiteIndicatorRating:
-      type: string
-      enum:
-      - positive
-      - negative
-      - neutral
-      title: WebsiteIndicatorRating
-    type__BankruptcyDebtorsItem:
-      type: object
-      properties:
-        name:
-          type: string
-      title: BankruptcyDebtorsItem
-    type__WebsitePagesItem:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-        category:
-          type: string
-        screenshot_url:
-          type: string
-          format: uri
-      title: WebsitePagesItem
-    type__LienDebtorsItem:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/type__LienDebtorsItemType'
-        party_type:
-          type: string
-        organization_name:
-          type: string
-        entity_type:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__LienDebtorsItemAddressesItem'
-      title: LienDebtorsItem
-    type__AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemConfidenceLevel:
-      type: string
-      enum:
-      - low
-      - moderate
-      - high
-      title: AdverseMediaScreeningResultsItemItemsItemFlagsSentimentsItemConfidenceLevel
-    type__ReviewTaskStatus:
-      type: string
-      enum:
-      - success
-      - failure
-      - warning
-      - neutral
-      title: ReviewTaskStatus
-    type__SignalReasonsItemCategory:
-      type: string
-      enum:
-      - identification
-      - verification
-      - evaluation
-      title: SignalReasonsItemCategory
-    type__AddressState:
-      type: string
-      enum:
-      - AL
-      - AK
-      - AZ
-      - AR
-      - CA
-      - CO
-      - CT
-      - DE
-      - FL
-      - GA
-      - HI
-      - ID
-      - IL
-      - IN
-      - IA
-      - KS
-      - KY
-      - LA
-      - ME
-      - MD
-      - MA
-      - MI
-      - MN
-      - MS
-      - MO
-      - MT
-      - NE
-      - NV
-      - NH
-      - NJ
-      - NM
-      - NY
-      - NC
-      - ND
-      - OH
-      - OK
-      - OR
-      - PA
-      - RI
-      - SC
-      - SD
-      - TN
-      - TX
-      - UT
-      - VT
-      - VA
-      - WA
-      - WV
-      - WI
-      - WY
-      title: AddressState
-    type__WebsiteDomainRegistrar:
-      type: object
-      properties:
-        organization:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        url:
-          type:
-          - string
-          - 'null'
-          format: uri
-      title: WebsiteDomainRegistrar
-    type__LoanDetailsNaicsCode:
-      type: object
-      properties:
-        code:
-          type: integer
-        title:
-          type: string
-        description:
-          type: string
-      title: LoanDetailsNaicsCode
-    type__BankruptcyObject:
-      type: string
-      enum:
-      - bankruptcy
-      title: BankruptcyObject
-    type__LienCollateralType:
-      type: string
-      enum:
-      - Blanket
-      - Collateral
-      - Unknown
-      - All Assets and Receivables
-      - All Receivables
-      - All Assets
-      - Named Assets
-      - Unavailable
-      title: LienCollateralType
-    type__LienObject:
-      type: string
-      enum:
-      - lien
-      title: LienObject
-    type__BusinessSubscriptionAvailabilityRegistration:
-      type: string
-      enum:
-      - subscribable
-      - account_unsubscribable
-      title: BusinessSubscriptionAvailabilityRegistration
-    type__SignalRequester:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - type
-      - name
-      title: SignalRequester
-    type__EmailRating:
-      type: object
-      properties:
-        risk_rating:
-          $ref: '#/components/schemas/type__EmailRatingRiskRating'
-        indicators:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__EmailIndicator'
-      required:
-      - risk_rating
-      title: EmailRating
-    type__Formation:
-      type: object
-      properties:
-        entity_type:
-          type: string
-        formation_date:
-          type: string
-          format: date
-        formation_state:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
-      required:
-      - created_at
-      - updated_at
-      title: Formation
+          description: Policy action result ID
+        details:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Action details
+        executed:
+          type: boolean
+          description: Execution status
+        policy_action:
+          $ref: '#/components/schemas/type__PolicyActionResultPolicyAction'
+      title: PolicyActionResult
     type__WatchlistResultAddressesItem:
       type: object
       properties:
         full_address:
           type: string
       title: WatchlistResultAddressesItem
-    type__PhoneNumberObject:
-      type: string
-      enum:
-      - phone_number
-      title: PhoneNumberObject
-    type__AdverseMediaScreeningResultsItemItemsItemObject:
-      type: string
-      enum:
-      - adverse_media_item
-      title: AdverseMediaScreeningResultsItemItemsItemObject
-    type__ErrorResponseErrorsItem:
+    type__SubmittedAddressFull:
       type: object
       properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__PersonTitlesItem:
-      type: object
-      properties:
-        object:
-          $ref: '#/components/schemas/type__PersonTitlesItemObject'
-        title:
-          type: string
-      title: PersonTitlesItem
-    type_businesses_BusinessRequestParamTin:
-      type: object
-      properties:
-        tin:
-          type: string
-      title: BusinessRequestParamTin
-    type__WebsiteIndicator:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type__WebsiteIndicatorType'
-        name:
-          type: string
-        rating:
-          $ref: '#/components/schemas/type__WebsiteIndicatorRating'
-        value:
-          type: string
-        description:
-          type: string
-      required:
-      - type
-      - name
-      - rating
-      - value
-      - description
-      title: WebsiteIndicator
-    type__Tin:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        mismatch:
-          type: boolean
-        unknown:
-          type: boolean
-        verified:
-          type:
-          - boolean
-          - 'null'
-        error:
-          type:
-          - string
-          - 'null'
-        updated_at:
-          type: string
-          format: date-time
-        issued:
-          type:
-          - boolean
-          - 'null'
-        verified_by:
-          type:
-          - string
-          - 'null'
-        business_id:
-          type: string
-          format: uuid
-        tin:
-          type: string
-      required:
-      - business_id
-      - tin
-      title: Tin
-    type__WebsiteAddressesItem:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        address_line1:
-          type:
-          - string
-          - 'null'
-        address_line2:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        postal_code:
-          type:
-          - string
-          - 'null'
         full_address:
           type: string
-        submitted:
-          type: boolean
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
-      title: WebsiteAddressesItem
-    type__Profile:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/type__ProfileType'
-        external_id:
-          type:
-          - string
-          - 'null'
-        url:
-          type: string
-          format: uri
-        metadata:
-          $ref: '#/components/schemas/type__ProfileMetadata'
-        rating:
-          type:
-          - number
-          - 'null'
-          format: double
-        rating_count:
-          type:
-          - integer
-          - 'null'
+          description: Complete address as a single string
       required:
-      - object
-      - id
-      - type
-      - url
-      title: Profile
-    type__BusinessSubscriptionAvailabilityCertification:
+      - full_address
+      title: SubmittedAddressFull
+    type__BusinessSubscriptionAvailabilityLien:
       type: string
       enum:
       - subscribable
       - account_unsubscribable
-      title: BusinessSubscriptionAvailabilityCertification
-    type__NameType:
-      type: string
-      enum:
-      - legal
-      - dba
-      title: NameType
-    type__Review:
+      title: BusinessSubscriptionAvailabilityLien
+    type__Certification:
       type: object
       properties:
         object:
-          $ref: '#/components/schemas/type__ReviewObject'
+          $ref: '#/components/schemas/type__CertificationObject'
         id:
+          type: string
+          format: uuid
+        business_id:
           type: string
           format: uuid
         created_at:
@@ -4055,192 +4173,74 @@ components:
         updated_at:
           type: string
           format: date-time
-        completed_at:
+        entrance_date:
           type:
           - string
           - 'null'
           format: date-time
-        tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ReviewTask'
-        assignee:
-          oneOf:
-          - $ref: '#/components/schemas/type__User'
-          - type: 'null'
-      required:
-      - object
-      - id
-      - created_at
-      - updated_at
-      - tasks
-      title: Review
-    type__ReviewTaskCategory:
-      type: string
-      enum:
-      - bankruptcies
-      - global_watchlists
-      - name
-      - people_litigations
-      - loans
-      - kyc
-      - watchlist
-      - phone
-      - formation
-      - people_criminal_history
-      - adverse_media
-      - litigations
-      - tin_type
-      - address
-      - sos
-      - web
-      - liens
-      - people_bankruptcies
-      - industry
-      - tin
-      - people
-      - people_liens
-      - website
-      - politically_exposed_persons
-      - email
-      title: ReviewTaskCategory
-    type__ProfileMetadata:
-      type: object
-      properties:
+        exit_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        certification_id:
+          type:
+          - string
+          - 'null'
         name:
           type: string
-        city:
+        key:
           type: string
-        state:
-          type: string
-        full_address:
-          type: string
-        website_urls:
+        certification_type:
+          $ref: '#/components/schemas/type__CertificationCertificationType'
+        external_sources:
           type: array
           items:
-            type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-        phone_number:
-          type: string
-        categories:
-          type: array
-          items:
-            type: string
-        reviews:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ProfileMetadataReviewsItem'
-        recent_posts:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-        recent_reviews:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-      title: ProfileMetadata
-    type_businesses_BusinessRequestParamOrdersItem:
-      type: object
-      properties:
-        product:
-          $ref: '#/components/schemas/type_businesses_BusinessRequestParamOrdersItemProduct'
-          description: The product to order.
-        subproducts:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_businesses_BusinessRequestParamOrdersItemSubproductsItem'
-          description: Subproducts to include with the order.
-        options:
-          $ref: '#/components/schemas/type_businesses_BusinessRequestParamOrdersItemOptions'
-          description: Per-order configuration flags.
+            $ref: '#/components/schemas/type__CertificationExternalSourcesItem'
       required:
-      - product
-      title: BusinessRequestParamOrdersItem
-    type__PoliticallyExposedPersonScreeningResultsItem:
+      - object
+      - name
+      - key
+      - certification_type
+      - external_sources
+      title: Certification
+    type__Name:
       type: object
       properties:
         object:
-          $ref: '#/components/schemas/type__PoliticallyExposedPersonScreeningResultsItemObject'
+          type: string
         id:
           type: string
           format: uuid
-        aliases:
-          type: array
-          items:
-            type: string
-        birth_name:
-          type:
-          - string
-          - 'null'
-        birth_place:
-          type:
-          - string
-          - 'null'
-        citizenship_country:
-          type:
-          - string
-          - 'null'
-        dob:
-          type:
-          - string
-          - 'null'
-        employers:
-          type: array
-          items:
-            type: string
-        hit_type:
-          $ref: '#/components/schemas/type__PoliticallyExposedPersonScreeningResultsItemHitType'
-        memberships:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
         name:
           type: string
-        professional_history:
+        submitted:
+          type: boolean
+        type:
+          oneOf:
+          - $ref: '#/components/schemas/type__NameType'
+          - type: 'null'
+        business_id:
+          type: string
+          format: uuid
+        sources:
           type: array
           items:
-            type: string
-        score:
-          type: number
-          format: double
-        source_urls:
-          type: array
-          items:
-            type: string
-        stakeholders:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-      title: PoliticallyExposedPersonScreeningResultsItem
-    type__BusinessStatus:
+            $ref: '#/components/schemas/type__Source'
+      required:
+      - object
+      - id
+      - name
+      - submitted
+      - business_id
+      - sources
+      title: Name
+    type__NameType:
       type: string
       enum:
-      - open
-      - pending
-      - in_audit
-      - in_review
-      - approved
-      - rejected
-      description: Current status of the business verification
-      title: BusinessStatus
-    type__CertificationObject:
-      type: string
-      enum:
-      - certification
-      title: CertificationObject
+      - legal
+      - dba
+      title: NameType
   securitySchemes:
     bearer_auth:
       type: http

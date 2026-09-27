@@ -245,114 +245,14 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type__AgentsRunFeedback:
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
-        object:
+        message:
           type: string
-          description: Object type identifier.
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the feedback record.
-        run_id:
-          type: string
-          format: uuid
-          description: Identifier of the agent run the feedback is attached to.
-        rating:
-          $ref: '#/components/schemas/type__AgentsRunFeedbackRating'
-          description: Rating value submitted by the reviewer.
-        artifact_id:
-          type: string
-          format: uuid
-          description: Identifier of the artifact within the run that was rated.
-        comment:
-          type:
-          - string
-          - 'null'
-          description: Optional free-text comment submitted with the rating.
-        reviewer:
-          $ref: '#/components/schemas/type__AgentsRunFeedbackReviewer'
-          description: The actor that submitted the feedback. Sidepanel/session callers attribute to a User; API-key callers attribute to the Account.
-        superseded_prior:
-          type: boolean
-          description: True if a prior active rating from the same reviewer for the same (run, artifact) tuple was superseded by this new rating.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the feedback was created.
       required:
-      - object
-      - id
-      - run_id
-      - rating
-      - artifact_id
-      - comment
-      - reviewer
-      - superseded_prior
-      - created_at
-      description: POSITIVE or NEGATIVE rating on an agent run artifact.
-      title: AgentsRunFeedback
-    type__AgentsStepStatus:
-      type: string
-      enum:
-      - running
-      - completed
-      - error
-      description: Current execution status for the step.
-      title: AgentsStepStatus
-    type__AgentsRunFeedbackReviewer:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type__AgentsRunFeedbackReviewerType'
-          description: Class of the reviewer record.
-        id:
-          type: string
-          format: uuid
-          description: Identifier of the reviewer record.
-      required:
-      - type
-      - id
-      description: The actor that submitted the feedback. Sidepanel/session callers attribute to a User; API-key callers attribute to the Account.
-      title: AgentsRunFeedbackReviewer
-    type__AgentsSource:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: Canonical source URL.
-        source_name:
-          type: string
-          description: Human-readable source name.
-        source_tier:
-          type: string
-          description: Source quality or trust tier.
-        source_type:
-          type: string
-          description: Source category.
-      required:
-      - url
-      description: A source reference used by an agent artifact.
-      title: AgentsSource
-    type_runs_ListAgentRunsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AgentsRun'
-        object:
-          type: string
-        has_more:
-          type: boolean
-        total_count:
-          type: integer
-      required:
-      - object
-      - has_more
-      title: ListAgentRunsResponse
+      - message
+      title: ErrorResponseErrorsItem
     type__AgentsRunInterruptsItem:
       type: object
       properties:
@@ -373,28 +273,21 @@ components:
       - id
       - value
       title: AgentsRunInterruptsItem
-    type__ErrorResponse:
+    type__AgentsRunFeedbackReviewer:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+        type:
+          $ref: '#/components/schemas/type__AgentsRunFeedbackReviewerType'
+          description: Class of the reviewer record.
+        id:
+          type: string
+          format: uuid
+          description: Identifier of the reviewer record.
       required:
-      - errors
-      title: ErrorResponse
-    type__AgentsRunOutput:
-      type: object
-      properties:
-        artifacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AgentsArtifact'
-          description: Artifacts produced by the agent during this run.
-      required:
-      - artifacts
-      description: Artifact envelope produced by the agent. Non-null only when `status` is `completed`; `null` for `running`, `interrupted`, and `error` runs.
-      title: AgentsRunOutput
+      - type
+      - id
+      description: The actor that submitted the feedback. Sidepanel/session callers attribute to a User; API-key callers attribute to the Account.
+      title: AgentsRunFeedbackReviewer
     type__AgentsRunFeedbackRating:
       type: string
       enum:
@@ -402,6 +295,33 @@ components:
       - NEGATIVE
       description: Rating value submitted by the reviewer.
       title: AgentsRunFeedbackRating
+    type__AgentsSource:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Canonical source URL.
+        source_name:
+          type: string
+          description: Human-readable source name.
+        source_tier:
+          type: string
+          description: Source quality or trust tier.
+        source_type:
+          type: string
+          description: Source category.
+      required:
+      - url
+      description: A source reference used by an agent artifact.
+      title: AgentsSource
+    type__AgentsRunFeedbackReviewerType:
+      type: string
+      enum:
+      - User
+      - Account
+      description: Class of the reviewer record.
+      title: AgentsRunFeedbackReviewerType
     type__AgentsStepResult:
       type: object
       properties:
@@ -410,34 +330,52 @@ components:
           description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
       description: Structured result payload for the step.
       title: AgentsStepResult
-    type__AgentsRunRequester:
+    type__AgentsStepStatus:
+      type: string
+      enum:
+      - running
+      - completed
+      - error
+      description: Current execution status for the step.
+      title: AgentsStepStatus
+    type__AgentsRunStatus:
+      type: string
+      enum:
+      - running
+      - completed
+      - error
+      - interrupted
+      description: Current lifecycle status of the agent run.
+      title: AgentsRunStatus
+    type__AgentsArtifact:
       type: object
       properties:
-        id:
+        title:
           type: string
-          format: uuid
-          description: Identifier of the requesting user or account.
-        name:
+          description: Human-readable title for the artifact.
+        type:
           type: string
-          description: Display name of the requester.
-        email:
+          description: Artifact type identifier.
+        confidence:
           type:
           - string
           - 'null'
-          format: email
-          description: Email address of the requester. Populated for user requesters and `null` for account requesters.
+          description: Optional confidence label for artifact quality.
+        summary:
+          type:
+          - string
+          - 'null'
+          description: Optional summary of the artifact contents.
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentsSource'
+          description: Source references used to produce the artifact.
       required:
-      - id
-      - name
-      description: Principal that initiated the run. Populated with the authenticated user's identity when a session caller initiates the run, and with the account when an API key caller initiates the run. `null` for system-initiated runs.
-      title: AgentsRunRequester
-    type__AgentsRunFeedbackReviewerType:
-      type: string
-      enum:
-      - User
-      - Account
-      description: Class of the reviewer record.
-      title: AgentsRunFeedbackReviewerType
+      - title
+      - type
+      description: A structured artifact produced by an agent step.
+      title: AgentsArtifact
     type__AgentsRun:
       type: object
       properties:
@@ -506,6 +444,25 @@ components:
       - status
       description: A single agent run execution within an agent thread.
       title: AgentsRun
+    type_runs_AgentsRunFeedbackRequestParamRating:
+      type: string
+      enum:
+      - POSITIVE
+      - NEGATIVE
+      description: Rating value to record for this artifact.
+      title: AgentsRunFeedbackRequestParamRating
+    type__AgentsRunOutput:
+      type: object
+      properties:
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentsArtifact'
+          description: Artifacts produced by the agent during this run.
+      required:
+      - artifacts
+      description: Artifact envelope produced by the agent. Non-null only when `status` is `completed`; `null` for `running`, `interrupted`, and `error` runs.
+      title: AgentsRunOutput
     type__AgentsStep:
       type: object
       properties:
@@ -571,66 +528,81 @@ components:
       - started_at
       description: A step in an agent workflow execution timeline.
       title: AgentsStep
-    type_runs_AgentsRunFeedbackRequestParamRating:
-      type: string
-      enum:
-      - POSITIVE
-      - NEGATIVE
-      description: Rating value to record for this artifact.
-      title: AgentsRunFeedbackRequestParamRating
-    type__ErrorResponseErrorsItem:
+    type__ErrorResponse:
       type: object
       properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__AgentsRunStatus:
-      type: string
-      enum:
-      - running
-      - completed
-      - error
-      - interrupted
-      description: Current lifecycle status of the agent run.
-      title: AgentsRunStatus
-    type__AgentsStepResultResolution:
-      type: string
-      enum:
-      - auto_approve
-      - skip
-      description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
-      title: AgentsStepResultResolution
-    type__AgentsArtifact:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Human-readable title for the artifact.
-        type:
-          type: string
-          description: Artifact type identifier.
-        confidence:
-          type:
-          - string
-          - 'null'
-          description: Optional confidence label for artifact quality.
-        summary:
-          type:
-          - string
-          - 'null'
-          description: Optional summary of the artifact contents.
-        sources:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/type__AgentsSource'
-          description: Source references used to produce the artifact.
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
-      - title
-      - type
-      description: A structured artifact produced by an agent step.
-      title: AgentsArtifact
+      - errors
+      title: ErrorResponse
+    type__AgentsRunFeedback:
+      type: object
+      properties:
+        object:
+          type: string
+          description: Object type identifier.
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the feedback record.
+        run_id:
+          type: string
+          format: uuid
+          description: Identifier of the agent run the feedback is attached to.
+        rating:
+          $ref: '#/components/schemas/type__AgentsRunFeedbackRating'
+          description: Rating value submitted by the reviewer.
+        artifact_id:
+          type: string
+          format: uuid
+          description: Identifier of the artifact within the run that was rated.
+        comment:
+          type:
+          - string
+          - 'null'
+          description: Optional free-text comment submitted with the rating.
+        reviewer:
+          $ref: '#/components/schemas/type__AgentsRunFeedbackReviewer'
+          description: The actor that submitted the feedback. Sidepanel/session callers attribute to a User; API-key callers attribute to the Account.
+        superseded_prior:
+          type: boolean
+          description: True if a prior active rating from the same reviewer for the same (run, artifact) tuple was superseded by this new rating.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the feedback was created.
+      required:
+      - object
+      - id
+      - run_id
+      - rating
+      - artifact_id
+      - comment
+      - reviewer
+      - superseded_prior
+      - created_at
+      description: POSITIVE or NEGATIVE rating on an agent run artifact.
+      title: AgentsRunFeedback
+    type_runs_ListAgentRunsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentsRun'
+        object:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - has_more
+      title: ListAgentRunsResponse
     type__AgentsStepType:
       type: string
       enum:
@@ -640,6 +612,34 @@ components:
       - error
       description: Category of step output.
       title: AgentsStepType
+    type__AgentsStepResultResolution:
+      type: string
+      enum:
+      - auto_approve
+      - skip
+      description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
+      title: AgentsStepResultResolution
+    type__AgentsRunRequester:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Identifier of the requesting user or account.
+        name:
+          type: string
+          description: Display name of the requester.
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address of the requester. Populated for user requesters and `null` for account requesters.
+      required:
+      - id
+      - name
+      description: Principal that initiated the run. Populated with the authenticated user's identity when a session caller initiates the run, and with the account when an API key caller initiates the run. `null` for system-initiated runs.
+      title: AgentsRunRequester
   securitySchemes:
     bearer_auth:
       type: http

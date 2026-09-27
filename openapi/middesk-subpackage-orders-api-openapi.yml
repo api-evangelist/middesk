@@ -203,6 +203,21 @@ paths:
                   description: New status for the order
 components:
   schemas:
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__OrderRequesterType:
+      type: string
+      enum:
+      - account
+      - user
+      - api_key
+      title: OrderRequesterType
     type__OrderSubproductsItem:
       type: string
       enum:
@@ -213,21 +228,6 @@ components:
       - web_analysis
       - industry_classification
       title: OrderSubproductsItem
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_orders_OrderRequestParamOptions:
-      type: object
-      properties:
-        person_match:
-          type: boolean
-      description: Additional options for the order
-      title: OrderRequestParamOptions
     type__Order:
       type: object
       properties:
@@ -271,7 +271,24 @@ components:
       - created_at
       - updated_at
       title: Order
-    type_orders_OrderRequestParamProduct:
+    type__OrderStatus:
+      type: string
+      enum:
+      - created
+      - pending
+      - audited
+      - completed
+      - approved
+      - rejected
+      title: OrderStatus
+    type_orders_OrderRequestParamOptions:
+      type: object
+      properties:
+        person_match:
+          type: boolean
+      description: Additional options for the order
+      title: OrderRequestParamOptions
+    type__OrderProduct:
       type: string
       enum:
       - identity
@@ -295,8 +312,7 @@ components:
       - tax_liens
       - ucc_liens
       - email_risk
-      description: Product type for the order
-      title: OrderRequestParamProduct
+      title: OrderProduct
     type_orders_ListOrdersResponse:
       type: object
       properties:
@@ -326,24 +342,27 @@ components:
           - $ref: '#/components/schemas/type__OrderRequesterType'
           - type: 'null'
       title: OrderRequester
-    type__OrderRequesterType:
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type_orders_OrderRequestParamSubproductsItem:
       type: string
       enum:
-      - account
-      - user
-      - api_key
-      title: OrderRequesterType
-    type__OrderStatus:
-      type: string
-      enum:
-      - created
-      - pending
-      - audited
-      - completed
-      - approved
-      - rejected
-      title: OrderStatus
-    type__OrderProduct:
+      - articles_of_incorporation
+      - certificate_of_good_standing
+      - articles_of_incorporation_with_fallback
+      - ucc_documents
+      - web_analysis
+      - industry_classification
+      title: OrderRequestParamSubproductsItem
+    type_orders_OrderRequestParamProduct:
       type: string
       enum:
       - identity
@@ -367,27 +386,8 @@ components:
       - tax_liens
       - ucc_liens
       - email_risk
-      title: OrderProduct
-    type_orders_OrderRequestParamSubproductsItem:
-      type: string
-      enum:
-      - articles_of_incorporation
-      - certificate_of_good_standing
-      - articles_of_incorporation_with_fallback
-      - ucc_documents
-      - web_analysis
-      - industry_classification
-      title: OrderRequestParamSubproductsItem
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
+      description: Product type for the order
+      title: OrderRequestParamProduct
   securitySchemes:
     bearer_auth:
       type: http

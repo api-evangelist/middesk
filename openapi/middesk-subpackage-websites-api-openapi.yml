@@ -49,6 +49,142 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
+    type__WebsiteEmailAddressesItem:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__WebsiteEmailAddressesItemObject'
+        email:
+          type: string
+        id:
+          type: string
+          format: uuid
+        submitted:
+          type: boolean
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      title: WebsiteEmailAddressesItem
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__WebsiteRatingQualityRating:
+      type: string
+      enum:
+      - low
+      - moderate
+      - high
+      - not_available
+      title: WebsiteRatingQualityRating
+    type__WebsitePagesItem:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        category:
+          type: string
+        screenshot_url:
+          type: string
+          format: uri
+      title: WebsitePagesItem
+    type__WebsiteDomainRegistrar:
+      type: object
+      properties:
+        organization:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+      title: WebsiteDomainRegistrar
+    type__WebsiteRating:
+      type: object
+      properties:
+        indicators:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__WebsiteIndicator'
+        quality_rating:
+          $ref: '#/components/schemas/type__WebsiteRatingQualityRating'
+      required:
+      - quality_rating
+      title: WebsiteRating
+    type__Source:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+      required:
+      - id
+      - type
+      - metadata
+      title: Source
+    type__WebsiteEmailAddressesItemObject:
+      type: string
+      enum:
+      - email_address
+      title: WebsiteEmailAddressesItemObject
+    type__WebsiteObject:
+      type: string
+      enum:
+      - website
+      title: WebsiteObject
+    type__WebsiteAddressesItem:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        address_line1:
+          type:
+          - string
+          - 'null'
+        address_line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postal_code:
+          type:
+          - string
+          - 'null'
+        full_address:
+          type: string
+        submitted:
+          type: boolean
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      title: WebsiteAddressesItem
     type__WebsitePhoneNumber:
       type: object
       properties:
@@ -76,18 +212,54 @@ components:
           items:
             $ref: '#/components/schemas/type__Source'
       title: WebsitePhoneNumber
-    type__WebsiteRating:
+    type__WebsiteIndicatorRating:
+      type: string
+      enum:
+      - positive
+      - negative
+      - neutral
+      title: WebsiteIndicatorRating
+    type__WebsiteIndicator:
       type: object
       properties:
-        indicators:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__WebsiteIndicator'
-        quality_rating:
-          $ref: '#/components/schemas/type__WebsiteRatingQualityRating'
+        type:
+          $ref: '#/components/schemas/type__WebsiteIndicatorType'
+        name:
+          type: string
+        rating:
+          $ref: '#/components/schemas/type__WebsiteIndicatorRating'
+        value:
+          type: string
+        description:
+          type: string
       required:
-      - quality_rating
-      title: WebsiteRating
+      - type
+      - name
+      - rating
+      - value
+      - description
+      title: WebsiteIndicator
+    type__WebsiteIndicatorType:
+      type: string
+      enum:
+      - domain_age
+      - top_level_domain
+      - content_diversity
+      - contact_info
+      - compliance_info
+      - page_count
+      - broken_links
+      - domain_consistency
+      - update_frequency
+      - filler_text
+      - image_quality
+      - last_updated
+      - third_party_profile_links
+      - us_business_presence
+      - spelling_and_grammar
+      - https
+      - domain_ownership
+      title: WebsiteIndicatorType
     type__Website:
       type: object
       properties:
@@ -223,50 +395,6 @@ components:
       - phone_numbers
       - addresses
       title: Website
-    type__WebsiteRatingQualityRating:
-      type: string
-      enum:
-      - low
-      - moderate
-      - high
-      - not_available
-      title: WebsiteRatingQualityRating
-    type__WebsiteIndicatorRating:
-      type: string
-      enum:
-      - positive
-      - negative
-      - neutral
-      title: WebsiteIndicatorRating
-    type__WebsiteStatus:
-      type: string
-      enum:
-      - online
-      - offline
-      - unknown
-      title: WebsiteStatus
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
-    type__WebsitePagesItem:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-        category:
-          type: string
-        screenshot_url:
-          type: string
-          format: uri
-      title: WebsitePagesItem
     type__WebsiteDomain:
       type: object
       properties:
@@ -301,126 +429,21 @@ components:
           format: uri
           description: The final URL after redirect resolution (present when redirected is true)
       title: WebsiteDomain
-    type__WebsiteDomainRegistrar:
-      type: object
-      properties:
-        organization:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        url:
-          type:
-          - string
-          - 'null'
-          format: uri
-      title: WebsiteDomainRegistrar
-    type__Source:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          type: string
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-      required:
-      - id
-      - type
-      - metadata
-      title: Source
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__WebsiteIndicator:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type__WebsiteIndicatorType'
-        name:
-          type: string
-        rating:
-          $ref: '#/components/schemas/type__WebsiteIndicatorRating'
-        value:
-          type: string
-        description:
-          type: string
-      required:
-      - type
-      - name
-      - rating
-      - value
-      - description
-      title: WebsiteIndicator
-    type__WebsiteAddressesItem:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        address_line1:
-          type:
-          - string
-          - 'null'
-        address_line2:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        postal_code:
-          type:
-          - string
-          - 'null'
-        full_address:
-          type: string
-        submitted:
-          type: boolean
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
-      title: WebsiteAddressesItem
-    type__NameType:
+    type__WebsitePhoneNumberObject:
       type: string
       enum:
-      - legal
-      - dba
-      title: NameType
-    type__WebsiteEmailAddressesItem:
+      - phone_number
+      title: WebsitePhoneNumberObject
+    type__ErrorResponse:
       type: object
       properties:
-        object:
-          $ref: '#/components/schemas/type__WebsiteEmailAddressesItemObject'
-        email:
-          type: string
-        id:
-          type: string
-          format: uuid
-        submitted:
-          type: boolean
-        sources:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/type__Source'
-      title: WebsiteEmailAddressesItem
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
     type__Name:
       type: object
       properties:
@@ -452,42 +475,19 @@ components:
       - business_id
       - sources
       title: Name
-    type__WebsiteIndicatorType:
+    type__WebsiteStatus:
       type: string
       enum:
-      - domain_age
-      - top_level_domain
-      - content_diversity
-      - contact_info
-      - compliance_info
-      - page_count
-      - broken_links
-      - domain_consistency
-      - update_frequency
-      - filler_text
-      - image_quality
-      - last_updated
-      - third_party_profile_links
-      - us_business_presence
-      - spelling_and_grammar
-      - https
-      - domain_ownership
-      title: WebsiteIndicatorType
-    type__WebsiteEmailAddressesItemObject:
+      - online
+      - offline
+      - unknown
+      title: WebsiteStatus
+    type__NameType:
       type: string
       enum:
-      - email_address
-      title: WebsiteEmailAddressesItemObject
-    type__WebsiteObject:
-      type: string
-      enum:
-      - website
-      title: WebsiteObject
-    type__WebsitePhoneNumberObject:
-      type: string
-      enum:
-      - phone_number
-      title: WebsitePhoneNumberObject
+      - legal
+      - dba
+      title: NameType
   securitySchemes:
     bearer_auth:
       type: http
