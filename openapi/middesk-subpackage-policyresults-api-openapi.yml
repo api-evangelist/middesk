@@ -43,14 +43,6 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
     type__PolicyResultsList:
       type: object
       properties:
@@ -86,6 +78,32 @@ components:
         policy_action:
           $ref: '#/components/schemas/type__PolicyActionResultPolicyAction'
       title: PolicyActionResult
+    type__PolicyActionResultPolicyAction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Policy action ID
+        action_type:
+          type: string
+          description: Type of action
+        options:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Action options
+        policy_version_id:
+          type: string
+          description: Policy version ID
+      title: PolicyActionResultPolicyAction
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
     type__PolicyResult:
       type: object
       properties:
@@ -135,24 +153,6 @@ components:
           items:
             $ref: '#/components/schemas/type__PolicyActionResult'
       title: PolicyResult
-    type__PolicyActionResultPolicyAction:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Policy action ID
-        action_type:
-          type: string
-          description: Type of action
-        options:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Action options
-        policy_version_id:
-          type: string
-          description: Policy version ID
-      title: PolicyActionResultPolicyAction
     type__ErrorResponse:
       type: object
       properties:

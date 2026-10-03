@@ -56,59 +56,6 @@ paths:
               - name
 components:
   schemas:
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_identities_BusinessIdentityRequestParamEntityType:
-      type: string
-      enum:
-      - LLC
-      - CORPORATION
-      - NON_PROFIT
-      - PARTNERSHIP
-      - TRUST
-      description: Entity type filter
-      title: BusinessIdentityRequestParamEntityType
-    type__BusinessIdentityNamesItem:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/type__BusinessIdentityNamesItemType'
-      title: BusinessIdentityNamesItem
-    type__BusinessIdentityNamesItemType:
-      type: string
-      enum:
-      - legal
-      - dba
-      title: BusinessIdentityNamesItemType
-    type__BusinessIdentityList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__BusinessIdentity'
-      description: List of business identity autocomplete results
-      title: BusinessIdentityList
-    type_identities_BusinessIdentityRequestParamAddressesItem:
-      type: object
-      properties:
-        address_line1:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postal_code:
-          type: string
-      title: BusinessIdentityRequestParamAddressesItem
     type__BusinessIdentity:
       type: object
       properties:
@@ -137,6 +84,36 @@ components:
           description: Business entity type
       description: Business result from autocomplete search
       title: BusinessIdentity
+    type_identities_BusinessIdentityRequestParamAddressesItem:
+      type: object
+      properties:
+        address_line1:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+      title: BusinessIdentityRequestParamAddressesItem
+    type__BusinessIdentityNamesItem:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/type__BusinessIdentityNamesItemType'
+      title: BusinessIdentityNamesItem
+    type_identities_BusinessIdentityRequestParamEntityType:
+      type: string
+      enum:
+      - LLC
+      - CORPORATION
+      - NON_PROFIT
+      - PARTNERSHIP
+      - TRUST
+      description: Entity type filter
+      title: BusinessIdentityRequestParamEntityType
     type__BusinessIdentityEntityType:
       type: string
       enum:
@@ -147,16 +124,39 @@ components:
       - TRUST
       description: Business entity type
       title: BusinessIdentityEntityType
-    type__ErrorResponse:
+    type__BusinessIdentityNamesItemType:
+      type: string
+      enum:
+      - legal
+      - dba
+      title: BusinessIdentityNamesItemType
+    type__BusinessIdentityPeopleItem:
       type: object
       properties:
-        errors:
+        name:
+          type: string
+        titles:
           type: array
           items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+            type: string
+      title: BusinessIdentityPeopleItem
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
       required:
-      - errors
-      title: ErrorResponse
+      - message
+      title: ErrorResponseErrorsItem
+    type__BusinessIdentityList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__BusinessIdentity'
+      description: List of business identity autocomplete results
+      title: BusinessIdentityList
     type__BusinessIdentityAddressesItem:
       type: object
       properties:
@@ -179,16 +179,16 @@ components:
           items:
             type: string
       title: BusinessIdentityAddressesItem
-    type__BusinessIdentityPeopleItem:
+    type__ErrorResponse:
       type: object
       properties:
-        name:
-          type: string
-        titles:
+        errors:
           type: array
           items:
-            type: string
-      title: BusinessIdentityPeopleItem
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http

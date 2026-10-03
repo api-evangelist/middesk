@@ -130,14 +130,40 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type__ErrorResponseErrorsItem:
+    type__AgentsStepType:
+      type: string
+      enum:
+      - activity
+      - output
+      - interrupt
+      - error
+      description: Category of step output.
+      title: AgentsStepType
+    type_threads_ListAgentThreadsResponse:
       type: object
       properties:
-        message:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentsThread'
+        object:
           type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
       required:
-      - message
-      title: ErrorResponseErrorsItem
+      - object
+      - has_more
+      title: ListAgentThreadsResponse
+    type__AgentsStepStatus:
+      type: string
+      enum:
+      - running
+      - completed
+      - error
+      description: Current execution status for the step.
+      title: AgentsStepStatus
     type__AgentsArtifact:
       type: object
       properties:
@@ -167,40 +193,6 @@ components:
       - type
       description: A structured artifact produced by an agent step.
       title: AgentsArtifact
-    type_threads_ListAgentThreadsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AgentsThread'
-        object:
-          type: string
-        has_more:
-          type: boolean
-        total_count:
-          type: integer
-      required:
-      - object
-      - has_more
-      title: ListAgentThreadsResponse
-    type__AgentsStepResult:
-      type: object
-      properties:
-        resolution:
-          $ref: '#/components/schemas/type__AgentsStepResultResolution'
-          description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
-      description: Structured result payload for the step.
-      title: AgentsStepResult
-    type__AgentsStepType:
-      type: string
-      enum:
-      - activity
-      - output
-      - interrupt
-      - error
-      description: Category of step output.
-      title: AgentsStepType
     type__AgentsThread:
       type: object
       properties:
@@ -249,6 +241,34 @@ components:
       - status
       description: A conversation thread for agent workflows.
       title: AgentsThread
+    type__AgentsSource:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Canonical source URL.
+        source_name:
+          type: string
+          description: Human-readable source name.
+        source_tier:
+          type: string
+          description: Source quality or trust tier.
+        source_type:
+          type: string
+          description: Source category.
+      required:
+      - url
+      description: A source reference used by an agent artifact.
+      title: AgentsSource
+    type__AgentsStepResult:
+      type: object
+      properties:
+        resolution:
+          $ref: '#/components/schemas/type__AgentsStepResultResolution'
+          description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
+      description: Structured result payload for the step.
+      title: AgentsStepResult
     type__AgentsStep:
       type: object
       properties:
@@ -314,26 +334,14 @@ components:
       - started_at
       description: A step in an agent workflow execution timeline.
       title: AgentsStep
-    type__AgentsSource:
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
-        url:
+        message:
           type: string
-          format: uri
-          description: Canonical source URL.
-        source_name:
-          type: string
-          description: Human-readable source name.
-        source_tier:
-          type: string
-          description: Source quality or trust tier.
-        source_type:
-          type: string
-          description: Source category.
       required:
-      - url
-      description: A source reference used by an agent artifact.
-      title: AgentsSource
+      - message
+      title: ErrorResponseErrorsItem
     type__AgentsThreadStatus:
       type: string
       enum:
@@ -360,14 +368,6 @@ components:
       required:
       - errors
       title: ErrorResponse
-    type__AgentsStepStatus:
-      type: string
-      enum:
-      - running
-      - completed
-      - error
-      description: Current execution status for the step.
-      title: AgentsStepStatus
   securitySchemes:
     bearer_auth:
       type: http

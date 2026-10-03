@@ -43,6 +43,183 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
+    type__ReviewTaskLabel:
+      type: string
+      enum:
+      - Politically Exposed Persons
+      - Web Presence Quality
+      - KYC
+      - People Bankruptcies
+      - Address Risk
+      - Global Watchlists
+      - Phone Number
+      - Third Party Profile Status
+      - Liens
+      - Third Party Profiles
+      - Time in Business
+      - Web - Email Address
+      - Risky Keywords
+      - SOS Domestic Sub‑status
+      - PPP Loans
+      - Secretary of State Filings
+      - Entity Type
+      - SOS Filings
+      - People Criminal History
+      - Adverse Media
+      - Web - People
+      - Office Address
+      - Entity Type Match
+      - Web - Phone Number
+      - Business Name
+      - Bankruptcies
+      - Industry Classification
+      - TIN Match
+      - Watchlists
+      - People Litigations
+      - True Industry
+      - People
+      - DBA Name
+      - Domain Ownership
+      - Domain Redirect
+      - TIN Type
+      - Website
+      - TIN Error
+      - Watchlist
+      - Litigations
+      - Web - Business Name
+      - Name Entity Type
+      - Formation State
+      - People Liens
+      - Web - Office Address
+      - Email Risk
+      title: ReviewTaskLabel
+    type__ReviewTask:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/type__ReviewTaskCategory'
+        key:
+          $ref: '#/components/schemas/type__ReviewTaskKey'
+        label:
+          $ref: '#/components/schemas/type__ReviewTaskLabel'
+        message:
+          type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/type__ReviewTaskStatus'
+        sub_label:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      required:
+      - category
+      - key
+      - label
+      - message
+      - name
+      - status
+      - sub_label
+      - sources
+      title: ReviewTask
+    type__ReviewTaskStatus:
+      type: string
+      enum:
+      - success
+      - failure
+      - warning
+      - neutral
+      title: ReviewTaskStatus
+    type__User:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        roles:
+          type: array
+          items:
+            type: string
+        image_url:
+          type: string
+          format: uri
+        directory_managed:
+          type: boolean
+        last_login_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        settings:
+          type: object
+          additionalProperties:
+            description: Any type
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - object
+      - id
+      - name
+      - email
+      - roles
+      - created_at
+      title: User
+    type__ReviewTaskCategory:
+      type: string
+      enum:
+      - bankruptcies
+      - global_watchlists
+      - name
+      - people_litigations
+      - loans
+      - kyc
+      - watchlist
+      - phone
+      - formation
+      - people_criminal_history
+      - adverse_media
+      - litigations
+      - tin_type
+      - address
+      - sos
+      - web
+      - liens
+      - people_bankruptcies
+      - industry
+      - tin
+      - people
+      - people_liens
+      - website
+      - politically_exposed_persons
+      - email
+      title: ReviewTaskCategory
+    type__Source:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+      required:
+      - id
+      - type
+      - metadata
+      title: Source
     type__ErrorResponseErrorsItem:
       type: object
       properties:
@@ -51,6 +228,11 @@ components:
       required:
       - message
       title: ErrorResponseErrorsItem
+    type__ReviewObject:
+      type: string
+      enum:
+      - review
+      title: ReviewObject
     type__ReviewTaskKey:
       type: string
       enum:
@@ -119,71 +301,6 @@ components:
       - people_liens
       - email_risk
       title: ReviewTaskKey
-    type__ReviewTaskCategory:
-      type: string
-      enum:
-      - bankruptcies
-      - global_watchlists
-      - name
-      - people_litigations
-      - loans
-      - kyc
-      - watchlist
-      - phone
-      - formation
-      - people_criminal_history
-      - adverse_media
-      - litigations
-      - tin_type
-      - address
-      - sos
-      - web
-      - liens
-      - people_bankruptcies
-      - industry
-      - tin
-      - people
-      - people_liens
-      - website
-      - politically_exposed_persons
-      - email
-      title: ReviewTaskCategory
-    type__ReviewObject:
-      type: string
-      enum:
-      - review
-      title: ReviewObject
-    type__ReviewTask:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/type__ReviewTaskCategory'
-        key:
-          $ref: '#/components/schemas/type__ReviewTaskKey'
-        label:
-          $ref: '#/components/schemas/type__ReviewTaskLabel'
-        message:
-          type: string
-        name:
-          type: string
-        status:
-          $ref: '#/components/schemas/type__ReviewTaskStatus'
-        sub_label:
-          type: string
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
-      required:
-      - category
-      - key
-      - label
-      - message
-      - name
-      - status
-      - sub_label
-      - sources
-      title: ReviewTask
     type__Review:
       type: object
       properties:
@@ -228,123 +345,6 @@ components:
       required:
       - errors
       title: ErrorResponse
-    type__Source:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          type: string
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-      required:
-      - id
-      - type
-      - metadata
-      title: Source
-    type__ReviewTaskLabel:
-      type: string
-      enum:
-      - Politically Exposed Persons
-      - Web Presence Quality
-      - KYC
-      - People Bankruptcies
-      - Address Risk
-      - Global Watchlists
-      - Phone Number
-      - Third Party Profile Status
-      - Liens
-      - Third Party Profiles
-      - Time in Business
-      - Web - Email Address
-      - Risky Keywords
-      - SOS Domestic Sub‑status
-      - PPP Loans
-      - Secretary of State Filings
-      - Entity Type
-      - SOS Filings
-      - People Criminal History
-      - Adverse Media
-      - Web - People
-      - Office Address
-      - Entity Type Match
-      - Web - Phone Number
-      - Business Name
-      - Bankruptcies
-      - Industry Classification
-      - TIN Match
-      - Watchlists
-      - People Litigations
-      - True Industry
-      - People
-      - DBA Name
-      - Domain Ownership
-      - Domain Redirect
-      - TIN Type
-      - Website
-      - TIN Error
-      - Watchlist
-      - Litigations
-      - Web - Business Name
-      - Name Entity Type
-      - Formation State
-      - People Liens
-      - Web - Office Address
-      - Email Risk
-      title: ReviewTaskLabel
-    type__User:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        roles:
-          type: array
-          items:
-            type: string
-        image_url:
-          type: string
-          format: uri
-        directory_managed:
-          type: boolean
-        last_login_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        settings:
-          type: object
-          additionalProperties:
-            description: Any type
-        created_at:
-          type: string
-          format: date-time
-      required:
-      - object
-      - id
-      - name
-      - email
-      - roles
-      - created_at
-      title: User
-    type__ReviewTaskStatus:
-      type: string
-      enum:
-      - success
-      - failure
-      - warning
-      - neutral
-      title: ReviewTaskStatus
   securitySchemes:
     bearer_auth:
       type: http

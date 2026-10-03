@@ -269,14 +269,6 @@ components:
       - WY
       description: US state abbreviation (required)
       title: RegistrationRequestParamState
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
     type_registrationRequests_ListRegistrationRequestsResponse:
       type: object
       properties:
@@ -289,6 +281,69 @@ components:
         url:
           type: string
       title: ListRegistrationRequestsResponse
+    type__RegistrationRequestState:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      description: US state abbreviation
+      title: RegistrationRequestState
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
     type__RegistrationRequest:
       type: object
       properties:
@@ -359,6 +414,15 @@ components:
       - items
       - invite_link
       title: RegistrationRequest
+    type_registrationRequests_GetRegistrationRequestGuestDashboardResponse:
+      type: object
+      properties:
+        guest_dashboard_url:
+          type: string
+          format: uri
+      required:
+      - guest_dashboard_url
+      title: GetRegistrationRequestGuestDashboardResponse
     type__ErrorResponse:
       type: object
       properties:
@@ -369,70 +433,6 @@ components:
       required:
       - errors
       title: ErrorResponse
-    type__RegistrationRequestState:
-      type: string
-      enum:
-      - AL
-      - AK
-      - AZ
-      - AR
-      - CA
-      - CO
-      - CT
-      - DE
-      - FL
-      - GA
-      - HI
-      - ID
-      - IL
-      - IN
-      - IA
-      - KS
-      - KY
-      - LA
-      - ME
-      - MD
-      - MA
-      - MI
-      - MN
-      - MS
-      - MO
-      - MT
-      - NE
-      - NV
-      - NH
-      - NJ
-      - NM
-      - NY
-      - NC
-      - ND
-      - OH
-      - OK
-      - OR
-      - PA
-      - RI
-      - SC
-      - SD
-      - TN
-      - TX
-      - UT
-      - VT
-      - VA
-      - WA
-      - WV
-      - WI
-      - WY
-      description: US state abbreviation
-      title: RegistrationRequestState
-    type_registrationRequests_GetRegistrationRequestGuestDashboardResponse:
-      type: object
-      properties:
-        guest_dashboard_url:
-          type: string
-          format: uri
-      required:
-      - guest_dashboard_url
-      title: GetRegistrationRequestGuestDashboardResponse
   securitySchemes:
     bearer_auth:
       type: http

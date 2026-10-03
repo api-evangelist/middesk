@@ -42,6 +42,43 @@ paths:
                 $ref: '#/components/schemas/type_informationRequests_ListInformationRequestsResponse'
 components:
   schemas:
+    type_informationRequests_ListInformationRequestsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentInformationRequest'
+        url:
+          type: string
+        has_more:
+          type: boolean
+        count:
+          type: integer
+      title: ListInformationRequestsResponse
+    type__AgentInformationRequestCompany:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        legal_name:
+          type:
+          - string
+          - 'null'
+        dba_name:
+          type:
+          - string
+          - 'null'
+        external_id:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      title: AgentInformationRequestCompany
     type__AgentInformationRequest:
       type: object
       properties:
@@ -72,43 +109,6 @@ components:
       - information_requested
       - company
       title: AgentInformationRequest
-    type__AgentInformationRequestCompany:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        legal_name:
-          type:
-          - string
-          - 'null'
-        dba_name:
-          type:
-          - string
-          - 'null'
-        external_id:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      title: AgentInformationRequestCompany
-    type_informationRequests_ListInformationRequestsResponse:
-      type: object
-      properties:
-        object:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AgentInformationRequest'
-        url:
-          type: string
-        has_more:
-          type: boolean
-        count:
-          type: integer
-      title: ListInformationRequestsResponse
     type__AgentInformationRequestContact:
       type: object
       properties:

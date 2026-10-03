@@ -69,15 +69,7 @@ components:
           items:
             $ref: '#/components/schemas/type__Source'
       title: ConnectionConnectingAddressesItem
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__ConnectionConnectingPeopleItem:
+    type__ConnectionConnectingBusinessesItem:
       type: object
       properties:
         name:
@@ -90,7 +82,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/type__Source'
-      title: ConnectionConnectingPeopleItem
+      title: ConnectionConnectingBusinessesItem
     type__Connection:
       type: object
       properties:
@@ -130,6 +122,20 @@ components:
       - connecting_addresses
       - connecting_businesses
       title: Connection
+    type__ConnectionConnectingPeopleItem:
+      type: object
+      properties:
+        name:
+          type: string
+        titles:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      title: ConnectionConnectingPeopleItem
     type_connections_GetV1BusinessesBusinessIdConnectionsResponse:
       type: object
       properties:
@@ -166,20 +172,14 @@ components:
       - type
       - metadata
       title: Source
-    type__ConnectionConnectingBusinessesItem:
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
-        name:
+        message:
           type: string
-        titles:
-          type: array
-          items:
-            type: string
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
-      title: ConnectionConnectingBusinessesItem
+      required:
+      - message
+      title: ErrorResponseErrorsItem
     type__ErrorResponse:
       type: object
       properties:

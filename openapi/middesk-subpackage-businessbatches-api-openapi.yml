@@ -157,6 +157,49 @@ paths:
                 description: Any type
 components:
   schemas:
+    type_businessBatches_ListBusinessBatchesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__BusinessBatch'
+        object:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - has_more
+      title: ListBusinessBatchesResponse
+    type__BusinessBatchAccount:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        slug:
+          type: string
+        pilot:
+          type: boolean
+      required:
+      - id
+      - name
+      - slug
+      - pilot
+      title: BusinessBatchAccount
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
     type__BusinessBatch:
       type: object
       properties:
@@ -188,31 +231,6 @@ components:
       - created_at
       - account
       title: BusinessBatch
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_businessBatches_ListBusinessBatchesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__BusinessBatch'
-        object:
-          type: string
-        has_more:
-          type: boolean
-        total_count:
-          type: integer
-      required:
-      - object
-      - has_more
-      title: ListBusinessBatchesResponse
     type__ErrorResponse:
       type: object
       properties:
@@ -223,24 +241,6 @@ components:
       required:
       - errors
       title: ErrorResponse
-    type__BusinessBatchAccount:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        slug:
-          type: string
-        pilot:
-          type: boolean
-      required:
-      - id
-      - name
-      - slug
-      - pilot
-      title: BusinessBatchAccount
   securitySchemes:
     bearer_auth:
       type: http

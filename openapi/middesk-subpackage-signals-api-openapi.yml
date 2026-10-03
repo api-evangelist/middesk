@@ -204,29 +204,13 @@ components:
       - description
       - code
       title: SignalReasonsItem
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__SignalRequester:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - type
-      - name
-      title: SignalRequester
+    type__SignalReasonsItemCategory:
+      type: string
+      enum:
+      - identification
+      - verification
+      - evaluation
+      title: SignalReasonsItemCategory
     type__Signal:
       type: object
       properties:
@@ -285,6 +269,29 @@ components:
       - name
       - created_at
       title: Signal
+    type__SignalRequester:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - type
+      - name
+      title: SignalRequester
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
     type__SignalReasonsItemCode:
       type: string
       enum:
@@ -331,13 +338,6 @@ components:
       - E1102
       - E1201
       title: SignalReasonsItemCode
-    type__SignalReasonsItemCategory:
-      type: string
-      enum:
-      - identification
-      - verification
-      - evaluation
-      title: SignalReasonsItemCategory
     type_signals_ListSignalsResponse:
       type: object
       properties:

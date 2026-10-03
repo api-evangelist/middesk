@@ -166,6 +166,21 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
+    type__ActionEffectOperation:
+      type: string
+      enum:
+      - created
+      - updated
+      - linked
+      description: The type of change that was made
+      title: ActionEffectOperation
+    type__ActionObjectType:
+      type: string
+      enum:
+      - Business
+      - Watchlist::Result
+      description: The type of object the action was performed on
+      title: ActionObjectType
     type_actions_ListActionsResponse:
       type: object
       properties:
@@ -181,39 +196,65 @@ components:
       - object
       - data
       title: ListActionsResponse
-    type__ErrorResponseErrorsItem:
+    type_actions_ListActionsRequestObjectType:
+      type: string
+      enum:
+      - businesses
+      - watchlist_result
+      title: ListActionsRequestObjectType
+    type_actions_GetActionRequestObjectType:
+      type: string
+      enum:
+      - businesses
+      - watchlist_result
+      title: GetActionRequestObjectType
+    type__ActionEffect:
       type: object
       properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__ActionActor:
-      type: object
-      properties:
-        actor_type:
-          $ref: '#/components/schemas/type__ActionActorActorType'
-          description: The type of actor
-        data:
-          type: object
+        operation:
+          $ref: '#/components/schemas/type__ActionEffectOperation'
+          description: The type of change that was made
+        diff:
+          type:
+          - object
+          - 'null'
           additionalProperties:
             description: Any type
-          description: Actor details (varies by actor type)
+          description: Before/after values for each changed field
+        target:
+          oneOf:
+          - $ref: '#/components/schemas/type__ActionEffectTarget'
+          - type: 'null'
       required:
-      - actor_type
-      title: ActionActor
-    type__ActionType:
+      - operation
+      - diff
+      - target
+      title: ActionEffect
+    type_actions_ActionRequestParamType:
       type: string
       enum:
       - add_sources
       - add_attributes
-      - update_address_risk
       - verify_tin
       - decision
       - dismissal
-      description: The action type that was performed
-      title: ActionType
+      description: The type of action to perform
+      title: ActionRequestParamType
+    type__ActionActorActorType:
+      type: string
+      enum:
+      - account
+      - user
+      - run
+      description: The type of actor
+      title: ActionActorActorType
+    type_actions_ActionRequestParamObjectType:
+      type: string
+      enum:
+      - businesses
+      - watchlist_result
+      description: Type of object to perform the action on
+      title: ActionRequestParamObjectType
     type__Action:
       type: object
       properties:
@@ -262,90 +303,6 @@ components:
       - effects
       - actors
       title: Action
-    type__ActionEffectOperation:
-      type: string
-      enum:
-      - created
-      - updated
-      - linked
-      description: The type of change that was made
-      title: ActionEffectOperation
-    type_actions_GetActionRequestObjectType:
-      type: string
-      enum:
-      - businesses
-      - watchlist_result
-      title: GetActionRequestObjectType
-    type__ActionEffect:
-      type: object
-      properties:
-        operation:
-          $ref: '#/components/schemas/type__ActionEffectOperation'
-          description: The type of change that was made
-        diff:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-          description: Before/after values for each changed field
-        target:
-          oneOf:
-          - $ref: '#/components/schemas/type__ActionEffectTarget'
-          - type: 'null'
-      required:
-      - operation
-      - diff
-      - target
-      title: ActionEffect
-    type_actions_ActionRequestParamObjectType:
-      type: string
-      enum:
-      - businesses
-      - watchlist_result
-      description: Type of object to perform the action on
-      title: ActionRequestParamObjectType
-    type__ActionActorActorType:
-      type: string
-      enum:
-      - account
-      - user
-      - run
-      description: The type of actor
-      title: ActionActorActorType
-    type__ActionObjectType:
-      type: string
-      enum:
-      - Business
-      - Watchlist::Result
-      description: The type of object the action was performed on
-      title: ActionObjectType
-    type_actions_ListActionsRequestObjectType:
-      type: string
-      enum:
-      - businesses
-      - watchlist_result
-      title: ListActionsRequestObjectType
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
-    type_actions_ActionRequestParamType:
-      type: string
-      enum:
-      - add_sources
-      - add_attributes
-      - verify_tin
-      - decision
-      - dismissal
-      description: The type of action to perform
-      title: ActionRequestParamType
     type__ActionEffectTarget:
       type: object
       properties:
@@ -360,6 +317,49 @@ components:
       - object
       - id
       title: ActionEffectTarget
+    type__ActionActor:
+      type: object
+      properties:
+        actor_type:
+          $ref: '#/components/schemas/type__ActionActorActorType'
+          description: The type of actor
+        data:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Actor details (varies by actor type)
+      required:
+      - actor_type
+      title: ActionActor
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__ActionType:
+      type: string
+      enum:
+      - add_sources
+      - add_attributes
+      - update_address_risk
+      - verify_tin
+      - decision
+      - dismissal
+      description: The action type that was performed
+      title: ActionType
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http

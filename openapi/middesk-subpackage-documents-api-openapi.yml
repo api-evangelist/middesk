@@ -106,24 +106,23 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type__ErrorResponseErrorsItem:
+    type_documents_ListDocumentsResponse:
       type: object
       properties:
-        message:
+        object:
           type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
+            $ref: '#/components/schemas/type__Document'
+      title: ListDocumentsResponse
+    type_documents_GetDocumentDownloadUrlResponse:
+      type: object
+      properties:
+        data:
+          type: string
+          format: uri
+      title: GetDocumentDownloadUrlResponse
     type__DocumentSource:
       type: object
       properties:
@@ -140,18 +139,14 @@ components:
             description: Any type
           description: Additional source metadata
       title: DocumentSource
-    type_documents_GetDocumentDownloadUrlResponse:
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
-        data:
+        message:
           type: string
-          format: uri
-      title: GetDocumentDownloadUrlResponse
-    type__DocumentObject:
-      type: string
-      enum:
-      - document
-      title: DocumentObject
+      required:
+      - message
+      title: ErrorResponseErrorsItem
     type__Document:
       type: object
       properties:
@@ -201,16 +196,21 @@ components:
       - download_url
       - created_at
       title: Document
-    type_documents_ListDocumentsResponse:
+    type__DocumentObject:
+      type: string
+      enum:
+      - document
+      title: DocumentObject
+    type__ErrorResponse:
       type: object
       properties:
-        object:
-          type: string
-        data:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/type__Document'
-      title: ListDocumentsResponse
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http
