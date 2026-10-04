@@ -79,6 +79,19 @@ components:
       required:
       - id
       title: AgentInformationRequestCompany
+    type__AgentInformationRequestContact:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+      title: AgentInformationRequestContact
     type__AgentInformationRequest:
       type: object
       properties:
@@ -109,19 +122,6 @@ components:
       - information_requested
       - company
       title: AgentInformationRequest
-    type__AgentInformationRequestContact:
-      type: object
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-      title: AgentInformationRequestContact
   securitySchemes:
     bearer_auth:
       type: http

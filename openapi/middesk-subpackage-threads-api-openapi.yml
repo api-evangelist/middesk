@@ -130,40 +130,16 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type__AgentsStepType:
-      type: string
-      enum:
-      - activity
-      - output
-      - interrupt
-      - error
-      description: Category of step output.
-      title: AgentsStepType
-    type_threads_ListAgentThreadsResponse:
+    type__ErrorResponse:
       type: object
       properties:
-        data:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/type__AgentsThread'
-        object:
-          type: string
-        has_more:
-          type: boolean
-        total_count:
-          type: integer
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
-      - object
-      - has_more
-      title: ListAgentThreadsResponse
-    type__AgentsStepStatus:
-      type: string
-      enum:
-      - running
-      - completed
-      - error
-      description: Current execution status for the step.
-      title: AgentsStepStatus
+      - errors
+      title: ErrorResponse
     type__AgentsArtifact:
       type: object
       properties:
@@ -193,6 +169,21 @@ components:
       - type
       description: A structured artifact produced by an agent step.
       title: AgentsArtifact
+    type__AgentsStepResultResolution:
+      type: string
+      enum:
+      - auto_approve
+      - skip
+      description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
+      title: AgentsStepResultResolution
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
     type__AgentsThread:
       type: object
       properties:
@@ -241,6 +232,15 @@ components:
       - status
       description: A conversation thread for agent workflows.
       title: AgentsThread
+    type__AgentsStepType:
+      type: string
+      enum:
+      - activity
+      - output
+      - interrupt
+      - error
+      description: Category of step output.
+      title: AgentsStepType
     type__AgentsSource:
       type: object
       properties:
@@ -261,14 +261,6 @@ components:
       - url
       description: A source reference used by an agent artifact.
       title: AgentsSource
-    type__AgentsStepResult:
-      type: object
-      properties:
-        resolution:
-          $ref: '#/components/schemas/type__AgentsStepResultResolution'
-          description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
-      description: Structured result payload for the step.
-      title: AgentsStepResult
     type__AgentsStep:
       type: object
       properties:
@@ -334,14 +326,23 @@ components:
       - started_at
       description: A step in an agent workflow execution timeline.
       title: AgentsStep
-    type__ErrorResponseErrorsItem:
+    type_threads_ListAgentThreadsResponse:
       type: object
       properties:
-        message:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentsThread'
+        object:
           type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
       required:
-      - message
-      title: ErrorResponseErrorsItem
+      - object
+      - has_more
+      title: ListAgentThreadsResponse
     type__AgentsThreadStatus:
       type: string
       enum:
@@ -351,23 +352,22 @@ components:
       - interrupted
       description: Current lifecycle status of the agent thread.
       title: AgentsThreadStatus
-    type__AgentsStepResultResolution:
-      type: string
-      enum:
-      - auto_approve
-      - skip
-      description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
-      title: AgentsStepResultResolution
-    type__ErrorResponse:
+    type__AgentsStepResult:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
+        resolution:
+          $ref: '#/components/schemas/type__AgentsStepResultResolution'
+          description: How the interrupt was resolved. Present only on completed interrupt steps when an interrupt policy auto-approved or skipped the interrupt. Absent for manual resolutions.
+      description: Structured result payload for the step.
+      title: AgentsStepResult
+    type__AgentsStepStatus:
+      type: string
+      enum:
+      - running
+      - completed
+      - error
+      description: Current execution status for the step.
+      title: AgentsStepStatus
   securitySchemes:
     bearer_auth:
       type: http

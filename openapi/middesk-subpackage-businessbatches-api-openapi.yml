@@ -157,6 +157,16 @@ paths:
                 description: Any type
 components:
   schemas:
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
     type_businessBatches_ListBusinessBatchesResponse:
       type: object
       properties:
@@ -174,24 +184,6 @@ components:
       - object
       - has_more
       title: ListBusinessBatchesResponse
-    type__BusinessBatchAccount:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        slug:
-          type: string
-        pilot:
-          type: boolean
-      required:
-      - id
-      - name
-      - slug
-      - pilot
-      title: BusinessBatchAccount
     type__ErrorResponseErrorsItem:
       type: object
       properties:
@@ -231,16 +223,24 @@ components:
       - created_at
       - account
       title: BusinessBatch
-    type__ErrorResponse:
+    type__BusinessBatchAccount:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        slug:
+          type: string
+        pilot:
+          type: boolean
       required:
-      - errors
-      title: ErrorResponse
+      - id
+      - name
+      - slug
+      - pilot
+      title: BusinessBatchAccount
   securitySchemes:
     bearer_auth:
       type: http

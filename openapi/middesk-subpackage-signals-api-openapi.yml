@@ -184,33 +184,16 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type__SignalReasonsItem:
+    type__ErrorResponse:
       type: object
       properties:
-        category:
-          $ref: '#/components/schemas/type__SignalReasonsItemCategory'
-        group:
-          type: string
-        description:
-          type: string
-        code:
-          $ref: '#/components/schemas/type__SignalReasonsItemCode'
-        importance:
-          type: number
-          format: double
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
       required:
-      - category
-      - group
-      - description
-      - code
-      title: SignalReasonsItem
-    type__SignalReasonsItemCategory:
-      type: string
-      enum:
-      - identification
-      - verification
-      - evaluation
-      title: SignalReasonsItemCategory
+      - errors
+      title: ErrorResponse
     type__Signal:
       type: object
       properties:
@@ -269,21 +252,6 @@ components:
       - name
       - created_at
       title: Signal
-    type__SignalRequester:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - type
-      - name
-      title: SignalRequester
     type__ErrorResponseErrorsItem:
       type: object
       properties:
@@ -338,6 +306,48 @@ components:
       - E1102
       - E1201
       title: SignalReasonsItemCode
+    type__SignalReasonsItemCategory:
+      type: string
+      enum:
+      - identification
+      - verification
+      - evaluation
+      title: SignalReasonsItemCategory
+    type__SignalRequester:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - type
+      - name
+      title: SignalRequester
+    type__SignalReasonsItem:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/type__SignalReasonsItemCategory'
+        group:
+          type: string
+        description:
+          type: string
+        code:
+          $ref: '#/components/schemas/type__SignalReasonsItemCode'
+        importance:
+          type: number
+          format: double
+      required:
+      - category
+      - group
+      - description
+      - code
+      title: SignalReasonsItem
     type_signals_ListSignalsResponse:
       type: object
       properties:
@@ -355,16 +365,6 @@ components:
       - object
       - has_more
       title: ListSignalsResponse
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http

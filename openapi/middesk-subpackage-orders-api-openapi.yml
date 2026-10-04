@@ -203,6 +203,41 @@ paths:
                   description: New status for the order
 components:
   schemas:
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type__OrderSubproductsItem:
+      type: string
+      enum:
+      - Articles of Incorporation
+      - Certificate of Good Standing
+      - Articles of Incorporation with Certificate of Good Standing fallback
+      - ucc_documents
+      - web_analysis
+      - industry_classification
+      title: OrderSubproductsItem
+    type_orders_OrderRequestParamOptions:
+      type: object
+      properties:
+        person_match:
+          type: boolean
+      description: Additional options for the order
+      title: OrderRequestParamOptions
     type__Order:
       type: object
       properties:
@@ -246,6 +281,58 @@ components:
       - created_at
       - updated_at
       title: Order
+    type__OrderStatus:
+      type: string
+      enum:
+      - created
+      - pending
+      - audited
+      - completed
+      - approved
+      - rejected
+      title: OrderStatus
+    type__OrderRequesterType:
+      type: string
+      enum:
+      - account
+      - user
+      - api_key
+      title: OrderRequesterType
+    type_orders_OrderRequestParamSubproductsItem:
+      type: string
+      enum:
+      - articles_of_incorporation
+      - certificate_of_good_standing
+      - articles_of_incorporation_with_fallback
+      - ucc_documents
+      - web_analysis
+      - industry_classification
+      title: OrderRequestParamSubproductsItem
+    type__OrderProduct:
+      type: string
+      enum:
+      - identity
+      - liens
+      - adverse_media
+      - bankruptcies
+      - business_enrichment
+      - documents
+      - enhanced_screenings
+      - kyc
+      - litigations
+      - people_litigations
+      - people_bankruptcies
+      - people_tax_liens
+      - people_ucc_liens
+      - people_criminal_history
+      - tin
+      - website
+      - business_verification_qualify
+      - business_verification_verify
+      - tax_liens
+      - ucc_liens
+      - email_risk
+      title: OrderProduct
     type__OrderRequester:
       type: object
       properties:
@@ -258,13 +345,23 @@ components:
           - $ref: '#/components/schemas/type__OrderRequesterType'
           - type: 'null'
       title: OrderRequester
-    type__OrderRequesterType:
-      type: string
-      enum:
-      - account
-      - user
-      - api_key
-      title: OrderRequesterType
+    type_orders_ListOrdersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Order'
+        object:
+          type: string
+        has_more:
+          type: boolean
+        total_count:
+          type: integer
+      required:
+      - object
+      - has_more
+      title: ListOrdersResponse
     type_orders_OrderRequestParamProduct:
       type: string
       enum:
@@ -291,103 +388,6 @@ components:
       - email_risk
       description: Product type for the order
       title: OrderRequestParamProduct
-    type_orders_ListOrdersResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Order'
-        object:
-          type: string
-        has_more:
-          type: boolean
-        total_count:
-          type: integer
-      required:
-      - object
-      - has_more
-      title: ListOrdersResponse
-    type_orders_OrderRequestParamSubproductsItem:
-      type: string
-      enum:
-      - articles_of_incorporation
-      - certificate_of_good_standing
-      - articles_of_incorporation_with_fallback
-      - ucc_documents
-      - web_analysis
-      - industry_classification
-      title: OrderRequestParamSubproductsItem
-    type_orders_OrderRequestParamOptions:
-      type: object
-      properties:
-        person_match:
-          type: boolean
-      description: Additional options for the order
-      title: OrderRequestParamOptions
-    type__OrderProduct:
-      type: string
-      enum:
-      - identity
-      - liens
-      - adverse_media
-      - bankruptcies
-      - business_enrichment
-      - documents
-      - enhanced_screenings
-      - kyc
-      - litigations
-      - people_litigations
-      - people_bankruptcies
-      - people_tax_liens
-      - people_ucc_liens
-      - people_criminal_history
-      - tin
-      - website
-      - business_verification_qualify
-      - business_verification_verify
-      - tax_liens
-      - ucc_liens
-      - email_risk
-      title: OrderProduct
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__OrderSubproductsItem:
-      type: string
-      enum:
-      - Articles of Incorporation
-      - Certificate of Good Standing
-      - Articles of Incorporation with Certificate of Good Standing fallback
-      - ucc_documents
-      - web_analysis
-      - industry_classification
-      title: OrderSubproductsItem
-    type__OrderStatus:
-      type: string
-      enum:
-      - created
-      - pending
-      - audited
-      - completed
-      - approved
-      - rejected
-      title: OrderStatus
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http

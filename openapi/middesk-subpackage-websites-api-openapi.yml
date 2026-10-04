@@ -54,40 +54,14 @@ components:
       enum:
       - email_address
       title: WebsiteEmailAddressesItemObject
-    type__WebsiteStatus:
-      type: string
-      enum:
-      - online
-      - offline
-      - unknown
-      title: WebsiteStatus
-    type__WebsitePhoneNumber:
+    type__ErrorResponseErrorsItem:
       type: object
       properties:
-        object:
-          $ref: '#/components/schemas/type__WebsitePhoneNumberObject'
-        id:
+        message:
           type: string
-          format: uuid
-        number:
-          type: string
-        contact_type:
-          type:
-          - string
-          - 'null'
-        recommended:
-          type:
-          - boolean
-          - 'null'
-        submitted:
-          type: boolean
-        sources:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/type__Source'
-      title: WebsitePhoneNumber
+      required:
+      - message
+      title: ErrorResponseErrorsItem
     type__WebsiteEmailAddressesItem:
       type: object
       properties:
@@ -105,85 +79,6 @@ components:
           items:
             $ref: '#/components/schemas/type__Source'
       title: WebsiteEmailAddressesItem
-    type__WebsiteDomain:
-      type: object
-      properties:
-        domain:
-          type: string
-        domain_id:
-          type:
-          - string
-          - 'null'
-        creation_date:
-          type: string
-          format: date-time
-        expiration_date:
-          type: string
-          format: date-time
-        registrar:
-          $ref: '#/components/schemas/type__WebsiteDomainRegistrar'
-        redirected:
-          type:
-          - boolean
-          - 'null'
-          description: Whether the domain redirects to a different URL
-        url_shortener:
-          type:
-          - boolean
-          - 'null'
-          description: Whether the domain uses a URL shortener service
-        resolved_url:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: The final URL after redirect resolution (present when redirected is true)
-      title: WebsiteDomain
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__WebsiteAddressesItem:
-      type: object
-      properties:
-        object:
-          type: string
-        id:
-          type: string
-          format: uuid
-        address_line1:
-          type:
-          - string
-          - 'null'
-        address_line2:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        postal_code:
-          type:
-          - string
-          - 'null'
-        full_address:
-          type: string
-        submitted:
-          type: boolean
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__Source'
-      title: WebsiteAddressesItem
     type__Name:
       type: object
       properties:
@@ -215,28 +110,13 @@ components:
       - business_id
       - sources
       title: Name
-    type__WebsiteIndicatorRating:
+    type__WebsiteStatus:
       type: string
       enum:
-      - positive
-      - negative
-      - neutral
-      title: WebsiteIndicatorRating
-    type__WebsiteDomainRegistrar:
-      type: object
-      properties:
-        organization:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        url:
-          type:
-          - string
-          - 'null'
-          format: uri
-      title: WebsiteDomainRegistrar
+      - online
+      - offline
+      - unknown
+      title: WebsiteStatus
     type__WebsiteIndicatorType:
       type: string
       enum:
@@ -258,18 +138,34 @@ components:
       - https
       - domain_ownership
       title: WebsiteIndicatorType
-    type__WebsitePagesItem:
+    type__ErrorResponse:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
-        category:
-          type: string
-        screenshot_url:
-          type: string
-          format: uri
-      title: WebsitePagesItem
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type__WebsiteIndicatorRating:
+      type: string
+      enum:
+      - positive
+      - negative
+      - neutral
+      title: WebsiteIndicatorRating
+    type__NameType:
+      type: string
+      enum:
+      - legal
+      - dba
+      title: NameType
+    type__WebsitePhoneNumberObject:
+      type: string
+      enum:
+      - phone_number
+      title: WebsitePhoneNumberObject
     type__Source:
       type: object
       properties:
@@ -287,12 +183,33 @@ components:
       - type
       - metadata
       title: Source
-    type__NameType:
-      type: string
-      enum:
-      - legal
-      - dba
-      title: NameType
+    type__WebsitePhoneNumber:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/type__WebsitePhoneNumberObject'
+        id:
+          type: string
+          format: uuid
+        number:
+          type: string
+        contact_type:
+          type:
+          - string
+          - 'null'
+        recommended:
+          type:
+          - boolean
+          - 'null'
+        submitted:
+          type: boolean
+        sources:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/type__Source'
+      title: WebsitePhoneNumber
     type__Website:
       type: object
       properties:
@@ -436,6 +353,21 @@ components:
       - high
       - not_available
       title: WebsiteRatingQualityRating
+    type__WebsiteDomainRegistrar:
+      type: object
+      properties:
+        organization:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+      title: WebsiteDomainRegistrar
     type__WebsiteRating:
       type: object
       properties:
@@ -448,26 +380,57 @@ components:
       required:
       - quality_rating
       title: WebsiteRating
-    type__ErrorResponse:
+    type__WebsitePagesItem:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
-    type__WebsitePhoneNumberObject:
-      type: string
-      enum:
-      - phone_number
-      title: WebsitePhoneNumberObject
+        url:
+          type: string
+          format: uri
+        category:
+          type: string
+        screenshot_url:
+          type: string
+          format: uri
+      title: WebsitePagesItem
     type__WebsiteObject:
       type: string
       enum:
       - website
       title: WebsiteObject
+    type__WebsiteDomain:
+      type: object
+      properties:
+        domain:
+          type: string
+        domain_id:
+          type:
+          - string
+          - 'null'
+        creation_date:
+          type: string
+          format: date-time
+        expiration_date:
+          type: string
+          format: date-time
+        registrar:
+          $ref: '#/components/schemas/type__WebsiteDomainRegistrar'
+        redirected:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the domain redirects to a different URL
+        url_shortener:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the domain uses a URL shortener service
+        resolved_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: The final URL after redirect resolution (present when redirected is true)
+      title: WebsiteDomain
     type__WebsiteIndicator:
       type: object
       properties:
@@ -488,6 +451,43 @@ components:
       - value
       - description
       title: WebsiteIndicator
+    type__WebsiteAddressesItem:
+      type: object
+      properties:
+        object:
+          type: string
+        id:
+          type: string
+          format: uuid
+        address_line1:
+          type:
+          - string
+          - 'null'
+        address_line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postal_code:
+          type:
+          - string
+          - 'null'
+        full_address:
+          type: string
+        submitted:
+          type: boolean
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Source'
+      title: WebsiteAddressesItem
   securitySchemes:
     bearer_auth:
       type: http

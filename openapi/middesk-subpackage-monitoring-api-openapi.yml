@@ -166,6 +166,16 @@ paths:
                   description: Email address to notify when bulk disable operation completes
 components:
   schemas:
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
     type_monitoring_BulkDisableMonitorsParamMonitorTypesItem:
       type: string
       enum:
@@ -195,16 +205,6 @@ components:
       required:
       - message
       title: ErrorResponseErrorsItem
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http

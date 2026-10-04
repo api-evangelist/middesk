@@ -166,48 +166,43 @@ paths:
                 $ref: '#/components/schemas/type__ErrorResponse'
 components:
   schemas:
-    type__ActionEffectOperation:
+    type__ActionType:
       type: string
       enum:
-      - created
-      - updated
-      - linked
-      description: The type of change that was made
-      title: ActionEffectOperation
-    type__ActionObjectType:
-      type: string
-      enum:
-      - Business
-      - Watchlist::Result
-      description: The type of object the action was performed on
-      title: ActionObjectType
-    type_actions_ListActionsResponse:
+      - add_sources
+      - add_attributes
+      - update_address_risk
+      - verify_tin
+      - decision
+      - dismissal
+      description: The action type that was performed
+      title: ActionType
+    type__ErrorResponse:
       type: object
       properties:
-        object:
-          type: string
-        data:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/type__Action'
-        url:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type__ActionActorActorType:
+      type: string
+      enum:
+      - account
+      - user
+      - run
+      description: The type of actor
+      title: ActionActorActorType
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
           type: string
       required:
-      - object
-      - data
-      title: ListActionsResponse
-    type_actions_ListActionsRequestObjectType:
-      type: string
-      enum:
-      - businesses
-      - watchlist_result
-      title: ListActionsRequestObjectType
-    type_actions_GetActionRequestObjectType:
-      type: string
-      enum:
-      - businesses
-      - watchlist_result
-      title: GetActionRequestObjectType
+      - message
+      title: ErrorResponseErrorsItem
     type__ActionEffect:
       type: object
       properties:
@@ -230,24 +225,6 @@ components:
       - diff
       - target
       title: ActionEffect
-    type_actions_ActionRequestParamType:
-      type: string
-      enum:
-      - add_sources
-      - add_attributes
-      - verify_tin
-      - decision
-      - dismissal
-      description: The type of action to perform
-      title: ActionRequestParamType
-    type__ActionActorActorType:
-      type: string
-      enum:
-      - account
-      - user
-      - run
-      description: The type of actor
-      title: ActionActorActorType
     type_actions_ActionRequestParamObjectType:
       type: string
       enum:
@@ -255,6 +232,41 @@ components:
       - watchlist_result
       description: Type of object to perform the action on
       title: ActionRequestParamObjectType
+    type__ActionEffectTarget:
+      type: object
+      properties:
+        object:
+          type: string
+          description: The type of the affected resource
+        id:
+          type: string
+          format: uuid
+          description: The ID of the affected resource
+      required:
+      - object
+      - id
+      title: ActionEffectTarget
+    type__ActionObjectType:
+      type: string
+      enum:
+      - Business
+      - Watchlist::Result
+      description: The type of object the action was performed on
+      title: ActionObjectType
+    type__ActionActor:
+      type: object
+      properties:
+        actor_type:
+          $ref: '#/components/schemas/type__ActionActorActorType'
+          description: The type of actor
+        data:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Actor details (varies by actor type)
+      required:
+      - actor_type
+      title: ActionActor
     type__Action:
       type: object
       properties:
@@ -303,63 +315,51 @@ components:
       - effects
       - actors
       title: Action
-    type__ActionEffectTarget:
+    type_actions_ListActionsResponse:
       type: object
       properties:
         object:
           type: string
-          description: The type of the affected resource
-        id:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__Action'
+        url:
           type: string
-          format: uuid
-          description: The ID of the affected resource
       required:
       - object
-      - id
-      title: ActionEffectTarget
-    type__ActionActor:
-      type: object
-      properties:
-        actor_type:
-          $ref: '#/components/schemas/type__ActionActorActorType'
-          description: The type of actor
-        data:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Actor details (varies by actor type)
-      required:
-      - actor_type
-      title: ActionActor
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type__ActionType:
+      - data
+      title: ListActionsResponse
+    type__ActionEffectOperation:
+      type: string
+      enum:
+      - created
+      - updated
+      - linked
+      description: The type of change that was made
+      title: ActionEffectOperation
+    type_actions_ListActionsRequestObjectType:
+      type: string
+      enum:
+      - businesses
+      - watchlist_result
+      title: ListActionsRequestObjectType
+    type_actions_ActionRequestParamType:
       type: string
       enum:
       - add_sources
       - add_attributes
-      - update_address_risk
       - verify_tin
       - decision
       - dismissal
-      description: The action type that was performed
-      title: ActionType
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
+      description: The type of action to perform
+      title: ActionRequestParamType
+    type_actions_GetActionRequestObjectType:
+      type: string
+      enum:
+      - businesses
+      - watchlist_result
+      title: GetActionRequestObjectType
   securitySchemes:
     bearer_auth:
       type: http

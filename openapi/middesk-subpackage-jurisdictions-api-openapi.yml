@@ -105,34 +105,6 @@ paths:
                 $ref: '#/components/schemas/type_jurisdictions_ListJurisdictionsResponse'
 components:
   schemas:
-    type_jurisdictions_ListJurisdictionsResponseSearchConfig:
-      type: object
-      properties:
-        hint:
-          type: string
-        help_text:
-          type:
-          - string
-          - 'null'
-        help_url:
-          type:
-          - string
-          - 'null'
-      title: ListJurisdictionsResponseSearchConfig
-    type_jurisdictions_ListJurisdictionsResponse:
-      type: object
-      properties:
-        object:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__AgentJurisdiction'
-        search_config:
-          oneOf:
-          - $ref: '#/components/schemas/type_jurisdictions_ListJurisdictionsResponseSearchConfig'
-          - type: 'null'
-      title: ListJurisdictionsResponse
     type__AgentJurisdiction:
       type: object
       properties:
@@ -175,6 +147,20 @@ components:
       - name
       - state
       title: AgentJurisdiction
+    type_jurisdictions_ListJurisdictionsResponseSearchConfig:
+      type: object
+      properties:
+        hint:
+          type: string
+        help_text:
+          type:
+          - string
+          - 'null'
+        help_url:
+          type:
+          - string
+          - 'null'
+      title: ListJurisdictionsResponseSearchConfig
     type_jurisdictions_SearchJurisdictionsResponse:
       type: object
       properties:
@@ -191,6 +177,20 @@ components:
         total_count:
           type: integer
       title: SearchJurisdictionsResponse
+    type_jurisdictions_ListJurisdictionsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__AgentJurisdiction'
+        search_config:
+          oneOf:
+          - $ref: '#/components/schemas/type_jurisdictions_ListJurisdictionsResponseSearchConfig'
+          - type: 'null'
+      title: ListJurisdictionsResponse
   securitySchemes:
     bearer_auth:
       type: http

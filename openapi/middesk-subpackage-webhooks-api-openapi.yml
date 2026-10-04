@@ -265,6 +265,31 @@ paths:
                 $ref: '#/components/schemas/type__OidcKey'
 components:
   schemas:
+    type__ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
+      required:
+      - errors
+      title: ErrorResponse
+    type__ErrorResponseErrorsItem:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ErrorResponseErrorsItem
+    type_webhooks_WebhookCreateParamOidcAuthMethod:
+      type: string
+      enum:
+      - private_key_jwt
+      - client_secret
+      description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
+      title: WebhookCreateParamOidcAuthMethod
     type__OidcKeyKeysItem:
       type: object
       properties:
@@ -295,6 +320,13 @@ components:
             type: string
           description: X.509 certificate chain
       title: OidcKeyKeysItem
+    type_webhooks_WebhookUpdateParamOidcAuthMethod:
+      type: string
+      enum:
+      - private_key_jwt
+      - client_secret
+      description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
+      title: WebhookUpdateParamOidcAuthMethod
     type__OidcKey:
       type: object
       properties:
@@ -305,38 +337,6 @@ components:
       required:
       - keys
       title: OidcKey
-    type_webhooks_WebhookUpdateParamOidcAuthMethod:
-      type: string
-      enum:
-      - private_key_jwt
-      - client_secret
-      description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
-      title: WebhookUpdateParamOidcAuthMethod
-    type__ErrorResponseErrorsItem:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: ErrorResponseErrorsItem
-    type_webhooks_WebhookCreateParamOidcAuthMethod:
-      type: string
-      enum:
-      - private_key_jwt
-      - client_secret
-      description: OIDC authentication method for obtaining access tokens. Required when configuring OIDC. 'private_key_jwt' — requires oidc_client_id, oidc_token_endpoint, oidc_access_token_ttl_seconds. 'client_secret' — requires oidc_client_id, oidc_client_secret, oidc_token_endpoint, oidc_access_token_ttl_seconds. Both methods optionally accept oidc_scope and oidc_resource_uri.
-      title: WebhookCreateParamOidcAuthMethod
-    type__ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type__ErrorResponseErrorsItem'
-      required:
-      - errors
-      title: ErrorResponse
   securitySchemes:
     bearer_auth:
       type: http
