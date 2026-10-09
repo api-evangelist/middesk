@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Middesk API Rate Limits
 description: Middesk enforces rate limiting on its REST API to ensure high availability and performance across all customers. Rate limiting operates at the IP address level. Specific numeric limits are not publicly documented and are subject to account-level agreements.
 url: https://docs.middesk.com/reference/introduction
@@ -26,7 +30,7 @@ authentication:
     - type: HTTP Basic Auth
       description: Provide the API key as the username value with no password required.
     - type: Bearer Token
-      description: Pass header value of "Authorization: Bearer mk_live_YOUR_API_KEY" or "Authorization: Bearer mk_test_YOUR_API_KEY".
+      description: 'Pass header value of "Authorization: Bearer mk_live_YOUR_API_KEY" or "Authorization: Bearer mk_test_YOUR_API_KEY".'
   notes:
     - All requests must use HTTPS.
     - API key type and base URL must match (production key with production URL, test key with sandbox URL).

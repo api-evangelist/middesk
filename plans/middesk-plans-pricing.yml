@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Middesk Plans and Pricing
 description: Middesk offers custom, volume-based pricing for business verification and compliance products. Pricing is tailored to KYB verification volumes, data services required, and monitoring needs. All plans require contacting sales for a custom quote.
 url: https://www.middesk.com/pricing/business-onboarding
@@ -45,3 +49,27 @@ notes:
   - Volume discounts increase for higher verification volumes (1,000–5,000+ per month) and multi-year agreements.
   - Professional services fees may apply for complex integrations or custom data mapping.
   - A free sandbox environment is available for development and testing.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Business Onboarding
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Business Monitoring
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Entity Management (Payroll/Compliance)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
