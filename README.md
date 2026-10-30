@@ -64,42 +64,223 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Middesk is a business identity and verification platform providing API-first infrastructure for KYB (Know Your Business) compliance, EIN/TIN validation, business registration verification, UBO and officer research, sanctions screening, and ongoing business monitoring. Used by fintechs, lenders, banks, and marketplaces to automate customer onboarding and compliance workflows.
+Middesk is a business identity and verification platform providing a REST API for KYB (Know Your Business) compliance, EIN/TIN validation, business registration verification, UBO research, sanctions screening, and ongoing business monitoring. Used by fintechs, lenders, and banks to automate onboarding and compliance workflows.
 
-**Website:** https://www.middesk.com
-**Developer Docs:** https://docs.middesk.com
-**API Reference:** https://docs.middesk.com/reference
-**Status:** https://status.middesk.com
-**Blog:** https://www.middesk.com/blog
-**GitHub:** https://github.com/middesk
-**LinkedIn:** https://www.linkedin.com/company/middesk
-**X:** https://x.com/middeskhq
+**Areas:** Business Verification · KYB · Identity Verification · Compliance · EIN Validation · TIN Verification · Sanctions Screening · Business Monitoring · Fintech · RegTech
 
-## API
+## Middesk on APIs.io
 
-Middesk exposes a REST API with JSON responses over HTTPS. Two environments are available:
+Everything profiled for Middesk is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/middesk/](https://apis.io/providers/middesk/)** — or go straight to one of the APIs or properties below.
 
-- **Production:** `https://api.middesk.com/v1/`
-- **Sandbox:** `https://api-sandbox.middesk.com/v1/`
+### APIs (28)
 
-Authentication uses HTTP Basic Auth or Bearer token with API keys (prefixed `mk_live` for production, `mk_test` for sandbox). Keys are managed in the Middesk Dashboard under Settings > Developer > Credentials.
+- [Middesk Subpackage Actions API](https://apis.io/apis/middesk/middesk-subpackage-actions-api/) — The subpackage_actions API from Middesk — 2 operation(s) for subpackage_actions.
+- [Middesk Subpackage Agents API](https://apis.io/apis/middesk/middesk-subpackage-agents-api/) — The subpackage_agents API from Middesk — 2 operation(s) for subpackage_agents.
+- [Middesk Subpackage Applications API](https://apis.io/apis/middesk/middesk-subpackage-applications-api/) — The subpackage_applications API from Middesk — 1 operation(s) for subpackage_applications.
+- [Middesk Subpackage Business Batches API](https://apis.io/apis/middesk/middesk-subpackage-businessbatches-api/) — The subpackage_businessBatches API from Middesk — 3 operation(s) for subpackage_businessbatches.
+- [Middesk Subpackage Businesses API](https://apis.io/apis/middesk/middesk-subpackage-businesses-api/) — The subpackage_businesses API from Middesk — 3 operation(s) for subpackage_businesses.
+- [Middesk Subpackage Companies API](https://apis.io/apis/middesk/middesk-subpackage-companies-api/) — The subpackage_companies API from Middesk — 1 operation(s) for subpackage_companies.
+- [Middesk Subpackage Connections API](https://apis.io/apis/middesk/middesk-subpackage-connections-api/) — The subpackage_connections API from Middesk — 1 operation(s) for subpackage_connections.
+- [Middesk Subpackage Documents API](https://apis.io/apis/middesk/middesk-subpackage-documents-api/) — The subpackage_documents API from Middesk — 3 operation(s) for subpackage_documents.
+- [Middesk Subpackage Identities API](https://apis.io/apis/middesk/middesk-subpackage-identities-api/) — The subpackage_identities API from Middesk — 1 operation(s) for subpackage_identities.
+- [Middesk Subpackage Information Requests API](https://apis.io/apis/middesk/middesk-subpackage-informationrequests-api/) — The subpackage_informationRequests API from Middesk — 1 operation(s) for subpackage_informationrequests.
+- [Middesk Subpackage Jurisdictions API](https://apis.io/apis/middesk/middesk-subpackage-jurisdictions-api/) — The subpackage_jurisdictions API from Middesk — 2 operation(s) for subpackage_jurisdictions.
+- [Middesk Subpackage Liens API](https://apis.io/apis/middesk/middesk-subpackage-liens-api/) — The subpackage_liens API from Middesk — 2 operation(s) for subpackage_liens.
+- [Middesk Subpackage Lien Terminations API](https://apis.io/apis/middesk/middesk-subpackage-lienterminations-api/) — The subpackage_lienTerminations API from Middesk — 1 operation(s) for subpackage_lienterminations.
+- [Middesk Subpackage Mail API](https://apis.io/apis/middesk/middesk-subpackage-mail-api/) — The subpackage_mail API from Middesk — 2 operation(s) for subpackage_mail.
+- [Middesk Subpackage Monitoring API](https://apis.io/apis/middesk/middesk-subpackage-monitoring-api/) — The subpackage_monitoring API from Middesk — 2 operation(s) for subpackage_monitoring.
+- [Middesk Subpackage Orders API](https://apis.io/apis/middesk/middesk-subpackage-orders-api/) — The subpackage_orders API from Middesk — 3 operation(s) for subpackage_orders.
+- [Middesk Subpackage Policy Results API](https://apis.io/apis/middesk/middesk-subpackage-policyresults-api/) — The subpackage_policyResults API from Middesk — 1 operation(s) for subpackage_policyresults.
+- [Middesk Subpackage Prefill API](https://apis.io/apis/middesk/middesk-subpackage-prefill-api/) — The subpackage_prefill API from Middesk — 1 operation(s) for subpackage_prefill.
+- [Middesk Subpackage Questions API](https://apis.io/apis/middesk/middesk-subpackage-questions-api/) — The subpackage_questions API from Middesk — 1 operation(s) for subpackage_questions.
+- [Middesk Subpackage Registration Requests API](https://apis.io/apis/middesk/middesk-subpackage-registrationrequests-api/) — The subpackage_registrationRequests API from Middesk — 3 operation(s) for subpackage_registrationrequests.
+- [Middesk Subpackage Reviews API](https://apis.io/apis/middesk/middesk-subpackage-reviews-api/) — The subpackage_reviews API from Middesk — 1 operation(s) for subpackage_reviews.
+- [Middesk Subpackage Runs API](https://apis.io/apis/middesk/middesk-subpackage-runs-api/) — The subpackage_runs API from Middesk — 4 operation(s) for subpackage_runs.
+- [Middesk Subpackage Signals API](https://apis.io/apis/middesk/middesk-subpackage-signals-api/) — The subpackage_signals API from Middesk — 2 operation(s) for subpackage_signals.
+- [Middesk Subpackage Threads API](https://apis.io/apis/middesk/middesk-subpackage-threads-api/) — The subpackage_threads API from Middesk — 2 operation(s) for subpackage_threads.
+- [Middesk Subpackage Timeline API](https://apis.io/apis/middesk/middesk-subpackage-timeline-api/) — The subpackage_timeline API from Middesk — 1 operation(s) for subpackage_timeline.
+- [Middesk Subpackage Tin Match API](https://apis.io/apis/middesk/middesk-subpackage-tinmatch-api/) — The subpackage_tinMatch API from Middesk — 1 operation(s) for subpackage_tinmatch.
+- [Middesk Subpackage Webhooks API](https://apis.io/apis/middesk/middesk-subpackage-webhooks-api/) — The subpackage_webhooks API from Middesk — 3 operation(s) for subpackage_webhooks.
+- [Middesk Subpackage Websites API](https://apis.io/apis/middesk/middesk-subpackage-websites-api/) — The subpackage_websites API from Middesk — 1 operation(s) for subpackage_websites.
 
-## Key Products
+### Published properties
 
-- Business verification (KYB) — Secretary of State registration, EIN/TIN validation, address verification
-- Owner and officer verification
-- Sanctions and OFAC screening
-- Adverse media and PEP screening
-- Web presence and industry analysis
-- Ongoing business monitoring with webhook notifications
-- Lien search and management
-- Entity management for payroll tax registration
-- Business autocomplete and smart populate (prefill)
-- Agentic compliance workflows
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Repository Contents
+#### Agentic access (1)
 
-- `apis.yml` — APIs.json 0.19 provider profile
-- `plans/middesk-plans-pricing.yml` — Pricing plans and tiers
-- `rate-limits/middesk-rate-limits.yml` — Rate limiting and authentication details
-- `finops/middesk-finops.yml` — FinOps guidance and cost optimization strategies
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Middesk Agentic Access](https://apis.io/agentic-access/middesk/middesk-agentic-access/)
+
+#### JSON Schema (18)
+
+The data models the API reads and writes.
+
+- [Action](https://apis.io/schemas/middesk/action/)
+- [Address](https://apis.io/schemas/middesk/address/)
+- [Bankruptcy](https://apis.io/schemas/middesk/bankruptcy/)
+- [Business](https://apis.io/schemas/middesk/business/)
+- [BusinessBatch](https://apis.io/schemas/middesk/businessbatch/)
+- [Certification](https://apis.io/schemas/middesk/certification/)
+- [Document](https://apis.io/schemas/middesk/document/)
+- [ErrorResponse](https://apis.io/schemas/middesk/errorresponse/)
+- [Lien](https://apis.io/schemas/middesk/lien/)
+- [Monitor](https://apis.io/schemas/middesk/monitor/)
+- [Order](https://apis.io/schemas/middesk/order/)
+- [Person](https://apis.io/schemas/middesk/person/)
+- [PolicyResult](https://apis.io/schemas/middesk/policyresult/)
+- [Registration](https://apis.io/schemas/middesk/registration/)
+- [Review](https://apis.io/schemas/middesk/review/)
+- [Signal](https://apis.io/schemas/middesk/signal/)
+- [Watchlist](https://apis.io/schemas/middesk/watchlist/)
+- [Website](https://apis.io/schemas/middesk/website/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Middesk Context](https://apis.io/jsonld/middesk/middesk-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Middesk Vocabulary](https://apis.io/vocabularies/middesk/middesk-vocabulary/)
+
+#### Examples (7)
+
+Example requests and responses.
+
+- [Middesk Create Business Example](https://apis.io/examples/middesk/middesk-create-business-example/)
+- [Middesk Create Order Example](https://apis.io/examples/middesk/middesk-create-order-example/)
+- [Middesk Create Webhook Example](https://apis.io/examples/middesk/middesk-create-webhook-example/)
+- [Middesk File Lien Example](https://apis.io/examples/middesk/middesk-file-lien-example/)
+- [Middesk Get Business Example](https://apis.io/examples/middesk/middesk-get-business-example/)
+- [Middesk List Businesses Example](https://apis.io/examples/middesk/middesk-list-businesses-example/)
+- [Middesk Screen Signal Example](https://apis.io/examples/middesk/middesk-screen-signal-example/)
+
+#### Collections (27)
+
+Postman and Open Collection request collections.
+
+- [Middesk subpackage_actions API](https://apis.io/collections/middesk/open-middesk-subpackage-actions-api/)
+- [Middesk subpackage_actions subpackage_agents API](https://apis.io/collections/middesk/open-middesk-subpackage-agents-api/)
+- [Middesk subpackage_actions subpackage_applications API](https://apis.io/collections/middesk/open-middesk-subpackage-applications-api/)
+- [Middesk subpackage_actions subpackage_businessBatches API](https://apis.io/collections/middesk/open-middesk-subpackage-businessbatches-api/)
+- [Middesk subpackage_actions subpackage_businesses API](https://apis.io/collections/middesk/open-middesk-subpackage-businesses-api/)
+- [Middesk subpackage_actions subpackage_companies API](https://apis.io/collections/middesk/open-middesk-subpackage-companies-api/)
+- [Middesk subpackage_actions subpackage_connections API](https://apis.io/collections/middesk/open-middesk-subpackage-connections-api/)
+- [Middesk subpackage_actions subpackage_documents API](https://apis.io/collections/middesk/open-middesk-subpackage-documents-api/)
+- [Middesk subpackage_actions subpackage_identities API](https://apis.io/collections/middesk/open-middesk-subpackage-identities-api/)
+- [Middesk subpackage_actions subpackage_informationRequests API](https://apis.io/collections/middesk/open-middesk-subpackage-informationrequests-api/)
+- [Middesk subpackage_actions subpackage_jurisdictions API](https://apis.io/collections/middesk/open-middesk-subpackage-jurisdictions-api/)
+- [Middesk subpackage_actions subpackage_liens API](https://apis.io/collections/middesk/open-middesk-subpackage-liens-api/)
+- [Middesk subpackage_actions subpackage_lienTerminations API](https://apis.io/collections/middesk/open-middesk-subpackage-lienterminations-api/)
+- [Middesk subpackage_actions subpackage_mail API](https://apis.io/collections/middesk/open-middesk-subpackage-mail-api/)
+- [Middesk subpackage_actions subpackage_monitoring API](https://apis.io/collections/middesk/open-middesk-subpackage-monitoring-api/)
+- [Middesk subpackage_actions subpackage_orders API](https://apis.io/collections/middesk/open-middesk-subpackage-orders-api/)
+- [Middesk subpackage_actions subpackage_policyResults API](https://apis.io/collections/middesk/open-middesk-subpackage-policyresults-api/)
+- [Middesk subpackage_actions subpackage_prefill API](https://apis.io/collections/middesk/open-middesk-subpackage-prefill-api/)
+- [Middesk subpackage_actions subpackage_questions API](https://apis.io/collections/middesk/open-middesk-subpackage-questions-api/)
+- [Middesk subpackage_actions subpackage_registrationRequests API](https://apis.io/collections/middesk/open-middesk-subpackage-registrationrequests-api/)
+- [Middesk subpackage_actions subpackage_runs API](https://apis.io/collections/middesk/open-middesk-subpackage-runs-api/)
+- [Middesk subpackage_actions subpackage_signals API](https://apis.io/collections/middesk/open-middesk-subpackage-signals-api/)
+- [Middesk subpackage_actions subpackage_threads API](https://apis.io/collections/middesk/open-middesk-subpackage-threads-api/)
+- [Middesk subpackage_actions subpackage_timeline API](https://apis.io/collections/middesk/open-middesk-subpackage-timeline-api/)
+- [Middesk subpackage_actions subpackage_tinMatch API](https://apis.io/collections/middesk/open-middesk-subpackage-tinmatch-api/)
+- …and 2 more published on APIs.io
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Middesk — jsonschema rules](https://apis.io/rules/middesk/middesk-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Middesk Authentication](https://apis.io/security/middesk/middesk-authentication/)
+- [Middesk Domain Security](https://apis.io/security/middesk/middesk-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Middesk Plans Pricing](https://apis.io/plans/middesk/middesk-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Middesk Rate Limits](https://apis.io/rate-limits/middesk/middesk-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Middesk Finops](https://apis.io/finops/middesk/middesk-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.middesk.com)
+- [Documentation](https://docs.middesk.com)
+- [Pricing](https://www.middesk.com/pricing/business-onboarding)
+- [Blog](https://www.middesk.com/blog)
+- [Status](https://status.middesk.com)
+
+## API Evangelist rating
+
+**Kin Score 36.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 53.1 |
+| Contract governance | 9.8 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 18.4 |
+
+**Agent readiness 23.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/middesk/](https://apis.io/providers/middesk/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Middesk: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/middesk/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
